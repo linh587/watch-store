@@ -1,11 +1,11 @@
-<div class="header-image-wrapper">
+<div class="header-image-wrapper position-relative overflow-visible">
   <div class="bg-img-autoplay">
     <swiper
       [autoplay]="{
         delay: 2500
       }"
       [speed]="1200"
-      class="bg-swiper">
+      class="bg-swiper position-absolute top-0 start-0 end-0 bottom-0">
       <ng-template swiperSlide *ngFor="let item of backgroundImage">
         <img
           [src]="item"
@@ -15,5 +15,6 @@
       </ng-template>
     </swiper>
   </div>
-  <div class="mask"></div>
+  <div
+    class="mask w-100 h-100 position-relative overflow-hidden top-0 start-0"></div>
 </div>

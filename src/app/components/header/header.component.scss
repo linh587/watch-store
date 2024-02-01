@@ -27,18 +27,10 @@
     }
 
     .card-total {
-      background-color: $primary-color;
-      border-radius: 100%;
-      color: $white;
-      float: left;
-      font-size: $text-xx-small;
       font-weight: 500;
       height: 20px;
       line-height: 22px;
       width: 20px;
-      position: absolute;
-      text-align: center;
-      text-transform: capitalize;
       top: -10px;
       right: 0px;
     }

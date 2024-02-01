@@ -1,0 +1,26 @@
+@import "font-family";
+@import "text-size";
+@import "color";
+
+.banner-area {
+  padding: 89px 0 120px 0;
+
+  .banner-content-wrapper {
+    padding: 127px 0 0 30px;
+
+    h2 {
+      color: #222222;
+      letter-spacing: 0px;
+    }
+
+    .content {
+      padding: 35px 0px 46px 0px;
+    }
+
+    .banner-btn a {
+      font-weight: 500;
+      background-color: #222222;
+      padding: 17px 41px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="swiper-partners pb-60">
+  <div class="container">
+    <swiper
+      [slidesPerView]="5"
+      [centeredSlides]="false"
+      [spaceBetween]="16"
+      slideActiveClass="swiper-active"
+      [navigation]="false"
+      [pagination]="false"
+      [autoplay]="{ delay: 500, disableOnInteraction: false }"
+      [virtual]="true"
+      [speed]="1200">
+      <ng-container>
+        <ng-template
+          swiperSlide
+          *ngFor="let partners of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+          <img
+            src="/assets/images/partners/brand-01.webp"
+            alt=""
+            class="object-fit-cover" />
+        </ng-template>
+      </ng-container>
+    </swiper>
+  </div>
+</div>

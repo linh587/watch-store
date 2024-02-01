@@ -1,0 +1,28 @@
+<div class="blog-area mb-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let blog of BLOGS">
+        <div class="single-latest-blog">
+          <div class="aritcles-content mb-30 pt-3">
+            <div class="author-name d-block text-size-x-small text-capitalize">
+              post by: <a href="#"> {{ blog.authorName }}</a> -
+              {{ blog.postedAt }}
+            </div>
+            <h4>
+              <a
+                href=""
+                class="articles-name d-block text-size-small mb-3 mt-0 position-relative text-uppercase"
+                >{{ blog.articlesName }}</a
+              >
+            </h4>
+          </div>
+          <div class="articles-image overflow-hidden position-relative">
+            <a href="">
+              <img [src]="blog.articlesImage" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
