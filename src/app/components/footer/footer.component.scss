@@ -1,0 +1,47 @@
+@import "color";
+@import "text-size";
+
+.footer {
+  background-color: #f5f3f2;
+  color: #767676;
+
+  &-top {
+    .social-icons {
+      margin-top: 20px;
+
+      li {
+        display: inline-block;
+        margin: 0 10px 5px 0;
+        position: relative;
+        vertical-align: middle;
+
+        a {
+          display: block;
+          font-size: $text-medium;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          width: 30px;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    .footer-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .title-widget {
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+  }
+
+  &-bottom {
+    border-top: 1px solid $gray-lighter;
+
+    .copy-right-image {
+      text-align: right;
+    }
+  }
+}

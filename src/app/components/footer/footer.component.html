@@ -1,3 +1,95 @@
-<p>
-  footer works!
-</p>
+<footer class="footer">
+  <div class="footer-top py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="widget-footer">
+            <h6 class="title-widget">Thông tin liên hệ</h6>
+            <div class="footer-address mt-2">
+              <div class="widget-content">
+                <p class="mb-1">
+                  Địa chỉ: 96 Định Công, P. Định Công,<br />
+                  Q. Hoàng Mai, TP. Hà Nội
+                </p>
+                <p class="mb-1">Điện thoại: 0982842001</p>
+                <p class="mb-1">
+                  Email:
+                  <a href="mailto:lemailinh22@gmail.com"
+                    >lemailinh22&#64;gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+            <ul class="social-icons">
+              <li *ngFor="let social of SOCIAL_ICONS">
+                <a
+                  href=""
+                  class="social-icon color-white"
+                  [style.backgroundColor]="social.bgColor">
+                  <i [class]="social.icon"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6">
+          <div class="widget-footer">
+            <h6 class="title-widget">Giúp Đỡ</h6>
+            <ul class="footer-list">
+              <li><a href="">Giỏ Hàng</a></li>
+              <li><a href="">Trang Chủ</a></li>
+              <li><a href="">Về Chúng Tôi</a></li>
+              <li><a href="">Liên Hệ</a></li>
+              <li><a href="">Tài Khoản</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6">
+          <div class="widget-footer">
+            <h6 class="title-widget">Dịch Vụ</h6>
+            <ul class="footer-list">
+              <li><a href="">Cửa Hàng</a></li>
+              <li><a href="">New Design 1</a></li>
+              <li><a href="">New Design 2</a></li>
+              <li><a href="">New Design 3</a></li>
+              <li><a href="">Product Single</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="widget-footer">
+            <h6 class="title-widget">Get the app</h6>
+            <p class="mb-3">
+              GreenLife App is now available on Google Play &amp; App Store. Get
+              it now.
+            </p>
+            <ul class="footer-list">
+              <li>
+                <img src="assets/images/img-googleplay.webp" alt="" />
+              </li>
+              <li>
+                <img src="assets/images/img-appstore.webp" alt="" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom py-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="copy-left-text">
+            <p>Copyright © HOU 2023. All Right Reserved.</p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="copy-right-image">
+            <img src="assets/images/img-payment.webp" alt="" class="mw-100" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

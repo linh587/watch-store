@@ -8,6 +8,7 @@ import { SharedModule } from "./components/shared.module";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [AppComponent, PagesComponent, NotFoundComponent],
@@ -17,6 +18,7 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
     SharedModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   bootstrap: [AppComponent],
 })

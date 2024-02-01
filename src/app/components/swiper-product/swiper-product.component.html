@@ -1,0 +1,21 @@
+<div class="swiper-product-container">
+  <swiper
+    #swiperRef
+    [slidesPerView]="slidesPerView"
+    [centeredSlides]="false"
+    [spaceBetween]="16"
+    [pagination]="false"
+    [navigation]="false"
+    [virtual]="true"
+    class="mySwiperProduct">
+    <ng-container>
+      <ng-template
+        swiperSlide
+        *ngFor="
+          let realEstate of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        ">
+        <app-product-item></app-product-item>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>

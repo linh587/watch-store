@@ -1,0 +1,55 @@
+$text-xx-small: 0.625rem; // ~10px
+$text-x-small: 0.75rem; // ~12px
+$text-small: 0.875rem; // ~14px
+$text-medium: 1rem; // standard ~16px
+$text-large: 1.125rem; // ~18px
+$text-xl: 1.375rem; // ~22px
+$text-2xl: 1.5rem; // ~24px
+$text-3xl: 1.75rem; // ~28px
+$text-4xl: 2rem; // ~32px
+$text-5xl: 2.25rem; // ~36px
+$text-6xl: 3rem; // ~48px
+
+.text-size-xx-small {
+  font-size: $text-xx-small;
+}
+
+.text-size-x-small {
+  font-size: $text-x-small;
+}
+
+.text-size-small {
+  font-size: $text-small;
+}
+
+.text-size-medium {
+  font-size: $text-medium;
+}
+
+.text-size-large {
+  font-size: $text-large;
+}
+
+.text-size-xl {
+  font-size: $text-xl;
+}
+
+.text-size-2xl {
+  font-size: $text-2xl;
+}
+
+.text-size-3xl {
+  font-size: $text-3xl;
+}
+
+.text-size-4xl {
+  font-size: $text-4xl;
+}
+
+.text-size-5xl {
+  font-size: $text-5xl;
+}
+
+.text-size-6xl {
+  font-size: $text-6xl;
+}

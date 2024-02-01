@@ -1,0 +1,36 @@
+$black: #000;
+$white: #fff;
+$gray-lighter: #d1d1d1;
+$primary-color: #c88979;
+
+.color-black {
+  color: $black;
+}
+
+.bg-black {
+  background-color: $black;
+}
+
+.color-white {
+  color: $white;
+}
+
+.bg-white {
+  background-color: $white;
+}
+
+.color-gray-lighter {
+  color: $gray-lighter;
+}
+
+.bg-gray-lighter {
+  background-color: $gray-lighter;
+}
+
+.primary-color {
+  color: $primary-color;
+}
+
+.bg-primary-color {
+  background-color: $primary-color;
+}

@@ -1,0 +1,19 @@
+<div class="header-image-wrapper">
+  <div class="bg-img-autoplay">
+    <swiper
+      [autoplay]="{
+        delay: 2500
+      }"
+      [speed]="1200"
+      class="bg-swiper">
+      <ng-template swiperSlide *ngFor="let item of backgroundImage">
+        <img
+          [src]="item"
+          loading="lazy"
+          alt="header-background-img"
+          class="w-100 h-100 object-fit-cover" />
+      </ng-template>
+    </swiper>
+  </div>
+  <div class="mask"></div>
+</div>

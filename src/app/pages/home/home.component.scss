@@ -1,0 +1,66 @@
+@import "color";
+@import "text-size";
+
+.category-area p {
+  right: 0;
+  left: 0;
+  bottom: 25px;
+  font-family: "Playfair Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: $text-4xl;
+}
+
+.section-title h4 {
+  font-family: "Playfair Display", sans-serif;
+  font-weight: 400 !important;
+}
+
+.product-area {
+  margin-top: 89px;
+}
+
+.banner-area {
+  padding: 89px 0 120px 0;
+
+  .banner-content-wrapper {
+    padding: 127px 0 0 30px;
+
+    h2 {
+      color: #222222;
+      font-family: "Playfair Display", Sans-serif;
+      font-size: $text-6xl;
+      font-weight: 400;
+      letter-spacing: 0px;
+    }
+
+    .content {
+      padding: 35px 0px 46px 0px;
+    }
+
+    .banner-btn a {
+      font-weight: 500;
+      background-color: #222222;
+      border-radius: 0;
+      padding: 17px 41px;
+    }
+  }
+}
+
+.product-tab {
+  margin-bottom: 60px;
+}
+
+.product-tab-menu li a.active {
+  color: #c89979;
+}
+
+.product-tab-menu li a {
+  display: block;
+  padding: 0;
+  margin-right: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
