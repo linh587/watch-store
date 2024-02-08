@@ -1,0 +1,56 @@
+@import "color";
+@import "text-size";
+
+.sign-in-btn {
+  height: 44px;
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    background-color: #bf6f5c;
+  }
+}
+
+.forgot-password-btn {
+  border: none;
+  color: #bf6f5c;
+
+  &:hover {
+    background-color: transparent;
+    color: $primary-color;
+    text-decoration: underline;
+  }
+}
+
+.nav-tabs {
+  margin: 0 16px;
+  border: none;
+  border-bottom: 1px solid $gray-lighter;
+
+  .nav-link {
+    color: $black;
+    border: none;
+    transition: border-bottom 0.3s ease;
+
+    &:hover {
+      border: none;
+      color: $primary-color;
+    }
+
+    &.active {
+      border-bottom: 4px solid $primary-color;
+    }
+  }
+}
+
+.modal-body {
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.facebook-btn,
+.google-btn {
+  height: 40px;
+  margin-top: 12px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+}

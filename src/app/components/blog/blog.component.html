@@ -4,14 +4,15 @@
       <div class="col-lg-4" *ngFor="let blog of BLOGS">
         <div class="single-latest-blog">
           <div class="aritcles-content mb-30 pt-3">
-            <div class="author-name d-block text-size-x-small text-capitalize">
+            <div
+              class="author-name fw-500 d-block text-size-x-small text-capitalize">
               post by: <a href="#"> {{ blog.authorName }}</a> -
               {{ blog.postedAt }}
             </div>
             <h4>
               <a
                 href=""
-                class="articles-name d-block text-size-small mb-3 mt-0 position-relative text-uppercase"
+                class="articles-name fw-600 d-block text-size-small mb-3 mt-0 position-relative text-uppercase"
                 >{{ blog.articlesName }}</a
               >
             </h4>

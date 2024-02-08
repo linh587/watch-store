@@ -11,6 +11,8 @@ import { SeasonCollectionBannerComponent } from "./season-collection-banner/seas
 import { CategoryBannerComponent } from "./category-banner/category-banner.component";
 import { BlogComponent } from "./blog/blog.component";
 import { OurPartnersComponent } from "./our-partners/our-partners.component";
+import { AuthenticationModalComponent } from "./authentication-modal/authentication-modal.component";
+import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -24,10 +26,11 @@ const COMPONENTS = [
   CategoryBannerComponent,
   BlogComponent,
   OurPartnersComponent,
+  AuthenticationModalComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, SwiperModule],
+  imports: [CommonModule, SwiperModule, NgbNavModule],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
 })

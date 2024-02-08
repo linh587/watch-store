@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-3 col-md-4 col-5">
-          <div class="logo-area">
+          <div
+            class="logo-area cursor-pointer"
+            (click)="router.navigate(['/']).then()">
             <img
               src="https://www.watchstore.vn/upload/image/logo-watchstore.webp"
               alt="logo"
@@ -27,28 +29,74 @@
         </div>
         <div class="col-lg-3">
           <div class="d-flex justify-content-end">
-            <div class="user-wrapper pe-2 me-3">
-              <a href="">
+            <div
+              class="wishlist-wrapper pe-2 me-3 position-relative"
+              (click)="router.navigate(['/favorite']).then()">
+              <a class="cursor-pointer">
+                <span class="material-symbols-outlined"> favorite </span>
+                <span
+                  class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize">
+                  2
+                </span>
+              </a>
+            </div>
+            <div
+              class="cart-wrapper pe-2 me-3 position-relative"
+              (click)="router.navigate(['/cart']).then()">
+              <a class="cursor-pointer" (click)="$event.stopPropagation()">
+                <span class="material-symbols-outlined"> shopping_cart </span>
+                <span
+                  class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
+                  >2
+                </span>
+              </a>
+              <ul
+                class="mini-cart position-absolute bg-white end-0"
+                (click)="$event.stopPropagation()">
+                <li class="cart-item d-flex position-relative pb-3">
+                  <div class="card-image cursor-pointer">
+                    <img
+                      src="/assets/images/details/product-detail.webp"
+                      alt=""
+                      class="mw-100" />
+                  </div>
+                  <div class="card-title ps-3 mt-2">
+                    <a class="pe-3 cursor-pointer">
+                      <h4 class="text-size-small fw-normal">Product Name 01</h4>
+                    </a>
+                    <div class="quanti-price-wrap d-flex">
+                      <span class="quantity me-1">1 ×</span>
+                      <div class="price-box fw-500 color-brown">
+                        <span class="new-price">$130.00</span>
+                      </div>
+                    </div>
+                    <div
+                      class="remove-from-cart position-absolute end-0 cursor-pointer">
+                      <i class="fa-regular fa-circle-xmark text-size-large"></i>
+                    </div>
+                  </div>
+                </li>
+                <li class="subtotal-box pt-3">
+                  <div
+                    class="subtotal-title d-flex justify-content-between color-brown text-size-small fw-600">
+                    <h3 class="text-size-small fw-600 m-0 color-brown">
+                      Tổng tiền :
+                    </h3>
+                    <span>$ 260.99</span>
+                  </div>
+                </li>
+                <li class="mini-cart-btns justify-content-between pt-3 w-100">
+                  <div class="cart-btns">
+                    <a>Xem giỏ hàng</a>
+                    <a>Thanh toán</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="profile-wrapper" (click)="openAuthenicationModal()">
+              <a class="cursor-pointer">
                 <span class="material-symbols-outlined"> person </span></a
               >
-            </div>
-            <div class="user-wrapper pe-2 me-3 position-relative">
-              <div
-                class="card-total rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize">
-                2
-              </div>
-              <a href="">
-                <span class="material-symbols-outlined"> favorite </span></a
-              >
-            </div>
-            <div class="user-wrapper pe-2 me-3 position-relative">
-              <div
-                class="card-total rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize">
-                2
-              </div>
-              <a href="">
-                <span class="material-symbols-outlined"> shopping_cart </span>
-              </a>
             </div>
           </div>
         </div>
@@ -62,17 +110,50 @@
         <div class="col-lg-12 d-none d-lg-block">
           <nav class="main-navigation text-center">
             <ul>
-              <li><a href="">Trang chủ</a></li>
-              <li>
-                <a href="">
+              <li><a (click)="router.navigate(['/']).then()">Trang chủ</a></li>
+              <li class="category">
+                <a>
                   Danh mục
                   <span class="material-symbols-outlined"> expand_more </span>
                 </a>
+                <ul class="mega-menu bg-white start-0 position-absolute">
+                  <li>
+                    <a href="">Shop Layouts</a>
+                    <ul>
+                      <li>Shop Left Sidebar</li>
+                      <li>Shop Right Sidebar</li>
+                      <li>Shop List Left Sidebar</li>
+                      <li>Shop List Right Sidebar</li>
+                      <li>Shop FullWidth</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="">Product Detail</a>
+                    <ul>
+                      <li>Single Product Details</li>
+                      <li>Variable Product Details</li>
+                      <li>Affiliatel Product Details</li>
+                      <li>Gallery Product Details</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="">Shop Pages</a>
+                    <ul>
+                      <li>Error 404</li>
+                      <li>Compare Page</li>
+                      <li>Cart Page</li>
+                      <li>Checkout Page</li>
+                      <li>Wish List Page</li>
+                    </ul>
+                  </li>
+                </ul>
               </li>
-              <li><a href="">Nam</a></li>
-              <li><a href="">Nữ</a></li>
-              <li><a href="">Luxury</a></li>
-              <li><a href="">Giới thiệu</a></li>
+              <li><a>Nam</a></li>
+              <li><a>Nữ</a></li>
+              <li><a>Luxury</a></li>
+              <li>
+                <a (click)="router.navigate(['about']).then()">Giới thiệu</a>
+              </li>
             </ul>
           </nav>
         </div>

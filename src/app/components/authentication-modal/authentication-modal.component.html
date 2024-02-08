@@ -1,0 +1,101 @@
+<form (keydown.enter)="$event.preventDefault()">
+  <div class="modal-content border-0">
+    <div class="modal-header border-0">
+      <h5 class="modal-title">Chào mừng đến với WatchStore</h5>
+      <div class="modal-button">
+        <button type="button" (click)="onCloseModal()">
+          <span class="material-symbols-outlined"> close </span>
+        </button>
+      </div>
+    </div>
+    <ul
+      ngbNav
+      #nav="ngbNav"
+      [(activeId)]="active"
+      class="nav-tabs"
+      (navChange)="onNavChange($event)">
+      <li [ngbNavItem]="1">
+        <button ngbNavLink class="text-size-medium">Đăng nhập</button>
+        <ng-template ngbNavContent>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập email..." />
+              </div>
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Mật khẩu</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập mật khẩu..." />
+              </div>
+              <div class="buttons col-12">
+                <button class="btn btn-primary w-100 mb-2 sign-in-btn">
+                  Đăng nhập
+                </button>
+                <button
+                  class="btn btn-outline-primary w-100 forgot-password-btn">
+                  Quên mật khẩu?
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <span class="text-center">Hoặc:</span>
+              <button
+                class="btn btn-primary color-black w-100 mb-2 facebook-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                <i class="fa-brands fa-facebook text-size-large me-2"></i>
+                <span class="text-size-small">Đăng nhập với Facebook</span>
+              </button>
+              <button
+                class="btn btn-primary color-black w-100 mb-2 google-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                <i class="fa-brands fa-google text-size-large me-2"></i>
+                <span class="text-size-small">Đăng nhập với Google</span>
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <button ngbNavLink class="text-size-medium">Đăng ký</button>
+        <ng-template ngbNavContent>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập email..." />
+              </div>
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Mật khẩu</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập mật khẩu..." />
+              </div>
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Nhập lại mật khẩu</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập lại mật khẩu..." />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="modal-button">Tạo tài khoản mới</div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2 px-3"></div>
+  </div>
+</form>
