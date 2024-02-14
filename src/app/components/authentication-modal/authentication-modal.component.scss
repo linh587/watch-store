@@ -43,14 +43,25 @@
   }
 }
 
-.modal-body {
-  border-bottom: 1px solid $gray-lighter;
+.modal-header {
+  display: unset;
 }
 
-.facebook-btn,
-.google-btn {
+.authen-btn {
   height: 40px;
   margin-top: 12px;
   border: 1px solid #dadce0;
   border-radius: 4px;
+}
+
+.facebook-btn i {
+  color: #4285f4;
+}
+
+.google-btn i {
+  color: #ea4335;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $gray-lighter;
 }

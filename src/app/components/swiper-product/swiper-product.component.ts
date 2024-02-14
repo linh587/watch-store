@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./swiper-product.component.scss"],
 })
 export class SwiperProductComponent implements OnInit {
-  @Input() slidesPerView: number = 3;
+  @Input() slidesPerView: number = 4;
 
   constructor() {}
 

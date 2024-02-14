@@ -1,12 +1,12 @@
 <form (keydown.enter)="$event.preventDefault()">
   <div class="modal-content border-0">
     <div class="modal-header border-0">
-      <h5 class="modal-title">Chào mừng đến với WatchStore</h5>
-      <div class="modal-button">
+      <div class="text-end">
         <button type="button" (click)="onCloseModal()">
           <span class="material-symbols-outlined"> close </span>
         </button>
       </div>
+      <h5 class="modal-title text-center">Chào mừng đến với WatchStore</h5>
     </div>
     <ul
       ngbNav
@@ -17,7 +17,7 @@
       <li [ngbNavItem]="1">
         <button ngbNavLink class="text-size-medium">Đăng nhập</button>
         <ng-template ngbNavContent>
-          <div class="modal-body">
+          <div class="modal-body border-bottom">
             <div class="row">
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
@@ -38,7 +38,7 @@
                   Đăng nhập
                 </button>
                 <button
-                  class="btn btn-outline-primary w-100 forgot-password-btn">
+                  class="btn btn-outline-primary w-100 forgot-password-btn pb-0">
                   Quên mật khẩu?
                 </button>
               </div>
@@ -48,12 +48,12 @@
             <div class="row">
               <span class="text-center">Hoặc:</span>
               <button
-                class="btn btn-primary color-black w-100 mb-2 facebook-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                class="btn btn-primary color-black w-100 facebook-btn authen-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
                 <i class="fa-brands fa-facebook text-size-large me-2"></i>
                 <span class="text-size-small">Đăng nhập với Facebook</span>
               </button>
               <button
-                class="btn btn-primary color-black w-100 mb-2 google-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                class="btn btn-primary color-black w-100 google-btn authen-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
                 <i class="fa-brands fa-google text-size-large me-2"></i>
                 <span class="text-size-small">Đăng nhập với Google</span>
               </button>
@@ -64,7 +64,7 @@
       <li [ngbNavItem]="2">
         <button ngbNavLink class="text-size-medium">Đăng ký</button>
         <ng-template ngbNavContent>
-          <div class="modal-body">
+          <div class="modal-body border-bottom">
             <div class="row">
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
@@ -80,22 +80,33 @@
                   class="form-control"
                   placeholder="Nhập mật khẩu..." />
               </div>
-              <div class="form-group pb-4 col-12" required>
-                <label class="form-label">Nhập lại mật khẩu</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nhập lại mật khẩu..." />
+
+              <div class="buttons col-12">
+                <button class="btn btn-primary w-100 mb-2 sign-in-btn">
+                  Tạo tài khoản
+                </button>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="modal-button">Tạo tài khoản mới</div>
+          <div class="modal-body">
+            <div class="row">
+              <span class="text-center">Hoặc:</span>
+              <button
+                class="btn btn-primary color-black w-100 facebook-btn authen-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                <i class="fa-brands fa-facebook text-size-large me-2"></i>
+                <span class="text-size-small">Đăng nhập với Facebook</span>
+              </button>
+              <button
+                class="btn btn-primary color-black w-100 google-btn authen-btn cursor-pointer d-flex align-items-center bg-white w-100 p-0 justify-content-center">
+                <i class="fa-brands fa-google text-size-large me-2"></i>
+                <span class="text-size-small">Đăng nhập với Google</span>
+              </button>
+            </div>
           </div>
         </ng-template>
       </li>
     </ul>
 
-    <div [ngbNavOutlet]="nav" class="mt-2 px-3"></div>
+    <div [ngbNavOutlet]="nav" class="my-2 px-3"></div>
   </div>
 </form>
