@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "swiper/css/bundle";
-@import "font-family";
 @import "text-size";
 
 * {
@@ -11,7 +10,7 @@
 
 html,
 body {
-  font-family: $roboto;
+  font-family: "Roboto", sans-serif;
   height: 100%;
   line-height: 1.5;
 }
