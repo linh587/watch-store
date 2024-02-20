@@ -40,19 +40,18 @@
                 </span>
               </a>
             </div>
-            <div
-              class="cart-wrapper pe-2 me-3 position-relative"
-              (click)="router.navigate(['/cart']).then()">
-              <a class="cursor-pointer" (click)="$event.stopPropagation()">
+            <div class="cart-wrapper pe-2 me-3 position-relative">
+              <a
+                class="cursor-pointer"
+                (click)="$event.stopPropagation()"
+                (click)="router.navigate(['/cart']).then()">
                 <span class="material-symbols-outlined"> shopping_cart </span>
                 <span
                   class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
                   >2
                 </span>
               </a>
-              <ul
-                class="mini-cart position-absolute bg-white end-0"
-                (click)="$event.stopPropagation()">
+              <ul class="mini-cart position-absolute bg-white end-0">
                 <li class="cart-item d-flex position-relative pb-3">
                   <div class="card-image cursor-pointer">
                     <img
