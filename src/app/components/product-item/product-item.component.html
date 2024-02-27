@@ -1,10 +1,7 @@
 <div class="single-product position-relative">
   <div class="product-thumb position-relative">
     <a href="">
-      <img
-        src="/assets/images/details/product-detail.webp"
-        alt=""
-        class="primary-image w-100 mw-100" />
+      <img [src]="productItem.img" alt="" class="primary-image w-100 mw-100" />
       <div class="label-product label-new">Mới</div>
       <div class="actions-link position-absolute text-center w-100">
         <a href="" class="cart-btn" title="Thêm vào giỏ">
@@ -21,11 +18,11 @@
   </div>
   <div class="product-caption text-center">
     <h4 class="product-name mb-2 text-size-small">
-      <a href="">Simple Product 001</a>
+      <a href="">{{ productItem.name }}</a>
     </h4>
     <div class="price-box text-size-medium">
-      <span class="new-price fw-600">$42.00</span>
-      <span class="old-price">$49.00</span>
+      <span class="new-price fw-600">{{ productItem.newPrice }}</span>
+      <span class="old-price">{{ productItem.oldPrice }}</span>
     </div>
   </div>
 </div>

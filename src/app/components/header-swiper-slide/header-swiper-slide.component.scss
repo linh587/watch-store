@@ -1,3 +1,5 @@
+@import "text-size";
+
 .header-image-wrapper {
   height: 600px;
 }
@@ -9,4 +11,27 @@
 .mask {
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+  z-index: 3;
+  top: 50%;
+  color: white;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.btn-bordered {
+  line-height: 24px;
+  padding: 10px 40px;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease 0s;
+  border-color: #fff;
+  color: #ffffff;
 }

@@ -30,6 +30,13 @@ const routes: Routes = [
         loadChildren: () =>
           import("./pages/cart/cart.module").then((m) => m.CartModule),
       },
+      {
+        path: "collections",
+        loadChildren: () =>
+          import("./pages/collections/collections.module").then(
+            (m) => m.CollectionsModule
+          ),
+      },
     ],
   },
   {

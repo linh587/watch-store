@@ -1,0 +1,125 @@
+<div class="main-content-wrap shop-page pt-60 pb-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 order-lg-1 order-2">
+        <div class="shop-sidebar-wrap">
+          <div class="shop-box-area">
+            <!-- PRODUCT CATEGORIES  -->
+            <div class="sidebar-categories-box shop-sidebar mb-30">
+              <h4 class="title">Product categories</h4>
+              <div class="category-sub-menu">
+                <ul>
+                  <li class="has-sub">
+                    <a>Sport Watches</a>
+                  </li>
+                  <li class="has-sub">
+                    <a>Kitchen & Dining</a>
+                  </li>
+                  <li class="has-sub">
+                    <a>Casual Watches</a>
+                  </li>
+                  <li class="has-sub">
+                    <a>Dress Watches</a>
+                  </li>
+                  <li class="has-sub">
+                    <a>Digital Watches</a>
+                  </li>
+                  <li class="has-sub">
+                    <a>Crystal Watches</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- FILTER BY PRICE  -->
+            <div class="shop-sidebar mb-30">
+              <h4 class="title">Filter By Price</h4>
+              <div class="filter-price-content">
+                <form action="#" method="post">
+                  <input type="range" min="0" max="100" class="w-100 mb-4" />
+
+                  <div class="filter-price-wapper">
+                    <div class="add-to-cart-button">
+                      <span>FILTER</span>
+                    </div>
+                    <div class="filter-price-cont">
+                      <span>Price: </span>
+                      <div class="input-type">
+                        <input type="text" id="min-price" readonly />
+                      </div>
+                      <span>—</span>
+                      <div class="input-type">
+                        <input type="text" id="max-price" readonly />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- FILTER BY COLOR  -->
+            <div class="shop-sidebar mb-30">
+              <h4 class="title">Filter By Color</h4>
+              <ul class="category-widget-list">
+                <li><a>Red</a></li>
+                <li><a>White</a></li>
+              </ul>
+            </div>
+
+            <!-- PRODUCTS TAG  -->
+            <div class="shop-sidebar mb-30">
+              <h4 class="title">Products Tag</h4>
+              <div class="sidebar-tag">
+                <li><a href="">accesories</a></li>
+                <li><a href="">blouse</a></li>
+                <li><a href="">clothes</a></li>
+                <li><a href="">desktop</a></li>
+                <li><a href="">digital</a></li>
+                <li><a href="">fashion</a></li>
+                <li><a href="">woman</a></li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 order-lg-2 order-1">
+        <div class="shop-product-wrapper">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="shop-top-bar">
+                <div class="product-mode">
+                  <ul class="nav shop-item-filter-list" role="tablist">
+                    <li class="active">
+                      <a class="active grid-view"><i class="fa fa-th"></i></a>
+                    </li>
+                    <li>
+                      <a class="list-view"><i class="fa fa-th-list"></i></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="product-sort">
+                  <p style="width: 40%; margin-right: 4px">Sort By:</p>
+                  <select class="form-select form-select-sm">
+                    <option selected>Relevance</option>
+                    <option value="1">Name(A - Z)</option>
+                    <option value="2">Name(Z - A)</option>
+                    <option value="3">Price(Low > High)</option>
+                    <option value="4">Rating(Lowest)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-products-wrap">
+            <div class="row">
+              <div
+                class="col-lg-4 col-md-6"
+                *ngFor="let collection of collections">
+                <app-product-item [productItem]="collection"></app-product-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

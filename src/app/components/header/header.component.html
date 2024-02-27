@@ -116,33 +116,15 @@
                   <span class="material-symbols-outlined"> expand_more </span>
                 </a>
                 <ul class="mega-menu bg-white start-0 position-absolute">
-                  <li>
-                    <a href="">Shop Layouts</a>
+                  <li *ngFor="let menu of subMenu">
+                    <a href="">{{ menu.textMenu }}</a>
                     <ul>
-                      <li>Shop Left Sidebar</li>
-                      <li>Shop Right Sidebar</li>
-                      <li>Shop List Left Sidebar</li>
-                      <li>Shop List Right Sidebar</li>
-                      <li>Shop FullWidth</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="">Product Detail</a>
-                    <ul>
-                      <li>Single Product Details</li>
-                      <li>Variable Product Details</li>
-                      <li>Affiliatel Product Details</li>
-                      <li>Gallery Product Details</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="">Shop Pages</a>
-                    <ul>
-                      <li>Error 404</li>
-                      <li>Compare Page</li>
-                      <li>Cart Page</li>
-                      <li>Checkout Page</li>
-                      <li>Wish List Page</li>
+                      <li
+                        *ngFor="let collection of menu.collections"
+                        class="cursor-pointer"
+                        (click)="router.navigate(['/collections']).then()">
+                        {{ collection }}
+                      </li>
                     </ul>
                   </li>
                 </ul>
