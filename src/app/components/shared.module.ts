@@ -13,6 +13,7 @@ import { BlogComponent } from "./blog/blog.component";
 import { OurPartnersComponent } from "./our-partners/our-partners.component";
 import { AuthenticationModalComponent } from "./authentication-modal/authentication-modal.component";
 import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
+import { QuickViewProductModalComponent } from "./quick-view-product-modal/quick-view-product-modal.component";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -27,6 +28,7 @@ const COMPONENTS = [
   BlogComponent,
   OurPartnersComponent,
   AuthenticationModalComponent,
+  QuickViewProductModalComponent,
 ];
 
 @NgModule({

@@ -25,7 +25,7 @@ export class PagesComponent implements OnInit {
 
   @HostListener("window:scroll") onWindowScroll() {
     const scrollTop = Math.max(
-      window.pageYOffset,
+      window.scrollY,
       document.documentElement.scrollTop,
       document.body.scrollTop
     );

@@ -1,7 +1,10 @@
 <div class="single-product position-relative">
   <div class="product-thumb position-relative">
     <a href="">
-      <img [src]="productItem.img" alt="" class="primary-image w-100 mw-100" />
+      <img
+        [src]="productItem.images[0]"
+        alt=""
+        class="primary-image w-100 mw-100" />
       <div class="label-product label-new">Mới</div>
       <div class="actions-link position-absolute text-center w-100">
         <a href="" class="cart-btn" title="Thêm vào giỏ">
@@ -10,7 +13,10 @@
         <a href="" class="wishlist-btn" title="Thêm vào yêu thích">
           <i class="fa-regular fa-heart"></i>
         </a>
-        <a href="" class="quick-view" title="Xem chi tiết">
+        <a
+          class="quick-view"
+          title="Xem chi tiết"
+          (click)="onOpenQuickViewProductModal($event)">
           <i class="fa-regular fa-eye"></i>
         </a>
       </div>

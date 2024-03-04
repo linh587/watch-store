@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <div class="header-bottom">
+  <div class="header-bottom" [class.menu-fixed]="menuFixed">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-12 d-none d-lg-block">
@@ -129,9 +129,15 @@
                   </li>
                 </ul>
               </li>
-              <li><a>Nam</a></li>
-              <li><a>Nữ</a></li>
-              <li><a>Luxury</a></li>
+              <li (click)="router.navigate(['/collections']).then()">
+                <a>Nam</a>
+              </li>
+              <li (click)="router.navigate(['/collections']).then()">
+                <a>Nữ</a>
+              </li>
+              <li (click)="router.navigate(['/collections']).then()">
+                <a>Luxury</a>
+              </li>
               <li>
                 <a (click)="router.navigate(['about']).then()">Giới thiệu</a>
               </li>

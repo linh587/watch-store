@@ -37,55 +37,58 @@ export const SUB_MENU = [
 
 export const COLLECTIONS = [
   {
-    img: "/assets/images/details/product-detail.webp",
+    images: [
+      "/assets/images/details/product-detail.webp",
+      "/assets/images/details/product-detail-1.webp",
+    ],
     name: "Simple product 1",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-1.webp",
+    images: ["/assets/images/details/product-detail-1.webp"],
     name: "Simple product 2",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-2.webp",
+    images: ["/assets/images/details/product-detail-2.webp"],
     name: "Simple product 3",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-3.webp",
+    images: ["/assets/images/details/product-detail-3.webp"],
     name: "Simple product 4",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-4.webp",
+    images: ["/assets/images/details/product-detail-4.webp"],
     name: "Simple product 5",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-3.webp",
+    images: ["/assets/images/details/product-detail-3.webp"],
     name: "Simple product 4",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-4.webp",
+    images: ["/assets/images/details/product-detail-4.webp"],
     name: "Simple product 5",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-3.webp",
+    images: ["/assets/images/details/product-detail-3.webp"],
     name: "Simple product 4",
     newPrice: "$59",
     oldPrice: "$90",
   },
   {
-    img: "/assets/images/details/product-detail-4.webp",
+    images: ["/assets/images/details/product-detail-4.webp"],
     name: "Simple product 5",
     newPrice: "$59",
     oldPrice: "$90",

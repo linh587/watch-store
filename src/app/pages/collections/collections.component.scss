@@ -1,3 +1,6 @@
+@import "color";
+@import "text-size";
+
 .shop-box-area {
   border: 1px solid #ebebeb;
   border-radius: 3px;
@@ -5,9 +8,9 @@
 }
 
 .shop-sidebar h4 {
-  font-size: 16px;
+  font-size: $text-medium;
   font-weight: 500;
-  color: #000000;
+  color: $black;
   margin-bottom: 25px;
   padding-bottom: 15px;
   position: relative;
@@ -24,48 +27,46 @@
 }
 
 .shop-item-filter-list li .active {
-  color: #c89979;
+  color: $primary-color;
 }
 
 .shop-item-filter-list li a {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: $text-medium;
 }
 
 .category-sub-menu ul li.has-sub > a {
   color: #363f4d;
   cursor: pointer;
   display: block;
-  font-size: 14px;
+  font-size: $text-small;
   line-height: 14px;
   padding: 10px 0 10px 0px;
   position: relative;
 }
 
 .category-sub-menu ul li.has-sub > a:after {
-  color: #333333;
+  color: $brown;
   content: "";
   font-family: FontAwesome;
-  font-size: 14px;
+  font-size: $text-small;
   position: absolute;
   right: 5px;
 }
 
 .filter-price-wapper .add-to-cart-button {
-  background: #333;
+  background: $brown;
   display: inline-block;
   font-weight: 500;
   padding: 4px 13px;
   right: 0;
-  color: #ffffff;
+  color: $white;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
 .filter-price-cont {
-  display: flex;
-  flex-direction: row;
-  font-size: 13px;
+  font-size: $text-x-small;
   margin-bottom: 10px;
 }
 
@@ -75,8 +76,8 @@
 
 .sidebar-tag li > a {
   border: 1px solid #ddd;
-  color: #333;
-  font-size: 13px;
+  color: $brown;
+  font-size: $text-x-small;
   margin: 10px 10px 0 0;
   padding: 4px 15px;
   border-radius: 5px;
@@ -84,27 +85,12 @@
 }
 
 .shop-top-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   padding: 10px 15px;
   border: 1px solid #ddd;
   margin-bottom: 10px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   border-radius: 3px;
 }
 
-.product-sort {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 14px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.product-sort p {
+  width: 40%;
 }

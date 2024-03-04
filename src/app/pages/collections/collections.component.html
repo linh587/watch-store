@@ -35,13 +35,13 @@
               <h4 class="title">Filter By Price</h4>
               <div class="filter-price-content">
                 <form action="#" method="post">
-                  <input type="range" min="0" max="100" class="w-100 mb-4" />
+                  <input type="range" min="0" max="100" class="w-100 mb-3" />
 
                   <div class="filter-price-wapper">
                     <div class="add-to-cart-button">
                       <span>FILTER</span>
                     </div>
-                    <div class="filter-price-cont">
+                    <div class="filter-price-cont d-flex flex-row">
                       <span>Price: </span>
                       <div class="input-type">
                         <input type="text" id="min-price" readonly />
@@ -84,7 +84,8 @@
         <div class="shop-product-wrapper">
           <div class="row align-items-center">
             <div class="col">
-              <div class="shop-top-bar">
+              <div
+                class="shop-top-bar d-flex justify-content-between align-items-center">
                 <div class="product-mode">
                   <ul class="nav shop-item-filter-list" role="tablist">
                     <li class="active">
@@ -95,8 +96,8 @@
                     </li>
                   </ul>
                 </div>
-                <div class="product-sort">
-                  <p style="width: 40%; margin-right: 4px">Sort By:</p>
+                <div class="product-sort d-flex align-items-center">
+                  <p class="mr-1">Sort By:</p>
                   <select class="form-select form-select-sm">
                     <option selected>Relevance</option>
                     <option value="1">Name(A - Z)</option>
