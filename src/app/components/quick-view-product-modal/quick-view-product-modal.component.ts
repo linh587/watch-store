@@ -7,13 +7,13 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class QuickViewProductModalComponent implements OnInit {
   @Input() productItem: any;
-  public initialSlide!: number;
+  public initialSlide: number = 0;
   public thumbsSwiper: any;
   public slidesPerView: number = 10;
 
   constructor() {}
 
-  ngOnInit() {
-    this.initialSlide = this.productItem.images[0];
-  }
+  ngOnInit() {}
+
+  public activeIndexChange(event: any) {}
 }

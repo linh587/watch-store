@@ -7,27 +7,40 @@
       <div class="row gx-3 product-details-inner">
         <div class="col-lg-5 col-md-6 col-sm-6">
           <div class="gallery">
-            <swiper
-              class="swiper-navigation"
-              [spaceBetween]="10"
-              [navigation]="true"
-              [initialSlide]="initialSlide"
-              [thumbs]="{
-                swiper:
-                  thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null
-              }"
-              class="mySwiper2">
-              <ng-template swiperSlide>
-                <img
-                  onerror="this.onerror=null; this.src='./assets/images/realEstate/default.jpg'" />
-              </ng-template>
-            </swiper>
+            <ng-container
+              *ngIf="
+                productItem?.images && productItem?.images.length > 0;
+                else defaultImage
+              ">
+              <swiper
+                [initialSlide]="initialSlide"
+                [thumbs]="{ swiper: thumbsSwiper }"
+                (slideChange)="activeIndexChange($event)"
+                class="mySwiper">
+                <ng-template
+                  *ngFor="let photo of productItem?.images; let i = index"
+                  swiperSlide>
+                  <div class="card-image">
+                    <div
+                      class="blur-image w-100 h-0 blur-image-mobile"
+                      [ngStyle]="{
+                        'background-image': 'url(' + photo + ')'
+                      }"></div>
+                  </div>
+                </ng-template>
+              </swiper>
+            </ng-container>
 
-            <swiper
+            <ng-template #defaultImage>
+              <div class="card-image">
+                <img alt="Default Image" class="w-100 h-100" />
+              </div>
+            </ng-template>
+
+            <!-- <swiper
               (swiper)="thumbsSwiper = $event"
               [spaceBetween]="10"
               [slidesPerView]="slidesPerView"
-              [initialSlide]="initialSlide"
               [freeMode]="true"
               [watchSlidesProgress]="true"
               class="mySwiper mb-2">
@@ -42,7 +55,7 @@
                   src="./assets/images/realEstate/default.jpg"
                   class="image-thumbnail"
               /></ng-template>
-            </swiper>
+            </swiper> -->
           </div>
         </div>
         <div class="col-lg-7 col-md-6 col-sm-6"></div>

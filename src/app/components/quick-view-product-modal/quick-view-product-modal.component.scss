@@ -1,0 +1,20 @@
+.mySwiper {
+  position: relative;
+  width: 100% !important;
+  height: 0 !important;
+  padding-bottom: 100% !important;
+}
+
+.card-image {
+  cursor: pointer;
+}
+
+.gallery {
+  position: relative;
+
+  .blur-image-mobile {
+    padding-bottom: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+}
