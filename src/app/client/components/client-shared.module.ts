@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
+import { ClientHeaderComponent } from "./client-header/client-header.component";
+import { ClientFooterComponent } from "./client-footer/client-footer.component";
 import { SwiperModule } from "swiper/angular";
 import SwiperCore, { Autoplay, Navigation, Pagination, Virtual } from "swiper";
 import { HeaderSwiperSlideComponent } from "./header-swiper-slide/header-swiper-slide.component";
@@ -18,8 +18,8 @@ import { QuickViewProductModalComponent } from "./quick-view-product-modal/quick
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
 const COMPONENTS = [
-  HeaderComponent,
-  FooterComponent,
+  ClientHeaderComponent,
+  ClientFooterComponent,
   HeaderSwiperSlideComponent,
   ProductItemComponent,
   SwiperProductComponent,

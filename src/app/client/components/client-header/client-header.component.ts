@@ -5,15 +5,12 @@ import { AuthenticationModalComponent } from "../authentication-modal/authentica
 import { SUB_MENU } from "../../../public/constants/common";
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  selector: "app-client-header",
+  templateUrl: "./client-header.component.html",
+  styleUrls: ["./client-header.component.scss"],
 })
-export class HeaderComponent {
-  constructor(
-    public router: Router,
-    public modalService: NgbModal,
-  ) {}
+export class ClientHeaderComponent {
+  constructor(public router: Router, public modalService: NgbModal) {}
 
   public subMenu = SUB_MENU;
   public menuFixed: boolean = false;
