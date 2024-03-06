@@ -1,0 +1,10 @@
+@import "variables";
+
+.main-content {
+  margin-left: $admin-sidebar-width;
+  background-color: #f7f7f7;
+}
+
+.page-content {
+  padding: calc(70px + 1.5rem) calc(1.5rem / 2) 50px calc(1.5rem / 2);
+}

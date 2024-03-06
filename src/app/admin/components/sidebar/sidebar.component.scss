@@ -1,0 +1,11 @@
+@import "color";
+@import "variables";
+
+.navbar-menu {
+  width: $admin-sidebar-width;
+  bottom: 0;
+  top: 0;
+  background-color: $primary-color;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

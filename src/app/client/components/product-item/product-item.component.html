@@ -1,0 +1,34 @@
+<div class="single-product position-relative">
+  <div class="product-thumb position-relative">
+    <a>
+      <img
+        [src]="productItem.images[0]"
+        alt=""
+        class="primary-image w-100 mw-100" />
+      <div class="label-product label-new">Mới</div>
+      <div class="actions-link position-absolute text-center w-100">
+        <a class="cart-btn" title="Thêm vào giỏ">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+        <a class="wishlist-btn" title="Thêm vào yêu thích">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <a
+          class="quick-view cursor-pointer"
+          title="Xem chi tiết"
+          (click)="onOpenQuickViewProductModal($event)">
+          <i class="fa-regular fa-eye"></i>
+        </a>
+      </div>
+    </a>
+  </div>
+  <div class="product-caption text-center">
+    <h4 class="product-name mb-2 text-size-small">
+      <a>{{ productItem.name }}</a>
+    </h4>
+    <div class="price-box text-size-medium">
+      <span class="new-price fw-600">{{ productItem.newPrice }}</span>
+      <span class="old-price">{{ productItem.oldPrice }}</span>
+    </div>
+  </div>
+</div>
