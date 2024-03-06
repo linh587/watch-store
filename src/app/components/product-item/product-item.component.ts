@@ -18,6 +18,7 @@ export class ProductItemComponent implements OnInit {
     event.preventDefault();
     const modalRef = this.modalService.open(QuickViewProductModalComponent, {
       centered: true,
+      size: "lg"
     });
 
     modalRef.componentInstance.productItem = this.productItem;

@@ -1,64 +1,129 @@
 <div class="modal-content border-0">
   <div class="modal-body">
-    <button type="button">
-      <span class="material-symbols-outlined"> close </span>
-    </button>
+    <div class="text-end">
+      <button type="button" (click)="onCloseModal()">
+        <span class="material-symbols-outlined"> close </span>
+      </button>
+    </div>
     <div class="modal-inner-area">
       <div class="row gx-3 product-details-inner">
         <div class="col-lg-5 col-md-6 col-sm-6">
           <div class="gallery">
-            <ng-container
-              *ngIf="
-                productItem?.images && productItem?.images.length > 0;
-                else defaultImage
-              ">
-              <swiper
-                [initialSlide]="initialSlide"
-                [thumbs]="{ swiper: thumbsSwiper }"
-                (slideChange)="activeIndexChange($event)"
-                class="mySwiper">
-                <ng-template
-                  *ngFor="let photo of productItem?.images; let i = index"
-                  swiperSlide>
-                  <div class="card-image">
-                    <div
-                      class="blur-image w-100 h-0 blur-image-mobile"
-                      [ngStyle]="{
-                        'background-image': 'url(' + photo + ')'
-                      }"></div>
-                  </div>
-                </ng-template>
-              </swiper>
-            </ng-container>
-
-            <ng-template #defaultImage>
-              <div class="card-image">
-                <img alt="Default Image" class="w-100 h-100" />
-              </div>
-            </ng-template>
-
-            <!-- <swiper
+            <swiper
+              [spaceBetween]="10"
+              [navigation]="false"
+              [thumbs]="{ swiper: thumbsSwiper }"
+              class="mySwiper2 mb-3 w-100">
+              <ng-template
+                swiperSlide
+                *ngFor="let image of productItem?.images">
+                <img [src]="image" alt="" class="w-100" />
+              </ng-template>
+            </swiper>
+            <swiper
               (swiper)="thumbsSwiper = $event"
+              [loop]="false"
               [spaceBetween]="10"
               [slidesPerView]="slidesPerView"
               [freeMode]="true"
               [watchSlidesProgress]="true"
-              class="mySwiper mb-2">
-              <ng-template swiperSlide>
-                <img
-                  class="image-thumbnail"
-                  onerror="this.onerror=null; this.src='./assets/images/realEstate/default.jpg'" />
+              class="mySwiper mb-2 w-100">
+              <ng-template
+                swiperSlide
+                *ngFor="let image of productItem?.images; let index = index">
+                <img class="image-thumbnail w-100" [src]="image" alt="" />
               </ng-template>
-
-              <ng-template *ngIf="true" swiperSlide>
-                <img
-                  src="./assets/images/realEstate/default.jpg"
-                  class="image-thumbnail"
-              /></ng-template>
-            </swiper> -->
+            </swiper>
           </div>
         </div>
-        <div class="col-lg-7 col-md-6 col-sm-6"></div>
+        <div class="col-lg-7 col-md-6 col-sm-6">
+          <div class="product-details-view-content">
+            <div class="product-info">
+              <h3 class="mb-2">{{ productItem?.name }}</h3>
+              <div class="product-rating d-flex">
+                <ul class="d-flex">
+                  <li>
+                    <i class="fa-regular fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-star"></i>
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-star"></i>
+                  </li>
+                </ul>
+                <a class="ms-2"
+                  >(<span class="count">1</span> customer review)</a
+                >
+              </div>
+              <div
+                class="price-box primary-color fw-500 mb-3 mt-2 w-100 text-size-large">
+                <span class="new-price fw-500 primary-color">$70.00</span>
+                <span
+                  class="old-price d-inline-block font-weight-normal ms-1 text-decoration-line-through"
+                  >$78.00</span
+                >
+              </div>
+              <p class="mb-3">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                fringilla augue nec est tristique auctor.
+              </p>
+              <div class="single-add-to-cart">
+                <form action="#" class="cart-quantity d-flex">
+                  <div class="quantity">
+                    <div class="cart-plus-minus">
+                      <input type="number" class="input-text" name="quantity" />
+                    </div>
+                  </div>
+                  <button class="add-to-cart">Add To Cart</button>
+                </form>
+              </div>
+              <ul class="single-add-actions">
+                <li class="add-to-wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                  Add to Wishlist
+                </li>
+              </ul>
+              <ul class="stock-cont">
+                <li class="product-stock-status">
+                  Categories:
+                  <a href="#">Watchs,</a>
+                  <a href="#">Man Watches</a>
+                </li>
+                <li class="product-stock-status">
+                  Tag:
+                  <a href="#">Man</a>
+                </li>
+              </ul>
+              <div class="share-product-social-area d-flex align-items-center">
+                <p>Share this product</p>
+                <ul class="single-product-share">
+                  <li>
+                    <a>
+                      <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fa-brands fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fa-brands fa-pinterest"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
