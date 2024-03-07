@@ -1,11 +1,48 @@
 @import "color";
 @import "variables";
+@import "text-size";
 
 .navbar-menu {
   width: $admin-sidebar-width;
   bottom: 0;
   top: 0;
-  background-color: $primary-color;
+  background-color: $white;
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-family: "Poppins", sans-serif;
+
+  .logo img {
+    width: $logo-width;
+  }
+
+  .sidebar-menu-scroll {
+    max-height: calc(100vh - 70px);
+    padding-bottom: 80px;
+
+    .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+
+      .menu-text {
+        font-size: 15px;
+      }
+
+      .nav-link {
+        color: $black;
+        display: flex;
+        align-items: center;
+        padding: 0.625rem 1.5rem;
+
+        i {
+          display: inline-block;
+          min-width: 1.75rem;
+          font-size: $text-large;
+          line-height: inherit;
+        }
+      }
+    }
+  }
 }

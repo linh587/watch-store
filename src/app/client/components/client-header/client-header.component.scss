@@ -1,12 +1,13 @@
 @import "color";
 @import "text-size";
+@import "variables";
 
 .header {
   &-top {
     border-bottom: 1px solid $gray-lighter;
 
     .logo-area {
-      width: 200px;
+      width: $logo-width;
     }
 
     .search-box-wrapper {
@@ -179,11 +180,20 @@
     z-index: 10;
   }
 
+  .dropdown-menu {
+    padding: 0;
+  }
+
   .dropdown-item {
     font-size: $text-small;
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
 
     &:active {
-      background-color: $primary-color;
+      background-color: $gray-300;
+      color: $black;
     }
   }
 }

@@ -2,11 +2,22 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AdminHeaderComponent } from "./admin-header/admin-header.component";
+import { SimplebarAngularModule } from "simplebar-angular";
+import { BreadcrumbsComponent } from "./breadcrumbs/breadcrumbs.component";
+import { AdminFooterComponent } from "./admin-footer/admin-footer.component";
+import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { TableComponent } from "./table/table.component";
 
-const COMPONENTS = [SidebarComponent, AdminHeaderComponent];
+const COMPONENTS = [
+  SidebarComponent,
+  AdminHeaderComponent,
+  BreadcrumbsComponent,
+  AdminFooterComponent,
+  TableComponent
+];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, SimplebarAngularModule, NgbPaginationModule],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
 })

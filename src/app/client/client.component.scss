@@ -1,4 +1,10 @@
 @import "color";
+@import "text-size";
+
+.page-wrapper {
+  font-family: "Roboto", sans-serif;
+  font-size: $text-small;
+}
 
 .back-to-top {
   width: 50px;

@@ -1,0 +1,96 @@
+<div class="card-body">
+  <!-- TABLE DATA-->
+  <div class="table-responsive table-card mb-1">
+    <table class="table align-middle table-nowrap" id="ticketTable">
+      <thead class="table-light">
+        <tr>
+          <ng-container *ngTemplateOutlet="headers"></ng-container>
+        </tr>
+      </thead>
+      <tbody class="llist form-check-all" id="ticket-list-data">
+        <ng-template [ngIf]="title !== 'quick-up'" [ngIfElse]="elseBlock">
+          <ng-container *ngFor="let d of data">
+            <!-- Main row -->
+            <tr [ngClass]="d.isSelected && 'table-active'">
+              <ng-container
+                *ngTemplateOutlet="
+                  rows;
+                  context: { $implicit: d, rotateClass: rotateClass }
+                "></ng-container>
+            </tr>
+            <!-- Expand detail-->
+            <tr *ngIf="d.isSelected">
+              <td colspan="12">
+                <ng-container
+                  *ngTemplateOutlet="
+                    rowExpand;
+                    context: { $implicit: d.contact }
+                  "></ng-container>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <ng-container *ngFor="let d of data">
+            <!-- Main row -->
+            <tr [ngClass]="d.isSelected && 'table-active'">
+              <ng-container
+                *ngTemplateOutlet="
+                  rows;
+                  context: { $implicit: d, rotateClass: rotateClass }
+                "></ng-container>
+            </tr>
+          </ng-container>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SKELETON LOADING-->
+  <!-- <ng-template [ngIf]="!data">
+    <app-skeleton-table tableType="tableRealEstate"></app-skeleton-table>
+  </ng-template> -->
+
+  <ng-template [ngIf]="total === 0">
+    <ng-container *ngTemplateOutlet="noData"></ng-container>
+  </ng-template>
+
+  <!-- OUTLET CALL API BỊ LỖI-->
+  <ng-template [ngIf]="logError === true">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <h3 class="text-danger">Server Error</h3>
+      <span>Vui lòng thử lại sau, cảm ơn</span>
+    </div>
+  </ng-template>
+
+  <!-- PAGINATION-->
+  <div class="row justify-content-md-between align-items-md-center">
+    <div class="col col-sm-6">
+      <div
+        class="dataTables_info mb-2"
+        id="tickets-table_info"
+        role="status"
+        aria-live="polite">
+        Hiển thị
+        {{ limit * (page - 1) }} tới {{ limit * (page - 1) + pageSize }} trong
+        {{ total }}
+        kết quả
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="col col-sm-6">
+      <div class="text-sm-right float-sm-end listjs-pagination">
+        <ngb-pagination
+          *ngIf="page"
+          [collectionSize]="total"
+          (pageChange)="pageChange.emit($event)"
+          [maxSize]="10"
+          [page]="page"
+          [pageSize]="limit">
+        </ngb-pagination>
+      </div>
+    </div>
+    <!-- End Pagination -->
+  </div>
+</div>
