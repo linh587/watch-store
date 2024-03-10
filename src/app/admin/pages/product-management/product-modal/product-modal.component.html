@@ -1,0 +1,56 @@
+<form (keydown.enter)="$event.preventDefault()">
+  <div class="modal-content border-0">
+    <div class="modal-header">
+      <h5 class="modal-title">This is title</h5>
+      <div class="modal-button">
+        <button type="button" data-dismiss="modal" (click)="handleCloseModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Mã sản phẩm</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Hình ảnh</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Tên sản phẩm</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Giá bán</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Số lượng</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group pb-4 col-6" required>
+          <label class="form-label">Phân loại</label>
+          <input type="text" class="form-control text-size-small" />
+        </div>
+        <div class="form-group col-12">
+          <label class="form-label">Mô tả</label>
+          <textarea
+            cols="30"
+            rows="10"
+            class="form-control text-size-small"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer border-0">
+      <div class="modal-button">
+        <button type="button" class="btn btn-danger">
+          <span>Huỷ chỉnh sửa</span>
+        </button>
+        <button type="submit" class="btn btn-success ms-2">Lưu</button>
+        <button class="btn btn-success ms-2">Sửa</button>
+      </div>
+    </div>
+  </div>
+</form>

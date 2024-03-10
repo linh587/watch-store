@@ -11,7 +11,7 @@ export const COLUMN_OF_PRODUCTS: string[] = [
   "Mã SP",
   "Hình ảnh",
   "Tên SP",
-  "Giá bán",
+  "Giá bán (VNĐ)",
   "Số lượng",
   "Phân loại",
   "Mô tả",

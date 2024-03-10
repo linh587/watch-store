@@ -13,7 +13,7 @@ const COMPONENTS = [
   AdminHeaderComponent,
   BreadcrumbsComponent,
   AdminFooterComponent,
-  TableComponent
+  TableComponent,
 ];
 
 @NgModule({

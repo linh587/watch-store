@@ -18,7 +18,9 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-auto justify-content-sm-end">
+          <div
+            class="col-sm-auto justify-content-sm-end"
+            (click)="onOpenAddModal()">
             <button class="btn btn-success add-btn">
               <i class="fa-solid fa-plus"></i>
               <span class="text-size-small ms-2">Thêm</span>
@@ -50,7 +52,9 @@
               }}</span>
             </td>
             <td>
-              <span class="badge bg-info text-size-x-small">{{ data.quantity }} Chiếc</span>
+              <span class="badge bg-info text-size-x-small"
+                >{{ data.quantity }} Chiếc</span
+              >
             </td>
             <td>{{ data.category }}</td>
             <td>{{ data.description }}</td>
@@ -59,7 +63,7 @@
                 <div class="edit">
                   <div class="btn btn-success btn-sm">Sửa</div>
                 </div>
-                <div class="remove">
+                <div class="remove" (click)="onOpenConfirmModal()">
                   <div class="btn btn-danger btn-sm">Xoá</div>
                 </div>
               </div>

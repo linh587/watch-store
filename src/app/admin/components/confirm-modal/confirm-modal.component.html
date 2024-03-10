@@ -1,0 +1,34 @@
+<div class="modal-header justify-content-end" *ngIf="hasClose">
+  <button
+    type="button"
+    data-dismiss="modal"
+    aria-label="Close"
+    class="close m-0 fs-16"
+    (click)="closeModal()">
+    <span>×</span>
+  </button>
+</div>
+<div class="modal-body text-center p-4">
+  <div>
+    <i class="las la-exclamation-circle text-warning fs-48"></i>
+    <h4 class="mb-3">{{ title }}</h4>
+    <p class="text-muted mb-4">
+      {{ content }}
+    </p>
+    <div class="hstack gap-2 justify-content-center">
+      <a
+        href="javascript:void(0);"
+        class="btn w-sm btn-light"
+        data-bs-dismiss="modal"
+        (click)="confirmModal(false)"
+        ><i class="ri-close-line me-1 align-middle"></i> Huỷ</a
+      >
+      <a
+        href="javascript:void(0);"
+        class="btn btn-danger"
+        (click)="confirmModal(true)">
+        <i class="las la-check"></i> Xác nhận</a
+      >
+    </div>
+  </div>
+</div>
