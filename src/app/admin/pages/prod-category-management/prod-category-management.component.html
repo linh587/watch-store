@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <app-table [data]="products">
+      <app-table [data]="categories">
         <ng-template #headers>
           <ng-container *ngFor="let column of COLUMNS; trackBy: trackColumn">
             <th [ngStyle]="{ 'min-width.px': column }" scope="col">
@@ -39,25 +39,13 @@
 
         <ng-template #rows let-data let-rotateClass="rotateClass">
           <ng-container>
-            <td>#{{ data.id }}</td>
-            <td style="width: 100px; height: 100px">
-              <img [src]="data.photo" alt="" class="w-100 h-100" />
+            <td>{{ data._id }}</td>
+            <td>
+              {{ data.title }}
             </td>
             <td>
-              {{ data.name }}
+              {{ data.status }}
             </td>
-            <td>
-              <span class="badge bg-warning text-size-x-small">{{
-                data.price
-              }}</span>
-            </td>
-            <td>
-              <span class="badge bg-info text-size-x-small"
-                >{{ data.quantity }} Chiếc</span
-              >
-            </td>
-            <td>{{ data.category }}</td>
-            <td>{{ data.description }}</td>
             <td>
               <div class="d-flex gap-2">
                 <div class="edit">

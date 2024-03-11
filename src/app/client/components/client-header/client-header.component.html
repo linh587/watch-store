@@ -94,19 +94,20 @@
             </div>
 
             <!-- GET THIS IF NOT LOGIN  -->
-            <!-- <div
+            <div
+              *ngIf="!(userInfo$ | async)"
               class="profile-wrapper cursor-pointer"
               (click)="openAuthenicationModal()">
               <span class="material-symbols-outlined"> person </span>
-            </div> -->
+            </div>
 
             <!-- GET THIS IF LOGIN SUCCESSFUL  -->
-            <div ngbDropdown>
+            <div ngbDropdown *ngIf="userInfo$ | async as userInfo">
               <div
                 ngbDropdownToggle
                 class="profile-wrapper cursor-pointer d-flex align-items-center">
                 <span class="material-symbols-outlined"> person </span>
-                <span class="mx-1">Le Mai Linh</span>
+                <span class="mx-1">{{ userInfo?.fullName }}</span>
               </div>
 
               <div ngbDropdownMenu aria-labelledby="profileDropdown">
@@ -130,7 +131,7 @@
                   <span class="material-symbols-outlined me-2"> key </span>
                   <span>Đổi mật khẩu</span>
                 </button>
-                <button ngbDropdownItem>
+                <button ngbDropdownItem (click)="logout()">
                   <span class="material-symbols-outlined me-2"> logout </span>
                   <span>Đăng xuất</span>
                 </button>

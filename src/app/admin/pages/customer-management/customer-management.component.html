@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="col-sm-auto justify-content-sm-end">
-            <button class="btn btn-success add-btn">
+            <button class="btn btn-success add-btn" (click)="onOpenAddModal()">
               <i class="fa-solid fa-plus"></i>
               <span class="ms-2">Thêm</span>
             </button>
@@ -39,11 +39,11 @@
 
         <ng-template #rows let-data let-rotateClass="rotateClass">
           <ng-container>
-            <td>#{{ data.id }}</td>
+            <td>{{ data._id }}</td>
             <td>{{ data.fullName }}</td>
-            <td>{{ data.phone }}</td>
+            <td>{{ data.mobile }}</td>
             <td>{{ data.email }}</td>
-            <td>{{ data.favorite }}</td>
+            <td>{{ data.role }}</td>
             <td class="due_date">
               <div class="form-check form-switch">
                 <input

@@ -72,6 +72,13 @@ const routes: Routes = [
             "./admin/pages/product-management/product-management.module"
           ).then((m) => m.ProductManagementModule),
       },
+      {
+        path: "product-category-management",
+        loadChildren: () =>
+          import(
+            "./admin/pages/prod-category-management/prod-category-management.module"
+          ).then((m) => m.ProdCategoryManagementModule),
+      },
     ],
   },
   {

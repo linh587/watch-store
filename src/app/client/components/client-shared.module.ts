@@ -14,6 +14,7 @@ import { OurPartnersComponent } from "./our-partners/our-partners.component";
 import { AuthenticationModalComponent } from "./authentication-modal/authentication-modal.component";
 import { NgbDropdownModule, NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import { QuickViewProductModalComponent } from "./quick-view-product-modal/quick-view-product-modal.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -32,7 +33,14 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SwiperModule, NgbNavModule, NgbDropdownModule],
+  imports: [
+    CommonModule,
+    SwiperModule,
+    NgbNavModule,
+    NgbDropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
 })

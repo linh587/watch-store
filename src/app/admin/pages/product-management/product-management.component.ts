@@ -13,7 +13,7 @@ import { ConfirmModalComponent } from "../../components/confirm-modal/confirm-mo
 export class ProductManagementComponent implements OnInit {
   public breadCrumbsItem!: Array<{}>;
   public COLUMNS = COLUMN_OF_PRODUCTS;
-  public customers = [
+  public products = [
     {
       id: 1,
       photo:

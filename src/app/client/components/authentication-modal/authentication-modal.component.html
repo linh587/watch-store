@@ -1,27 +1,28 @@
-<form (keydown.enter)="$event.preventDefault()">
-  <div class="modal-content border-0">
-    <div class="modal-header border-0">
-      <div class="text-end">
-        <button type="button" (click)="onCloseModal()">
-          <span class="material-symbols-outlined"> close </span>
-        </button>
-      </div>
-      <h5 class="modal-title text-center">Chào mừng đến với WatchStore</h5>
+<div class="modal-content border-0">
+  <div class="modal-header border-0">
+    <div class="text-end">
+      <button type="button" (click)="onCloseModal()">
+        <span class="material-symbols-outlined"> close </span>
+      </button>
     </div>
-    <ul
-      ngbNav
-      #nav="ngbNav"
-      [(activeId)]="active"
-      class="nav-tabs"
-      (navChange)="onNavChange($event)">
-      <li [ngbNavItem]="1">
-        <button ngbNavLink class="text-size-medium">Đăng nhập</button>
-        <ng-template ngbNavContent>
+    <h5 class="modal-title text-center">Chào mừng đến với WatchStore</h5>
+  </div>
+  <ul
+    ngbNav
+    #nav="ngbNav"
+    [(activeId)]="active"
+    class="nav-tabs"
+    (navChange)="onNavChange($event)">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink class="text-size-medium">Đăng nhập</button>
+      <ng-template ngbNavContent>
+        <form [formGroup]="loginForm" (submit)="onLoginFormSubmit()">
           <div class="modal-body border-bottom">
             <div class="row">
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
                 <input
+                  formControlName="email"
                   type="text"
                   class="form-control"
                   placeholder="Nhập email..." />
@@ -29,15 +30,20 @@
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Mật khẩu</label>
                 <input
-                  type="text"
+                  formControlName="password"
+                  type="password"
                   class="form-control"
                   placeholder="Nhập mật khẩu..." />
               </div>
               <div class="buttons col-12">
-                <button class="btn btn-primary w-100 mb-2 sign-in-btn">
+                <button
+                  (keydown.enter)="onLoginFormSubmit()"
+                  class="btn btn-primary w-100 mb-2 sign-in-btn"
+                  type="submit">
                   Đăng nhập
                 </button>
                 <button
+                  type="button"
                   class="btn btn-outline-primary w-100 forgot-password-btn pb-0">
                   Quên mật khẩu?
                 </button>
@@ -59,30 +65,53 @@
               </button>
             </div>
           </div>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="2">
-        <button ngbNavLink class="text-size-medium">Đăng ký</button>
-        <ng-template ngbNavContent>
+        </form>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink class="text-size-medium">Đăng ký</button>
+      <ng-template ngbNavContent>
+        <form [formGroup]="registerForm" (submit)="onRegisterFormSubmit()">
           <div class="modal-body border-bottom">
             <div class="row">
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Họ và tên</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập họ và tên..."
+                  formControlName="fullName" />
+              </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Nhập email..." />
+                  placeholder="Nhập email..."
+                  formControlName="email" />
+              </div>
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Số diện thoại</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập số điện thoại..."
+                  formControlName="mobile" />
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Mật khẩu</label>
                 <input
-                  type="text"
+                  type="password"
                   class="form-control"
-                  placeholder="Nhập mật khẩu..." />
+                  placeholder="Nhập mật khẩu..."
+                  formControlName="password" />
               </div>
 
               <div class="buttons col-12">
-                <button class="btn btn-primary w-100 mb-2 sign-in-btn">
+                <button
+                  (keydown.enter)="onRegisterFormSubmit()"
+                  class="btn btn-primary w-100 mb-2 sign-in-btn"
+                  type="submit">
                   Tạo tài khoản
                 </button>
               </div>
@@ -103,10 +132,10 @@
               </button>
             </div>
           </div>
-        </ng-template>
-      </li>
-    </ul>
+        </form>
+      </ng-template>
+    </li>
+  </ul>
 
-    <div [ngbNavOutlet]="nav" class="my-2 px-3"></div>
-  </div>
-</form>
+  <div [ngbNavOutlet]="nav" class="my-2 px-3"></div>
+</div>
