@@ -1,12 +1,10 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { BaseHttpRequest } from "../http/base-http-request.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class ProductsService {
-  constructor(private httpClient: HttpClient) {}
-
+export class ProductsService extends BaseHttpRequest {
   public getAllCategories() {
     return this.httpClient.get("http://localhost:5000/api/category");
   }
@@ -24,5 +22,9 @@ export class ProductsService {
 
   public deleteCategory(id: string) {
     return this.httpClient.delete(`http://localhost:5000/api/category/${id}`);
+  }
+
+  public getDetailCategory(id: string) {
+    return this.httpClient.get(`http://localhost:5000/api/category/${id}`);
   }
 }

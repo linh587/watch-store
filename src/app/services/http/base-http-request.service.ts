@@ -9,8 +9,7 @@ import {
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Observable, of, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
-// import { NotifyService } from "src/app/services/common/notify.service";
-// import { TokenStorageService } from "src/app/services/storage/token-storage.service";
+import { StorageService } from "../storage/storage.service";
 
 export interface OptionsRequest {
   headers?:
@@ -43,22 +42,24 @@ export class BaseHttpRequest {
   public context: HttpContext;
 
   constructor(
-    public http: HttpClient // public storageService: TokenStorageService, // private notify: NotifyService
+    public httpClient: HttpClient,
+    public storageService: StorageService
   ) {
     this.context = new HttpContext();
     this.context.set(IS_CALL_API, true);
   }
 
   get<T>(url: string, options?: OptionsRequest): Observable<T> {
-    return this.http.get<T>(url, { ...options, context: this.context }).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((err) => {
-        this.handleError(err);
-        return throwError(err);
-      })
-    );
+    return this.httpClient
+      .get<T>(url, { ...options, context: this.context })
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      );
   }
 
   patch<T>(
@@ -67,7 +68,7 @@ export class BaseHttpRequest {
     options?: OptionsRequest
   ): Observable<HttpResponse<T>> {
     const payload = JSON.stringify(req);
-    return this.http
+    return this.httpClient
       .patch<HttpResponse<T>>(url, payload, {
         ...options,
         context: this.context,
@@ -77,8 +78,7 @@ export class BaseHttpRequest {
           return res;
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }
@@ -87,29 +87,27 @@ export class BaseHttpRequest {
     url: string,
     options?: OptionsRequest
   ): Observable<HttpResponse<T>> {
-    return this.http
+    return this.httpClient
       .delete<HttpResponse<T>>(url, { ...options, context: this.context })
       .pipe(
         tap((res) => {
           return res;
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }
 
   post<T>(url: string, payload: any, options?: OptionsRequest): Observable<T> {
-    return this.http
+    return this.httpClient
       .post<T>(url, payload, { ...options, context: this.context })
       .pipe(
         switchMap((res) => {
           return of(res);
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }
@@ -119,15 +117,14 @@ export class BaseHttpRequest {
     param: any,
     options?: OptionsRequest | null
   ): Observable<HttpResponse<T>> {
-    return this.http
+    return this.httpClient
       .put<HttpResponse<T>>(url, param, { ...options, context: this.context })
       .pipe(
         map((res) => {
           return res;
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }
@@ -137,15 +134,14 @@ export class BaseHttpRequest {
     param: any,
     options?: OptionsRequest | null
   ): Observable<HttpResponse<T>> {
-    return this.http
+    return this.httpClient
       .post<HttpResponse<T>>(url, param, { ...options, context: this.context })
       .pipe(
         map((res) => {
           return res;
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
   }
@@ -155,21 +151,15 @@ export class BaseHttpRequest {
     param: any,
     options?: OptionsRequest | null
   ): Observable<HttpResponse<T>> {
-    return this.http
+    return this.httpClient
       .put<HttpResponse<T>>(url, param, { ...options, context: this.context })
       .pipe(
         map((res) => {
           return res;
         }),
         catchError((err) => {
-          this.handleError(err);
-          return throwError(err);
+          return throwError(() => err);
         })
       );
-  }
-
-  private handleError(err: any) {
-    const { message } = err;
-    // this.notify.error(message, 'Xảy ra lỗi');
   }
 }

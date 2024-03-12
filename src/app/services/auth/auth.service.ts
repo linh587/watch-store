@@ -1,18 +1,12 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { StorageService } from "../storage/storage.service";
+import { BaseHttpRequest } from "../http/base-http-request.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class AuthService {
+export class AuthService extends BaseHttpRequest {
   private userLogin$ = new BehaviorSubject<any>(null);
-
-  constructor(
-    private httpClient: HttpClient,
-    private storageService: StorageService
-  ) {}
 
   public login(payload: any) {
     return this.httpClient.post(
@@ -49,5 +43,9 @@ export class AuthService {
 
   public getAllUser() {
     return this.httpClient.get("http://localhost:5000/api/user/all-users");
+  }
+
+  public refreshToken() {
+    return this.httpClient.get("http://localhost:5000/api/user/refresh-token");
   }
 }
