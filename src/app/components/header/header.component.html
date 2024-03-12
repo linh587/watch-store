@@ -111,7 +111,9 @@
               </div>
 
               <div ngbDropdownMenu aria-labelledby="profileDropdown">
-                <button ngbDropdownItem>
+                <button
+                  ngbDropdownItem
+                  (click)="router.navigate(['/profile']).then()">
                   <span class="material-symbols-outlined me-2"> person </span>
                   <span>Thông tin tài khoản</span>
                 </button>

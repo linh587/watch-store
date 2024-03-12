@@ -22,12 +22,6 @@ export class HeaderComponent {
     private storageService: StorageService
   ) {
     this.userInfo$ = this.authService.getUserInfo();
-
-    this.userInfo$.subscribe((res) => {
-      this.authService
-        .currentUserInfo(res._id)
-        .subscribe((res) => console.log(res));
-    });
   }
 
   public subMenu = SUB_MENU;

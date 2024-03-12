@@ -1,0 +1,117 @@
+.dashboard-upper-info {
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  margin-bottom: 60px;
+}
+
+.no-gutters {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.dashboard-upper-info [class*="col-"]:not(:last-child) .d-single-info {
+  border-right: 1px solid #ebebeb;
+  padding: 30px 20px;
+}
+
+.dashboard-upper-info [class*="col-"]:not(:last-child) .d-single-info p {
+  margin-bottom: 0;
+}
+
+.dashboard-list li:first-child {
+  border-top: 1px solid #ebebeb;
+}
+
+.dashboard-list li a {
+  border-bottom: 1px solid #ebebeb;
+  color: #222222;
+  display: block;
+  font-size: 14px;
+  padding: 12px 0;
+  text-transform: capitalize;
+}
+
+.dashboard-content {
+  border: 1px solid #ebebeb;
+  padding: 30px;
+}
+
+.dashboard-content h3 {
+  border-bottom: 1px solid #ebebeb;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  text-transform: capitalize;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.dashboard-upper-info a.view-cart {
+  background: #c89979;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 5px 12px;
+  text-transform: capitalize;
+}
+
+.dashboard-content .table thead {
+  background: #f6f6f6 none repeat scroll 0 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.dashboard-content .view {
+  background: #c89979;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 5px 12px;
+  text-transform: capitalize;
+  display: inline;
+}
+
+.billing-address {
+  margin-bottom: 10px;
+}
+
+.biller-name {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.login-form-container {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  padding: 60px;
+  text-align: left;
+}
+
+.account-input-box label {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.account-input-box input {
+  width: 100%;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  padding: 4px 10px;
+  font-size: 15px;
+}
+
+.account-login-form .example {
+  margin-bottom: 15px;
+}
+
+.account-login-form .custom-checkbox {
+  display: flex;
+}
+
+.account-login-form .default-btn {
+  margin-top: 15px;
+  padding: 6px 28px;
+}

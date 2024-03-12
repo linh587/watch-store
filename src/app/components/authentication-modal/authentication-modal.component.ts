@@ -4,7 +4,6 @@ import { NgbModal, NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../services/auth/auth.service";
 import { Subject, catchError, takeUntil, tap, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-import { Router } from "@angular/router";
 import { StorageService } from "../../services/storage/storage.service";
 
 @Component({
@@ -24,7 +23,6 @@ export class AuthenticationModalComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastrService,
-    private router: Router,
     private storageService: StorageService
   ) {
     this.initForm();
