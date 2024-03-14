@@ -5,6 +5,7 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Subject, catchError, takeUntil, tap, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../services/storage/storage.service";
+import { API_URL } from "../../public/constants/api-url";
 
 @Component({
   selector: "app-authentication-modal",
@@ -70,9 +71,9 @@ export class AuthenticationModalComponent implements OnInit {
           })
         )
         .subscribe((data: any) => {
-          this.storageService.set("authUser", data);
+          this.storageService.set("AUTH_USER", data);
           this.storageService.set("JWT_TOKEN", data.token);
-          window.location.reload();
+          this.getCurrentUserLogin(data._id);
           this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
         });
     }
@@ -101,6 +102,18 @@ export class AuthenticationModalComponent implements OnInit {
   private handleCallAPISuccess(message: string) {
     this.toastService.success(message);
     this.onCloseModal();
+  }
+
+  private getCurrentUserLogin(id: string): void {
+    this.authService
+      .currentUserInfo(id)
+      .pipe(
+        tap((data: any) => {
+          this.storageService.set("USER_LOGIN", { ...data });
+          this.authService.setUserInfo({ ...data });
+        })
+      )
+      .subscribe();
   }
 
   public onCloseModal() {

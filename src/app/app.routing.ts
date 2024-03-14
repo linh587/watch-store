@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { PagesComponent } from "./pages/pages.component";
+import { AuthGuard } from "./public/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       },
       {
         path: "favorite",
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/favorite/favorite.module").then(
             (m) => m.FavoriteModule
@@ -27,6 +29,7 @@ const routes: Routes = [
       },
       {
         path: "profile",
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/account-profile/account-profile.module").then(
             (m) => m.AccountProfileModule
@@ -34,11 +37,13 @@ const routes: Routes = [
       },
       {
         path: "cart",
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/cart/cart.module").then((m) => m.CartModule),
       },
       {
         path: "collections",
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/collections/collections.module").then(
             (m) => m.CollectionsModule

@@ -4,6 +4,7 @@ import { AccountProfileComponent } from "./account-profile.component";
 import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "../../components/shared.module";
 import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: AccountProfileComponent },
@@ -15,6 +16,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     NgbNavModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [AccountProfileComponent],
 })

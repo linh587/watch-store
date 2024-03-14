@@ -1,6 +1,4 @@
-<div
-  class="main-content-wrap pt-60 pb-60 my-account-page"
-  *ngIf="userInfo$ | async as userInfo">
+<div class="main-content-wrap pt-60 pb-60 my-account-page">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -10,7 +8,7 @@
               <div class="col-lg-3 col-md-12">
                 <div class="d-single-info">
                   <p class="user-name">
-                    Xin chào <span>{{ userInfo.fullName }}</span>
+                    Xin chào <span>{{ userInfo?.fullName }}</span>
                   </p>
                 </div>
               </div>
@@ -28,7 +26,7 @@
               </div>
               <div class="col-lg-2 col-md-12">
                 <div class="d-single-info text-lg-center">
-                  <a class="view-cart">
+                  <a class="view-cart cursor-pointer">
                     <i class="fa-solid fa-cart-plus"></i>
                     Xem giỏ hàng
                   </a>
@@ -51,11 +49,11 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Order</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Actions</th>
+                            <th>STT</th>
+                            <th>Thời gian</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Hành động</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -64,14 +62,14 @@
                             <td>May 10, 2018</td>
                             <td>Processing</td>
                             <td>$25.00 for 1 item</td>
-                            <td><a class="view">view</a></td>
+                            <td><a class="view">Chi tiết</a></td>
                           </tr>
                           <tr>
                             <td>2</td>
                             <td>May 10, 2018</td>
                             <td>Processing</td>
                             <td>$17.00 for 1 item</td>
-                            <td><a class="view">view</a></td>
+                            <td><a class="view">Chi tiết</a></td>
                           </tr>
                         </tbody>
                       </table>
@@ -79,89 +77,49 @@
                   </ng-template>
                 </li>
                 <li [ngbNavItem]="2">
-                  <a ngbNavLink>Địa chỉ</a>
-                  <ng-template ngbNavContent>
-                    <p>
-                      The following addresses will be used on the checkout page
-                      by default.
-                    </p>
-                    <h4 class="billing-address">Billing address</h4>
-                    <a class="view">edit</a>
-                    <p class="biller-name">Johan Don</p>
-                    <p>Bangladesh</p>
-                  </ng-template>
-                </li>
-                <li [ngbNavItem]="3">
                   <a ngbNavLink>Hồ sơ</a>
                   <ng-template ngbNavContent>
-                    <h3>Account details</h3>
-                    <div class="login">
-                      <div class="login-form-container">
-                        <div class="account-login-form">
-                          <form action="#">
-                            <p>
-                              Already have an account?
-                              <a href="#">Log in instead!</a>
-                            </p>
-                            <label>Social title</label>
-                            <div class="input-radio">
-                              <span class="custom-radio"
-                                ><input
-                                  type="radio"
-                                  value="1"
-                                  name="id_gender" />
-                                Mr.</span
-                              >
-                              <span class="custom-radio"
-                                ><input
-                                  type="radio"
-                                  value="1"
-                                  name="id_gender" />
-                                Mrs.</span
-                              >
-                            </div>
-                            <div class="account-input-box">
-                              <label>{{ userInfo.fullName }}</label>
-                              <input type="text" name="first-name" />
-                              <label>Last Name</label>
-                              <input type="text" name="last-name" />
-                              <label>Email</label>
-                              <input type="text" name="email-name" />
-                              <label>Password</label>
-                              <input type="password" name="user-password" />
-                              <label>Birthdate</label>
-                              <input
-                                type="text"
-                                placeholder="MM/DD/YYYY"
-                                value=""
-                                name="birthday" />
-                            </div>
-                            <div class="example">(E.g.: 05/31/1970)</div>
-                            <div class="custom-checkbox">
-                              <input type="checkbox" value="1" name="optin" />
-                              <label>Receive offers from our partners</label>
-                            </div>
-                            <div class="custom-checkbox">
-                              <input
-                                type="checkbox"
-                                value="1"
-                                name="newsletter" />
-                              <label
-                                >Sign up for our newsletter<br /><em
-                                  >You may unsubscribe at any moment. For that
-                                  purpose, please find our contact info in the
-                                  legal notice.</em
-                                ></label
-                              >
-                            </div>
-                            <div class="button-box">
-                              <button class="btn default-btn" type="submit">
-                                Save
-                              </button>
-                            </div>
-                          </form>
+                    <h3>Hồ sơ</h3>
+                    <div class="login-form-container">
+                      <form
+                        [formGroup]="profileForm"
+                        (submit)="onUpdateProfile()">
+                        <div class="row">
+                          <div class="form-group pb-4 col-12">
+                            <label class="form-label">Họ và tên</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="fullName" />
+                          </div>
+                          <div class="form-group pb-4 col-12">
+                            <label class="form-label">Email</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="email" />
+                          </div>
+                          <div class="form-group pb-4 col-12">
+                            <label class="form-label">Số điện thoại</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="mobile" />
+                          </div>
+                          <div class="form-group pb-4 col-12">
+                            <label class="form-label">Địa chỉ</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="address" />
+                          </div>
                         </div>
-                      </div>
+                        <div class="button-box d-flex justify-content-end">
+                          <button class="btn default-btn" type="submit">
+                            Lưu
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </ng-template>
                 </li>
