@@ -7,5 +7,6 @@ export const API_URL = {
   REFRESH_TOKEN: "user/refresh-token",
   GET_ALL_USER: "user/all-users",
   GET_DETAIL_USER: "user",
-  EDIT_USER: "user/edit-user"
+  EDIT_USER: "user/edit-user",
+  CHANGE_PASSWORD: "password"
 };

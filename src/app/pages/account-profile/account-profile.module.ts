@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "../../components/shared.module";
 import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PurchaseOrderComponent } from "./purchase-order/purchase-order.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: AccountProfileComponent },
@@ -19,6 +20,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [AccountProfileComponent],
+  declarations: [AccountProfileComponent, PurchaseOrderComponent],
 })
 export class AccountProfileModule {}

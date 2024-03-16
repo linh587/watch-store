@@ -78,7 +78,12 @@
                 <form action="#" class="cart-quantity d-flex">
                   <div class="quantity">
                     <div class="cart-plus-minus">
-                      <input type="number" class="input-text" name="quantity" />
+                      <input
+                        type="number"
+                        class="input-text"
+                        name="quantity"
+                        min="0"
+                        max="100" />
                     </div>
                   </div>
                   <button class="add-to-cart">Add To Cart</button>

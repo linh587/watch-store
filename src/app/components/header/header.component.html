@@ -29,76 +29,94 @@
         </div>
         <div class="col-lg-3 col-sm-8">
           <div class="d-flex justify-content-end">
-            <div
-              class="wishlist-wrapper pe-2 me-3 position-relative"
-              (click)="router.navigate(['/favorite']).then()">
-              <a class="cursor-pointer">
-                <span class="material-symbols-outlined"> favorite </span>
-                <span
-                  class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize">
-                  2
-                </span>
-              </a>
-            </div>
-            <div class="cart-wrapper pe-2 me-3 position-relative">
-              <a
-                class="cursor-pointer"
-                (click)="$event.stopPropagation()"
-                (click)="router.navigate(['/cart']).then()">
-                <span class="material-symbols-outlined"> shopping_cart </span>
-                <span
-                  class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
-                  >2
-                </span>
-              </a>
-              <ul class="mini-cart position-absolute bg-white end-0">
-                <li class="cart-item d-flex position-relative pb-3">
-                  <div class="card-image cursor-pointer">
-                    <img
-                      src="/assets/images/details/product-detail.webp"
-                      alt=""
-                      class="mw-100" />
-                  </div>
-                  <div class="card-title ps-3 mt-2">
-                    <a class="pe-3 cursor-pointer">
-                      <h4 class="text-size-small fw-normal">Product Name 01</h4>
-                    </a>
-                    <div class="quanti-price-wrap d-flex">
-                      <span class="quantity me-1">1 ×</span>
-                      <div class="price-box fw-500 color-brown">
-                        <span class="new-price">$130.00</span>
+            <ng-container *ngIf="userInfo$ | async">
+              <div
+                class="wishlist-wrapper pe-2 me-3 position-relative"
+                (click)="router.navigate(['/favorite']).then()">
+                <a class="cursor-pointer">
+                  <span class="material-symbols-outlined"> favorite </span>
+                  <span
+                    class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize">
+                    2
+                  </span>
+                </a>
+              </div>
+              <div class="cart-wrapper pe-2 me-3 position-relative">
+                <a
+                  class="cursor-pointer"
+                  (click)="$event.stopPropagation()"
+                  (click)="router.navigate(['/cart']).then()">
+                  <span class="material-symbols-outlined"> shopping_cart </span>
+                  <span
+                    class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
+                    >2
+                  </span>
+                </a>
+                <ul class="mini-cart position-absolute bg-white end-0">
+                  <li class="cart-item d-flex position-relative pb-3">
+                    <div class="card-image cursor-pointer">
+                      <img
+                        src="/assets/images/details/product-detail.webp"
+                        alt=""
+                        class="mw-100" />
+                    </div>
+                    <div class="card-title ps-3 mt-2">
+                      <a class="pe-3 cursor-pointer">
+                        <h4 class="text-size-small fw-normal">
+                          Product Name 01
+                        </h4>
+                      </a>
+                      <div class="quanti-price-wrap d-flex">
+                        <span class="quantity me-1">1 ×</span>
+                        <div class="price-box fw-500 color-brown">
+                          <span class="new-price">$130.00</span>
+                        </div>
+                      </div>
+                      <div
+                        class="remove-from-cart position-absolute end-0 cursor-pointer">
+                        <i
+                          class="fa-regular fa-circle-xmark text-size-large"></i>
                       </div>
                     </div>
+                  </li>
+                  <li class="subtotal-box pt-3">
                     <div
-                      class="remove-from-cart position-absolute end-0 cursor-pointer">
-                      <i class="fa-regular fa-circle-xmark text-size-large"></i>
+                      class="subtotal-title d-flex justify-content-between color-brown text-size-small fw-600">
+                      <h3 class="text-size-small fw-600 m-0 color-brown">
+                        Tổng tiền :
+                      </h3>
+                      <span>$ 260.99</span>
                     </div>
-                  </div>
-                </li>
-                <li class="subtotal-box pt-3">
-                  <div
-                    class="subtotal-title d-flex justify-content-between color-brown text-size-small fw-600">
-                    <h3 class="text-size-small fw-600 m-0 color-brown">
-                      Tổng tiền :
-                    </h3>
-                    <span>$ 260.99</span>
-                  </div>
-                </li>
-                <li class="mini-cart-btns justify-content-between pt-3 w-100">
-                  <div class="cart-btns">
-                    <a>Xem giỏ hàng</a>
-                    <a>Thanh toán</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                  </li>
+                  <li class="mini-cart-btns justify-content-between pt-3 w-100">
+                    <div class="cart-btns">
+                      <a>Xem giỏ hàng</a>
+                      <a>Thanh toán</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
 
             <!-- GET THIS IF NOT LOGIN  -->
-            <div
+            <!-- <div
               *ngIf="!(userInfo$ | async)"
               class="profile-wrapper cursor-pointer"
               (click)="openAuthenicationModal()">
               <span class="material-symbols-outlined"> person </span>
+            </div> -->
+            <div *ngIf="!(userInfo$ | async)" class="cursor-pointer">
+              <button
+                class="custom-btn sign-in"
+                (click)="openAuthenicationModal('sign-in')">
+                Đăng nhập
+              </button>
+              <span class="line" style="display: inline-block"></span>
+              <button
+                class="custom-btn sign-in"
+                (click)="openAuthenicationModal('sign-up')">
+                Đăng ký
+              </button>
             </div>
 
             <!-- GET THIS IF LOGIN SUCCESSFUL  -->

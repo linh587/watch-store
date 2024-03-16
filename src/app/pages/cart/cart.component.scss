@@ -1,0 +1,147 @@
+.table-content table {
+  background: #ffffff none repeat scroll 0 0;
+  border-color: #ebebeb;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%;
+  text-align: center;
+}
+
+.table-content th,
+.table-content td {
+  border-bottom: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+}
+
+.table-content table td {
+  border-top: medium none;
+  font-size: 16px;
+  padding: 20px 10px;
+  vertical-align: middle;
+  min-width: 140px;
+}
+
+.table-content th,
+.table-content td {
+  border-bottom: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+}
+
+.cart-table .coupon-all {
+  margin-top: 50px;
+}
+
+.cart-table .coupon-all .coupon2 {
+  margin-bottom: 40px;
+}
+
+.cart-table .coupon-all .coupon2 input.submit {
+  padding: 8px 15px;
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.cart-table .coupon-all .coupon2 input {
+  margin-right: 8px;
+}
+
+.cart-table .coupon-all .coupon2 .continue-btn {
+  padding: 9px 15px;
+  background: #000000;
+  color: #fff;
+}
+
+.cart-table .coupon-all .coupon h3 {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: -8px;
+}
+
+.cart-table .coupon-all .coupon input {
+  border: 1px solid #999999;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 6px 10px;
+  width: 130px;
+}
+
+.cart-table .coupon-all .coupon input.button {
+  background: #000000;
+  border: 0 none;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  height: 36px;
+  letter-spacing: 1px;
+  line-height: 36px;
+  padding: 0 14px;
+  text-transform: uppercase;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  width: inherit;
+}
+.cart-table .coupon-all .coupon input {
+  border: 1px solid #999999;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 6px 10px;
+  width: 130px;
+}
+
+.cart-page-total {
+  margin-top: 40px;
+}
+
+.cart-page-total h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+
+.cart-page-total ul {
+  border: 1px solid #dddddd;
+}
+
+.cart-page-total ul li {
+  border-bottom: 1px solid #ebebeb;
+  color: #252525;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  list-style: outside none none;
+  padding: 10px 30px;
+}
+
+.cart-page-total ul li span {
+  float: right;
+}
+
+.cart-page-total .proceed-checkout-btn {
+  background: #000000;
+  color: #ffffff;
+  display: inline-block;
+  margin-top: 30px;
+  padding: 8px 16px;
+  text-transform: capitalize;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.plantmore-product-quantity > input {
+  text-align: center;
+  width: 48px;
+}
+
+.plantmore-product-thumbnail img {
+  width: 120px;
+  object-fit: cover;
+}

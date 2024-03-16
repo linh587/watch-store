@@ -49,6 +49,14 @@ const routes: Routes = [
             (m) => m.CollectionsModule
           ),
       },
+      {
+        path: "checkout",
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import("./pages/checkout/checkout.module").then(
+            (m) => m.CheckoutModule
+          ),
+      },
     ],
   },
   {

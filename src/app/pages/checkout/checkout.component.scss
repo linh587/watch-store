@@ -1,0 +1,159 @@
+.coupon-accordion h3 {
+  background: #f6f6f6;
+  border-top: 3px solid #c89979;
+  color: #515151;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 0 30px;
+  padding: 1em 2em 1em 3.5em;
+  position: relative;
+  text-transform: capitalize;
+}
+
+.coupon-accordion h3 .coupon {
+  color: #c89979;
+  cursor: pointer;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.coupon-content {
+  border: 1px solid #dddddd;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: none;
+}
+
+.coupon-info p.form-row-first {
+  float: left;
+  width: 48%;
+}
+
+.coupon-input label {
+  display: block;
+  font-size: 14px;
+}
+
+.coupon-input span.required {
+  color: red;
+}
+
+.coupon-input input {
+  border: 1px solid #999999;
+  color: #000000;
+  padding: 5px 10px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.coupon-info p.form-row-last {
+  float: right;
+  width: 48%;
+}
+
+.clear {
+  clear: both;
+}
+
+.coupon-info .remember {
+  margin-left: 10px;
+}
+
+.coupon-info .remember span {
+  margin-left: 5px;
+}
+
+.shoping-checkboxt-title {
+  border-bottom: 1px solid #dddddd;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+.single-form-row {
+  margin-bottom: 20px;
+}
+
+.single-form-row label {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.single-form-row input {
+  border: 1px solid #999999;
+  color: #666;
+  font-size: 14px;
+  padding: 5px 12px;
+  width: 100%;
+}
+
+.shoping-checkboxt-title {
+  border-bottom: 1px solid #dddddd;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+.your-order-wrap {
+  background: #f6f6f6;
+}
+
+.your-order-table {
+  padding: 20px 30px;
+}
+
+.your-order-table table th {
+  border-top: medium none;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 250px;
+}
+
+.your-order-table table td {
+  border-bottom: 1px solid #d8d8d8;
+  border-right: medium none;
+  font-size: 14px;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.order-button-payment input {
+  background: #c89979;
+  border: medium none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px;
+  text-transform: uppercase;
+  width: 100%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.payment-method {
+  padding: 20px 30px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+.payment-accordion p {
+  font-size: 14px;
+  padding-left: 16px;
+}
+
+.payment-accordion:not(:last-child) p {
+  padding-bottom: 16px;
+}
+
+.order-button-payment {
+  margin-top: 30px;
+}

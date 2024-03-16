@@ -5,7 +5,6 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Subject, catchError, takeUntil, tap, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../services/storage/storage.service";
-import { API_URL } from "../../public/constants/api-url";
 
 @Component({
   selector: "app-authentication-modal",

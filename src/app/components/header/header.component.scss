@@ -197,3 +197,37 @@
     }
   }
 }
+
+.custom-btn {
+  font-style: normal;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.sign-in {
+  color: #2c2c2c;
+  background: rgba(0, 0, 0, 0);
+  border: solid 1px rgba(0, 0, 0, 0);
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  padding: 13px 15px;
+  border-radius: 8px;
+
+  &:hover {
+    color: #2c2c2c;
+    background: #fafafa;
+    border: solid 1px #fafafa;
+  }
+}
+
+.line {
+  border: 0;
+  width: 1px;
+  height: 16px;
+  background: #e5e5e5;
+  transform: translateY(3px);
+}

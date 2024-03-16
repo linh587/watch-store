@@ -27,12 +27,16 @@ export class HeaderComponent {
   public subMenu = SUB_MENU;
   public menuFixed: boolean = false;
 
-  public openAuthenicationModal() {
-    this.modalService.open(AuthenticationModalComponent, {
+  public openAuthenicationModal(type: string) {
+    const modal = this.modalService.open(AuthenticationModalComponent, {
       centered: true,
       backdrop: "static",
       windowClass: "customize-modal",
     });
+
+    if (type === "sign-in") {
+      modal.componentInstance.active = 1;
+    } else modal.componentInstance.active = 2;
   }
 
   @HostListener("window:scroll") onWindowScroll() {

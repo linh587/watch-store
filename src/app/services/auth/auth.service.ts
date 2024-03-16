@@ -10,11 +10,11 @@ import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 export class AuthService extends BaseHttpRequest {
   private userLogin$ = new BehaviorSubject<any>(null);
 
-  public login(payload: any) {
+  public login(payload: UserModel) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.LOGIN}`, payload);
   }
 
-  public register(payload: any) {
+  public register(payload: UserModel) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.REGISTER}`, payload);
   }
 
@@ -53,5 +53,12 @@ export class AuthService extends BaseHttpRequest {
 
   public isLogin(): boolean {
     return this.storageService.get("USER_LOGIN");
+  }
+
+  public changePassword(payload: UserModel) {
+    return this.httpClient.put(
+      `${ENVIRONMENT}${API_URL.CHANGE_PASSWORD}`,
+      payload
+    );
   }
 }

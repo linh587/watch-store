@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { StorageService } from "../../services/storage/storage.service";
 import { ToastrService } from "ngx-toastr";
+import { matchingPasswords } from "../../public/validators/matching-password.validator";
 
 @Component({
   selector: "app-account-profile",
@@ -15,6 +16,7 @@ export class AccountProfileComponent implements OnInit {
   public profileForm!: FormGroup;
   public userLogin$ = new BehaviorSubject<any>(null);
   public userInfo: any;
+  public passwordForm!: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -26,6 +28,14 @@ export class AccountProfileComponent implements OnInit {
   ngOnInit() {
     this.getUserInfo();
     this.initForm();
+  }
+
+  get profileControls() {
+    return this.profileForm.controls;
+  }
+
+  get passwordControls() {
+    return this.passwordForm.controls;
   }
 
   private getUserInfo() {
@@ -45,11 +55,29 @@ export class AccountProfileComponent implements OnInit {
         Validators.compose([Validators.required, Validators.email]),
       ],
       mobile: [
-        (this.userInfo?.getaUser?.mobile, this.userInfo?.mobile),
+        this.userInfo?.getaUser?.mobile || this.userInfo?.mobile,
         Validators.required,
       ],
       address: [this.userInfo?.getaUser?.address || this.userInfo?.address],
     });
+
+    this.passwordForm = this.fb.group(
+      {
+        password: [
+          "",
+          Validators.compose([Validators.required, Validators.minLength(8)]),
+        ],
+        newPassword: [
+          "",
+          Validators.compose([Validators.required, Validators.minLength(8)]),
+        ],
+        confirmNewPassword: [
+          "",
+          Validators.compose([Validators.required, Validators.minLength(8)]),
+        ],
+      },
+      { validator: matchingPasswords("newPassword", "confirmNewPassword") }
+    );
   }
 
   public onUpdateProfile() {
@@ -65,6 +93,24 @@ export class AccountProfileComponent implements OnInit {
           }),
           catchError((error) => {
             this.toastService.error("Chỉnh sửa thông tin thất bại!");
+            return throwError(() => error);
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  public onUpdatePassword() {
+    if (this.passwordForm.valid) {
+      const payload = this.passwordControls["confirmNewPassword"].value;
+      this.authService
+        .changePassword(payload)
+        .pipe(
+          tap(() => {
+            this.toastService.success("Đổi mật khẩu thành công");
+          }),
+          catchError((error) => {
+            this.toastService.error("Đổi mật khẩu thất bại");
             return throwError(() => error);
           })
         )
