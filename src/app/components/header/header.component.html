@@ -90,8 +90,12 @@
                   </li>
                   <li class="mini-cart-btns justify-content-between pt-3 w-100">
                     <div class="cart-btns">
-                      <a>Xem giỏ hàng</a>
-                      <a>Thanh toán</a>
+                      <a (click)="router.navigate(['/cart']).then()"
+                        >Xem giỏ hàng</a
+                      >
+                      <a (click)="router.navigate(['/checkout']).then()"
+                        >Thanh toán</a
+                      >
                     </div>
                   </li>
                 </ul>
@@ -99,19 +103,13 @@
             </ng-container>
 
             <!-- GET THIS IF NOT LOGIN  -->
-            <!-- <div
-              *ngIf="!(userInfo$ | async)"
-              class="profile-wrapper cursor-pointer"
-              (click)="openAuthenicationModal()">
-              <span class="material-symbols-outlined"> person </span>
-            </div> -->
             <div *ngIf="!(userInfo$ | async)" class="cursor-pointer">
               <button
                 class="custom-btn sign-in"
                 (click)="openAuthenicationModal('sign-in')">
                 Đăng nhập
               </button>
-              <span class="line" style="display: inline-block"></span>
+              <span class="line d-inline-block"></span>
               <button
                 class="custom-btn sign-in"
                 (click)="openAuthenicationModal('sign-up')">

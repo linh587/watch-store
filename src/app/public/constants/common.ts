@@ -132,3 +132,11 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
 ];
+
+export const CART_TABLE_HEADER = [
+  "Hình ảnh",
+  "Tên sản phẩm",
+  "Giá tiền",
+  "Số lượng",
+  "Tổng tiền",
+];

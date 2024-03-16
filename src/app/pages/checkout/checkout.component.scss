@@ -1,20 +1,23 @@
-.coupon-accordion h3 {
-  background: #f6f6f6;
-  border-top: 3px solid #c89979;
-  color: #515151;
-  font-size: 14px;
-  font-weight: 400;
-  margin: 0 0 30px;
-  padding: 1em 2em 1em 3.5em;
-  position: relative;
-  text-transform: capitalize;
-}
+@import "color";
 
-.coupon-accordion h3 .coupon {
-  color: #c89979;
-  cursor: pointer;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+.coupon-accordion {
+  h3 {
+    background: #f6f6f6;
+    border-top: 3px solid #c89979;
+    color: #515151;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 30px;
+    padding: 1em 2em 1em 3.5em;
+    position: relative;
+    text-transform: capitalize;
+
+    .coupon {
+      color: #c89979;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+  }
 }
 
 .coupon-content {
@@ -29,21 +32,23 @@
   width: 48%;
 }
 
-.coupon-input label {
-  display: block;
-  font-size: 14px;
-}
+.coupon-input {
+  label {
+    display: block;
+    font-size: 14px;
+  }
 
-.coupon-input span.required {
-  color: red;
-}
+  span.required {
+    color: red;
+  }
 
-.coupon-input input {
-  border: 1px solid #999999;
-  color: #000000;
-  padding: 5px 10px;
-  width: 100%;
-  font-size: 14px;
+  input {
+    border: 1px solid #999999;
+    color: #000000;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 14px;
+  }
 }
 
 .coupon-info p.form-row-last {
@@ -73,19 +78,19 @@
 
 .single-form-row {
   margin-bottom: 20px;
-}
 
-.single-form-row label {
-  font-size: 14px;
-  margin-bottom: 2px;
-}
+  label {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
 
-.single-form-row input {
-  border: 1px solid #999999;
-  color: #666;
-  font-size: 14px;
-  padding: 5px 12px;
-  width: 100%;
+  input {
+    border: 1px solid #999999;
+    color: #666;
+    font-size: 14px;
+    padding: 5px 12px;
+    width: 100%;
+  }
 }
 
 .shoping-checkboxt-title {
@@ -102,24 +107,25 @@
 
 .your-order-table {
   padding: 20px 30px;
-}
 
-.your-order-table table th {
-  border-top: medium none;
-  font-weight: normal;
-  text-align: center;
-  text-transform: uppercase;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: 250px;
-}
+  table td,
+  table th {
+    border-bottom: 1px solid #d8d8d8;
+    border-right: medium none;
+    font-size: 14px;
+    padding: 15px 0;
+    text-align: center;
+  }
 
-.your-order-table table td {
-  border-bottom: 1px solid #d8d8d8;
-  border-right: medium none;
-  font-size: 14px;
-  padding: 15px 0;
-  text-align: center;
+  table th {
+    border-top: medium none;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 250px;
+  }
 }
 
 .order-button-payment input {
