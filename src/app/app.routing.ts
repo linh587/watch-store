@@ -57,6 +57,13 @@ const routes: Routes = [
             (m) => m.CheckoutModule
           ),
       },
+      {
+        path: "product",
+        loadChildren: () =>
+          import("./pages/product-detail/product-detail.module").then(
+            (m) => m.ProductDetailModule
+          ),
+      },
     ],
   },
   {

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { QuickViewProductModalComponent } from "../quick-view-product-modal/quick-view-product-modal.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-product-item",
@@ -10,7 +11,7 @@ import { QuickViewProductModalComponent } from "../quick-view-product-modal/quic
 export class ProductItemComponent implements OnInit {
   @Input() productItem: any;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -18,9 +19,13 @@ export class ProductItemComponent implements OnInit {
     event.preventDefault();
     const modalRef = this.modalService.open(QuickViewProductModalComponent, {
       centered: true,
-      size: "lg"
+      size: "lg",
     });
 
     modalRef.componentInstance.productItem = this.productItem;
+  }
+
+  public redirectDetail(id: number) {
+    this.router.navigate([`/product/${id}`]).then();
   }
 }

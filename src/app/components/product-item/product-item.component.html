@@ -23,7 +23,9 @@
     </a>
   </div>
   <div class="product-caption text-center">
-    <h4 class="product-name mb-2 text-size-small">
+    <h4
+      class="product-name mb-2 text-size-small cursor-pointer"
+      (click)="redirectDetail(productItem.id)">
       <a>{{ productItem.name }}</a>
     </h4>
     <div class="price-box text-size-medium">

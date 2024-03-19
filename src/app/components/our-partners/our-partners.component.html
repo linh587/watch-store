@@ -9,15 +9,10 @@
       [pagination]="false"
       [autoplay]="{ delay: 500, disableOnInteraction: false }"
       [virtual]="true"
-      [speed]="1200">
+      [speed]="2000">
       <ng-container>
-        <ng-template
-          swiperSlide
-          *ngFor="let partners of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
-          <img
-            src="/assets/images/partners/brand-01.webp"
-            alt=""
-            class="object-fit-cover" />
+        <ng-template swiperSlide *ngFor="let partner of PARTNERS">
+          <img [src]="partner" alt="" class="object-fit-cover w-100" />
         </ng-template>
       </ng-container>
     </swiper>

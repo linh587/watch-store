@@ -37,6 +37,7 @@ export const SUB_MENU = [
 
 export const COLLECTIONS = [
   {
+    id: 1,
     images: [
       "/assets/images/details/product-detail.webp",
       "/assets/images/details/product-detail-1.webp",
@@ -50,6 +51,7 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
+    id: 2,
     images: [
       "/assets/images/details/product-detail-1.webp",
       "/assets/images/details/product-detail-3.webp",
@@ -65,6 +67,7 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
+    id: 3,
     images: [
       "/assets/images/details/product-detail-2.webp",
       "/assets/images/details/product-detail-2.webp",
@@ -74,6 +77,7 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
+    id: 4,
     images: [
       "/assets/images/details/product-detail-3.webp",
       "/assets/images/details/product-detail-3.webp",
@@ -85,24 +89,7 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
-    images: [
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 5",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    images: [
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 4",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
+    id: 5,
     images: [
       "/assets/images/details/product-detail-4.webp",
       "/assets/images/details/product-detail-2.webp",
@@ -112,6 +99,7 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
+    id: 6,
     images: [
       "/assets/images/details/product-detail-3.webp",
       "/assets/images/details/product-detail-2.webp",
@@ -121,6 +109,27 @@ export const COLLECTIONS = [
     oldPrice: "$90",
   },
   {
+    id: 7,
+    images: [
+      "/assets/images/details/product-detail-4.webp",
+      "/assets/images/details/product-detail-2.webp",
+    ],
+    name: "Simple product 5",
+    newPrice: "$59",
+    oldPrice: "$90",
+  },
+  {
+    id: 8,
+    images: [
+      "/assets/images/details/product-detail-3.webp",
+      "/assets/images/details/product-detail-2.webp",
+    ],
+    name: "Simple product 4",
+    newPrice: "$59",
+    oldPrice: "$90",
+  },
+  {
+    id: 9,
     images: [
       "/assets/images/details/product-detail-4.webp",
       "/assets/images/details/product-detail-2.webp",
@@ -139,4 +148,25 @@ export const CART_TABLE_HEADER = [
   "Giá tiền",
   "Số lượng",
   "Tổng tiền",
+];
+
+export const OUR_PARTNERS = [
+  "/assets/images/partners/BU.jpg",
+  "/assets/images/partners/CK.jpg",
+  "/assets/images/partners/CS.jpg",
+  "/assets/images/partners/fc.jpg",
+  "/assets/images/partners/FL.jpg",
+  "/assets/images/partners/GK.jpg",
+  "/assets/images/partners/HB.jpg",
+  "/assets/images/partners/logo-SRWatch.jpg",
+  "/assets/images/partners/logo-Tissot.jpg",
+  "/assets/images/partners/MD.jpg",
+  "/assets/images/partners/OG.jpg",
+  "/assets/images/partners/OM.jpg",
+  "/assets/images/partners/LG.jpg",
+  "/assets/images/partners/CT.jpg",
+  "/assets/images/partners/ML.jpg",
+  "/assets/images/partners/MV.jpg",
+  "/assets/images/partners/CA.jpg",
+  "/assets/images/partners/OV.jpg",
 ];
