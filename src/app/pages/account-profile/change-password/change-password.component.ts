@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { matchingPasswords } from "../../../public/validators/matching-password.validator";
 import { AuthService } from "../../../services/auth/auth.service";
 import { catchError, tap, throwError } from "rxjs";
+import { PASSWORD_REGEX } from "../../../public/constants/regex";
 
 @Component({
   selector: "app-change-password",
@@ -34,21 +35,21 @@ export class ChangePasswordComponent implements OnInit {
           "",
           Validators.compose([
             Validators.required,
-            Validators.pattern(/^([a-zA-Z]+\d+|\d+[a-zA-Z]+)+[a-zA-Z0-9]*$/),
+            Validators.pattern(PASSWORD_REGEX),
           ]),
         ],
         newPassword: [
           "",
           Validators.compose([
             Validators.required,
-            Validators.pattern(/^([a-zA-Z]+\d+|\d+[a-zA-Z]+)+[a-zA-Z0-9]*$/),
+            Validators.pattern(PASSWORD_REGEX),
           ]),
         ],
         confirmNewPassword: [
           "",
           Validators.compose([
             Validators.required,
-            Validators.pattern(/^([a-zA-Z]+\d+|\d+[a-zA-Z]+)+[a-zA-Z0-9]*$/),
+            Validators.pattern(PASSWORD_REGEX),
           ]),
         ],
       },

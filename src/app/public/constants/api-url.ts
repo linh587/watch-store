@@ -8,4 +8,6 @@ export const API_URL = {
   GET_DETAIL_USER: "user/information",
   EDIT_USER: "user/information",
   CHANGE_PASSWORD: "user/password",
+  FORGOT_PASSWORD: "sign-in/forgot",
+  RESET_PASSWORD: "sign-in/reset",
 };

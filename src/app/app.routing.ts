@@ -64,6 +64,20 @@ const routes: Routes = [
             (m) => m.ProductDetailModule
           ),
       },
+      {
+        path: "forgot-password",
+        loadChildren: () =>
+          import("./pages/forgot-password/forgot-password.module").then(
+            (m) => m.ForgotPasswordModule
+          ),
+      },
+      {
+        path: "reset-password",
+        loadChildren: () =>
+          import("./pages/reset-password/reset-password.module").then(
+            (m) => m.ResetPasswordModule
+          ),
+      },
     ],
   },
   {

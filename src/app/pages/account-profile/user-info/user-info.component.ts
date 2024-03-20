@@ -4,11 +4,14 @@ import { AuthService } from "../../../services/auth/auth.service";
 import { catchError, tap, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../../services/storage/storage.service";
+import { DatePipe } from "@angular/common";
+import { PHONE_REGEX } from "../../../public/constants/regex";
 
 @Component({
   selector: "app-user-info",
   templateUrl: "./user-info.component.html",
   styleUrls: ["./user-info.component.scss"],
+  providers: [DatePipe],
 })
 export class UserInfoComponent implements OnInit {
   public profileForm!: FormGroup;
@@ -18,7 +21,8 @@ export class UserInfoComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastrService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -39,11 +43,19 @@ export class UserInfoComponent implements OnInit {
         this.userInfo?.email,
         Validators.compose([Validators.required, Validators.email]),
       ],
-      phone: [this.userInfo?.phone, Validators.required],
+      phone: [
+        this.userInfo?.phone,
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(PHONE_REGEX),
+        ]),
+      ],
       address: [this.userInfo?.address],
       gender: [this.userInfo?.gender, Validators.required],
       avatar: [this.userInfo?.avatar],
-      dateOfBirth: [this.userInfo?.dateOfBirth],
+      dateOfBirth: [
+        this.datePipe.transform(this.userInfo?.dateOfBirth, "dd-MM-YYYY"),
+      ],
     });
   }
 

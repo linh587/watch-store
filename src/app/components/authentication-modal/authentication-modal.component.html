@@ -43,6 +43,7 @@
                   Đăng nhập
                 </button>
                 <button
+                  (click)="redirectToResetPassword()"
                   type="button"
                   class="btn btn-outline-primary w-100 forgot-password-btn pb-0">
                   Quên mật khẩu?
@@ -80,7 +81,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Nhập họ và tên..."
-                  formControlName="fullName" />
+                  formControlName="name" />
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
@@ -96,7 +97,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Nhập số điện thoại..."
-                  formControlName="mobile" />
+                  formControlName="phone" />
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Mật khẩu</label>
@@ -105,6 +106,34 @@
                   class="form-control"
                   placeholder="Nhập mật khẩu..."
                   formControlName="password" />
+              </div>
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Giới tính</label>
+                <select formControlName="gender" class="form-select fs-14">
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+                </select>
+              </div>
+              <div class="form-group pb-4 col-12">
+                <label class="form-label">Ngày sinh</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="dateOfBirth" />
+              </div>
+              <div class="form-group pb-4 col-12">
+                <label class="form-label">Ảnh đại diện</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="avatar" />
+              </div>
+              <div class="form-group pb-4 col-12">
+                <label class="form-label">Địa chỉ</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="address" />
               </div>
 
               <div class="buttons col-12">

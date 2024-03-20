@@ -56,4 +56,12 @@ export class AuthService extends BaseHttpRequest {
       payload
     );
   }
+
+  public forgotPassword(payload: any) {
+    return this.post(`${ENVIRONMENT}${API_URL.FORGOT_PASSWORD}`, payload);
+  }
+
+  public resetPassword(token: string, payload: any) {
+    return this.post(`${ENVIRONMENT}${API_URL.RESET_PASSWORD}/${token}`, payload);
+  }
 }

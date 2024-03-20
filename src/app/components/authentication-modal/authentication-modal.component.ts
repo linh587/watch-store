@@ -5,6 +5,8 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Subject, catchError, takeUntil, tap, throwError } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../services/storage/storage.service";
+import { PASSWORD_REGEX } from "../../public/constants/regex";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-authentication-modal",
@@ -23,7 +25,8 @@ export class AuthenticationModalComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastrService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    public router: Router
   ) {
     this.initForm();
   }
@@ -38,21 +41,31 @@ export class AuthenticationModalComponent implements OnInit {
       ],
       password: [
         null,
-        Validators.compose([Validators.required, Validators.minLength(8)]),
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(PASSWORD_REGEX),
+        ]),
       ],
     });
 
     this.registerForm = this.fb.group({
-      fullName: [null, Validators.required],
+      name: [null, Validators.required],
       email: [
         null,
         Validators.compose([Validators.required, Validators.email]),
       ],
-      mobile: [null, Validators.required],
+      phone: [null, Validators.required],
       password: [
         null,
-        Validators.compose([Validators.required, Validators.minLength(8)]),
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(PASSWORD_REGEX),
+        ]),
       ],
+      gender: ["", Validators.required],
+      dateOfBirth: [""],
+      avatar: [""],
+      address: [""],
     });
   }
 
@@ -80,10 +93,22 @@ export class AuthenticationModalComponent implements OnInit {
 
   public onRegisterFormSubmit() {
     if (this.registerForm.valid) {
-      const payload: any = this.registerForm.getRawValue();
+      const formData = new FormData();
+
+      formData.append("name", this.registerForm.get("name")?.value);
+      formData.append("email", this.registerForm.get("email")?.value);
+      formData.append("password", this.registerForm.get("password")?.value);
+      formData.append("phone", this.registerForm.get("phone")?.value);
+      formData.append("gender", this.registerForm.get("gender")?.value);
+      formData.append("avatar", this.registerForm.get("avatar")?.value);
+      formData.append("address", this.registerForm.get("address")?.value);
+      formData.append(
+        "dateOfBirth",
+        this.registerForm.get("dateOfBirth")?.value
+      );
 
       this.authService
-        .register(payload)
+        .register(formData)
         .pipe(
           tap(() => {
             this.handleCallAPISuccess("Bạn đã đăng ký thành công");
@@ -121,5 +146,10 @@ export class AuthenticationModalComponent implements OnInit {
 
   public onNavChange(event: NgbNavChangeEvent) {
     this.activeNav = event.nextId;
+  }
+
+  public redirectToResetPassword() {
+    this.router.navigate(["/forgot-password"]).then();
+    this.onCloseModal();
   }
 }
