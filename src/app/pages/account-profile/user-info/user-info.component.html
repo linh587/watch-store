@@ -1,3 +1,41 @@
-<p>
-  user-info works!
-</p>
+<h3>Hồ sơ</h3>
+<div class="login-form-container">
+  <form [formGroup]="profileForm" (submit)="onUpdateProfile()">
+    <div class="row">
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" formControlName="email" />
+      </div>
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" formControlName="phone" />
+      </div>
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" formControlName="address" />
+      </div>
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Ảnh đại diện</label>
+        <input type="text" class="form-control" formControlName="avatar" />
+      </div>
+      <div class="form-group pb-4 col-12" required>
+        <label class="form-label">Giới tính</label>
+        <select formControlName="gender" class="form-select fs-14">
+          <option value="male">Nam</option>
+          <option value="female">Nữ</option>
+        </select>
+      </div>
+      <div class="form-group pb-4 col-12">
+        <label class="form-label">Ngày sinh</label>
+        <input type="text" class="form-control" formControlName="dateOfBirth" />
+      </div>
+    </div>
+    <div class="button-box d-flex justify-content-end">
+      <button class="btn default-btn" type="submit">Lưu</button>
+    </div>
+  </form>
+</div>

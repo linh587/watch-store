@@ -6,9 +6,24 @@ import { SharedModule } from "../../components/shared.module";
 import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PurchaseOrderComponent } from "./purchase-order/purchase-order.component";
+import { UserInfoComponent } from "./user-info/user-info.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", component: AccountProfileComponent },
+  {
+    path: "",
+    component: AccountProfileComponent,
+    children: [
+      { path: "", pathMatch: "full", redirectTo: "orders" },
+      { path: "orders", pathMatch: "full", component: PurchaseOrderComponent },
+      { path: "user-info", pathMatch: "full", component: UserInfoComponent },
+      {
+        path: "change-password",
+        pathMatch: "full",
+        component: ChangePasswordComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -20,6 +35,11 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [AccountProfileComponent, PurchaseOrderComponent],
+  declarations: [
+    AccountProfileComponent,
+    PurchaseOrderComponent,
+    UserInfoComponent,
+    ChangePasswordComponent,
+  ],
 })
 export class AccountProfileModule {}

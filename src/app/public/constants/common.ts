@@ -170,3 +170,22 @@ export const OUR_PARTNERS = [
   "/assets/images/partners/CA.jpg",
   "/assets/images/partners/OV.jpg",
 ];
+
+
+export const ACCOUNT_TAB = [
+  {
+    label: "Đơn mua",
+    link: "orders",
+  },
+  {
+    label: "Hồ sơ",
+    link: "user-info",
+  },
+  {
+    label: "Mật khẩu",
+    link: "change-password",
+  },
+  {
+    label: "Đăng xuất"
+  }
+];

@@ -1,12 +1,11 @@
-export const ENVIRONMENT = "http://localhost:5000/api/";
+export const ENVIRONMENT = "http://localhost:8080/";
 
 export const API_URL = {
   // AUTH
-  LOGIN: "user/login",
-  REGISTER: "user/register",
+  LOGIN: "sign-in/user",
+  REGISTER: "sign-up",
   REFRESH_TOKEN: "user/refresh-token",
-  GET_ALL_USER: "user/all-users",
-  GET_DETAIL_USER: "user",
-  EDIT_USER: "user/edit-user",
-  CHANGE_PASSWORD: "password"
+  GET_DETAIL_USER: "user/information",
+  EDIT_USER: "user/information",
+  CHANGE_PASSWORD: "user/password",
 };

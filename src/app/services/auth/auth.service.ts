@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { BaseHttpRequest } from "../http/base-http-request.service";
-import { UserModel } from "../../models/user.model";
 import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 
 @Injectable({
@@ -10,26 +9,26 @@ import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 export class AuthService extends BaseHttpRequest {
   private userLogin$ = new BehaviorSubject<any>(null);
 
-  public login(payload: UserModel) {
+  public login(payload: any) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.LOGIN}`, payload);
   }
 
-  public register(payload: UserModel) {
+  public register(payload: any) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.REGISTER}`, payload);
   }
 
   public getUserInfo() {
     if (this.userLogin$.value) {
-      return this.userLogin$ as Observable<UserModel>;
+      return this.userLogin$ as Observable<any>;
     } else {
       const user = this.storageService.get("USER_LOGIN");
       this.setUserInfo(user);
 
-      return this.userLogin$ as Observable<UserModel>;
+      return this.userLogin$ as Observable<any>;
     }
   }
 
-  public setUserInfo(data: UserModel) {
+  public setUserInfo(data: any) {
     this.userLogin$.next(data);
   }
 
@@ -39,15 +38,11 @@ export class AuthService extends BaseHttpRequest {
     );
   }
 
-  public getAllUser() {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_ALL_USER}`);
-  }
-
   public refreshToken() {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.REFRESH_TOKEN}`);
   }
 
-  public updateUser(payload: UserModel) {
+  public updateUser(payload: any) {
     return this.httpClient.put(`${ENVIRONMENT}${API_URL.EDIT_USER}`, payload);
   }
 
@@ -55,8 +50,8 @@ export class AuthService extends BaseHttpRequest {
     return this.storageService.get("USER_LOGIN");
   }
 
-  public changePassword(payload: UserModel) {
-    return this.httpClient.put(
+  public changePassword(payload: any) {
+    return this.httpClient.patch(
       `${ENVIRONMENT}${API_URL.CHANGE_PASSWORD}`,
       payload
     );

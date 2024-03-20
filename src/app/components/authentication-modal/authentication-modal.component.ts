@@ -71,8 +71,8 @@ export class AuthenticationModalComponent implements OnInit {
         )
         .subscribe((data: any) => {
           this.storageService.set("AUTH_USER", data);
-          this.storageService.set("JWT_TOKEN", data.token);
-          this.getCurrentUserLogin(data._id);
+          this.storageService.set("JWT_TOKEN", data.accessToken);
+          this.getCurrentUserLogin(data.id);
           this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
         });
     }

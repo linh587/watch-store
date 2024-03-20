@@ -1,0 +1,26 @@
+@import "color";
+@import "text-size";
+@import "variables";
+
+.view {
+  background: $primary-color;
+  color: $white;
+  font-size: $text-small;
+  padding: 8px 12px;
+  text-transform: capitalize;
+  display: inline;
+}
+
+h3 {
+  border-bottom: 1px solid #ebebeb;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  text-transform: capitalize;
+}
+
+table th {
+  background-color: #f6f6f6;
+}

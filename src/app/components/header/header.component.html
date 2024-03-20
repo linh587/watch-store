@@ -129,15 +129,21 @@
               <div ngbDropdownMenu aria-labelledby="profileDropdown">
                 <button
                   ngbDropdownItem
-                  (click)="router.navigate(['/profile']).then()">
+                  (click)="router.navigate(['/profile/user-info']).then()">
                   <span class="material-symbols-outlined me-2"> person </span>
                   <span>Thông tin tài khoản</span>
                 </button>
-                <button ngbDropdownItem>
+                <button
+                  ngbDropdownItem
+                  (click)="router.navigate(['/profile/orders']).then()">
                   <span class="material-symbols-outlined me-2"> list_alt </span>
                   <span>Đơn mua</span>
                 </button>
-                <button ngbDropdownItem>
+                <button
+                  ngbDropdownItem
+                  (click)="
+                    router.navigate(['/profile/change-password']).then()
+                  ">
                   <span class="material-symbols-outlined me-2"> key </span>
                   <span>Đổi mật khẩu</span>
                 </button>

@@ -8,7 +8,7 @@
               <div class="col-lg-3 col-md-12">
                 <div class="d-single-info">
                   <p class="user-name">
-                    Xin chào <span>{{ userInfo?.fullName }}</span>
+                    Xin chào <span>{{ userInfo?.name }}</span>
                   </p>
                 </div>
               </div>
@@ -36,141 +36,24 @@
           </div>
           <div class="row">
             <div class="col-md-12 col-lg-2">
-              <ul
-                ngbNav
-                #nav="ngbNav"
-                class="nav flex-column dashboard-list"
-                [(activeId)]="active">
-                <li [ngbNavItem]="1">
-                  <a ngbNavLink>Đơn mua</a>
-                  <ng-template ngbNavContent>
-                    <h3>Đơn đã mua</h3>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>STT</th>
-                            <th>Thời gian</th>
-                            <th>Trạng thái</th>
-                            <th>Tổng tiền</th>
-                            <th>Hành động</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>May 10, 2018</td>
-                            <td>Processing</td>
-                            <td>$25.00 for 1 item</td>
-                            <td><a class="view">Chi tiết</a></td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>May 10, 2018</td>
-                            <td>Processing</td>
-                            <td>$17.00 for 1 item</td>
-                            <td><a class="view">Chi tiết</a></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </ng-template>
-                </li>
-                <li [ngbNavItem]="2">
-                  <a ngbNavLink>Hồ sơ</a>
-                  <ng-template ngbNavContent>
-                    <h3>Hồ sơ</h3>
-                    <div class="login-form-container">
-                      <form
-                        [formGroup]="profileForm"
-                        (submit)="onUpdateProfile()">
-                        <div class="row">
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Họ và tên</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="fullName" />
-                          </div>
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Email</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="email" />
-                          </div>
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Số điện thoại</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="mobile" />
-                          </div>
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Địa chỉ</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="address" />
-                          </div>
-                        </div>
-                        <div class="button-box d-flex justify-content-end">
-                          <button class="btn default-btn" type="submit">
-                            Lưu
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </ng-template>
-                </li>
-                <li [ngbNavItem]="3">
-                  <a ngbNavLink>Mật khẩu</a>
-                  <ng-template ngbNavContent>
-                    <h3>Đổi mật khẩu</h3>
-                    <div class="login-form-container">
-                      <form
-                        [formGroup]="passwordForm"
-                        (submit)="onUpdatePassword()">
-                        <div class="row">
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Mật khẩu cũ</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              formControlName="password" />
-                          </div>
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Mật khẩu mới</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              formControlName="newPassword" />
-                          </div>
-                          <div class="form-group pb-4 col-12">
-                            <label class="form-label">Nhập lại mật khẩu</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              formControlName="confirmNewPassword" />
-                          </div>
-                        </div>
-                        <div class="button-box d-flex justify-content-end">
-                          <button class="btn default-btn" type="submit">
-                            Lưu
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </ng-template>
-                </li>
-                <li>
-                  <a>Đăng xuất</a>
-                </li>
+              <ul class="nav">
+                <div class="w-100">
+                  <ng-container *ngFor="let item of ACCOUNT_TAB">
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        [routerLink]="item.link"
+                        routerLinkActive="active"
+                        >{{ item.label }}</a
+                      >
+                    </li>
+                  </ng-container>
+                </div>
               </ul>
             </div>
             <div class="col-md-12 col-lg-10">
               <div class="dashboard-content">
-                <div [ngbNavOutlet]="nav"></div>
+                <router-outlet></router-outlet>
               </div>
             </div>
           </div>
