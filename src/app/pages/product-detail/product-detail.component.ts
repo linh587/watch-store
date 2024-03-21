@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { COLLECTIONS } from "../../public/constants/common";
 import SwiperCore, { FreeMode, Navigation, Pagination, Thumbs } from "swiper";
+import { ProductsService } from "../../services/products/products.service";
+import {
+  createCloudinaryImageLink,
+  createCloudinaryThumbLink,
+} from "../../public/helpers/images";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs, Pagination]);
 
@@ -13,31 +17,44 @@ SwiperCore.use([FreeMode, Navigation, Thumbs, Pagination]);
 export class ProductDetailComponent implements OnInit {
   public thumbsSwiper: any;
   public slidesPerView: number = 4;
-  public id!: number;
+  public id!: string;
   public productItem: any;
-  public COLLECTIONS = COLLECTIONS;
   public active = 1;
+  public createCloudinaryThumbLink = createCloudinaryThumbLink;
+  public createCloudinaryImageLink = createCloudinaryImageLink;
+  public productPrices: any[] = [];
+  public priceOfThisProduct: any[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit() {
     this.getProductId();
+    this.getListProductPrice();
     this.getProductItem();
   }
 
   private getProductId() {
     this.route.params.subscribe((params) => {
-      this.id = +params["id"];
+      this.id = params["id"];
     });
   }
 
   private getProductItem() {
-    this.productItem = this.COLLECTIONS.find((p) => p.id === this.id);
-
-    console.log(this.productItem);
+    this.productsService.getDetailProduct(this.id).subscribe((res) => {
+      this.productItem = res;
+    });
   }
 
-  public onNavChange($event: any) {
+  public onNavChange($event: any) {}
 
+  private getListProductPrice() {
+    this.productsService.getProductPrices().subscribe((res: any) => {
+      this.productPrices = res.filter(
+        (p: any) => p?.productId === this.productItem?.id
+      );
+    });
   }
 }

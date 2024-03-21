@@ -41,7 +41,9 @@
                   </span>
                 </a>
               </div>
-              <div class="cart-wrapper pe-2 me-3 position-relative">
+              <div
+                class="cart-wrapper pe-2 me-3 position-relative"
+                *ngIf="productList$ | async as productList">
                 <a
                   class="cursor-pointer"
                   (click)="$event.stopPropagation()"
@@ -49,27 +51,33 @@
                   <span class="material-symbols-outlined"> shopping_cart </span>
                   <span
                     class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
-                    >2
+                    >{{ productList.length }}
                   </span>
                 </a>
                 <ul class="mini-cart position-absolute bg-white end-0">
-                  <li class="cart-item d-flex position-relative pb-3">
+                  <li
+                    class="cart-item d-flex position-relative pb-3"
+                    *ngFor="let product of productList">
                     <div class="card-image cursor-pointer">
                       <img
-                        src="/assets/images/details/product-detail.webp"
+                        [src]="createCloudinaryThumbLink(product.coverImage)"
                         alt=""
                         class="mw-100" />
                     </div>
                     <div class="card-title ps-3 mt-2">
                       <a class="pe-3 cursor-pointer">
                         <h4 class="text-size-small fw-normal">
-                          Product Name 01
+                          {{ product.name }}
                         </h4>
                       </a>
                       <div class="quanti-price-wrap d-flex">
-                        <span class="quantity me-1">1 ×</span>
+                        <span class="quantity me-1"
+                          >{{ product.quantity }} ×</span
+                        >
                         <div class="price-box fw-500 color-brown">
-                          <span class="new-price">$130.00</span>
+                          <span class="new-price">{{
+                            product.price | formatPrice
+                          }}</span>
                         </div>
                       </div>
                       <div
@@ -83,9 +91,9 @@
                     <div
                       class="subtotal-title d-flex justify-content-between color-brown text-size-small fw-600">
                       <h3 class="text-size-small fw-600 m-0 color-brown">
-                        Tổng tiền :
+                        Tổng tiền : {{ total | formatPrice }}
                       </h3>
-                      <span>$ 260.99</span>
+                      <span></span>
                     </div>
                   </li>
                   <li class="mini-cart-btns justify-content-between pt-3 w-100">

@@ -14,6 +14,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AppGetTokenInterceptor } from "./public/interceptors/get-token.interceptor";
 import { ErrorInterceptor } from "./public/interceptors/error.interceptor";
 import { AppInterceptor } from "./public/interceptors/app.interceptor";
+import { CloudinaryModule } from "@cloudinary/ng";
 
 @NgModule({
   declarations: [AppComponent, PagesComponent, NotFoundComponent],
@@ -31,6 +32,7 @@ import { AppInterceptor } from "./public/interceptors/app.interceptor";
         tokenGetter: tokenGetter,
       },
     }),
+    CloudinaryModule
   ],
   providers: [
     {

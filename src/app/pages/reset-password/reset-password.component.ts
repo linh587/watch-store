@@ -61,7 +61,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   public onResetPassword() {
-    console.log(this.resetForm.value);
     if (this.resetForm.valid) {
       const payload = {
         newPassword: this.resetForm.controls["newPassword"].value,

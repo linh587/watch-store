@@ -2,7 +2,7 @@
   <div class="product-thumb position-relative">
     <a>
       <img
-        [src]="productItem.images[0]"
+        [src]="createCloudinaryThumbLink(productItem.coverImage)"
         alt=""
         class="primary-image w-100 mw-100" />
       <div class="label-product label-new">Mới</div>
@@ -29,8 +29,10 @@
       <a>{{ productItem.name }}</a>
     </h4>
     <div class="price-box text-size-medium">
-      <span class="new-price fw-600">{{ productItem.newPrice }}</span>
-      <span class="old-price">{{ productItem.oldPrice }}</span>
+      <span class="new-price fw-600">{{
+        productPrices[0]?.price | formatPrice
+      }}</span>
+      <!-- <span class="old-price">{{ productItem?.oldPrice }}</span> -->
     </div>
   </div>
 </div>

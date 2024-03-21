@@ -61,11 +61,16 @@
 
   .primary-image {
     border-radius: 0.25rem;
+    object-fit: scale-down;
   }
 
   .product-caption {
     padding: 20px 0;
     border-top: 1px solid $gray-lighter;
+
+    .product-name {
+      min-height: 25px;
+    }
 
     .new-price {
       color: $primary-color;

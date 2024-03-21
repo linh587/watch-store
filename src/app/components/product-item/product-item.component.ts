@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { QuickViewProductModalComponent } from "../quick-view-product-modal/quick-view-product-modal.component";
 import { Router } from "@angular/router";
+import { createCloudinaryThumbLink } from "../../public/helpers/images";
+import { ProductsService } from "../../services/products/products.service";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-product-item",
@@ -10,10 +13,20 @@ import { Router } from "@angular/router";
 })
 export class ProductItemComponent implements OnInit {
   @Input() productItem: any;
+  public productPrices: any[] = [];
+  public createCloudinaryThumbLink = createCloudinaryThumbLink;
+  public priceOfThisProduct: any[] = [];
+  public productSizes = new BehaviorSubject([]);
 
-  constructor(private modalService: NgbModal, private router: Router) {}
+  constructor(
+    private modalService: NgbModal,
+    private router: Router,
+    private productsService: ProductsService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getListProductPrice();
+  }
 
   public onOpenQuickViewProductModal(event: Event) {
     event.preventDefault();
@@ -23,9 +36,18 @@ export class ProductItemComponent implements OnInit {
     });
 
     modalRef.componentInstance.productItem = this.productItem;
+    modalRef.componentInstance.productPrices = this.productPrices;
   }
 
   public redirectDetail(id: number) {
     this.router.navigate([`/product/${id}`]).then();
+  }
+
+  private getListProductPrice() {
+    this.productsService.getProductPrices().subscribe((res: any) => {
+      this.productPrices = res.filter(
+        (p: any) => p.productId === this.productItem.id
+      );
+    });
   }
 }

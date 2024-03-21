@@ -3,36 +3,43 @@
     <div class="row product-details-inner">
       <div class="col-lg-5 col-md-6">
         <div class="gallery">
-          <swiper
+          <!-- <swiper
             [spaceBetween]="10"
             [navigation]="false"
             [thumbs]="{ swiper: thumbsSwiper }"
-            class="mySwiper2 mb-3 w-100">
-            <ng-template swiperSlide *ngFor="let image of productItem?.images">
-              <img [src]="image" alt="" class="w-100" />
-            </ng-template>
-          </swiper>
-          <swiper
+            class="mySwiper2 mb-3 w-100"> -->
+          <!-- <ng-template swiperSlide *ngFor="let image of productItem?.images"> -->
+          <img
+            [src]="createCloudinaryThumbLink(productItem?.coverImage)"
+            alt=""
+            class="w-100"
+            style="object-fit: scale-down" />
+          <!-- </ng-template> -->
+          <!-- </swiper> -->
+          <!-- <swiper
             (swiper)="thumbsSwiper = $event"
             [loop]="false"
             [spaceBetween]="10"
             [slidesPerView]="slidesPerView"
             [freeMode]="true"
             [watchSlidesProgress]="true"
-            class="custome-swiper mb-2 w-100">
-            <ng-template
+            class="custome-swiper mb-2 w-100"> -->
+          <!-- <ng-template
               swiperSlide
-              *ngFor="let image of productItem?.images; let index = index">
-              <img class="image-thumbnail w-100" [src]="image" alt="" />
-            </ng-template>
-          </swiper>
+              *ngFor="let image of productItem?.images; let index = index"> -->
+          <img
+            class="image-thumbnail"
+            [src]="createCloudinaryImageLink(productItem?.coverImage, 100, 100)"
+            alt="" />
+          <!-- </ng-template>
+          </swiper> -->
         </div>
       </div>
 
       <div class="col-lg-7 col-md-6">
         <div class="product-details-view-content">
           <div class="product-info">
-            <h3>Ornare sed consequat</h3>
+            <h3 class="mb-2">{{ productItem?.name }}</h3>
             <div class="product-rating d-flex align-items-center">
               <ul class="d-flex">
                 <li>
@@ -56,28 +63,23 @@
               >
             </div>
             <div class="price-box">
-              <span class="new-price">$70.00</span>
-              <span class="old-price">$78.00</span>
+              <span class="new-price">{{
+                priceOfThisProduct[0]?.price | formatPrice
+              }}</span>
+              <!-- <span class="old-price">$78.00</span> -->
             </div>
-            <p class="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-              fringilla augue nec est tristique auctor. Donec non est at libero
-              vulputate rutrum. Morbi ornare lectus quis justo gravida semper.
-              Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-              nulla.
-            </p>
+            <div class="mb-3" [innerHTML]="productItem?.description"></div>
 
             <div class="single-add-to-cart">
               <form action="#" class="cart-quantity d-flex">
                 <div class="quantity">
                   <div class="cart-plus-minus">
                     <input
+                      appAvoidQuantity
                       type="number"
                       class="input-text"
-                      name="quantity"
-                      value="1"
-                      title="Qty"
-                      fdprocessedid="ryazoi" />
+                      min="0"
+                      max="50" />
                   </div>
                 </div>
                 <button
@@ -105,10 +107,11 @@
             <ul class="stock-cont">
               <li class="product-sku">Sku: <span>P006</span></li>
               <li class="product-stock-status">
-                Loại sản phẩm: <a href="#">Butter &amp; Eggs,</a>
-                <a href="#">Cultured Butter</a>
+                Loại sản phẩm: <a href="#">{{ productItem?.categoryName }}</a>
               </li>
-              <li class="product-stock-status">Thẻ: <a href="#">Man</a></li>
+              <li class="product-stock-status">
+                Thẻ: <a href="#">{{ productItem?.categoryName }}</a>
+              </li>
             </ul>
             <div class="share-product-socail-area">
               <p>Chia sẻ sản phẩm</p>
@@ -144,27 +147,9 @@
                 <ng-template ngbNavContent>
                   <div class="product_description_wrap mt-30">
                     <div class="product_desc mb-30">
-                      <p class="mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nam fringilla augue nec est tristique auctor. Donec non
-                        est at libero vulputate rutrum. Morbi ornare lectus quis
-                        justo gravida semper. Nulla tellus mi, vulputate
-                        adipiscing cursus eu, suscipit id nulla.
-                      </p>
-
-                      <p>
-                        Pellentesque aliquet, sem eget laoreet ultrices, ipsum
-                        metus feugiat sem, quis fermentum turpis eros eget
-                        velit. Donec ac tempus ante. Fusce ultricies massa
-                        massa. Fusce aliquam, purus eget sagittis vulputate,
-                        sapien libero hendrerit est, sed commodo augue nisi non
-                        neque. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit. Sed tempor, lorem et placerat
-                        vestibulum, metus nisi posuere nisl, in accumsan elit
-                        odio quis mi. Cras neque metus, consequat et blandit et,
-                        luctus a nunc. Etiam gravida vehicula tellus, in
-                        imperdiet ligula euismod eget.
-                      </p>
+                      <p
+                        class="mb-3"
+                        [innerHTML]="productItem?.description"></p>
                     </div>
                   </div>
                 </ng-template>

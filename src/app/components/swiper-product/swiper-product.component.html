@@ -8,8 +8,8 @@
     [virtual]="true"
     class="mySwiperProduct">
     <ng-container>
-      <ng-template swiperSlide *ngFor="let collection of collections">
-        <app-product-item [productItem]="collection"></app-product-item>
+      <ng-template swiperSlide *ngFor="let product of products">
+        <app-product-item [productItem]="product"></app-product-item>
       </ng-template>
     </ng-container>
   </swiper>

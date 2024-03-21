@@ -9,18 +9,22 @@
       <div class="row gx-3 product-details-inner">
         <div class="col-lg-5 col-md-6 col-sm-6">
           <div class="gallery">
-            <swiper
+            <!-- <swiper
               [spaceBetween]="10"
               [navigation]="false"
               [thumbs]="{ swiper: thumbsSwiper }"
               class="mySwiper2 mb-3 w-100">
               <ng-template
                 swiperSlide
-                *ngFor="let image of productItem?.images">
-                <img [src]="image" alt="" class="w-100" />
-              </ng-template>
-            </swiper>
-            <swiper
+                *ngFor="let image of productItem?.images"> -->
+            <img
+              [src]="createCloudinaryThumbLink(productItem.coverImage)"
+              alt=""
+              class="w-100"
+              style="object-fit: scale-down" />
+            <!-- </ng-template>
+            </swiper> -->
+            <!-- <swiper
               (swiper)="thumbsSwiper = $event"
               [loop]="false"
               [spaceBetween]="10"
@@ -30,10 +34,13 @@
               class="mySwiper mb-2 w-100">
               <ng-template
                 swiperSlide
-                *ngFor="let image of productItem?.images; let index = index">
-                <img class="image-thumbnail w-100" [src]="image" alt="" />
-              </ng-template>
-            </swiper>
+                *ngFor="let image of productItem?.images; let index = index"> -->
+            <img
+              class="image-thumbnail"
+              [src]="createCloudinaryImageLink(productItem.coverImage, 70, 70)"
+              alt="" />
+            <!-- </ng-template>
+            </swiper> -->
           </div>
         </div>
         <div class="col-lg-7 col-md-6 col-sm-6">
@@ -58,37 +65,62 @@
                     <i class="fa-regular fa-star"></i>
                   </li>
                 </ul>
-                <a class="ms-2"
-                  >(<span class="count">1</span> đánh giá)</a
-                >
+                <a class="ms-2">(<span class="count">1</span> đánh giá)</a>
               </div>
               <div
                 class="price-box primary-color fw-500 mb-3 mt-2 w-100 text-size-large">
-                <span class="new-price fw-500 primary-color">$70.00</span>
-                <span
+                <span class="new-price fw-500 primary-color">{{
+                  selectedPrice?.price | formatPrice
+                }}</span>
+                <!-- <span
                   class="old-price d-inline-block font-weight-normal ms-1 text-decoration-line-through"
                   >$78.00</span
-                >
+                > -->
               </div>
-              <p class="mb-3">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                fringilla augue nec est tristique auctor.
-              </p>
-              <div class="single-add-to-cart">
-                <form action="#" class="cart-quantity d-flex">
+              <div class="select-size-box mb-3">
+                <h6 class="mb-2">Chọn size</h6>
+                <div class="size-list">
+                  <ng-container *ngIf="productSizes$ | async as productSizes">
+                    <div
+                      class="position-relative border"
+                      *ngFor="let size of productSizes">
+                      <input
+                        class="select-radio cursor-pointer"
+                        type="radio"
+                        (change)="onSizeChange(size)"
+                        [value]="size"
+                        [checked]="size.name === selectedSize" />
+                      <label
+                        [class.active]="size.name === selectedSize"
+                        class="select-label text-size-medium d-flex align-items-center justify-content-center"
+                        >{{ size.name }}</label
+                      >
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="single-add-to-cart mb-4">
+                <form
+                  class="cart-quantity d-flex"
+                  [formGroup]="addToCartForm"
+                  (submit)="onAddToCart()">
                   <div class="quantity">
                     <div class="cart-plus-minus">
                       <input
+                        appAvoidQuantity
                         type="number"
-                        class="input-text"
-                        name="quantity"
+                        value="1"
                         min="1"
-                        max="100" />
+                        max="50"
+                        formControlName="quantity" />
                     </div>
                   </div>
-                  <button class="add-to-cart">Thêm vào giỏ</button>
+                  <button type="submit" class="add-to-cart">
+                    Thêm vào giỏ
+                  </button>
                 </form>
               </div>
+              <div class="mb-3" [innerHTML]="productItem?.description"></div>
               <ul class="single-add-actions">
                 <li class="add-to-wishlist">
                   <i class="fa-regular fa-heart"></i>
@@ -98,12 +130,11 @@
               <ul class="stock-cont">
                 <li class="product-stock-status">
                   Loại sản phẩm:
-                  <a href="#">Watchs,</a>
-                  <a href="#">Man Watches</a>
+                  <a href="#">{{ productItem?.categoryName }}</a>
                 </li>
                 <li class="product-stock-status">
                   Thẻ:
-                  <a href="#">Man</a>
+                  <a href="#">{{ productItem?.categoryName }}</a>
                 </li>
               </ul>
               <div class="share-product-social-area d-flex align-items-center">

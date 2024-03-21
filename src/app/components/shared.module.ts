@@ -15,6 +15,8 @@ import { AuthenticationModalComponent } from "./authentication-modal/authenticat
 import { CategoryBannerComponent } from "./category-banner/category-banner.component";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
+import { DirectivesModule } from "../public/directives/directives.module";
+import { PipesModule } from "../public/pipes/pipes.module";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -40,6 +42,8 @@ const COMPONENTS = [
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
+    DirectivesModule,
+    PipesModule
   ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],

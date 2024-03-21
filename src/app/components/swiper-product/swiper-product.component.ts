@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { COLLECTIONS } from "../../public/constants/common";
-
+import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-swiper-product",
@@ -8,11 +7,20 @@ import { COLLECTIONS } from "../../public/constants/common";
   styleUrls: ["./swiper-product.component.scss"],
 })
 export class SwiperProductComponent implements OnInit {
-  public collections = COLLECTIONS;
+  @Input() products!: any[];
   @Input() slidesPerView: number = 4;
   @Input() gridOptions: any;
+  public productPrice: any[] = [];
 
-  constructor() {}
+  constructor(private productsService: ProductsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProductPrices();
+  }
+
+  private getProductPrices() {
+    this.productsService.getProductPrices().subscribe((res: any) => {
+      this.productPrice = res;
+    });
+  }
 }

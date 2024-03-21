@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row product-active">
-        <app-swiper-product></app-swiper-product>
+        <app-swiper-product [products]="productList"></app-swiper-product>
       </div>
     </div>
   </div>
@@ -45,7 +45,8 @@
 
       <div class="tab-content">
         <app-swiper-product
-          [slidesPerView]="5"></app-swiper-product>
+          [slidesPerView]="5"
+          [products]="productList"></app-swiper-product>
       </div>
     </div>
   </div>
