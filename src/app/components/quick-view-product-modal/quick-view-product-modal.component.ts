@@ -11,10 +11,10 @@ import {
   createCloudinaryThumbLink,
 } from "../../public/helpers/images";
 import { ProductsService } from "../../services/products/products.service";
-import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
 import { CartService } from "../../services/cart/cart.service";
+import { ToastrService } from "ngx-toastr";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -28,12 +28,12 @@ SwiperCore.use([FreeMode, Navigation, Thumbs]);
 export class QuickViewProductModalComponent implements OnInit {
   public createCloudinaryThumbLink = createCloudinaryThumbLink;
   public createCloudinaryImageLink = createCloudinaryImageLink;
-  public productItem: any;
   public thumbsSwiper: any;
   public slidesPerView: number = 4;
+  public productItem: any;
   public productPrices: any[] = [];
-  public productSizes$ = new BehaviorSubject<any>([]);
-  public selectedPrice!: any;
+  public productSizes$ = new BehaviorSubject<any[]>([]);
+  public selectedPrice: any;
   public selectedSize!: string;
   public addToCartForm!: FormGroup;
 
@@ -41,7 +41,8 @@ export class QuickViewProductModalComponent implements OnInit {
     private modalService: NgbModal,
     private productsService: ProductsService,
     private fb: FormBuilder,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class QuickViewProductModalComponent implements OnInit {
 
   private initForm() {
     this.addToCartForm = this.fb.group({
-      quantity: [null, Validators.required],
+      quantity: [1, Validators.required],
     });
   }
 
@@ -90,6 +91,8 @@ export class QuickViewProductModalComponent implements OnInit {
         quality: this.addToCartForm.controls["quantity"].value,
       };
       this.cartService.addToCart(payload);
+    } else {
+      this.toastService.info("Vui lòng chọn size sản phẩm");
     }
   }
 }

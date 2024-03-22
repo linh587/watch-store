@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { BaseHttpRequest } from "../http/base-http-request.service";
 import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
+import { UserAccount } from "../../models/user.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService extends BaseHttpRequest {
   private userLogin$ = new BehaviorSubject<any>(null);
-  public hasToken$ = new BehaviorSubject<boolean>(false);
 
-  public login(payload: any) {
+  public login(payload: UserAccount) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.LOGIN}`, payload);
   }
 
@@ -25,23 +25,23 @@ export class AuthService extends BaseHttpRequest {
 
   public getUserInfo() {
     if (this.userLogin$.value) {
-      return this.userLogin$ as Observable<any>;
+      return this.userLogin$ as Observable<UserAccount>;
     } else {
       const user = this.storageService.get("USER_LOGIN");
       this.setUserInfo(user);
 
-      return this.userLogin$ as Observable<any>;
+      return this.userLogin$ as Observable<UserAccount>;
     }
   }
 
-  public setUserInfo(data: any) {
+  public setUserInfo(data: UserAccount) {
     this.userLogin$.next(data);
   }
 
   public currentUserInfo(id: string) {
-    return this.httpClient
-      .get(`${ENVIRONMENT}${API_URL.GET_DETAIL_USER}/${id}`)
-      .pipe(tap((_) => this.hasToken$.next(true)));
+    return this.httpClient.get(
+      `${ENVIRONMENT}${API_URL.GET_DETAIL_USER}/${id}`
+    );
   }
 
   public refreshToken() {

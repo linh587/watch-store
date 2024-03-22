@@ -27,4 +27,8 @@ export class AccountProfileComponent implements OnInit {
       this.userInfo = res;
     });
   }
+
+  public logout() {
+    this.authService.logout();
+  }
 }

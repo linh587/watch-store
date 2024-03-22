@@ -41,7 +41,10 @@ export class ProductsService extends BaseHttpRequest {
     );
   }
 
-  public updateCartItem(productPriceId: string, payload: any) {
+  public updateCartItem(
+    productPriceId: string,
+    payload: any
+  ) {
     return this.httpClient.put(
       `${ENVIRONMENT}${API_URL.ADD_TO_CART}/${productPriceId}`,
       payload
@@ -50,6 +53,12 @@ export class ProductsService extends BaseHttpRequest {
 
   public getCart() {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.CART}`);
+  }
+
+  public getCartDetail(productPriceId: string) {
+    return this.httpClient.get(
+      `${ENVIRONMENT}${API_URL.CART}/${productPriceId}`
+    );
   }
 
   public removeCartItem(productPriceId: string) {

@@ -2,87 +2,114 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <form action="#" class="cart-table">
-          <div class="table-content table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th *ngFor="let header of HEADER">{{ header }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let collection of COLLECTIONS.slice(0, 5)">
-                  <td class="plantmore-product-thumbnail">
-                    <img [src]="collection.images[0]" alt="" />
-                  </td>
-                  <td class="plantmore-product-name">
-                    <a href="#">{{ collection.name }}</a>
-                  </td>
-                  <td class="plantmore-product-price">
-                    <span class="amount">{{ collection.newPrice }}</span>
-                  </td>
-                  <td class="plantmore-product-quantity">
+        <ng-container *ngIf="productList$ | async as productList">
+          <form class="cart-table">
+            <div class="table-content table-responsive">
+              <table class="table w-100 text-center mb-0">
+                <thead>
+                  <tr>
+                    <th *ngFor="let header of HEADER">{{ header }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of productList">
+                    <td class="plantmore-product-thumbnail">
+                      <img
+                        [src]="
+                          createCloudinaryImageLink(
+                            product.productCoverImage,
+                            120
+                          )
+                        "
+                        alt="" />
+                    </td>
+                    <td class="plantmore-product-name">
+                      <a
+                        >{{ product.productName }} ({{
+                          product.productSizeName
+                        }})</a
+                      >
+                    </td>
+                    <td class="plantmore-product-price">
+                      <span class="amount">{{
+                        product.price | formatPrice
+                      }}</span>
+                    </td>
+                    <td class="plantmore-product-quantity">
+                      <input
+                        appAvoidQuantity
+                        min="1"
+                        max="50"
+                        [value]="product.quality"
+                        type="number"
+                        (change)="
+                          updateCartItem($event, product.productPriceId)
+                        " />
+                    </td>
+                    <td class="product-subtotal">
+                      <span class="amount">{{
+                        product.price * product.quality | formatPrice
+                      }}</span>
+                    </td>
+                    <td
+                      class="plantmore-product-remove"
+                      (click)="removeCartItem(product.productPriceId)">
+                      <a class="btn btn-primary bg-primary-color border-0">
+                        <span>Xoá</span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="coupon-all">
+                  <div class="coupon2">
+                    <a
+                      routerLink="/collections"
+                      class="continue-btn d-inline-block"
+                      >Tiếp tục mua sắm</a
+                    >
+                  </div>
+
+                  <div class="coupon">
+                    <h3 class="mb-2">Khuyến mãi</h3>
                     <input
-                      min="1"
-                      value="1"
-                      type="number"
-                      fdprocessedid="eqli4d" />
-                  </td>
-                  <td class="product-subtotal">
-                    <span class="amount"></span>
-                  </td>
-                  <td class="plantmore-product-remove">
-                    <a href="#"><i class="fa fa-times"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <div class="coupon-all">
-                <div class="coupon2">
-                  <input
-                    class="submit"
-                    name="update_cart"
-                    value="Cập nhật giỏ hàng"
-                    type="submit"
-                    fdprocessedid="aj5vn" />
-                  <a href="shop.html" class="continue-btn d-inline-block"
-                    >Tiếp tục mua sắm</a
+                      class="input-text"
+                      placeholder="Mã khuyến mãi"
+                      type="text" />
+                    <button
+                      type="button"
+                      class="button text-center color-white bg-black cursor-pointer d-inline-block text-size-x-small fw-600 text-uppercase">
+                      Thêm mã
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 ml-auto">
+                <div class="cart-page-total">
+                  <h2 class="text-size-xl fw-600 mb-3 text-capitalize">
+                    Tổng tiền
+                  </h2>
+                  <ul>
+                    <li>
+                      Tổng tiền hàng <span>{{ total | formatPrice }}</span>
+                    </li>
+                    <li>
+                      Tổng thanh toán <span>{{ total | formatPrice }}</span>
+                    </li>
+                  </ul>
+                  <a
+                    routerLink="/checkout"
+                    class="proceed-checkout-btn cursor-pointer bg-black color-white d-inline-block text-capitalize py-2 px-3"
+                    >Thanh toán</a
                   >
                 </div>
-
-                <div class="coupon">
-                  <h3 class="mb-2">Khuyến mãi</h3>
-                  <p class="mb-3">Nhập mã khuyến mãi.</p>
-                  <input
-                    id="coupon_code"
-                    class="input-text"
-                    name="coupon_code"
-                    value=""
-                    placeholder="Coupon code"
-                    type="text" />
-                  <input
-                    class="button"
-                    name="apply_coupon"
-                    value="Thêm mã khuyến mãi"
-                    type="submit" />
-                </div>
               </div>
             </div>
-            <div class="col-md-4 ml-auto">
-              <div class="cart-page-total">
-                <h2>Tổng tiền</h2>
-                <ul>
-                  <li>Tổng tiền hàng <span>$170.00</span></li>
-                  <li>Tổng thanh toán <span>$170.00</span></li>
-                </ul>
-                <a href="#" class="proceed-checkout-btn">Thanh toán</a>
-              </div>
-            </div>
-          </div>
-        </form>
+          </form>
+        </ng-container>
       </div>
     </div>
   </div>

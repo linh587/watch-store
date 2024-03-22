@@ -1,5 +1,15 @@
-import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, catchError, throwError } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core";
+import {
+  BehaviorSubject,
+  Subject,
+  catchError,
+  debounceTime,
+  forkJoin,
+  of,
+  switchMap,
+  takeUntil,
+  throwError,
+} from "rxjs";
 import { ProductsService } from "../products/products.service";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../auth/auth.service";
@@ -7,54 +17,62 @@ import { AuthService } from "../auth/auth.service";
 @Injectable({
   providedIn: "root",
 })
-export class CartService implements OnInit {
-  private productList: any[] = [];
-  private quantityList: number[] = [];
-
-  private productList$ = new BehaviorSubject<any[]>(this.productList);
-  private quantityList$ = new BehaviorSubject<number[]>(this.quantityList);
+export class CartService implements OnDestroy {
+  private productList$ = new BehaviorSubject<any[]>([]);
+  private subscription$ = new Subject();
 
   constructor(
     private productsService: ProductsService,
     private toastService: ToastrService,
     private authService: AuthService
   ) {
-    this.authService.hasToken$.subscribe((state: boolean) => {
-      state && this.getCartProducts();
-    });
+    this.checkAllowCallAPI();
   }
 
-  ngOnInit(): void {}
+  private checkAllowCallAPI() {
+    this.authService.getUserInfo().subscribe((user) => {
+      user && this.getCartProducts();
+    });
+  }
 
   public getProductList$() {
     return this.productList$.asObservable();
   }
 
-  public getQuantityList$() {
-    return this.quantityList$.asObservable();
-  }
-
   public getCartProducts() {
-    this.productsService.getCart().subscribe((cartItems: any) => {
-      this.productList = cartItems;
-      this.quantityList = cartItems.map((item: any) => item.quality);
-      this.productList$.next(this.productList);
-      this.quantityList$.next(this.productList);
-    });
+    this.productsService
+      .getCart()
+      .pipe(
+        takeUntil(this.subscription$),
+        switchMap((carts: any) => {
+          if (carts.length) {
+            const requests = carts.map((cart: any) => {
+              return this.productsService.getCartDetail(cart.productPriceId);
+            });
+            return forkJoin(requests);
+          }
+
+          return of([]);
+        })
+      )
+      .subscribe((products: any) => {
+        this.productList$.next(products);
+      });
   }
 
   public addToCart(payload: any) {
     this.productsService
       .addToCart(payload)
       .pipe(
+        takeUntil(this.subscription$),
         catchError((error) => {
           this.toastService.error("Thêm vào giỏ hàng thất bại");
           return throwError(() => error);
         })
       )
       .subscribe((_) => {
-        this.toastService.success("Thêm vào giỏ hàng thành công");
         this.getCartProducts();
+        this.toastService.success("Thêm vào giỏ hàng thành công");
       });
   }
 
@@ -62,13 +80,14 @@ export class CartService implements OnInit {
     this.productsService
       .updateCartItem(productPriceId, payload)
       .pipe(
+        debounceTime(500),
+        takeUntil(this.subscription$),
         catchError((error) => {
           this.toastService.error("Cập nhật giỏ hàng thất bại");
           return throwError(() => error);
         })
       )
       .subscribe((_) => {
-        this.toastService.success("Cập nhật giỏ hàng thành công");
         this.getCartProducts();
       });
   }
@@ -77,18 +96,19 @@ export class CartService implements OnInit {
     this.productsService
       .removeCartItem(productPriceId)
       .pipe(
+        takeUntil(this.subscription$),
         catchError((error) => {
           this.toastService.error("Xoá khỏi giỏ hàng thất bại");
           return throwError(() => error);
         })
       )
       .subscribe((_) => {
-        this.productList = this.productList.filter(
-          (item) => item.productPriceId !== productPriceId
-        );
-
-        this.toastService.success("Xoá khỏi giỏ hàng thành công");
-        this.productList$.next(this.productList);
+        this.getCartProducts();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.next(null);
+    this.subscription$.complete();
   }
 }

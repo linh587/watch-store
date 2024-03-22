@@ -12,8 +12,8 @@
           <img
             [src]="createCloudinaryThumbLink(productItem?.coverImage)"
             alt=""
-            class="w-100"
-            style="object-fit: scale-down" />
+            class="w-100 border mb-3"
+            style="object-fit: scale-down;" />
           <!-- </ng-template> -->
           <!-- </swiper> -->
           <!-- <swiper
@@ -28,7 +28,7 @@
               swiperSlide
               *ngFor="let image of productItem?.images; let index = index"> -->
           <img
-            class="image-thumbnail"
+            class="image-thumbnail border p-2"
             [src]="createCloudinaryImageLink(productItem?.coverImage, 100, 100)"
             alt="" />
           <!-- </ng-template>
@@ -64,48 +64,61 @@
             </div>
             <div class="price-box">
               <span class="new-price">{{
-                priceOfThisProduct[0]?.price | formatPrice
+                selectedPrice?.price | formatPrice
               }}</span>
               <!-- <span class="old-price">$78.00</span> -->
             </div>
-            <div class="mb-3" [innerHTML]="productItem?.description"></div>
-
+            <div class="select-size-box mb-3">
+              <h6 class="mb-2">Chọn size</h6>
+              <div class="size-list">
+                <ng-container *ngIf="productSizes$ | async as productSizes">
+                  <div
+                    class="position-relative border"
+                    *ngFor="let size of productSizes">
+                    <input
+                      class="select-radio cursor-pointer"
+                      type="radio"
+                      (change)="onSizeChange(size)"
+                      [value]="size"
+                      [checked]="size.name === selectedSize" />
+                    <label
+                      [class.active]="size.name === selectedSize"
+                      class="select-label text-size-medium d-flex align-items-center justify-content-center"
+                      >{{ size.name }}</label
+                    >
+                  </div>
+                </ng-container>
+              </div>
+            </div>
             <div class="single-add-to-cart">
-              <form action="#" class="cart-quantity d-flex">
+              <form
+                class="cart-quantity d-flex mb-3"
+                [formGroup]="addToCartForm"
+                (submit)="onAddToCart()">
                 <div class="quantity">
                   <div class="cart-plus-minus">
                     <input
+                      formControlName="quantity"
                       appAvoidQuantity
                       type="number"
                       class="input-text"
-                      min="0"
+                      min="1"
                       max="50" />
                   </div>
                 </div>
-                <button
-                  class="add-to-cart"
-                  type="submit"
-                  fdprocessedid="hhl0mg">
-                  Thêm vào giỏ
-                </button>
+                <button class="add-to-cart" type="submit">Thêm vào giỏ</button>
               </form>
             </div>
+            <div class="mb-3" [innerHTML]="productItem?.description"></div>
+
             <ul class="single-add-actions">
               <li class="add-to-wishlist">
-                <a href="wishlist.html" class="add_to_wishlist"
+                <a href="wishlist.html"
                   ><i class="fa-regular fa-heart"></i> Thêm vào yêu thích</a
                 >
               </li>
-              <li class="add-to-compare">
-                <div class="compare-button">
-                  <a href="compare.html"
-                    ><i class="fa-solid fa-arrows-rotate"></i> So sánh</a
-                  >
-                </div>
-              </li>
             </ul>
             <ul class="stock-cont">
-              <li class="product-sku">Sku: <span>P006</span></li>
               <li class="product-stock-status">
                 Loại sản phẩm: <a href="#">{{ productItem?.categoryName }}</a>
               </li>
@@ -136,12 +149,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="product-details-tab">
-            <ul
-              ngbNav
-              #nav="ngbNav"
-              [(activeId)]="active"
-              class="nav-tabs"
-              (navChange)="onNavChange($event)">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
               <li [ngbNavItem]="1">
                 <button ngbNavLink class="text-size-medium">Mô tả</button>
                 <ng-template ngbNavContent>

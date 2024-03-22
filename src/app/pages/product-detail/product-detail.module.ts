@@ -7,6 +7,7 @@ import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "../../components/shared.module";
 import { DirectivesModule } from "../../public/directives/directives.module";
 import { PipesModule } from "../../public/pipes/pipes.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     SharedModule,
     DirectivesModule,
     PipesModule,
+    ReactiveFormsModule
   ],
   declarations: [ProductDetailComponent],
 })

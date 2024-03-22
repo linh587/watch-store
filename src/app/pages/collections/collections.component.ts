@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { COLLECTIONS } from "../../public/constants/common";
+import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-collections",
@@ -7,8 +7,17 @@ import { COLLECTIONS } from "../../public/constants/common";
   styleUrls: ["./collections.component.scss"],
 })
 export class CollectionsComponent implements OnInit {
-  public collections = COLLECTIONS;
-  constructor() {}
+  public productList: any[] = [];
 
-  ngOnInit() {}
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit() {
+    this.getListProduct();
+  }
+
+  private getListProduct() {
+    this.productsService.getProducts().subscribe((res: any) => {
+      this.productList = res.data;
+    });
+  }
 }

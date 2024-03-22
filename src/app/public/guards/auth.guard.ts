@@ -12,7 +12,6 @@ import {
 import { Observable } from "rxjs";
 import { AuthService } from "../../services/auth/auth.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { StorageService } from "../../services/storage/storage.service";
 import { AuthenticationModalComponent } from "../../components/authentication-modal/authentication-modal.component";
 
 @Injectable({
@@ -24,8 +23,7 @@ export class AuthGuard
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dialog: NgbModal,
-    private storageService: StorageService
+    private dialog: NgbModal
   ) {}
 
   // Check can active route

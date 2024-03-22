@@ -62,7 +62,9 @@
                         <div class="card-image cursor-pointer">
                           <img
                             [src]="
-                              createCloudinaryThumbLink(product.coverImage)
+                              createCloudinaryThumbLink(
+                                product?.productCoverImage
+                              )
                             "
                             alt=""
                             class="mw-100" />
@@ -70,16 +72,18 @@
                         <div class="card-title ps-3 mt-2">
                           <a class="pe-3 cursor-pointer">
                             <h4 class="text-size-small fw-normal">
-                              {{ product.name }}
+                              {{ product?.productName }} ({{
+                                product?.productSizeName
+                              }})
                             </h4>
                           </a>
                           <div class="quanti-price-wrap d-flex">
                             <span class="quantity me-1"
-                              >{{ product.quantity }} ×</span
+                              >{{ product?.quality }} ×</span
                             >
                             <div class="price-box fw-500 color-brown">
                               <span class="new-price">{{
-                                product.price | formatPrice
+                                product?.price | formatPrice
                               }}</span>
                             </div>
                           </div>
@@ -146,7 +150,7 @@
                 ngbDropdownToggle
                 class="profile-wrapper cursor-pointer d-flex align-items-center">
                 <span class="material-symbols-outlined"> person </span>
-                <span class="mx-1">{{ userInfo?.fullName }}</span>
+                <span class="mx-1">{{ userInfo.name }}</span>
               </div>
 
               <div ngbDropdownMenu aria-labelledby="profileDropdown">

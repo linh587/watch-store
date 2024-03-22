@@ -7,7 +7,7 @@ import { ProductsService } from "../../services/products/products.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  public productList: any[] = [];
+  public productList: any;
 
   constructor(private productsService: ProductsService) {}
 

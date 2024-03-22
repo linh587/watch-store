@@ -1,12 +1,12 @@
-export interface UserModel {
-  _id: string;
-  fullName: string;
+export interface UserAccount {
+  id: string;
+  phone?: string;
+  name: string;
+  gender: string;
+  dateOfBirth: Date | string;
+  avatar?: string;
   email: string;
-  mobile: string;
-  address: string;
-  password: string;
-  role: string;
-  createdAt: Date;
-  updatedAt: Date;
-  status: string;
+  address?: string;
+  longitude?: string;
+  latitude?: string;
 }

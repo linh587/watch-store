@@ -7,7 +7,7 @@ import { ProductsService } from "../../services/products/products.service";
   styleUrls: ["./swiper-product.component.scss"],
 })
 export class SwiperProductComponent implements OnInit {
-  @Input() products!: any[];
+  @Input() products: any;
   @Input() slidesPerView: number = 4;
   @Input() gridOptions: any;
   public productPrice: any[] = [];

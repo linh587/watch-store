@@ -35,119 +35,13 @@ export const SUB_MENU = [
   },
 ];
 
-export const COLLECTIONS = [
-  {
-    id: 1,
-    images: [
-      "/assets/images/details/product-detail.webp",
-      "/assets/images/details/product-detail-1.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-    ],
-    name: "Simple product 1",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 2,
-    images: [
-      "/assets/images/details/product-detail-1.webp",
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-    ],
-    name: "Simple product 2",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 3,
-    images: [
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 3",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 4,
-    images: [
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-    ],
-    name: "Simple product 4",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 5,
-    images: [
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 5",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 6,
-    images: [
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 4",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 7,
-    images: [
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 5",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 8,
-    images: [
-      "/assets/images/details/product-detail-3.webp",
-      "/assets/images/details/product-detail-2.webp",
-    ],
-    name: "Simple product 4",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-  {
-    id: 9,
-    images: [
-      "/assets/images/details/product-detail-4.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-2.webp",
-      "/assets/images/details/product-detail-4.webp",
-    ],
-    name: "Simple product 5",
-    newPrice: "$59",
-    oldPrice: "$90",
-  },
-];
-
 export const CART_TABLE_HEADER = [
   "Hình ảnh",
   "Tên sản phẩm",
   "Giá tiền",
   "Số lượng",
   "Tổng tiền",
+  "Hành động",
 ];
 
 export const OUR_PARTNERS = [
@@ -171,7 +65,6 @@ export const OUR_PARTNERS = [
   "/assets/images/partners/OV.jpg",
 ];
 
-
 export const ACCOUNT_TAB = [
   {
     label: "Đơn mua",
@@ -185,7 +78,4 @@ export const ACCOUNT_TAB = [
     label: "Mật khẩu",
     link: "change-password",
   },
-  {
-    label: "Đăng xuất"
-  }
 ];

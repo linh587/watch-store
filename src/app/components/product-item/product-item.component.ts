@@ -39,7 +39,7 @@ export class ProductItemComponent implements OnInit {
     modalRef.componentInstance.productPrices = this.productPrices;
   }
 
-  public redirectDetail(id: number) {
+  public redirectDetail(id: string) {
     this.router.navigate([`/product/${id}`]).then();
   }
 
