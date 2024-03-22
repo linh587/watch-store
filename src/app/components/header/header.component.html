@@ -41,52 +41,67 @@
                   </span>
                 </a>
               </div>
-              <div
-                class="cart-wrapper pe-2 me-3 position-relative"
-                *ngIf="productList$ | async as productList">
+              <div class="cart-wrapper pe-2 me-3 position-relative">
                 <a
                   class="cursor-pointer"
                   (click)="$event.stopPropagation()"
                   (click)="router.navigate(['/cart']).then()">
                   <span class="material-symbols-outlined"> shopping_cart </span>
                   <span
+                    *ngIf="productList$ | async as productList"
                     class="card-total fw-500 rounded-circle bg-primary-color color-white float-left text-size-xx-small position-absolute text-center text-capitalize"
                     >{{ productList.length }}
                   </span>
                 </a>
                 <ul class="mini-cart position-absolute bg-white end-0">
-                  <li
-                    class="cart-item d-flex position-relative pb-3"
-                    *ngFor="let product of productList">
-                    <div class="card-image cursor-pointer">
-                      <img
-                        [src]="createCloudinaryThumbLink(product.coverImage)"
-                        alt=""
-                        class="mw-100" />
-                    </div>
-                    <div class="card-title ps-3 mt-2">
-                      <a class="pe-3 cursor-pointer">
-                        <h4 class="text-size-small fw-normal">
-                          {{ product.name }}
-                        </h4>
-                      </a>
-                      <div class="quanti-price-wrap d-flex">
-                        <span class="quantity me-1"
-                          >{{ product.quantity }} ×</span
-                        >
-                        <div class="price-box fw-500 color-brown">
-                          <span class="new-price">{{
-                            product.price | formatPrice
-                          }}</span>
+                  <ng-container *ngIf="productList$ | async as productList">
+                    <ng-container *ngIf="productList.length; else noProducts">
+                      <li
+                        class="cart-item d-flex position-relative pb-3"
+                        *ngFor="let product of productList">
+                        <div class="card-image cursor-pointer">
+                          <img
+                            [src]="
+                              createCloudinaryThumbLink(product.coverImage)
+                            "
+                            alt=""
+                            class="mw-100" />
                         </div>
-                      </div>
-                      <div
-                        class="remove-from-cart position-absolute end-0 cursor-pointer">
-                        <i
-                          class="fa-regular fa-circle-xmark text-size-large"></i>
-                      </div>
+                        <div class="card-title ps-3 mt-2">
+                          <a class="pe-3 cursor-pointer">
+                            <h4 class="text-size-small fw-normal">
+                              {{ product.name }}
+                            </h4>
+                          </a>
+                          <div class="quanti-price-wrap d-flex">
+                            <span class="quantity me-1"
+                              >{{ product.quantity }} ×</span
+                            >
+                            <div class="price-box fw-500 color-brown">
+                              <span class="new-price">{{
+                                product.price | formatPrice
+                              }}</span>
+                            </div>
+                          </div>
+                          <div
+                            (click)="removeCartItem(product.productPriceId)"
+                            class="remove-from-cart position-absolute end-0 cursor-pointer">
+                            <i
+                              class="fa-regular fa-circle-xmark text-size-large"></i>
+                          </div>
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #noProducts>
+                    <div
+                      class="d-flex align-items-center mb-3 justify-content-center">
+                      <span class="material-symbols-outlined me-2">
+                        shopping_cart_off
+                      </span>
+                      <h6>Giỏ hàng trống</h6>
                     </div>
-                  </li>
+                  </ng-template>
                   <li class="subtotal-box pt-3">
                     <div
                       class="subtotal-title d-flex justify-content-between color-brown text-size-small fw-600">

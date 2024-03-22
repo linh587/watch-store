@@ -25,5 +25,5 @@ export const API_URL = {
 
   //CART
   ADD_TO_CART: "user/cart",
-  GET_CART: "user/cart"
+  CART: "user/cart",
 };

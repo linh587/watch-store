@@ -14,6 +14,7 @@ import { ProductsService } from "../../services/products/products.service";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import { CartService } from "../../services/cart/cart.service";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -40,7 +41,7 @@ export class QuickViewProductModalComponent implements OnInit {
     private modalService: NgbModal,
     private productsService: ProductsService,
     private fb: FormBuilder,
-    private toastService: ToastrService
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -88,18 +89,7 @@ export class QuickViewProductModalComponent implements OnInit {
         productPriceId: this.selectedPrice.id,
         quality: this.addToCartForm.controls["quantity"].value,
       };
-      this.productsService
-        .addToCart(payload)
-        .pipe(
-          tap((_) => {
-            this.toastService.success("Thêm sản phẩm vào giỏ thành công");
-          }),
-          catchError((error) => {
-            this.toastService.error("Thêm sản phẩm vào giỏ thất bại");
-            return throwError(() => error);
-          })
-        )
-        .subscribe();
+      this.cartService.addToCart(payload);
     }
   }
 }

@@ -25,7 +25,6 @@ export class GetNameByIdDirective {
 
   getName() {
     if (this.list && this.list.length) {
-      console.log(this.list?.find((u) => u.id === this.id)?.price);
       return this.list?.find((u) => u.id === this.id)?.name || null;
     }
 

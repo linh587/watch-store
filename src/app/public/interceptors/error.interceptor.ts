@@ -114,7 +114,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): HttpRequest<any> {
     /* for Spring Boot back-end */
     return request.clone({
-      headers: request.headers.set("Authorization", "Bearer " + token),
+      headers: request.headers.set("Authorization", token),
     });
   }
 

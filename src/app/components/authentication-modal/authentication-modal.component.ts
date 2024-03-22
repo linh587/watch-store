@@ -76,18 +76,18 @@ export class AuthenticationModalComponent implements OnInit {
       this.authService
         .login(payload)
         .pipe(
-          takeUntil(this.subscription$),
+          tap((data: any) => {
+            this.storageService.set("AUTH_USER", data);
+            this.storageService.set("JWT_TOKEN", data.accessToken);
+            this.getCurrentUserLogin(data.id);
+            this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
+          }),
           catchError((error) => {
             this.toastService.error("Đăng nhập thất bại!");
             return throwError(() => error);
           })
         )
-        .subscribe((data: any) => {
-          this.storageService.set("AUTH_USER", data);
-          this.storageService.set("JWT_TOKEN", data.accessToken);
-          this.getCurrentUserLogin(data.id);
-          this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
-        });
+        .subscribe((_) => {});
     }
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { BaseHttpRequest } from "../http/base-http-request.service";
 import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 
@@ -8,9 +8,15 @@ import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 })
 export class AuthService extends BaseHttpRequest {
   private userLogin$ = new BehaviorSubject<any>(null);
+  public hasToken$ = new BehaviorSubject<boolean>(false);
 
   public login(payload: any) {
     return this.httpClient.post(`${ENVIRONMENT}${API_URL.LOGIN}`, payload);
+  }
+
+  public logout() {
+    this.storageService.deleteAll();
+    window.location.reload();
   }
 
   public register(payload: any) {
@@ -33,9 +39,9 @@ export class AuthService extends BaseHttpRequest {
   }
 
   public currentUserInfo(id: string) {
-    return this.httpClient.get(
-      `${ENVIRONMENT}${API_URL.GET_DETAIL_USER}/${id}`
-    );
+    return this.httpClient
+      .get(`${ENVIRONMENT}${API_URL.GET_DETAIL_USER}/${id}`)
+      .pipe(tap((_) => this.hasToken$.next(true)));
   }
 
   public refreshToken() {
@@ -62,6 +68,9 @@ export class AuthService extends BaseHttpRequest {
   }
 
   public resetPassword(token: string, payload: any) {
-    return this.post(`${ENVIRONMENT}${API_URL.RESET_PASSWORD}/${token}`, payload);
+    return this.post(
+      `${ENVIRONMENT}${API_URL.RESET_PASSWORD}/${token}`,
+      payload
+    );
   }
 }

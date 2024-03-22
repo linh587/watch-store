@@ -3,11 +3,18 @@ import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationModalComponent } from "../authentication-modal/authentication-modal.component";
 import { SUB_MENU } from "../../public/constants/common";
-import { BehaviorSubject, Observable, forkJoin, map, switchMap } from "rxjs";
+import {
+  BehaviorSubject,
+  Observable,
+  forkJoin,
+  map,
+  of,
+  switchMap,
+} from "rxjs";
 import { AuthService } from "../../services/auth/auth.service";
-import { StorageService } from "../../services/storage/storage.service";
 import { ProductsService } from "../../services/products/products.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images";
+import { CartService } from "../../services/cart/cart.service";
 
 @Component({
   selector: "app-header",
@@ -16,7 +23,7 @@ import { createCloudinaryImageLink } from "../../public/helpers/images";
 })
 export class HeaderComponent implements OnInit {
   public userInfo$!: Observable<any>;
-  public productList$ = new BehaviorSubject<any>(null);
+  public productList$ = new BehaviorSubject<any>([]);
   public subMenu = SUB_MENU;
   public menuFixed: boolean = false;
   public createCloudinaryThumbLink = createCloudinaryImageLink;
@@ -26,8 +33,8 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     public modalService: NgbModal,
     private authService: AuthService,
-    private storageService: StorageService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cartService: CartService
   ) {
     this.userInfo$ = this.authService.getUserInfo();
   }
@@ -43,7 +50,6 @@ export class HeaderComponent implements OnInit {
         const itemTotal = item.price * item.quantity;
         return total + itemTotal;
       }, 0);
-
       this.total = orderTotal;
     });
   }
@@ -65,40 +71,48 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-    this.storageService.deleteAll();
-    window.location.reload();
+    this.authService.logout();
   }
 
   private getCart() {
-    this.productsService
-      .getCart()
+    this.cartService
+      .getProductList$()
       .pipe(
         switchMap((carts: any) => {
-          const requests = carts.map((cart: any) => {
-            return this.productsService
-              .getDetailProductPrice(cart.productPriceId)
-              .pipe(
-                switchMap((p: any) => {
-                  const productWithPrice = {
-                    ...p,
-                    price: p.price,
-                    quantity: cart.quality,
-                  };
-                  return this.productsService
-                    .getDetailProduct(p.productId)
-                    .pipe(
-                      map((product: any) => {
-                        return { ...product, ...productWithPrice };
-                      })
-                    );
-                })
-              );
-          });
-          return forkJoin(requests);
+          if (carts.length) {
+            const requests = carts?.map((cart: any) => {
+              return this.productsService
+                .getDetailProductPrice(cart.productPriceId)
+                .pipe(
+                  switchMap((p: any) => {
+                    const productWithPrice = {
+                      ...p,
+                      price: p.price,
+                      quantity: cart.quality,
+                      productPriceId: p.id,
+                    };
+                    return this.productsService
+                      .getDetailProduct(p.productId)
+                      .pipe(
+                        map((product: any) => {
+                          return { ...product, ...productWithPrice };
+                        })
+                      );
+                  })
+                );
+            });
+            return forkJoin(requests);
+          }
+
+          return of([]);
         })
       )
       .subscribe((productListWithPrice: any) => {
         this.productList$.next(productListWithPrice);
       });
+  }
+
+  public removeCartItem(productPriceId: string) {
+    this.cartService.removeCartItem(productPriceId);
   }
 }

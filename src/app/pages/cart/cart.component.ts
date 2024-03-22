@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CART_TABLE_HEADER, COLLECTIONS } from "../../public/constants/common";
+import { CartService } from "../../services/cart/cart.service";
 
 @Component({
   selector: "app-cart",
@@ -7,11 +8,13 @@ import { CART_TABLE_HEADER, COLLECTIONS } from "../../public/constants/common";
   styleUrls: ["./cart.component.scss"],
 })
 export class CartComponent implements OnInit {
-  public HEADER = CART_TABLE_HEADER
+  public HEADER = CART_TABLE_HEADER;
 
-  public COLLECTIONS = COLLECTIONS
+  public COLLECTIONS = COLLECTIONS;
 
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {}
+
+  private getCart() {}
 }
