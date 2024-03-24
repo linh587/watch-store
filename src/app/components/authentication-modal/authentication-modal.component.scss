@@ -70,3 +70,31 @@
   max-height: 600px;
   overflow: auto;
 }
+
+.search-suggestion {
+  left: 0;
+  right: 0;
+  z-index: 4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 4;
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 16px;
+
+    &:hover {
+      background-color: aliceblue;
+    }
+
+    i {
+      color: $blue;
+      margin-right: 6px;
+      font-size: 18px;
+    }
+    span {
+      font-size: 16px;
+    }
+  }
+}

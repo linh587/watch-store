@@ -1,11 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../services/auth/auth.service";
-import { catchError, tap, throwError } from "rxjs";
+import {
+  BehaviorSubject,
+  Subject,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+  tap,
+  throwError,
+} from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../../services/storage/storage.service";
 import { DatePipe } from "@angular/common";
 import { PHONE_REGEX } from "../../../public/constants/regex";
+import { UserAccount } from "../../../models/user.model";
+import { MapService } from "../../../services/map/map.service";
 
 @Component({
   selector: "app-user-info",
@@ -15,19 +26,34 @@ import { PHONE_REGEX } from "../../../public/constants/regex";
 })
 export class UserInfoComponent implements OnInit {
   public profileForm!: FormGroup;
-  public userInfo: any;
+  public userInfo!: UserAccount;
+  public subscription$ = new Subject();
+
+  public searchSuggestion$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    []
+  );
+  public subscriptions$ = new Subject();
+  public showSuggestion: boolean = false;
+  @ViewChild("suggestionSearch")
+  public searchElementRef!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private toastService: ToastrService,
     private storageService: StorageService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private mapService: MapService
   ) {}
 
   ngOnInit() {
     this.getUserInfo();
     this.initForm();
+    this.observerInputSearchChange();
+  }
+
+  get controls() {
+    return this.profileForm.controls;
   }
 
   private getUserInfo() {
@@ -51,10 +77,13 @@ export class UserInfoComponent implements OnInit {
         ]),
       ],
       address: [this.userInfo?.address],
+      longitude: [""],
+      latitude: [""],
       gender: [this.userInfo?.gender, Validators.required],
       avatar: [this.userInfo?.avatar],
       dateOfBirth: [
-        this.datePipe.transform(this.userInfo?.dateOfBirth, "dd-MM-YYYY"),
+        this.datePipe.transform(this.userInfo?.dateOfBirth, "YYYY-MM-dd"),
+        Validators.required,
       ],
     });
   }
@@ -69,6 +98,8 @@ export class UserInfoComponent implements OnInit {
       formData.append("gender", this.profileForm.get("gender")?.value);
       formData.append("avatar", this.profileForm.get("avatar")?.value);
       formData.append("address", this.profileForm.get("address")?.value);
+      formData.append("latitude", this.profileForm.get("latitude")?.value);
+      formData.append("longitude", this.profileForm.get("longitude")?.value);
       formData.append(
         "dateOfBirth",
         this.profileForm.get("dateOfBirth")?.value
@@ -90,5 +121,40 @@ export class UserInfoComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  public observerInputSearchChange() {
+    this.controls["address"].valueChanges
+      .pipe(
+        takeUntil(this.subscriptions$),
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe((address: string) => {
+        this.mapService.searchAddressGoongIo(address).subscribe((res: any) => {
+          this.searchSuggestion$.next(res);
+        });
+      });
+  }
+
+  public patchAddressToForm(search: any) {
+    this.controls["address"].setValue(search.formattedAddress);
+    this.controls["latitude"].setValue(search.latitude);
+    this.controls["longitude"].setValue(search.longitude);
+
+    this.hideSearchSuggestion();
+  }
+
+  public showSearchSuggestion() {
+    this.showSuggestion = true;
+  }
+
+  public hideSearchSuggestion() {
+    this.showSuggestion = false;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions$.next(null);
+    this.subscriptions$.complete();
   }
 }

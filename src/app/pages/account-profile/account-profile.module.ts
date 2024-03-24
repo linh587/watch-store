@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PurchaseOrderComponent } from "./purchase-order/purchase-order.component";
 import { UserInfoComponent } from "./user-info/user-info.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { PipesModule } from "../../public/pipes/pipes.module";
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     NgbNavModule,
     FormsModule,
     ReactiveFormsModule,
+    PipesModule,
   ],
   declarations: [
     AccountProfileComponent,

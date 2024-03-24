@@ -2,25 +2,57 @@
 <div class="login-form-container">
   <form [formGroup]="profileForm" (submit)="onUpdateProfile()">
     <div class="row">
-      <div class="form-group pb-4 col-12">
+      <div class="form-group pb-4 col-12" required>
         <label class="form-label">Họ và tên</label>
         <input type="text" class="form-control" formControlName="name" />
+        <small *ngIf="controls['name'].errors && controls['name'].touched"
+          >Bạn cần nhập tên</small
+        >
       </div>
-      <div class="form-group pb-4 col-12">
+      <div class="form-group pb-4 col-12" required>
         <label class="form-label">Email</label>
         <input type="text" class="form-control" formControlName="email" />
+        <small *ngIf="controls['email'].errors && controls['email'].touched"
+          >Bạn cần nhập đúng định dạng email</small
+        >
       </div>
-      <div class="form-group pb-4 col-12">
+      <div class="form-group pb-4 col-12" required>
         <label class="form-label">Số điện thoại</label>
         <input type="text" class="form-control" formControlName="phone" />
+        <small *ngIf="controls['phone'].errors && controls['phone'].touched"
+          >Đây không phải là số điện thoại</small
+        >
       </div>
-      <div class="form-group pb-4 col-12">
-        <label class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" formControlName="address" />
-      </div>
-      <div class="form-group pb-4 col-12">
-        <label class="form-label">Ảnh đại diện</label>
-        <input type="text" class="form-control" formControlName="avatar" />
+      <div class="form-group pb-4 col-12" required>
+        <div class="position-relative">
+          <div>
+            <label class="form-label">Địa chỉ</label>
+            <input
+              type="text"
+              placeholder="Nhập địa chỉ"
+              class="form-control"
+              formControlName="address"
+              #suggestionSearch
+              (focus)="showSearchSuggestion()" />
+            <small
+              *ngIf="controls['address'].errors && controls['address'].touched"
+              >Đây là trường bắt buộc</small
+            >
+          </div>
+          <ng-container *ngIf="searchSuggestion$ | async as searchSuggestion">
+            <div
+              class="search-suggestion bg-white position-absolute"
+              *ngIf="showSuggestion">
+              <div
+                class="search-item"
+                *ngFor="let search of searchSuggestion"
+                (mousedown)="patchAddressToForm(search)">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>{{ search.formattedAddress }}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
       </div>
       <div class="form-group pb-4 col-12" required>
         <label class="form-label">Giới tính</label>
@@ -29,9 +61,15 @@
           <option value="female">Nữ</option>
         </select>
       </div>
-      <div class="form-group pb-4 col-12">
+      <div class="form-group pb-4 col-12" required>
         <label class="form-label">Ngày sinh</label>
-        <input type="text" class="form-control" formControlName="dateOfBirth" />
+        <input type="date" formControlName="dateOfBirth" class="form-control" />
+        <small
+          *ngIf="
+            controls['dateOfBirth'].errors && controls['dateOfBirth'].touched
+          "
+          >Đây là trường bắt buộc</small
+        >
       </div>
     </div>
     <div class="button-box d-flex justify-content-end">

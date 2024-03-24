@@ -1,24 +1,47 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbModal, NgbNavChangeEvent } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../services/auth/auth.service";
-import { Subject, catchError, takeUntil, tap, throwError } from "rxjs";
+import {
+  BehaviorSubject,
+  Subject,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+  tap,
+  throwError,
+} from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { StorageService } from "../../services/storage/storage.service";
-import { PASSWORD_REGEX } from "../../public/constants/regex";
+import { PASSWORD_REGEX, PHONE_REGEX } from "../../public/constants/regex";
 import { Router } from "@angular/router";
+import { MapService } from "../../services/map/map.service";
 
 @Component({
   selector: "app-authentication-modal",
   templateUrl: "./authentication-modal.component.html",
   styleUrls: ["./authentication-modal.component.scss"],
 })
-export class AuthenticationModalComponent implements OnInit {
+export class AuthenticationModalComponent implements OnInit, OnDestroy {
   public active = 1;
   public activeNav!: number;
   public loginForm!: FormGroup;
   public registerForm!: FormGroup;
   public subscription$ = new Subject();
+  public searchSuggestion$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    []
+  );
+  public subscriptions$ = new Subject();
+  public showSuggestion: boolean = false;
+  @ViewChild("suggestionSearch")
+  public searchElementRef!: ElementRef;
 
   constructor(
     private modalService: NgbModal,
@@ -26,12 +49,23 @@ export class AuthenticationModalComponent implements OnInit {
     private authService: AuthService,
     private toastService: ToastrService,
     private storageService: StorageService,
-    public router: Router
+    public router: Router,
+    private mapService: MapService
   ) {
     this.initForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.observerInputSearchChange();
+  }
+
+  get loginControl() {
+    return this.loginForm.controls;
+  }
+
+  get registerControl() {
+    return this.registerForm.controls;
+  }
 
   private initForm() {
     this.loginForm = this.fb.group({
@@ -54,7 +88,7 @@ export class AuthenticationModalComponent implements OnInit {
         null,
         Validators.compose([Validators.required, Validators.email]),
       ],
-      phone: [null, Validators.required],
+      phone: [null, Validators.pattern(PHONE_REGEX)],
       password: [
         null,
         Validators.compose([
@@ -62,10 +96,12 @@ export class AuthenticationModalComponent implements OnInit {
           Validators.pattern(PASSWORD_REGEX),
         ]),
       ],
-      gender: ["", Validators.required],
-      dateOfBirth: [""],
-      avatar: [""],
+      avatar: ["avatar.jpg"],
+      gender: ["male", Validators.required],
+      dateOfBirth: ["", Validators.required],
       address: [""],
+      longitude: [""],
+      latitude: [""],
     });
   }
 
@@ -79,12 +115,18 @@ export class AuthenticationModalComponent implements OnInit {
           tap((data: any) => {
             this.storageService.set("AUTH_USER", data);
             this.storageService.set("JWT_TOKEN", data.accessToken);
+            this.storageService.set("REFRESH_TOKEN", data.refreshToken);
             this.getCurrentUserLogin(data.id);
             this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
           }),
           catchError((error) => {
-            this.toastService.error("Đăng nhập thất bại!");
-            return throwError(() => error);
+            return throwError(() => {
+              if (error === "Not Found") {
+                this.toastService.error("Không tìm thấy người dùng");
+              } else {
+                this.toastService.error("Email đã được đăng ký");
+              }
+            });
           })
         )
         .subscribe((_) => {});
@@ -95,16 +137,18 @@ export class AuthenticationModalComponent implements OnInit {
     if (this.registerForm.valid) {
       const formData = new FormData();
 
-      formData.append("name", this.registerForm.get("name")?.value);
-      formData.append("email", this.registerForm.get("email")?.value);
-      formData.append("password", this.registerForm.get("password")?.value);
-      formData.append("phone", this.registerForm.get("phone")?.value);
-      formData.append("gender", this.registerForm.get("gender")?.value);
-      formData.append("avatar", this.registerForm.get("avatar")?.value);
-      formData.append("address", this.registerForm.get("address")?.value);
+      formData.append("name", this.registerControl["name"]?.value);
+      formData.append("email", this.registerControl["email"]?.value);
+      formData.append("password", this.registerControl["password"]?.value);
+      formData.append("phone", this.registerControl["phone"]?.value);
+      formData.append("gender", this.registerControl["gender"]?.value);
+      formData.append("address", this.registerControl["address"]?.value);
+      formData.append("avatar", this.registerControl["avatar"]?.value);
+      formData.append("latitude", this.registerControl["latitude"]?.value);
+      formData.append("longitude", this.registerControl["longitude"]?.value);
       formData.append(
         "dateOfBirth",
-        this.registerForm.get("dateOfBirth")?.value
+        this.registerControl["dateOfBirth"]?.value
       );
 
       this.authService
@@ -116,7 +160,11 @@ export class AuthenticationModalComponent implements OnInit {
           takeUntil(this.subscription$),
           catchError((error) => {
             this.toastService.error("Đăng ký thất bại");
-            return throwError(() => error);
+            return throwError(() => {
+              if (error === "Bad Request") {
+                this.toastService.error("Không tìm thấy địa chỉ");
+              }
+            });
           })
         )
         .subscribe((_) => {});
@@ -151,5 +199,40 @@ export class AuthenticationModalComponent implements OnInit {
   public redirectToResetPassword() {
     this.router.navigate(["/forgot-password"]).then();
     this.onCloseModal();
+  }
+
+  public observerInputSearchChange() {
+    this.registerForm.controls["address"].valueChanges
+      .pipe(
+        takeUntil(this.subscriptions$),
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe((address: string) => {
+        this.mapService.searchAddressGoongIo(address).subscribe((res: any) => {
+          this.searchSuggestion$.next(res);
+        });
+      });
+  }
+
+  public patchAddressToForm(search: any) {
+    this.registerForm.controls["address"].setValue(search.formattedAddress);
+    this.registerForm.controls["latitude"].setValue(search.latitude);
+    this.registerForm.controls["longitude"].setValue(search.longitude);
+
+    this.hideSearchSuggestion();
+  }
+
+  public showSearchSuggestion() {
+    this.showSuggestion = true;
+  }
+
+  public hideSearchSuggestion() {
+    this.showSuggestion = false;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions$.next(null);
+    this.subscriptions$.complete();
   }
 }

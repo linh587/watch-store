@@ -8,7 +8,7 @@
               <div class="col-lg-3 col-md-12">
                 <div class="d-single-info">
                   <p class="user-name">
-                    Xin chào <span>{{ userInfo?.name }}</span>
+                    Xin chào <span>{{ userInfo.name }}</span>
                   </p>
                 </div>
               </div>
@@ -26,7 +26,9 @@
               </div>
               <div class="col-lg-2 col-md-12">
                 <div class="d-single-info text-lg-center">
-                  <a class="view-cart cursor-pointer">
+                  <a
+                    class="view-cart cursor-pointer"
+                    (click)="router.navigate(['/cart']).then()">
                     <i class="fa-solid fa-cart-plus"></i>
                     Xem giỏ hàng
                   </a>

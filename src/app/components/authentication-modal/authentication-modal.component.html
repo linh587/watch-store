@@ -20,12 +20,20 @@
           <div class="modal-body border-bottom">
             <div class="row">
               <div class="form-group pb-4 col-12" required>
-                <label class="form-label">Email</label>
+                <label class="form-label">Email*</label>
                 <input
+                  required
                   formControlName="email"
                   type="text"
                   class="form-control"
                   placeholder="Nhập email..." />
+                <small
+                  *ngIf="
+                    loginControl['email'].errors &&
+                    loginControl['email'].touched
+                  "
+                  >Vui lòng nhập đúng định dạng email</small
+                >
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Mật khẩu</label>
@@ -34,6 +42,13 @@
                   type="password"
                   class="form-control"
                   placeholder="Nhập mật khẩu..." />
+                <small
+                  *ngIf="
+                    loginControl['password'].errors &&
+                    loginControl['password'].touched
+                  ">
+                  Mật khẩu cần phải có cả chữ và số
+                </small>
               </div>
               <div class="buttons col-12">
                 <button
@@ -82,6 +97,13 @@
                   class="form-control"
                   placeholder="Nhập họ và tên..."
                   formControlName="name" />
+                <small
+                  *ngIf="
+                    registerControl['name'].errors &&
+                    registerControl['name'].touched
+                  "
+                  >Đây là trường bắt buộc</small
+                >
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Email</label>
@@ -90,6 +112,13 @@
                   class="form-control"
                   placeholder="Nhập email..."
                   formControlName="email" />
+                <small
+                  *ngIf="
+                    registerControl['email'].errors &&
+                    registerControl['email'].touched
+                  "
+                  >Bạn cần nhập đúng định dạng email</small
+                >
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Số diện thoại</label>
@@ -98,6 +127,13 @@
                   class="form-control"
                   placeholder="Nhập số điện thoại..."
                   formControlName="phone" />
+                <small
+                  *ngIf="
+                    registerControl['phone'].errors &&
+                    registerControl['phone'].touched
+                  "
+                  >Đây không phải là số điện thoại</small
+                >
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Mật khẩu</label>
@@ -106,6 +142,13 @@
                   class="form-control"
                   placeholder="Nhập mật khẩu..."
                   formControlName="password" />
+                <small
+                  *ngIf="
+                    registerControl['password'].errors &&
+                    registerControl['password'].touched
+                  "
+                  >Mật khẩu cần có cả chữ và số</small
+                >
               </div>
               <div class="form-group pb-4 col-12" required>
                 <label class="form-label">Giới tính</label>
@@ -114,28 +157,56 @@
                   <option value="female">Nữ</option>
                 </select>
               </div>
-              <div class="form-group pb-4 col-12">
-                <label class="form-label">Ngày sinh</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="dateOfBirth" />
-              </div>
-              <div class="form-group pb-4 col-12">
-                <label class="form-label">Ảnh đại diện</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="avatar" />
-              </div>
-              <div class="form-group pb-4 col-12">
-                <label class="form-label">Địa chỉ</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="address" />
+              <div class="form-group pb-4 col-12" required>
+                <div class="position-relative">
+                  <div>
+                    <label class="form-label">Địa chỉ</label>
+                    <input
+                      type="text"
+                      placeholder="Nhập địa chỉ"
+                      class="form-control"
+                      formControlName="address"
+                      #suggestionSearch
+                      (focus)="showSearchSuggestion()" />
+                    <small
+                      *ngIf="
+                        registerControl['address'].errors &&
+                        registerControl['address'].touched
+                      "
+                      >Đây là trường bắt buộc</small
+                    >
+                  </div>
+                  <ng-container
+                    *ngIf="searchSuggestion$ | async as searchSuggestion">
+                    <div
+                      class="search-suggestion bg-white position-absolute"
+                      *ngIf="showSuggestion">
+                      <div
+                        class="search-item"
+                        *ngFor="let search of searchSuggestion"
+                        (mousedown)="patchAddressToForm(search)">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>{{ search.formattedAddress }}</span>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
               </div>
 
+              <div class="form-group pb-4 col-12" required>
+                <label class="form-label">Ngày sinh</label>
+                <input
+                  type="date"
+                  formControlName="dateOfBirth"
+                  class="form-control" />
+                <small
+                  *ngIf="
+                    registerControl['dateOfBirth'].errors &&
+                    registerControl['dateOfBirth'].touched
+                  "
+                  >Đây là trường bắt buộc</small
+                >
+              </div>
               <div class="buttons col-12">
                 <button
                   (keydown.enter)="onRegisterFormSubmit()"

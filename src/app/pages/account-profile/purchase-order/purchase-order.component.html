@@ -4,27 +4,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th>STT</th>
-          <th>Thời gian</th>
-          <th>Trạng thái</th>
-          <th>Tổng tiền</th>
-          <th>Hành động</th>
+          <th *ngFor="let header of PURCHASE_ORDER_HEADER">{{ header }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>May 10, 2018</td>
-          <td>Processing</td>
-          <td>$25.00 for 1 item</td>
-          <td><a class="view">Chi tiết</a></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>May 10, 2018</td>
-          <td>Processing</td>
-          <td>$17.00 for 1 item</td>
-          <td><a class="view">Chi tiết</a></td>
+        <tr *ngFor="let order of orderList; let index = index">
+          <td>{{ index }}</td>
+          <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
+          <td>{{ order.status | orderStatus }}</td>
+          <td>{{ order.totalPrice | formatPrice }}</td>
+          <td><a class="view cursor-pointer">Chi tiết</a></td>
         </tr>
       </tbody>
     </table>

@@ -79,3 +79,11 @@ export const ACCOUNT_TAB = [
     link: "change-password",
   },
 ];
+
+export const PURCHASE_ORDER_HEADER = [
+  "STT",
+  "Thời gian",
+  "Trạng thái",
+  "Tổng tiền",
+  "Hành động",
+];

@@ -76,23 +76,6 @@
   padding-bottom: 15px;
 }
 
-.single-form-row {
-  margin-bottom: 20px;
-
-  label {
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
-  input {
-    border: 1px solid #999999;
-    color: #666;
-    font-size: 14px;
-    padding: 5px 12px;
-    width: 100%;
-  }
-}
-
 .shoping-checkboxt-title {
   border-bottom: 1px solid #dddddd;
   font-size: 24px;
@@ -151,9 +134,9 @@ h5 {
   margin-top: 30px;
 
   button {
-    background: #c89979;
+    background: $primary-color;
     border: medium none;
-    color: #ffffff;
+    color: $white;
     font-size: 14px;
     font-weight: 600;
     padding: 12px;
@@ -161,5 +144,33 @@ h5 {
     width: 100%;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+  }
+}
+
+.search-suggestion {
+  left: 0;
+  right: 0;
+  z-index: 4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 4;
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 16px;
+
+    &:hover {
+      background-color: aliceblue;
+    }
+
+    i {
+      color: $blue;
+      margin-right: 6px;
+      font-size: 18px;
+    }
+    span {
+      font-size: 16px;
+    }
   }
 }

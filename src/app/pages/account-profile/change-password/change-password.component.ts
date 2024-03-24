@@ -24,7 +24,7 @@ export class ChangePasswordComponent implements OnInit {
     this.initForm();
   }
 
-  get passwordControls() {
+  get controls() {
     return this.passwordForm.controls;
   }
 
@@ -60,8 +60,8 @@ export class ChangePasswordComponent implements OnInit {
   public onUpdatePassword() {
     if (this.passwordForm.valid) {
       const payload = {
-        oldPassword: this.passwordControls["oldPassword"].value,
-        newPassword: this.passwordControls["confirmNewPassword"].value,
+        oldPassword: this.controls["oldPassword"].value,
+        newPassword: this.controls["confirmNewPassword"].value,
       };
       this.authService
         .changePassword(payload)

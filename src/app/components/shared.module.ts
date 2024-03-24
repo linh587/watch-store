@@ -17,6 +17,7 @@ import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { DirectivesModule } from "../public/directives/directives.module";
 import { PipesModule } from "../public/pipes/pipes.module";
+import { InputSearchSuggestionComponent } from "./input-search-suggestion/input-search-suggestion.component";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -32,6 +33,7 @@ const COMPONENTS = [
   OurPartnersComponent,
   AuthenticationModalComponent,
   QuickViewProductModalComponent,
+  InputSearchSuggestionComponent,
 ];
 
 @NgModule({
@@ -43,7 +45,7 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     DirectivesModule,
-    PipesModule
+    PipesModule,
   ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],

@@ -13,18 +13,25 @@ import {
 import { ProductsService } from "../products/products.service";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../auth/auth.service";
+import { Product } from "../../models/product.model";
+import {
+  InformationToCreateCartDetail,
+  InformationToUpdateCartDetail,
+} from "../../models/cart.model";
+import { StorageService } from "../storage/storage.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class CartService implements OnDestroy {
-  private productList$ = new BehaviorSubject<any[]>([]);
+  public productList$ = new BehaviorSubject<Product[]>([]);
   private subscription$ = new Subject();
 
   constructor(
     private productsService: ProductsService,
     private toastService: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) {
     this.checkAllowCallAPI();
   }
@@ -57,10 +64,11 @@ export class CartService implements OnDestroy {
       )
       .subscribe((products: any) => {
         this.productList$.next(products);
+        this.storageService.set("PRODUCT_CART", products);
       });
   }
 
-  public addToCart(payload: any) {
+  public addToCart(payload: InformationToCreateCartDetail) {
     this.productsService
       .addToCart(payload)
       .pipe(
@@ -76,7 +84,10 @@ export class CartService implements OnDestroy {
       });
   }
 
-  public updateCartItem(productPriceId: string, payload: any) {
+  public updateCartItem(
+    productPriceId: string,
+    payload: InformationToUpdateCartDetail
+  ) {
     this.productsService
       .updateCartItem(productPriceId, payload)
       .pipe(

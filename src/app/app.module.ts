@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app.routing";
@@ -15,6 +15,8 @@ import { AppGetTokenInterceptor } from "./public/interceptors/get-token.intercep
 import { ErrorInterceptor } from "./public/interceptors/error.interceptor";
 import { AppInterceptor } from "./public/interceptors/app.interceptor";
 import { CloudinaryModule } from "@cloudinary/ng";
+import localeVi from "@angular/common/locales/vi";
+import { registerLocaleData } from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent, PagesComponent, NotFoundComponent],
@@ -32,7 +34,7 @@ import { CloudinaryModule } from "@cloudinary/ng";
         tokenGetter: tokenGetter,
       },
     }),
-    CloudinaryModule
+    CloudinaryModule,
   ],
   providers: [
     {
@@ -50,10 +52,18 @@ import { CloudinaryModule } from "@cloudinary/ng";
       useClass: ErrorInterceptor,
       multi: true,
     },
+    {
+      provide: LOCALE_ID,
+      useValue: "vi-VN",
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeVi);
+  }
+}
 
 function tokenGetter() {
   return localStorage.getItem("JWT_TOKEN");

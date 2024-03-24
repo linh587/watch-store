@@ -101,3 +101,13 @@ h6 {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.form-group small {
+  margin-top: 4px;
+  color: red;
+}
+
+.form-group[required] label:after {
+  content: " *";
+  color: red;
+}

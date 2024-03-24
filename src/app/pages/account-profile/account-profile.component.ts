@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth/auth.service";
 import { StorageService } from "../../services/storage/storage.service";
 import { ACCOUNT_TAB } from "../../public/constants/common";
+import { UserAccount } from "../../models/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-account-profile",
@@ -10,12 +12,13 @@ import { ACCOUNT_TAB } from "../../public/constants/common";
 })
 export class AccountProfileComponent implements OnInit {
   public active = 1;
-  public userInfo: any;
+  public userInfo!: UserAccount;
   public ACCOUNT_TAB = ACCOUNT_TAB;
 
   constructor(
     private authService: AuthService,
-    public storageService: StorageService
+    public storageService: StorageService,
+    public router: Router
   ) {}
 
   ngOnInit() {

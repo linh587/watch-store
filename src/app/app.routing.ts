@@ -78,6 +78,13 @@ const routes: Routes = [
             (m) => m.ResetPasswordModule
           ),
       },
+      {
+        path: "verify",
+        loadChildren: () =>
+          import("./pages/verify-email/verify-email.module").then(
+            (m) => m.VerifyEmailModule
+          ),
+      },
     ],
   },
   {

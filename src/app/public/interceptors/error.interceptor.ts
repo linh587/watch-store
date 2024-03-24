@@ -12,6 +12,7 @@ import { Observable, Subject, switchMap, tap, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { StorageService } from "../../services/storage/storage.service";
 import { AuthService } from "../../services/auth/auth.service";
+import { EventBusService } from "../../services/common/event-bus.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -20,7 +21,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private storageService: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private eventBus: EventBusService
   ) {}
 
   intercept(
@@ -39,7 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             .trim();
           const refreshTk = res.headers.get("refresh-token");
 
-          this.storageService.set("JWT_REFRESH_TOKEN", refreshTk);
+          this.storageService.set("REFRESH_TOKEN", refreshTk);
           this.storageService.set("JWT_TOKEN", authorization);
 
           this.refreshTokensSubject$.next(authorization);
@@ -76,12 +78,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private onHandleError401(request: HttpRequest<any>, next: HttpHandler) {
-    const refreshToken = this.storageService.get("JWT_REFRESH_TOKEN");
-    // if (!refreshToken) {
-    //   this.eventBus.emit({ name: "logout", value: null });
-    //   // @ts-ignore
-    //   return;
-    // }
+    const refreshToken = this.storageService.get("REFRESH_TOKEN");
+    if (!refreshToken) {
+      this.eventBus.emit({ name: "logout", value: null });
+      // @ts-ignore
+      return;
+    }
 
     if (!this.isLoadingRefresh) {
       this.isLoadingRefresh = true;
@@ -119,8 +121,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private static isRequestRefresh(url: string) {
-    if (url.includes("user/refresh-token")) {
-      return "JWT_REFRESH_TOKEN";
+    if (url.includes("refresh/user")) {
+      return "REFRESH_TOKEN";
     }
     return null;
   }

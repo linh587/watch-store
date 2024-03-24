@@ -32,7 +32,7 @@ export class AppGetTokenInterceptor {
                 isAuthRequest,
                 authorization.replace("Bearer ", "").trim()
               );
-              this.storageService.set("JWT_REFRESH_TOKEN", refreshTk);
+              this.storageService.set("REFRESH_TOKEN", refreshTk);
             } else {
               throw new Error();
             }
@@ -43,7 +43,7 @@ export class AppGetTokenInterceptor {
   }
 
   getTokenKey(name: string) {
-    if (name.includes("user/login")) {
+    if (name.includes("sign-in/user")) {
       return "JWT_TOKEN";
     }
     return null;

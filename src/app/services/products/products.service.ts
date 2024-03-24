@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
 import { BaseHttpRequest } from "../http/base-http-request.service";
 import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
+import {
+  InformationToCreateCartDetail,
+  InformationToUpdateCartDetail,
+} from "../../models/cart.model";
 
 @Injectable({
   providedIn: "root",
@@ -34,7 +38,7 @@ export class ProductsService extends BaseHttpRequest {
     );
   }
 
-  public addToCart(payload: any) {
+  public addToCart(payload: InformationToCreateCartDetail) {
     return this.httpClient.post(
       `${ENVIRONMENT}${API_URL.ADD_TO_CART}`,
       payload
@@ -43,7 +47,7 @@ export class ProductsService extends BaseHttpRequest {
 
   public updateCartItem(
     productPriceId: string,
-    payload: any
+    payload: InformationToUpdateCartDetail
   ) {
     return this.httpClient.put(
       `${ENVIRONMENT}${API_URL.ADD_TO_CART}/${productPriceId}`,
