@@ -38,10 +38,8 @@ export class AuthService extends BaseHttpRequest {
     this.userLogin$.next(data);
   }
 
-  public currentUserInfo(id: string) {
-    return this.httpClient.get(
-      `${ENVIRONMENT}${API_URL.GET_DETAIL_USER}/${id}`
-    );
+  public currentUserInfo() {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_DETAIL_USER}`);
   }
 
   public refreshToken() {

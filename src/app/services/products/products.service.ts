@@ -5,13 +5,27 @@ import {
   InformationToCreateCartDetail,
   InformationToUpdateCartDetail,
 } from "../../models/cart.model";
+import { Observable, map } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductsService extends BaseHttpRequest {
-  public getProducts() {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_LIST_PRODUCTS}`);
+  public getCategory() {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_LIST_CATEGORY}`);
+  }
+
+  public getProducts(params?: any): Observable<any> {
+    return this.httpClient
+      .get<any>(`${ENVIRONMENT}${API_URL.GET_LIST_PRODUCTS}`, { params })
+      .pipe(
+        map((res) => {
+          const _data = res?.data?.map((i: any) => i);
+          return {
+            data: _data as any,
+          };
+        })
+      );
   }
 
   public getDetailProduct(id: string) {

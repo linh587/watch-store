@@ -1,13 +1,20 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationModalComponent } from "../authentication-modal/authentication-modal.component";
 import { SUB_MENU } from "../../public/constants/common";
 import { Observable } from "rxjs";
 import { AuthService } from "../../services/auth/auth.service";
-import { createCloudinaryImageLink } from "../../public/helpers/images";
+import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { CartService } from "../../services/cart/cart.service";
 import { UserAccount } from "../../models/user.model";
+import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-header",
@@ -21,22 +28,33 @@ export class HeaderComponent implements OnInit {
   public menuFixed: boolean = false;
   public createCloudinaryThumbLink = createCloudinaryImageLink;
   public total!: number;
+  public categories: any[] = [];
+  @ViewChild("inputSearch") inputSearch!: ElementRef;
 
   constructor(
     public router: Router,
     public modalService: NgbModal,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private productService: ProductsService
   ) {}
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getCart();
     this.calculateTotal();
+    this.getAllCategory();
   }
 
   private getUserInfo() {
     this.userInfo$ = this.authService.getUserInfo();
+  }
+
+  private getAllCategory() {
+    this.productService.getCategory().subscribe((res: any) => {
+      this.categories = res;
+    });
   }
 
   private calculateTotal() {
@@ -75,5 +93,27 @@ export class HeaderComponent implements OnInit {
 
   public removeCartItem(productPriceId: string) {
     this.cartService.removeCartItem(productPriceId);
+  }
+
+  public onSearch() {
+    const inputSearch = this.inputSearch.nativeElement.value;
+
+    this.router
+      .navigate(["/collections"], {
+        relativeTo: this.route,
+        queryParamsHandling: "merge",
+        queryParams: { s: inputSearch },
+      })
+      .then();
+  }
+
+  public onSearchCategory(id: string) {
+    this.router
+      .navigate(["/collections"], {
+        relativeTo: this.route,
+        queryParamsHandling: "merge",
+        queryParams: { categoryId: id },
+      })
+      .then();
   }
 }

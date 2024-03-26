@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { QuickViewProductModalComponent } from "../quick-view-product-modal/quick-view-product-modal.component";
 import { Router } from "@angular/router";
-import { createCloudinaryThumbLink } from "../../public/helpers/images";
+import { createCloudinaryThumbLink } from "../../public/helpers/images.helper";
 import { ProductsService } from "../../services/products/products.service";
 import { BehaviorSubject } from "rxjs";
 
@@ -14,6 +14,7 @@ import { BehaviorSubject } from "rxjs";
 export class ProductItemComponent implements OnInit {
   @Input() productItem: any;
   public productPrices: any[] = [];
+  public minPriceOfProduct: any;
   public createCloudinaryThumbLink = createCloudinaryThumbLink;
   public priceOfThisProduct: any[] = [];
   public productSizes = new BehaviorSubject([]);
@@ -45,9 +46,21 @@ export class ProductItemComponent implements OnInit {
 
   private getListProductPrice() {
     this.productsService.getProductPrices().subscribe((res: any) => {
-      this.productPrices = res.filter(
-        (p: any) => p.productId === this.productItem.id
-      );
+      this.productPrices = res.filter((p: any) => {
+        return p.productId === this.productItem.id;
+      });
+
+      if (this.productPrices.length > 0) {
+        const minProduct = this.productPrices.reduce(
+          (minPrice: any, currentPrice: any) => {
+            return currentPrice.price < minPrice.price
+              ? currentPrice
+              : minPrice;
+          }
+        );
+
+        this.minPriceOfProduct = minProduct;
+      }
     });
   }
 }

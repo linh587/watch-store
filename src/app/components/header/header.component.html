@@ -17,10 +17,13 @@
           <div class="search-box-wrapper position-relative d-flex">
             <input
               type="text"
-              placeholder="Tìm kiếm..."
-              class="w-100 px-3 bg-white" />
+              placeholder="Tìm kiếm theo tên sản phẩm..."
+              class="w-100 px-3 bg-white"
+              (keydown.enter)="onSearch()"
+              #inputSearch />
             <div class="search-btn">
               <button
+                (click)="onSearch()"
                 class="bg-primary-color color-white position-absolute d-flex align-items-center justify-content-center">
                 <span class="material-symbols-outlined"> search </span>
               </button>
@@ -199,17 +202,19 @@
                   <span class="material-symbols-outlined"> expand_more </span>
                 </a>
                 <ul class="mega-menu bg-white start-0 position-absolute">
-                  <li *ngFor="let menu of subMenu">
-                    <a href="">{{ menu.textMenu }}</a>
-                    <ul>
-                      <li
-                        *ngFor="let collection of menu.collections"
-                        class="cursor-pointer"
-                        (click)="router.navigate(['/collections']).then()">
-                        {{ collection }}
-                      </li>
-                    </ul>
-                  </li>
+                  <div class="d-flex">
+                    <a class="col-4">Phổ biến nhất</a>
+                    <a class="col-4">Hàng cao cấp</a>
+                    <a class="col-4">Các hãng khác</a>
+                  </div>
+                  <ul class="d-flex flex-wrap">
+                    <li
+                      *ngFor="let category of categories"
+                      class="cursor-pointer col-4 mt-2"
+                      (click)="onSearchCategory(category.id)">
+                      {{ category.name }}
+                    </li>
+                  </ul>
                 </ul>
               </li>
               <li (click)="router.navigate(['/collections']).then()">

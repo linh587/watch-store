@@ -9,7 +9,7 @@ import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 import {
   createCloudinaryImageLink,
   createCloudinaryThumbLink,
-} from "../../public/helpers/images";
+} from "../../public/helpers/images.helper";
 import { ProductsService } from "../../services/products/products.service";
 import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";

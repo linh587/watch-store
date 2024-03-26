@@ -31,4 +31,7 @@ export const API_URL = {
   // ORDER
   GET_ORDER_LIST: "user/order",
   ORDER: "order",
+
+  // CATEGORY
+  GET_LIST_CATEGORY: "category",
 };

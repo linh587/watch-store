@@ -116,7 +116,7 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
             this.storageService.set("AUTH_USER", data);
             this.storageService.set("JWT_TOKEN", data.accessToken);
             this.storageService.set("REFRESH_TOKEN", data.refreshToken);
-            this.getCurrentUserLogin(data.id);
+            this.getCurrentUserLogin();
             this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
           }),
           catchError((error) => {
@@ -176,9 +176,9 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
     this.onCloseModal();
   }
 
-  private getCurrentUserLogin(id: string): void {
+  private getCurrentUserLogin(): void {
     this.authService
-      .currentUserInfo(id)
+      .currentUserInfo()
       .pipe(
         tap((data: any) => {
           this.storageService.set("USER_LOGIN", { ...data });

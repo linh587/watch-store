@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CART_TABLE_HEADER } from "../../public/constants/common";
 import { CartService } from "../../services/cart/cart.service";
 import { Observable } from "rxjs";
-import { createCloudinaryImageLink } from "../../public/helpers/images";
+import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 
 @Component({
   selector: "app-cart",

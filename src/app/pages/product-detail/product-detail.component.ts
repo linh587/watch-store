@@ -5,7 +5,7 @@ import { ProductsService } from "../../services/products/products.service";
 import {
   createCloudinaryImageLink,
   createCloudinaryThumbLink,
-} from "../../public/helpers/images";
+} from "../../public/helpers/images.helper";
 import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CartService } from "../../services/cart/cart.service";

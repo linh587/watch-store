@@ -61,6 +61,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.initForm();
     this.observerInputSearchChange();
     this.calculateTotal();
+    this.calculateDeliveryCharge();
     this.observeChangeDeliveryCharge();
   }
 
@@ -133,7 +134,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       )
       .subscribe((res) => {
         const deliveryCharge = calculateDeliveryCharge(res);
-
         this.deliveryCharge = deliveryCharge;
       });
   }
@@ -159,9 +159,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           }),
           catchError((error) => {
             this.toastService.error("Đặt đơn hàng thất bại");
-            return throwError(() => {
-              console.log(error);
-            });
+            return throwError(() => error);
           })
         )
         .subscribe();
