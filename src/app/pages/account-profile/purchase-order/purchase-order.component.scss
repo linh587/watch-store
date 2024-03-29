@@ -2,8 +2,7 @@
 @import "text-size";
 @import "variables";
 
-.view {
-  background: $primary-color;
+.view, .cancel {
   color: $white;
   font-size: $text-small;
   padding: 8px 12px;

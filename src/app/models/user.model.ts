@@ -4,7 +4,6 @@ export interface UserAccount {
   name: string;
   gender: string;
   dateOfBirth: Date | string;
-  avatar?: string;
   email: string;
   address?: string;
   longitude?: string;

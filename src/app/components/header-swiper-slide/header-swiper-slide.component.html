@@ -5,7 +5,10 @@
       delay: 2500
     }"
     [speed]="1200">
-    <ng-template swiperSlide *ngFor="let item of backgroundImage">
+    <ng-template
+      swiperSlide
+      *ngFor="let item of backgroundImage"
+      (click)="onSearch()">
       <img
         [src]="item"
         loading="lazy"
@@ -13,26 +16,4 @@
         class="w-100 h-100 object-fit-cover" />
     </ng-template>
   </swiper>
-  <div
-    class="mask w-100 h-100 position-relative overflow-hidden top-0 start-0"></div>
-  <div class="header-content container position-absolute">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <div class="header-content-text text-left">
-          <h5 class="mb-2 text-size-medium">
-            Exclusive Offer -20% Off This Week
-          </h5>
-          <h1 class="mb-2">H-Vault Classico</h1>
-          <p class="mb-3">
-            H-Vault Watches Are A Lot Like Classic American Muscle Cars - Expect
-            For The American Part That Is.
-          </p>
-          <p class="mb-3">Starting At <strong>$1.499.00</strong></p>
-          <div class="slide-btn-group">
-            <a href="" class="btn btn-bordered btn-style-1 mt-4">Show Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

@@ -18,6 +18,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { DirectivesModule } from "../public/directives/directives.module";
 import { PipesModule } from "../public/pipes/pipes.module";
 import { InputSearchSuggestionComponent } from "./input-search-suggestion/input-search-suggestion.component";
+import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -34,6 +35,7 @@ const COMPONENTS = [
   AuthenticationModalComponent,
   QuickViewProductModalComponent,
   InputSearchSuggestionComponent,
+  ConfirmModalComponent,
 ];
 
 @NgModule({

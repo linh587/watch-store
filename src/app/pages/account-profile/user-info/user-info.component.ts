@@ -80,7 +80,6 @@ export class UserInfoComponent implements OnInit {
       longitude: [""],
       latitude: [""],
       gender: [this.userInfo?.gender, Validators.required],
-      avatar: [this.userInfo?.avatar],
       dateOfBirth: [
         this.datePipe.transform(this.userInfo?.dateOfBirth, "YYYY-MM-dd"),
         Validators.required,
@@ -96,7 +95,6 @@ export class UserInfoComponent implements OnInit {
       formData.append("email", this.profileForm.get("email")?.value);
       formData.append("phone", this.profileForm.get("phone")?.value);
       formData.append("gender", this.profileForm.get("gender")?.value);
-      formData.append("avatar", this.profileForm.get("avatar")?.value);
       formData.append("address", this.profileForm.get("address")?.value);
       formData.append("latitude", this.profileForm.get("latitude")?.value);
       formData.append("longitude", this.profileForm.get("longitude")?.value);

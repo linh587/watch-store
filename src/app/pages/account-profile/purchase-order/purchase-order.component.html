@@ -13,7 +13,15 @@
           <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
           <td>{{ order.status | orderStatus }}</td>
           <td>{{ order.totalPrice | formatPrice }}</td>
-          <td><a class="view cursor-pointer">Chi tiết</a></td>
+          <td>{{ order.paymentStatus | paymentStatus }}</td>
+          <td>
+            <a class="view cursor-pointer me-2 bg-primary-color">Chi tiết</a>
+            <a
+              class="view cancel cursor-pointer bg-black"
+              (click)="onCancelOrder(order.id)"
+              >Huỷ đơn</a
+            >
+          </td>
         </tr>
       </tbody>
     </table>

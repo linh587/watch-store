@@ -96,7 +96,6 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
           Validators.pattern(PASSWORD_REGEX),
         ]),
       ],
-      avatar: ["avatar.jpg"],
       gender: ["male", Validators.required],
       dateOfBirth: ["", Validators.required],
       address: [""],
@@ -143,7 +142,6 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
       formData.append("phone", this.registerControl["phone"]?.value);
       formData.append("gender", this.registerControl["gender"]?.value);
       formData.append("address", this.registerControl["address"]?.value);
-      formData.append("avatar", this.registerControl["avatar"]?.value);
       formData.append("latitude", this.registerControl["latitude"]?.value);
       formData.append("longitude", this.registerControl["longitude"]?.value);
       formData.append(

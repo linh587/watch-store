@@ -25,6 +25,7 @@ import { ToastrService } from "ngx-toastr";
 import { PHONE_REGEX } from "../../public/constants/regex";
 import { calculateDeliveryCharge } from "../../public/helpers/utils";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-checkout",
@@ -52,7 +53,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private mapService: MapService,
     private orderService: OrderService,
     private toastService: ToastrService,
-    private router: Router
+    private router: Router,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
@@ -93,6 +95,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         receivedType: ["delivery"],
         receivedAddress: [this.userInfo.address, Validators.required],
         details: [[]],
+        paymentType: ["0", Validators.required],
+        bankCode: ["NCB"],
+        language: ["vn"],
       }),
       receivedAddressCoordinate: this.fb.group({
         latitude: [this.userInfo.latitude, Validators.required],
@@ -155,14 +160,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           tap(() => {
             this.toastService.success("Đặt đơn hàng thành công");
             this.deleteProductCart();
-            this.router.navigate(["/"]).then();
           }),
           catchError((error) => {
             this.toastService.error("Đặt đơn hàng thất bại");
             return throwError(() => error);
           })
         )
-        .subscribe();
+        .subscribe((res: any) => {
+          if (res.vpnUrl) {
+            window.location.href = res.vpnUrl;
+          }
+        });
     }
   }
 

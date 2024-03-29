@@ -1,6 +1,6 @@
 export const BACKGROUND_IMAGE_SLIDE = [
-  "/assets/images/slides/home-slide-1.webp",
-  "/assets/images/slides/home-slide-2.webp",
+  "/assets/images/banners/13-418004996-1357155059.webp",
+  "/assets/images/banners/13-418004996-1357155059.webp",
 ];
 
 export const SUB_MENU = [
@@ -105,5 +105,6 @@ export const PURCHASE_ORDER_HEADER = [
   "Thời gian",
   "Trạng thái",
   "Tổng tiền",
+  "Thanh toán",
   "Hành động",
 ];

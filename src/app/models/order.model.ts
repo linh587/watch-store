@@ -13,6 +13,7 @@ export interface Order {
   subtotalPrice: number;
   totalPrice: number;
   status: string;
+  paymentStatus: string;
   note?: string;
   createdAt: Date | string;
   details: OrderDetail[];

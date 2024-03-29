@@ -11,6 +11,7 @@ export const API_URL = {
   FORGOT_PASSWORD: "sign-in/forgot",
   RESET_PASSWORD: "sign-in/reset",
   VERIFY: "sign-up/verify",
+  USER: "user",
 
   // PRODUCT
   GET_LIST_PRODUCTS: "product",
@@ -31,6 +32,7 @@ export const API_URL = {
   // ORDER
   GET_ORDER_LIST: "user/order",
   ORDER: "order",
+  CANCEL: "cancel",
 
   // CATEGORY
   GET_LIST_CATEGORY: "category",

@@ -85,6 +85,13 @@ const routes: Routes = [
             (m) => m.VerifyEmailModule
           ),
       },
+      {
+        path: "order/vnpay_return",
+        loadChildren: () =>
+          import("./pages/order-return/order-return.module").then(
+            (m) => m.OrderReturnModule
+          ),
+      },
     ],
   },
   {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BACKGROUND_IMAGE_SLIDE } from "../../public/constants/common";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header-swiper-slide",
@@ -9,7 +10,7 @@ import { BACKGROUND_IMAGE_SLIDE } from "../../public/constants/common";
 export class HeaderSwiperSlideComponent implements OnInit {
   public backgroundImage = BACKGROUND_IMAGE_SLIDE;
 
-  constructor() {}
+  constructor(public router: Router) {}
 
   ngOnInit() {}
 }

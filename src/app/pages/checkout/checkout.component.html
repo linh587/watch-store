@@ -138,23 +138,33 @@
                 </div>
                 <div class="payment-method">
                   <div class="payment-accordion">
-                    <h5>Chuyển khoản trực tiếp</h5>
-                    <div class="payment-content">
-                      <p>
-                        Thực hiện thanh toán trực tiếp vào tài khoản ngân hàng
-                        của chúng tôi. Vui lòng sử dụng ID đơn hàng của bạn làm
-                        tài liệu tham khảo thanh toán. Đơn đặt hàng của bạn sẽ
-                        không được chuyển cho đến khi tiền đã được xóa trong tài
-                        khoản của chúng tôi.
-                      </p>
-                    </div>
-                    <h5>PayPal</h5>
-                    <div class="payment-content">
-                      <p>
-                        Thanh toán qua PayPal; bạn có thể thanh toán bằng thẻ
-                        tín dụng nếu bạn không có tài khoản PayPal.
-                      </p>
-                    </div>
+                    <ng-container formGroupName="order">
+                      <h5>Phương thức thanh toán</h5>
+                      <div class="cod">
+                        <input
+                          class="form-check-input me-2"
+                          type="radio"
+                          name="paymentType"
+                          id="paymentType1"
+                          value="0"
+                          formControlName="paymentType" />
+                        <label class="form-check-label" for="paymentType1">
+                          Thanh toán tiền mặt khi nhận hàng (COD)
+                        </label>
+                      </div>
+                      <div class="cod">
+                        <input
+                          class="form-check-input me-2"
+                          type="radio"
+                          name="paymentType"
+                          id="paymentType2"
+                          value="1"
+                          formControlName="paymentType" />
+                        <label class="form-check-label" for="paymentType2">
+                          Thanh toán online
+                        </label>
+                      </div>
+                    </ng-container>
                   </div>
                   <div class="order-button-payment">
                     <button type="submit">Đặt hàng</button>
