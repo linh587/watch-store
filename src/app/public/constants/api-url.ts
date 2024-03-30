@@ -12,6 +12,7 @@ export const API_URL = {
   RESET_PASSWORD: "sign-in/reset",
   VERIFY: "sign-up/verify",
   USER: "user",
+  NOTIFICATION: "user/notification",
 
   // PRODUCT
   GET_LIST_PRODUCTS: "product",
@@ -36,4 +37,11 @@ export const API_URL = {
 
   // CATEGORY
   GET_LIST_CATEGORY: "category",
+
+  // BRANCH
+  BRANCH: "branch",
+
+  // PAYMENT STATUS
+  PAYMENT: "order/querydr"
+
 };

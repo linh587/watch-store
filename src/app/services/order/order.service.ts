@@ -20,4 +20,8 @@ export class OrderService extends BaseHttpRequest {
       payload
     );
   }
+
+  public getOrderDetail(id: string) {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.ORDER}/${id}`);
+  }
 }

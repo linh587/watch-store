@@ -92,6 +92,13 @@ const routes: Routes = [
             (m) => m.OrderReturnModule
           ),
       },
+      {
+        path: "order-history",
+        loadChildren: () =>
+          import("./pages/order-history/order-history.module").then(
+            (m) => m.OrderHistoryModule
+          ),
+      },
     ],
   },
   {

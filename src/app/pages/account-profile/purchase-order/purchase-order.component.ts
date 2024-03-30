@@ -7,6 +7,7 @@ import { ToastrService } from "ngx-toastr";
 import { catchError, tap, throwError } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ConfirmModalComponent } from "../../../components/confirm-modal/confirm-modal.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-purchase-order",
@@ -21,7 +22,8 @@ export class PurchaseOrderComponent implements OnInit {
     private orderService: OrderService,
     private storageService: StorageService,
     private toastService: ToastrService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -66,5 +68,9 @@ export class PurchaseOrderComponent implements OnInit {
         })
       )
       .subscribe(() => this.getListOrder());
+  }
+
+  public directOrderDetail(orderId: string) {
+    this.router.navigate([`/order-history/${orderId}`]).then();
   }
 }

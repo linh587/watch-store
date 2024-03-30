@@ -77,8 +77,8 @@ export class UserInfoComponent implements OnInit {
         ]),
       ],
       address: [this.userInfo?.address],
-      longitude: [""],
-      latitude: [""],
+      longitude: [this.userInfo?.longitude],
+      latitude: [this.userInfo?.latitude],
       gender: [this.userInfo?.gender, Validators.required],
       dateOfBirth: [
         this.datePipe.transform(this.userInfo?.dateOfBirth, "YYYY-MM-dd"),
@@ -140,6 +140,7 @@ export class UserInfoComponent implements OnInit {
     this.controls["latitude"].setValue(search.latitude);
     this.controls["longitude"].setValue(search.longitude);
 
+    console.log(search);
     this.hideSearchSuggestion();
   }
 

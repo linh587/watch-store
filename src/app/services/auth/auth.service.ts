@@ -78,4 +78,8 @@ export class AuthService extends BaseHttpRequest {
   public verify(token: string) {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.VERIFY}/${token}`);
   }
+
+  public getNotifications() {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.NOTIFICATION}`);
+  }
 }

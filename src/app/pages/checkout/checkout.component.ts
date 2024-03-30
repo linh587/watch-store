@@ -26,6 +26,7 @@ import { PHONE_REGEX } from "../../public/constants/regex";
 import { calculateDeliveryCharge } from "../../public/helpers/utils";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { BranchService } from "../../services/branch/branch.service";
 
 @Component({
   selector: "app-checkout",
@@ -45,6 +46,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public searchElementRef!: ElementRef;
   public total!: number;
   public deliveryCharge!: number;
+  public branchs$ = new BehaviorSubject<any>(null);
 
   constructor(
     private cartService: CartService,
@@ -53,8 +55,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private mapService: MapService,
     private orderService: OrderService,
     private toastService: ToastrService,
-    private router: Router,
-    private httpClient: HttpClient
+    private branchService: BranchService
   ) {}
 
   ngOnInit() {
@@ -65,6 +66,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.calculateTotal();
     this.calculateDeliveryCharge();
     this.observeChangeDeliveryCharge();
+    this.getAllBranchs();
   }
 
   get orderGroup() {
@@ -73,6 +75,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   get latlngGroup() {
     return this.orderForm.get("receivedAddressCoordinate") as FormGroup;
+  }
+
+  public getAllBranchs() {
+    this.branchService.getAllBranch().subscribe((res: any) => {
+      this.branchs$.next(res);
+    });
   }
 
   private getProductList() {
@@ -114,6 +122,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         distinctUntilChanged()
       )
       .subscribe(() => {
+        console.log(this.orderGroup.value);
         this.calculateDeliveryCharge();
       });
 

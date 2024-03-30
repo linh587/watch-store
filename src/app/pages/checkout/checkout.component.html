@@ -73,6 +73,16 @@
                       </ng-container>
                     </div>
                   </div>
+                  <div class="col-lg-12 form-group pb-4" required>
+                    <label class="form-label">Chi nhánh</label>
+                    <select formControlName="branchId" class="form-control">
+                      <ng-container *ngIf="branchs$ | async as branchs">
+                        <ng-container *ngFor="let branch of branchs">
+                          <option [value]="branch.id">{{ branch.name }}</option>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </div>
                   <div class="col-lg-12 form-group pb-4">
                     <label class="form-label">Ghi chú</label>
                     <textarea class="w-100 form-control" rows="10"></textarea>

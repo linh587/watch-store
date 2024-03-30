@@ -15,11 +15,14 @@ import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { CartService } from "../../services/cart/cart.service";
 import { UserAccount } from "../../models/user.model";
 import { ProductsService } from "../../services/products/products.service";
+import { DatePipe } from "@angular/common";
+import { StorageService } from "../../services/storage/storage.service";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
+  providers: [DatePipe],
 })
 export class HeaderComponent implements OnInit {
   public userInfo$!: Observable<UserAccount>;
@@ -30,6 +33,7 @@ export class HeaderComponent implements OnInit {
   public total!: number;
   public categories: any[] = [];
   @ViewChild("inputSearch") inputSearch!: ElementRef;
+  public notifications: any[] = [];
 
   constructor(
     public router: Router,
@@ -37,7 +41,8 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +50,7 @@ export class HeaderComponent implements OnInit {
     this.getCart();
     this.calculateTotal();
     this.getAllCategory();
+    this.getNotifications();
   }
 
   private getUserInfo() {
@@ -115,5 +121,18 @@ export class HeaderComponent implements OnInit {
         queryParams: { categoryId: id },
       })
       .then();
+  }
+
+  public getNotifications() {
+    const userInfo = this.storageService.get("AUTH_USER")?.id;
+    if (userInfo) {
+      this.authService.getNotifications().subscribe((res: any) => {
+        this.notifications = res.data;
+      });
+    }
+  }
+
+  public redirectOrderHistory(linkTo: string) {
+    window.location.href = linkTo;
   }
 }

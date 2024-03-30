@@ -15,7 +15,7 @@
           <td>{{ order.totalPrice | formatPrice }}</td>
           <td>{{ order.paymentStatus | paymentStatus }}</td>
           <td>
-            <a class="view cursor-pointer me-2 bg-primary-color">Chi tiết</a>
+            <a class="view cursor-pointer me-2 bg-primary-color" (click)="directOrderDetail(order.id)">Chi tiết</a>
             <a
               class="view cancel cursor-pointer bg-black"
               (click)="onCancelOrder(order.id)"
