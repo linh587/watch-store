@@ -9,4 +9,8 @@ export class BranchService extends BaseHttpRequest {
   public getAllBranch() {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.BRANCH}`);
   }
+
+  public getBranchDetail(id: string) {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.BRANCH}/${id}`)
+  }
 }

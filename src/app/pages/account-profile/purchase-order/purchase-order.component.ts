@@ -8,6 +8,7 @@ import { catchError, tap, throwError } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ConfirmModalComponent } from "../../../components/confirm-modal/confirm-modal.component";
 import { Router } from "@angular/router";
+import { NotificationService } from "../../../services/notification/notification.service";
 
 @Component({
   selector: "app-purchase-order",
@@ -23,7 +24,8 @@ export class PurchaseOrderComponent implements OnInit {
     private storageService: StorageService,
     private toastService: ToastrService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -67,7 +69,10 @@ export class PurchaseOrderComponent implements OnInit {
           return throwError(() => error);
         })
       )
-      .subscribe(() => this.getListOrder());
+      .subscribe(() => {
+        this.getListOrder();
+        this.notificationService.getListNotification();
+      });
   }
 
   public directOrderDetail(orderId: string) {

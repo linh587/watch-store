@@ -139,8 +139,6 @@ export class UserInfoComponent implements OnInit {
     this.controls["address"].setValue(search.formattedAddress);
     this.controls["latitude"].setValue(search.latitude);
     this.controls["longitude"].setValue(search.longitude);
-
-    console.log(search);
     this.hideSearchSuggestion();
   }
 

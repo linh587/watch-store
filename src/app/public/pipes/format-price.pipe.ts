@@ -11,7 +11,6 @@ export class FormatPricePipe implements PipeTransform {
       let formattedValue = replaceZero
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      formattedValue += "đ";
       return formattedValue;
     } else {
       return "";

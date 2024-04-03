@@ -4,10 +4,6 @@
       <div class="col">
         <div class="coupon-area">
           <div class="coupon-accordion">
-            <h3>
-              Bạn có mã khuyến mãi?
-              <span class="coupon">Nhấn vào dây để nhập mã khuyến mãi</span>
-            </h3>
             <div class="coupon-content">
               <div class="coupon-info">
                 <form>
@@ -84,6 +80,45 @@
                     </select>
                   </div>
                   <div class="col-lg-12 form-group pb-4">
+                    <div class="position-relative">
+                      <div>
+                        <label class="form-label">Sử dụng coupon</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="couponCode"
+                          (focus)="couponSuggestion = true"
+                          (focusout)="couponSuggestion = false" />
+                      </div>
+                      <ng-container *ngIf="coupons$ | async as coupons">
+                        <div
+                          class="search-suggestion bg-white position-absolute"
+                          *ngIf="couponSuggestion">
+                          <div
+                            (mousedown)="onClickItem(coupon.couponCode)"
+                            class="coupon-item"
+                            *ngFor="let coupon of coupons">
+                            <p>{{ coupon.couponCode }}</p>
+                            <p>
+                              Giảm {{ coupon.decrease | formatPrice }}
+                              {{ coupon.unit | getTypePriceCoupon }}
+                            </p>
+                            <p>
+                              Áp dụng cho đơn hàng có giá từ
+                              {{ coupon.totalPriceFrom | formatPrice }}đ đến
+                              {{ coupon.totalPriceTo | formatPrice }}đ
+                            </p>
+                            <p>
+                              Hạn sử dụng:
+                              {{ coupon.beginAt | date : "dd-MM-YYYY" }} -
+                              {{ coupon.finishAt | date : "dd-MM-YYYY" }}
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 form-group pb-4">
                     <label class="form-label">Ghi chú</label>
                     <textarea class="w-100 form-control" rows="10"></textarea>
                   </div>
@@ -109,15 +144,33 @@
                           class="cart_item"
                           *ngFor="let product of productList">
                           <td class="product-name">
-                            {{ product.productName }}
-                            <strong class="product-quantity">
-                              × {{ product.quality }}</strong
-                            >
+                            <a
+                              [routerLink]="['/product', product.productId]"
+                              target="_blank"
+                              class="d-flex align-items-center justify-content-between">
+                              <img
+                                [src]="
+                                  createCloudinaryImageLink(
+                                    product.productCoverImage,
+                                    70,
+                                    70
+                                  )
+                                "
+                                alt="" />
+                              <div>
+                                <p>{{ product.productName }}</p>
+                                <p class="product-quantity">
+                                  Số lượng: {{ product.quality }}
+                                </p>
+                              </div>
+                            </a>
                           </td>
                           <td class="product-total">
-                            <span class="amount">{{
-                              product.price * product.quality | formatPrice
-                            }}</span>
+                            <span class="amount"
+                              >{{
+                                product.price * product.quality | formatPrice
+                              }}đ</span
+                            >
                           </td>
                         </tr>
                       </ng-container>
@@ -126,20 +179,27 @@
                       <tr class="cart-subtotal">
                         <th>Tổng hoá đơn</th>
                         <td>
-                          <span class="amount">{{ total | formatPrice }}</span>
+                          <span class="amount">{{ total | formatPrice }}đ</span>
                         </td>
                       </tr>
                       <tr class="shipping">
                         <th>Phí vận chuyển</th>
-                        <td>{{ deliveryCharge | formatPrice }}</td>
+                        <td>{{ deliveryCharge | formatPrice }}đ</td>
+                      </tr>
+                      <tr class="shipping">
+                        <th>Khuyến mãi</th>
+                        <td>- {{ (decreaseMoney | formatPrice) || 0 }}đ</td>
                       </tr>
                       <tr class="order-total">
                         <th>Tổng thanh toán</th>
                         <td>
                           <strong
-                            ><span class="amount">{{
-                              total + deliveryCharge | formatPrice
-                            }}</span></strong
+                            ><span class="amount">
+                              {{
+                                total + deliveryCharge - (decreaseMoney || 0)
+                                  | formatPrice
+                              }}đ
+                            </span></strong
                           >
                         </td>
                       </tr>

@@ -24,9 +24,11 @@ import { OrderService } from "../../services/order/order.service";
 import { ToastrService } from "ngx-toastr";
 import { PHONE_REGEX } from "../../public/constants/regex";
 import { calculateDeliveryCharge } from "../../public/helpers/utils";
-import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
 import { BranchService } from "../../services/branch/branch.service";
+import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
+import { Router } from "@angular/router";
+import { NotificationService } from "../../services/notification/notification.service";
+import { SocketService } from "../../services/socket/socket.service";
 
 @Component({
   selector: "app-checkout",
@@ -47,6 +49,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public total!: number;
   public deliveryCharge!: number;
   public branchs$ = new BehaviorSubject<any>(null);
+  public createCloudinaryImageLink = createCloudinaryImageLink;
+  public coupons$ = new BehaviorSubject<any>(null);
+  public couponSuggestion: boolean = false;
+  public decreaseMoney: any;
 
   constructor(
     private cartService: CartService,
@@ -55,18 +61,25 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private mapService: MapService,
     private orderService: OrderService,
     private toastService: ToastrService,
-    private branchService: BranchService
+    private branchService: BranchService,
+    private router: Router,
+    private notificationService: NotificationService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
     this.getProductList();
     this.getUserInfo();
     this.initForm();
+    this.patchProductCartToForm();
     this.observerInputSearchChange();
     this.calculateTotal();
     this.calculateDeliveryCharge();
     this.observeChangeDeliveryCharge();
     this.getAllBranchs();
+    this.couponRelation();
+
+    // this.socketService.listen("newNotification").subscribe((res) => {});
   }
 
   get orderGroup() {
@@ -75,6 +88,18 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   get latlngGroup() {
     return this.orderForm.get("receivedAddressCoordinate") as FormGroup;
+  }
+
+  private couponRelation() {
+    if (this.orderGroup.controls["details"].value.length) {
+      this.orderService
+        .couponRelation({
+          order: this.orderGroup.getRawValue(),
+        })
+        .subscribe((res) => {
+          this.coupons$.next(res);
+        });
+    }
   }
 
   public getAllBranchs() {
@@ -99,13 +124,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           ]),
         ],
         branchId: ["00lu07vqv0a46crjdi6f", Validators.required],
-        userAccountId: [this.userInfo.userAccountId || this.userInfo.id],
         receivedType: ["delivery"],
         receivedAddress: [this.userInfo.address, Validators.required],
         details: [[]],
         paymentType: ["0", Validators.required],
         bankCode: ["NCB"],
         language: ["vn"],
+        couponCode: [""],
       }),
       receivedAddressCoordinate: this.fb.group({
         latitude: [this.userInfo.latitude, Validators.required],
@@ -121,9 +146,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         debounceTime(200),
         distinctUntilChanged()
       )
-      .subscribe(() => {
-        console.log(this.orderGroup.value);
-        this.calculateDeliveryCharge();
+      .subscribe((branch: any) => {
+        this.branchService.getBranchDetail(branch).subscribe((res: any) => {
+          this.calculateDeliveryCharge(res.latitude, res.longitude);
+        });
       });
 
     this.orderForm.controls["receivedAddressCoordinate"].valueChanges
@@ -135,12 +161,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.calculateDeliveryCharge();
       });
+
+    this.orderGroup.controls["couponCode"].valueChanges.subscribe(() => {
+      this.orderService
+        .decreaseMoney({
+          couponCode: this.orderGroup.get("couponCode")?.value,
+          order: this.orderGroup.getRawValue(),
+        })
+        .subscribe((res) => {
+          this.decreaseMoney = res;
+        });
+    });
   }
 
-  private calculateDeliveryCharge() {
+  private calculateDeliveryCharge(branchLat?: any, branchLng?: any) {
     this.mapService
       .getLengthFromOriginToDestinationGoongIo(
-        { latitude: "21.01830435000005", longitude: "105.85120678400006" },
+        {
+          latitude: branchLat || "21.01830435000005",
+          longitude: branchLng || "105.85120678400006",
+        },
         {
           latitude: this.latlngGroup.controls["latitude"].value,
           longitude: this.latlngGroup.controls["longitude"].value,
@@ -157,8 +197,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   public onPlaceOrder() {
-    this.patchProductCartToForm();
-
     if (
       this.orderForm.valid &&
       this.orderGroup.controls["details"].value.length
@@ -168,7 +206,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         .pipe(
           tap(() => {
             this.toastService.success("Đặt đơn hàng thành công");
-            this.deleteProductCart();
+            this.cartService.getCartProducts();
+            this.notificationService.getListNotification();
           }),
           catchError((error) => {
             this.toastService.error("Đặt đơn hàng thất bại");
@@ -178,17 +217,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         .subscribe((res: any) => {
           if (res.vpnUrl) {
             window.location.href = res.vpnUrl;
+          } else {
+            this.router.navigate(["/"]).then();
           }
         });
     }
-  }
-
-  private deleteProductCart() {
-    const carts = this.storageService.get("PRODUCT_CART");
-    carts.forEach((cart: any) => {
-      this.cartService.removeCartItem(cart.productPriceId);
-    });
-    this.storageService.delete("PRODUCT_CART");
   }
 
   public patchProductCartToForm() {
@@ -245,6 +278,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       }, 0);
       this.total = orderTotal;
     });
+  }
+
+  public onRedirectProductDetail(productId: string) {
+    this.router.navigate([`/product/${productId}`]).then();
+  }
+
+  public onClickItem(couponCode: string) {
+    this.couponSuggestion = false;
+    this.orderGroup.get("couponCode")?.setValue(couponCode);
   }
 
   ngOnDestroy(): void {

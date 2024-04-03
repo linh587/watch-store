@@ -1,21 +1,27 @@
 import { Injectable } from "@angular/core";
-import { Socket } from "ngx-socket-io";
-import { map } from "rxjs";
+import { Observable, map } from "rxjs";
+import io from "socket.io-client";
 
 @Injectable({
   providedIn: "root",
 })
 export class SocketService {
-  constructor(private socket: Socket) {}
+  public socket: any;
+  public readonly string = "ws://localhost:8080";
 
-  sendMessage(msg: string) {
-    this.socket.emit(`${msg}`, msg);
+  constructor() {
+    this.socket = io();
   }
 
-  on() {
-
+  public listen(eventName: string) {
+    return new Observable((subscriber) => {
+      this.socket.on(eventName, (data: any) => {
+        subscriber.next(data);
+      });
+    });
   }
-  getMessage() {
-    return this.socket.fromEvent("message").pipe(map((data: any) => data.msg));
+
+  public emit(eventName: string, data: any) {
+    this.socket.emit(eventName, data);
   }
 }

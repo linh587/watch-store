@@ -13,7 +13,7 @@
             [src]="createCloudinaryThumbLink(productItem?.coverImage)"
             alt=""
             class="w-100 border mb-3"
-            style="object-fit: scale-down;" />
+            style="object-fit: scale-down" />
           <!-- </ng-template> -->
           <!-- </swiper> -->
           <!-- <swiper
@@ -63,10 +63,9 @@
               >
             </div>
             <div class="price-box">
-              <span class="new-price">{{
-                selectedPrice?.price | formatPrice
-              }}</span>
-              <!-- <span class="old-price">$78.00</span> -->
+              <span class="new-price"
+                >{{ selectedPrice?.price | formatPrice }}đ</span
+              >
             </div>
             <div class="select-size-box mb-3">
               <h6 class="mb-2">Chọn size</h6>

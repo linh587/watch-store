@@ -5,6 +5,7 @@ import { OrderStatusPipe } from "./order-status.pipe";
 import { PaymentStatusPipe } from "./payment-status.pipe";
 import { TimeAgoPipe } from "./time-ago.pipe";
 import { OrderStatusColorPipe } from "./order-status-color.pipe";
+import { GetTypePriceCouponPipe } from "./get-type-price-coupon.pipe";
 
 const PIPES = [
   FormatPricePipe,
@@ -12,6 +13,7 @@ const PIPES = [
   PaymentStatusPipe,
   TimeAgoPipe,
   OrderStatusColorPipe,
+  GetTypePriceCouponPipe,
 ];
 
 @NgModule({

@@ -66,7 +66,7 @@
                         </div>
                       </td>
                       <td>
-                        {{ product?.detail?.priceAtPurchase | formatPrice }}
+                        {{ product?.detail?.priceAtPurchase | formatPrice }}đ
                       </td>
                       <td>{{ product?.detail?.quality }}</td>
                       <td>
@@ -82,7 +82,7 @@
                         {{
                           product?.detail?.priceAtPurchase *
                             product?.detail?.quality | formatPrice
-                        }}
+                        }}đ
                       </td>
                     </tr>
                   </ng-container>
@@ -94,29 +94,33 @@
                           <tr>
                             <td>Tổng hoá đơn :</td>
                             <td class="text-end">
-                              {{ order?.subtotalPrice | formatPrice }}
+                              {{ order?.subtotalPrice | formatPrice }}đ
                             </td>
                           </tr>
                           <tr>
                             <td>
                               Khuyến mãi
-                              <span class="text-muted">{{
-                                order?.couponCode
-                              }}</span>
+                              <span class="text-muted"
+                                >({{ order?.couponCode }})</span
+                              >
                               :
                             </td>
-                            <td class="text-end">-0đ</td>
+                            <td class="text-end">
+                              -
+                              {{ (couponDetail?.decrease | formatPrice) || 0 }}
+                              {{ couponDetail?.unit | getTypePriceCoupon }}
+                            </td>
                           </tr>
                           <tr>
                             <td>Phí vận chuyển :</td>
                             <td class="text-end">
-                              {{ order?.deliveryCharge | formatPrice }}
+                              {{ order?.deliveryCharge | formatPrice }}đ
                             </td>
                           </tr>
                           <tr class="border-top border-top-dashed">
                             <th scope="row">Tổng thanh toán :</th>
                             <th class="text-end">
-                              {{ order?.totalPrice | formatPrice }}
+                              {{ order?.totalPrice | formatPrice }}đ
                             </th>
                           </tr>
                         </tbody>

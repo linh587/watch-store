@@ -16,7 +16,7 @@ import { CartService } from "../../services/cart/cart.service";
 import { UserAccount } from "../../models/user.model";
 import { ProductsService } from "../../services/products/products.service";
 import { DatePipe } from "@angular/common";
-import { StorageService } from "../../services/storage/storage.service";
+import { NotificationService } from "../../services/notification/notification.service";
 
 @Component({
   selector: "app-header",
@@ -33,7 +33,9 @@ export class HeaderComponent implements OnInit {
   public total!: number;
   public categories: any[] = [];
   @ViewChild("inputSearch") inputSearch!: ElementRef;
-  public notifications: any[] = [];
+  public notifications$!: Observable<any>;
+  public unseenIds: string[] = [];
+  public showNotification: boolean = false;
 
   constructor(
     public router: Router,
@@ -42,15 +44,23 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private route: ActivatedRoute,
     private productService: ProductsService,
-    private storageService: StorageService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     this.getUserInfo();
+    this.getNotifications();
     this.getCart();
     this.calculateTotal();
     this.getAllCategory();
-    this.getNotifications();
+
+    this.notifications$.subscribe((n) => {
+      const unseenIds = n
+        .filter((res: any) => res.seen === 0)
+        .map((item: any) => item.id);
+
+      this.unseenIds = unseenIds;
+    });
   }
 
   private getUserInfo() {
@@ -124,15 +134,29 @@ export class HeaderComponent implements OnInit {
   }
 
   public getNotifications() {
-    const userInfo = this.storageService.get("AUTH_USER")?.id;
-    if (userInfo) {
-      this.authService.getNotifications().subscribe((res: any) => {
-        this.notifications = res.data;
-      });
-    }
+    this.notifications$ = this.notificationService.getNotifications$();
   }
 
   public redirectOrderHistory(linkTo: string) {
-    window.location.href = linkTo;
+    const newLink = linkTo.replace("http://localhost:4200/", "");
+
+    this.router.navigate([newLink]).then();
+  }
+
+  public onShowNotification(event: Event) {
+    event.stopPropagation();
+    this.showNotification = !this.showNotification;
+
+    if (this.showNotification && this.unseenIds.length) {
+      this.authService
+        .markIsSeen({ notificationIds: this.unseenIds })
+        .subscribe(() => {
+          this.notificationService.getListNotification();
+        });
+    }
+  }
+
+  @HostListener("document:click", ["$event"]) onDocumentClick() {
+    this.showNotification = false;
   }
 }

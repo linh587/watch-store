@@ -50,12 +50,11 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
     private toastService: ToastrService,
     private storageService: StorageService,
     public router: Router,
-    private mapService: MapService
-  ) {
-    this.initForm();
-  }
+    private mapService: MapService,
+  ) {}
 
   ngOnInit(): void {
+    this.initForm();
     this.observerInputSearchChange();
   }
 

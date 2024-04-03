@@ -7,7 +7,10 @@ import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
 })
 export class OrderService extends BaseHttpRequest {
   public createOrder(payload: any) {
-    return this.httpClient.post(`${ENVIRONMENT}${API_URL.ORDER}`, payload);
+    return this.httpClient.post(
+      `${ENVIRONMENT}${API_URL.CREATE_ORDER}`,
+      payload
+    );
   }
 
   public getOrders() {
@@ -23,5 +26,20 @@ export class OrderService extends BaseHttpRequest {
 
   public getOrderDetail(id: string) {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.ORDER}/${id}`);
+  }
+
+  public couponRelation(payload: any) {
+    return this.httpClient.post(`${ENVIRONMENT}${API_URL.RELATION}`, payload);
+  }
+
+  public decreaseMoney(payload: any) {
+    return this.httpClient.post(
+      `${ENVIRONMENT}${API_URL.DECREASE_MONEY}`,
+      payload
+    );
+  }
+
+  public couponDetail(couponCode: string) {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.COUPON}/${couponCode}`);
   }
 }

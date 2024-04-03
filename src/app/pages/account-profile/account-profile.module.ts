@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { AccountProfileComponent } from "./account-profile.component";
 import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "../../components/shared.module";
-import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbNavModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PurchaseOrderComponent } from "./purchase-order/purchase-order.component";
 import { UserInfoComponent } from "./user-info/user-info.component";
@@ -36,6 +36,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
+    NgbTooltipModule
   ],
   declarations: [
     AccountProfileComponent,

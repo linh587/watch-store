@@ -12,11 +12,17 @@
           <td>{{ index }}</td>
           <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
           <td>{{ order.status | orderStatus }}</td>
-          <td>{{ order.totalPrice | formatPrice }}</td>
+          <td>{{ order.totalPrice | formatPrice }}đ</td>
           <td>{{ order.paymentStatus | paymentStatus }}</td>
           <td>
-            <a class="view cursor-pointer me-2 bg-primary-color" (click)="directOrderDetail(order.id)">Chi tiết</a>
             <a
+              [ngbTooltip]="'Xem chi tiết'"
+              class="view cursor-pointer me-2 bg-primary-color"
+              (click)="directOrderDetail(order.id)"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+            <a
+              *ngIf="order.status === 'waitVerify'"
               class="view cancel cursor-pointer bg-black"
               (click)="onCancelOrder(order.id)"
               >Huỷ đơn</a

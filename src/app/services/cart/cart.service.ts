@@ -18,7 +18,6 @@ import {
   InformationToCreateCartDetail,
   InformationToUpdateCartDetail,
 } from "../../models/cart.model";
-import { StorageService } from "../storage/storage.service";
 
 @Injectable({
   providedIn: "root",
@@ -30,8 +29,7 @@ export class CartService implements OnDestroy {
   constructor(
     private productsService: ProductsService,
     private toastService: ToastrService,
-    private authService: AuthService,
-    private storageService: StorageService
+    private authService: AuthService
   ) {
     this.checkAllowCallAPI();
   }
@@ -64,7 +62,6 @@ export class CartService implements OnDestroy {
       )
       .subscribe((products: any) => {
         this.productList$.next(products);
-        this.storageService.set("PRODUCT_CART", products);
       });
   }
 

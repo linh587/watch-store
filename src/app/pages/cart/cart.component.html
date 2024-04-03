@@ -31,9 +31,9 @@
                       >
                     </td>
                     <td class="plantmore-product-price">
-                      <span class="amount">{{
-                        product.price | formatPrice
-                      }}</span>
+                      <span class="amount"
+                        >{{ product.price | formatPrice }}đ</span
+                      >
                     </td>
                     <td class="plantmore-product-quantity">
                       <input
@@ -47,9 +47,11 @@
                         " />
                     </td>
                     <td class="product-subtotal">
-                      <span class="amount">{{
-                        product.price * product.quality | formatPrice
-                      }}</span>
+                      <span class="amount"
+                        >{{
+                          product.price * product.quality | formatPrice
+                        }}đ</span
+                      >
                     </td>
                     <td
                       class="plantmore-product-remove"
@@ -72,19 +74,6 @@
                       >Tiếp tục mua sắm</a
                     >
                   </div>
-
-                  <div class="coupon">
-                    <h3 class="mb-2">Khuyến mãi</h3>
-                    <input
-                      class="input-text border me-2"
-                      placeholder="Mã khuyến mãi"
-                      type="text" />
-                    <button
-                      type="button"
-                      class="button text-center color-white bg-black cursor-pointer d-inline-block text-size-x-small fw-600 text-uppercase">
-                      Thêm mã
-                    </button>
-                  </div>
                 </div>
               </div>
               <div class="col-md-4 ml-auto">
@@ -94,10 +83,10 @@
                   </h2>
                   <ul>
                     <li>
-                      Tổng tiền hàng <span>{{ total | formatPrice }}</span>
+                      Tổng tiền hàng <span>{{ total | formatPrice }}đ</span>
                     </li>
                     <li>
-                      Tổng thanh toán <span>{{ total | formatPrice }}</span>
+                      Tổng thanh toán <span>{{ total | formatPrice }}đ</span>
                     </li>
                   </ul>
                   <a

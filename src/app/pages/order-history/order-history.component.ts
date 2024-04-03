@@ -21,7 +21,8 @@ export class OrderHistoryComponent implements OnInit {
   public orderDetail$ = new BehaviorSubject<any>(null);
   public subscription$ = new Subject();
   public detailProducts$ = new BehaviorSubject<any>(null);
-  public createCloudinaryImageLink = createCloudinaryImageLink
+  public createCloudinaryImageLink = createCloudinaryImageLink;
+  public couponDetail: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,8 +44,17 @@ export class OrderHistoryComponent implements OnInit {
   public getOrderDetail() {
     this.orderService.getOrderDetail(this.orderId).subscribe((res: any) => {
       this.orderDetail$.next(res);
+      this.getCouponDetail(res);
       this.getProduct();
     });
+  }
+
+  private getCouponDetail(response: any) {
+    this.orderService
+      .couponDetail(response.couponCode)
+      .subscribe((res: any) => {
+        this.couponDetail = res;
+      });
   }
 
   private getProduct() {

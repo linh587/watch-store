@@ -82,4 +82,11 @@ export class AuthService extends BaseHttpRequest {
   public getNotifications() {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.NOTIFICATION}`);
   }
+
+  public markIsSeen(payload: any) {
+    return this.httpClient.patch(
+      `${ENVIRONMENT}${API_URL.NOTIFICATION}/${API_URL.MARK_IS_SEEN}`,
+      payload
+    );
+  }
 }

@@ -13,6 +13,7 @@ export const API_URL = {
   VERIFY: "sign-up/verify",
   USER: "user",
   NOTIFICATION: "user/notification",
+  MARK_IS_SEEN: "mark-is-seen",
 
   // PRODUCT
   GET_LIST_PRODUCTS: "product",
@@ -34,6 +35,7 @@ export const API_URL = {
   GET_ORDER_LIST: "user/order",
   ORDER: "order",
   CANCEL: "cancel",
+  CREATE_ORDER: "user/order",
 
   // CATEGORY
   GET_LIST_CATEGORY: "category",
@@ -42,6 +44,10 @@ export const API_URL = {
   BRANCH: "branch",
 
   // PAYMENT STATUS
-  PAYMENT: "order/querydr"
+  PAYMENT: "order/querydr",
 
+  // COUPON
+  COUPON: "coupon",
+  RELATION: "coupon/relation",
+  DECREASE_MONEY: "coupon/decrease-money",
 };
