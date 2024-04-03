@@ -86,18 +86,32 @@
               </div>
             </div>
           </div>
-
-          <div class="shop-products-wrap">
-            <div class="row">
-              <ng-container *ngIf="productList$ | async as productList">
+          <ng-container *ngIf="productList$ | async as productList">
+            <div class="shop-products-wrap mb-4">
+              <div class="row">
                 <div
                   class="col-lg-4 col-md-6"
-                  *ngFor="let product of productList">
+                  *ngFor="
+                    let product of productList
+                      | paginate
+                        : {
+                            itemsPerPage: 24,
+                            currentPage: page,
+                            totalItems: productList.length
+                          }
+                  ">
                   <app-product-item [productItem]="product"></app-product-item>
                 </div>
-              </ng-container>
+              </div>
             </div>
-          </div>
+
+            <pagination-controls
+              previousLabel="Trang trước"
+              nextLabel="Trang sau"
+              (pageChange)="page = $event"
+              class="float-right text-center">
+            </pagination-controls>
+          </ng-container>
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ export class CollectionsComponent implements OnInit {
   public searchForm: FormGroup;
 
   public productList$ = new BehaviorSubject<any>(null);
+  public page = 1;
   public categories: any[] = [];
 
   constructor(
