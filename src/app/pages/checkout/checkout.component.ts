@@ -178,8 +178,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.mapService
       .getLengthFromOriginToDestinationGoongIo(
         {
-          latitude: branchLat || "21.01830435000005",
-          longitude: branchLng || "105.85120678400006",
+          latitude: branchLat || "21.00418966600006",
+          longitude: branchLng || "105.84547508400004",
         },
         {
           latitude: this.latlngGroup.controls["latitude"].value,

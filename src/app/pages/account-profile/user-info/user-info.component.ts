@@ -109,7 +109,6 @@ export class UserInfoComponent implements OnInit {
           tap((data: any) => {
             this.toastService.success("Chỉnh sửa thông tin thành công!");
             this.authService.setUserInfo({ ...data });
-            this.storageService.set("AUTH_USER", data);
             this.storageService.set("USER_LOGIN", data);
           }),
           catchError((error) => {

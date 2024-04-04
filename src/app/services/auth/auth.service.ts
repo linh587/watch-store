@@ -42,8 +42,11 @@ export class AuthService extends BaseHttpRequest {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_DETAIL_USER}`);
   }
 
-  public refreshToken() {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.REFRESH_TOKEN}`);
+  public refreshToken(payload: any) {
+    return this.httpClient.post(
+      `${ENVIRONMENT}${API_URL.REFRESH_TOKEN}`,
+      payload
+    );
   }
 
   public updateUser(payload: any) {

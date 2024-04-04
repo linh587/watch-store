@@ -35,13 +35,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         // Nếu là response && refresh-token.
         if (isRefreshToken && res instanceof HttpResponse) {
-          const authorization = res.headers
-            .get("authorization")
+          const authorization = this.storageService
+            .get("JWT_TOKEN")
             ?.replace("Bearer", "")
             .trim();
-          const refreshTk = res.headers.get("refresh-token");
+          const refreshTk = this.storageService.get("JWT_REFRESH_TOKEN");
 
-          this.storageService.set("REFRESH_TOKEN", refreshTk);
+          this.storageService.set("JWT_REFRESH_TOKEN", refreshTk);
           this.storageService.set("JWT_TOKEN", authorization);
 
           this.refreshTokensSubject$.next(authorization);
@@ -78,7 +78,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private onHandleError401(request: HttpRequest<any>, next: HttpHandler) {
-    const refreshToken = this.storageService.get("REFRESH_TOKEN");
+    const refreshToken = this.storageService.get("JWT_REFRESH_TOKEN");
     if (!refreshToken) {
       this.eventBus.emit({ name: "logout", value: null });
       // @ts-ignore
@@ -87,11 +87,14 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     if (!this.isLoadingRefresh) {
       this.isLoadingRefresh = true;
-      return this.authService.refreshToken().pipe(
+      return this.authService.refreshToken({ refreshToken: refreshToken }).pipe(
         // @ts-ignore
-        switchMap((_) => {
+        switchMap((res: any) => {
           this.isLoadingRefresh = false;
-          const token = this.storageService.get("JWT_TOKEN");
+          const token = res.accessToken;
+          const refreshToken = res.refreshToken;
+          this.storageService.set("JWT_TOKEN", token);
+          this.storageService.set("JWT_REFRESH_TOKEN", refreshToken);
           return next.handle(ErrorInterceptor.addTokenHeader(request, token));
         })
       );
@@ -122,7 +125,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private static isRequestRefresh(url: string) {
     if (url.includes("refresh/user")) {
-      return "REFRESH_TOKEN";
+      return "JWT_REFRESH_TOKEN";
     }
     return null;
   }

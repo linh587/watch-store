@@ -8,7 +8,6 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationModalComponent } from "../authentication-modal/authentication-modal.component";
-import { SUB_MENU } from "../../public/constants/common";
 import { Observable } from "rxjs";
 import { AuthService } from "../../services/auth/auth.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
@@ -27,7 +26,6 @@ import { NotificationService } from "../../services/notification/notification.se
 export class HeaderComponent implements OnInit {
   public userInfo$!: Observable<UserAccount>;
   public productList$!: Observable<any>;
-  public subMenu = SUB_MENU;
   public menuFixed: boolean = false;
   public createCloudinaryThumbLink = createCloudinaryImageLink;
   public total!: number;

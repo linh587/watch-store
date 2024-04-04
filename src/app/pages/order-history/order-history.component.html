@@ -49,9 +49,13 @@
                               class="img-fluid d-block" />
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <h5 class="fs-14">
+                            <h5 class="text-size-medium">
                               <a
-                                routerLink="/ecommerce/product-detail/1"
+                                [routerLink]="[
+                                  '/product',
+                                  product?.productInfo?.id
+                                ]"
+                                target="_blank"
                                 class="text-body"
                                 >{{ product?.productInfo?.name }}</a
                               >

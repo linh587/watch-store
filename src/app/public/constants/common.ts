@@ -3,58 +3,6 @@ export const BACKGROUND_IMAGE_SLIDE = [
   "/assets/images/banners/13-418004996-1357155059.webp",
 ];
 
-export const SUB_MENU = [
-  {
-    textMenu: "Phổ biến nhất",
-    collections: [
-      "Casio",
-      "G-Stock",
-      "Hublot",
-      "Tissot",
-      "SRWatch",
-      "Citizen",
-      "Fossil",
-      "Hanboro",
-      "Daniel Wellington",
-      "Freelook",
-      "SevenFriday",
-      "Bulova",
-    ],
-  },
-  {
-    textMenu: "Hàng cao cấp",
-    collections: [
-      "Orient",
-      "Bentley",
-      "Seiko",
-      "Zenith",
-      "Versace",
-      "Fossil",
-      "Calvin Klein",
-      "Olym Pianus ",
-      "Certina",
-      "Omega",
-      "Frederique Constant",
-    ],
-  },
-  {
-    textMenu: "Các hãng khác",
-    collections: [
-      "Longines",
-      "Ogival",
-      "Maurice Lacroix",
-      "Montblanc",
-      "Bonest Gatti",
-      "Mido",
-      "Q&Q",
-      "Movado",
-      "Richard Mille",
-      "Audemars Piguet",
-      "Orient Star",
-    ],
-  },
-];
-
 export const CART_TABLE_HEADER = [
   "Hình ảnh",
   "Tên sản phẩm",
@@ -107,4 +55,19 @@ export const PURCHASE_ORDER_HEADER = [
   "Tổng tiền",
   "Thanh toán",
   "Hành động",
+];
+
+export const PRODUCT_SORT = [
+  {
+    text: "Nổi bật",
+    key: "highRating",
+  },
+  {
+    text: "Mới nhất",
+    key: "newest",
+  },
+  {
+    text: "Bán chạy",
+    key: "highPopular",
+  },
 ];

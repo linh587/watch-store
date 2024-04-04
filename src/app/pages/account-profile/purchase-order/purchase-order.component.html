@@ -22,11 +22,12 @@
               ><i class="fa-regular fa-eye"></i
             ></a>
             <a
+              [ngbTooltip]="'Huỷ đơn'"
               *ngIf="order.status === 'waitVerify'"
               class="view cancel cursor-pointer bg-black"
-              (click)="onCancelOrder(order.id)"
-              >Huỷ đơn</a
-            >
+              (click)="onCancelOrder(order.id)">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </a>
           </td>
         </tr>
       </tbody>

@@ -14,7 +14,8 @@
         </div>
       </div>
       <div class="row product-active">
-        <app-swiper-product [products]="productList"></app-swiper-product>
+        <app-swiper-product
+          [products]="highPopularProduct"></app-swiper-product>
       </div>
     </div>
   </div>
@@ -27,18 +28,15 @@
       <div class="row">
         <div class="col-12">
           <ul class="nav product-tab-menu">
-            <li class="nav-item active">
-              <a class="product-link active" href="">Nổi Bật</a>
-            </li>
-            <li class="nav-item">
-              <a class="product-link" href="">Mới Nhất</a>
-            </li>
-            <li class="product-tab__item nav-item">
-              <a class="product-link" href="">Bán Chạy</a>
-            </li>
-            <li class="product-tab__item nav-item">
-              <a class="product-link" href="">Giảm Giá</a>
-            </li>
+            <ng-container *ngFor="let sort of PRODUCT_SORT">
+              <li
+                class="nav-item cursor-pointer"
+                (click)="sortProductByText(sort.key)">
+                <a class="product-link" [class.active]="sort.key === activeKey">
+                  {{ sort.text }}
+                </a>
+              </li>
+            </ng-container>
           </ul>
         </div>
       </div>
@@ -46,7 +44,7 @@
       <div class="tab-content">
         <app-swiper-product
           [slidesPerView]="5"
-          [products]="productList"></app-swiper-product>
+          [products]="productListSort$ | async"></app-swiper-product>
       </div>
     </div>
   </div>

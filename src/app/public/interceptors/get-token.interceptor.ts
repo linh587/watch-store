@@ -23,8 +23,8 @@ export class AppGetTokenInterceptor {
 
         if (isAuthRequest && res instanceof HttpResponse) {
           // If is request login.
-          const authorization = res.headers.get("authorization");
-          const refreshTk = res.headers.get("refresh-token");
+          const authorization = this.storageService.get("JWT_TOKEN");
+          const refreshTk = this.storageService.get("JWT_REFRESH_TOKEN");
 
           if (authorization) {
             if (this.checkValidToken(authorization)) {
@@ -32,7 +32,7 @@ export class AppGetTokenInterceptor {
                 isAuthRequest,
                 authorization.replace("Bearer ", "").trim()
               );
-              this.storageService.set("REFRESH_TOKEN", refreshTk);
+              this.storageService.set("JWT_REFRESH_TOKEN", refreshTk);
             } else {
               throw new Error();
             }
@@ -43,7 +43,7 @@ export class AppGetTokenInterceptor {
   }
 
   getTokenKey(name: string) {
-    if (name.includes("sign-in/user")) {
+    if (name.includes("sign-in")) {
       return "JWT_TOKEN";
     }
     return null;

@@ -50,7 +50,7 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
     private toastService: ToastrService,
     private storageService: StorageService,
     public router: Router,
-    private mapService: MapService,
+    private mapService: MapService
   ) {}
 
   ngOnInit(): void {
@@ -111,9 +111,8 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
         .login(payload)
         .pipe(
           tap((data: any) => {
-            this.storageService.set("AUTH_USER", data);
             this.storageService.set("JWT_TOKEN", data.accessToken);
-            this.storageService.set("REFRESH_TOKEN", data.refreshToken);
+            this.storageService.set("JWT_REFRESH_TOKEN", data.refreshToken);
             this.getCurrentUserLogin();
             this.handleCallAPISuccess("Bạn đã đăng nhập thành công!");
           }),
