@@ -5,16 +5,11 @@
         <div class="single-latest-blog">
           <div class="aritcles-content mb-30 pt-3">
             <div
-              class="author-name fw-500 d-block text-size-x-small text-capitalize">
-              post by: <a> {{ blog.authorName }}</a> -
+              class="author-name fw-500 d-flex text-size-x-small text-capitalize">
+              post by: {{ blog.authorName }} -
               {{ blog.postedAt }}
             </div>
-            <h4>
-              <a
-                class="articles-name fw-600 d-block text-size-small mb-3 mt-0 position-relative text-uppercase"
-                >{{ blog.articlesName }}</a
-              >
-            </h4>
+            <h4>{{ blog.articlesName }}</h4>
           </div>
           <div class="articles-image overflow-hidden position-relative">
             <a>

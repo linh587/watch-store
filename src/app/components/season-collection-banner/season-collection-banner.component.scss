@@ -22,3 +22,15 @@
     }
   }
 }
+
+@media screen and (max-width: 992px) {
+  .banner-content-wrapper {
+    h2 {
+      font-size: 32px;
+    }
+
+    .banner-btn a {
+      padding: 13px 25px !important;
+    }
+  }
+}

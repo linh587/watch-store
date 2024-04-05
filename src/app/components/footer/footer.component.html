@@ -2,28 +2,17 @@
   <div class="footer-top py-5">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="widget-footer">
-            <h6 class="title-widget mb-30 text-uppercase">Thông tin liên hệ</h6>
-            <div class="footer-address mt-2">
-              <div class="widget-content">
-                <p class="mb-1">
-                  Địa chỉ: 96 Định Công, P. Định Công,<br />
-                  Q. Hoàng Mai, TP. Hà Nội
-                </p>
-                <p class="mb-1">Điện thoại: 0982842001</p>
-                <p class="mb-1">
-                  Email:
-                  <a href="mailto:lemailinh22@gmail.com"
-                    >lemailinh22&#64;gmail.com</a
-                  >
-                </p>
-              </div>
-            </div>
+            <h6 class="title-widget mb-4 text-uppercase">Về watchstore</h6>
+            <ul class="footer-list">
+              <li><a>Về Chúng Tôi</a></li>
+              <li><a>Kiến thức về đồng hồ</a></li>
+              <li><a>Tin tức</a></li>
+            </ul>
             <ul class="social-icons">
               <li *ngFor="let social of SOCIAL_ICONS">
                 <a
-                  href=""
                   class="social-icon color-white"
                   [style.backgroundColor]="social.bgColor">
                   <i [class]="social.icon"></i>
@@ -32,44 +21,62 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="widget-footer">
-            <h6 class="title-widget mb-30 text-uppercase">Giúp Đỡ</h6>
+            <h6 class="title-widget mb-4 text-uppercase">Chính sách chung</h6>
             <ul class="footer-list">
-              <li><a href="">Giỏ Hàng</a></li>
-              <li><a href="">Trang Chủ</a></li>
-              <li><a href="">Về Chúng Tôi</a></li>
-              <li><a href="">Liên Hệ</a></li>
-              <li><a href="">Tài Khoản</a></li>
+              <li><a>Điều khoản thanh toán</a></li>
+              <li><a>Chính sách bảo hành</a></li>
+              <li><a>Chính sách bảo mật</a></li>
+              <li><a>Chính sách vận chuyển</a></li>
+              <li><a>Chính sách đổi trả</a></li>
             </ul>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="widget-footer">
-            <h6 class="title-widget mb-30 text-uppercase">Dịch Vụ</h6>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="widget-footer mb-4">
+            <h6 class="title-widget mb-4 text-uppercase">Cửa hàng Hà Nội</h6>
             <ul class="footer-list">
-              <li><a href="">Cửa Hàng</a></li>
-              <li><a href="">New Design 1</a></li>
-              <li><a href="">New Design 2</a></li>
-              <li><a href="">New Design 3</a></li>
-              <li><a href="">Product Single</a></li>
+              <li *ngFor="let branch of BRANCH_HA_NOI">
+                <div class="mb-1">
+                  <i class="fa-solid fa-location-dot color-blue me-1"></i>
+                  <span class="fw-500">{{ branch.address }}</span>
+                </div>
+                <p class="d-flex align-items-center">
+                  <span>Mở cửa: {{ branch.time }}</span>
+                  <span class="mx-1">|</span>
+                  <a [href]="branch.map">Chỉ đường</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="widget-footer">
+            <h6 class="title-widget mb-4 text-uppercase">
+              Cửa hàng Hồ Chí Minh
+            </h6>
+            <ul class="footer-list">
+              <li *ngFor="let branch of BRANCH_HO_CHI_MINH">
+                <div class="mb-1">
+                  <i class="fa-solid fa-location-dot color-blue me-1"></i>
+                  <span class="fw-500">{{ branch.address }}</span>
+                </div>
+                <p class="d-flex align-items-center">
+                  <span>Mở cửa: {{ branch.time }}</span>
+                  <span class="mx-1">|</span>
+                  <a [href]="branch.map">Chỉ đường</a>
+                </p>
+              </li>
             </ul>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-2 col-md-6">
           <div class="widget-footer">
-            <h6 class="title-widget mb-30 text-uppercase">Get the app</h6>
-            <p class="mb-3">
-              GreenLife App is now available on Google Play &amp; App Store. Get
-              it now.
-            </p>
+            <h6 class="title-widget mb-4 text-uppercase">Liên hệ hỗ trợ</h6>
             <ul class="footer-list">
-              <li>
-                <img src="assets/images/footer/img-googleplay.webp" alt="" />
-              </li>
-              <li>
-                <img src="assets/images/footer/img-appstore.webp" alt="" />
-              </li>
+              <li>Hotline 1: 093.189.2222</li>
+              <li>Hotline 2: 097.189.3333</li>
+              <li>Hotline 3: 096.139.5555</li>
+              <li>Phản ánh: info&#64;watchstore.vn</li>
             </ul>
           </div>
         </div>

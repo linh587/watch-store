@@ -21,7 +21,6 @@ const routes: Routes = [
       },
       {
         path: "favorite",
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/favorite/favorite.module").then(
             (m) => m.FavoriteModule
@@ -37,13 +36,11 @@ const routes: Routes = [
       },
       {
         path: "cart",
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/cart/cart.module").then((m) => m.CartModule),
       },
       {
         path: "collections",
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/collections/collections.module").then(
             (m) => m.CollectionsModule
@@ -51,7 +48,6 @@ const routes: Routes = [
       },
       {
         path: "checkout",
-        canActivate: [AuthGuard],
         loadChildren: () =>
           import("./pages/checkout/checkout.module").then(
             (m) => m.CheckoutModule
@@ -94,6 +90,7 @@ const routes: Routes = [
       },
       {
         path: "order-history",
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import("./pages/order-history/order-history.module").then(
             (m) => m.OrderHistoryModule

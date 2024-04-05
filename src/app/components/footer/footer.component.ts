@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import {
+  BRANCH_HA_NOI,
+  BRANCH_HO_CHI_MINH,
+} from "../../public/constants/common";
 
 @Component({
   selector: "app-footer",
@@ -33,6 +37,9 @@ export class FooterComponent implements OnInit {
       bgColor: "#eb8314",
     },
   ];
+
+  public BRANCH_HA_NOI = BRANCH_HA_NOI;
+  public BRANCH_HO_CHI_MINH = BRANCH_HO_CHI_MINH;
 
   constructor() {}
 

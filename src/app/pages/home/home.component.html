@@ -15,6 +15,7 @@
       </div>
       <div class="row product-active">
         <app-swiper-product
+          [slidesPerViewBreakPoint]="4"
           [products]="highPopularProduct"></app-swiper-product>
       </div>
     </div>
@@ -43,7 +44,7 @@
 
       <div class="tab-content">
         <app-swiper-product
-          [slidesPerView]="5"
+          [slidesPerViewBreakPoint]="5"
           [products]="productListSort$ | async"></app-swiper-product>
       </div>
     </div>

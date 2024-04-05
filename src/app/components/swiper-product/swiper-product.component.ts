@@ -8,9 +8,23 @@ import { ProductsService } from "../../services/products/products.service";
 })
 export class SwiperProductComponent implements OnInit {
   @Input() products: any;
-  @Input() slidesPerView: number = 4;
+  @Input() slidesPerView: number = 2;
+  @Input() slidesPerViewBreakPoint!: number;
   @Input() gridOptions: any;
   public productPrice: any[] = [];
+
+  get swiperConfig() {
+    return {
+      slidesPerView: this.slidesPerView,
+      spaceBetween: 16,
+      breakpoints: {
+        992: {
+          slidesPerView: this.slidesPerViewBreakPoint,
+        },
+      },
+      slidesPerColumn: 2,
+    };
+  }
 
   constructor(private productsService: ProductsService) {}
 
