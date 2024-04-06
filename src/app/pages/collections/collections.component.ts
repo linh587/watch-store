@@ -80,7 +80,6 @@ export class CollectionsComponent implements OnInit {
   }
 
   public sortByCondition(event: any) {
-    console.log(event);
     this.searchForm.patchValue({
       sort: event.target.value,
     });

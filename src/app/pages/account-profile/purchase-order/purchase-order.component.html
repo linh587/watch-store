@@ -14,7 +14,7 @@
           <td>{{ order.status | orderStatus }}</td>
           <td>{{ order.totalPrice | formatPrice }}đ</td>
           <td>{{ order.paymentStatus | paymentStatus }}</td>
-          <td>
+          <td class="d-flex align-items-center">
             <a
               [ngbTooltip]="'Xem chi tiết'"
               class="view cursor-pointer me-2 bg-primary-color"

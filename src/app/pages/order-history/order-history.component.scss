@@ -1,1 +1,11 @@
 @import "text-size";
+
+.detail-product {
+  display: flex;
+}
+
+@media screen and (max-width: 992px) {
+  .detail-product {
+    display: unset !important;
+  }
+}
