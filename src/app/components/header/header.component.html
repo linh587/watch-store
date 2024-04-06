@@ -14,7 +14,10 @@
         </div>
 
         <div
-          class="mobile-menu-icon d-flex align-items-center justify-content-end d-lg-none col-2">
+          class="mobile-menu-icon d-flex align-items-center justify-content-end d-lg-none col-2"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample">
           <span class="material-symbols-outlined"> menu </span>
         </div>
 
@@ -281,3 +284,212 @@
     </div>
   </div>
 </header>
+
+<!-- mobile navbar  -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <div style="width: 190px">
+      <img
+        class="w-100"
+        src="https://www.watchstore.vn/upload/image/logo-watchstore.webp"
+        alt="" />
+    </div>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="search-box-mobile position-relative d-flex mb-2">
+      <input
+        type="text"
+        placeholder="Tìm kiếm theo tên sản phẩm..."
+        class="ps-3 bg-white"
+        (keydown.enter)="onSearch()"
+        #inputSearch />
+      <div class="search-btn">
+        <button
+          (click)="onSearch()"
+          class="bg-primary-color color-white position-absolute d-flex align-items-center justify-content-center">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
+      </div>
+    </div>
+    <ul class="menu-list mb-3">
+      <li (click)="router.navigate(['/']).then()" data-bs-dismiss="offcanvas">
+        Trang chủ
+      </li>
+      <li
+        (click)="hpCollapsed = !hpCollapsed"
+        class="d-flex align-items-center justify-content-between"
+        data-bs-toggle="collapse"
+        data-bs-target="#highPopular"
+        aria-expanded="false"
+        aria-controls="highPopular">
+        <span>Phổ biến nhất</span>
+        <i
+          class="fa-solid"
+          [ngClass]="{
+            'fa-plus': !hpCollapsed,
+            'fa-minus': hpCollapsed
+          }"></i>
+      </li>
+      <div class="collapse" id="highPopular">
+        <ul class="ps-2 d-flex flex-wrap">
+          <li
+            (click)="onSearchCategory(category.id)"
+            *ngFor="let category of categories.slice(0, 12)"
+            class="col-6"
+            data-bs-dismiss="offcanvas">
+            {{ category.name }}
+          </li>
+        </ul>
+      </div>
+      <li
+        (click)="luxuryCollapsed = !luxuryCollapsed"
+        class="d-flex align-items-center justify-content-between"
+        data-bs-toggle="collapse"
+        data-bs-target="#luxury"
+        aria-expanded="false"
+        aria-controls="luxury">
+        <span>Hàng cao cấp</span>
+        <i
+          class="fa-solid"
+          [ngClass]="{
+            'fa-plus': !luxuryCollapsed,
+            'fa-minus': luxuryCollapsed
+          }"></i>
+      </li>
+      <div class="collapse" id="luxury">
+        <ul class="ps-2 d-flex flex-wrap">
+          <li
+            *ngFor="let category of categories.slice(13, 25)"
+            (click)="onSearchCategory(category.id)"
+            class="col-6"
+            data-bs-dismiss="offcanvas">
+            {{ category.name }}
+          </li>
+        </ul>
+      </div>
+      <li
+        (click)="anotherCollapsed = !anotherCollapsed"
+        class="d-flex align-items-center justify-content-between"
+        data-bs-toggle="collapse"
+        data-bs-target="#another"
+        aria-expanded="false"
+        aria-controls="another">
+        <span>Các hãng khác</span>
+        <i
+          class="fa-solid"
+          [ngClass]="{
+            'fa-plus': !anotherCollapsed,
+            'fa-minus': anotherCollapsed
+          }"></i>
+      </li>
+      <div class="collapse" id="another">
+        <ul class="ps-2 d-flex flex-wrap">
+          <li
+            *ngFor="let category of categories.slice(26, 36)"
+            (click)="onSearchCategory(category.id)"
+            class="col-6"
+            data-bs-dismiss="offcanvas">
+            {{ category.name }}
+          </li>
+        </ul>
+      </div>
+      <li
+        data-bs-dismiss="offcanvas"
+        (click)="router.navigate(['/about']).then()">
+        Giới thiệu
+      </li>
+    </ul>
+
+    <div
+      class="d-flex align-items-center justify-content-center gap-3"
+      *ngIf="!(userInfo$ | async)">
+      <button
+        data-bs-dismiss="offcanvas"
+        class="btn btn-primary"
+        (click)="openAuthenicationModal('sign-in')">
+        Đăng Nhập
+      </button>
+      <button
+        data-bs-dismiss="offcanvas"
+        class="btn btn-outline-primary"
+        (click)="openAuthenicationModal('sign-out')">
+        Đăng Ký
+      </button>
+    </div>
+
+    <ng-container *ngIf="userInfo$ | async as userInfo">
+      <div class="user-menu-container">
+        <a
+          class="w-100"
+          (click)="router.navigate(['/profile/orders']).then()"
+          data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl">list_alt</span>
+          <div class="text-size-x-small">
+            <span class="fw-500">Đơn mua</span>
+          </div></a
+        ><a
+          class="w-100"
+          (click)="router.navigate(['/cart']).then()"
+          data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl"
+            >shopping_cart</span
+          >
+          <div class="text-size-x-small">
+            <span class="fw-500">Giỏ hàng</span>
+          </div></a
+        ><a
+          class="menu-half-w"
+          (click)="router.navigate(['/profile/user-info']).then()"
+          data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl"
+            >account_circle</span
+          >
+          <div class="text-size-x-small">
+            <span class="fw-500">Hồ sơ</span>
+          </div></a
+        ><a
+          class="menu-half-w"
+          (click)="router.navigate(['/profile/change-password']).then()"
+          data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl">password</span>
+          <div class="text-size-x-small">
+            <span class="fw-500">Đổi mật khẩu</span>
+          </div></a
+        ><a
+          class="menu-half-w"
+          (click)="router.navigate(['/favorite']).then()"
+          data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl">favorite</span>
+          <div class="text-size-x-small">
+            <span class="fw-500">Yêu thích</span>
+          </div></a
+        >
+        <a class="menu-half-w" data-bs-dismiss="offcanvas"
+          ><span class="material-symbols-outlined text-size-2xl"
+            >notifications</span
+          >
+          <div class="text-size-x-small">
+            <span class="fw-500">Thông báo</span>
+          </div></a
+        >
+      </div>
+
+      <div
+        (click)="logout()"
+        data-bs-dismiss="offcanvas"
+        class="log-out-btn d-flex align-item-center justify-content-start text-size-small text-danger">
+        <span class="material-symbols-outlined mr-1"> logout </span
+        ><span>Đăng Xuất</span>
+      </div>
+    </ng-container>
+  </div>
+</div>

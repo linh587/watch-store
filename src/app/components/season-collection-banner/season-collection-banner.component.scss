@@ -24,13 +24,23 @@
 }
 
 @media screen and (max-width: 992px) {
-  .banner-content-wrapper {
-    h2 {
-      font-size: 32px;
-    }
+  .banner-area {
+    padding: 80px 0;
 
-    .banner-btn a {
-      padding: 13px 25px !important;
+    .banner-content-wrapper {
+      padding-top: 60px;
+
+      .content {
+        padding: 20px 0;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
+
+      .banner-btn a {
+        padding: 13px 25px;
+      }
     }
   }
 }

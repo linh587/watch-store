@@ -34,6 +34,9 @@ export class HeaderComponent implements OnInit {
   public notifications$!: Observable<any>;
   public unseenIds: string[] = [];
   public showNotification: boolean = false;
+  public hpCollapsed: boolean = false;
+  public luxuryCollapsed: boolean = false;
+  public anotherCollapsed: boolean = false;
 
   constructor(
     public router: Router,

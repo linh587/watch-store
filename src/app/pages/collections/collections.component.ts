@@ -22,6 +22,7 @@ export class CollectionsComponent implements OnInit {
   public productList$ = new BehaviorSubject<any>(null);
   public page = 1;
   public categories: any[] = [];
+  public showCategory: boolean = true;
 
   constructor(
     public injector: Injector,
@@ -79,6 +80,7 @@ export class CollectionsComponent implements OnInit {
   }
 
   public sortByCondition(event: any) {
+    console.log(event);
     this.searchForm.patchValue({
       sort: event.target.value,
     });

@@ -121,7 +121,7 @@ export class AuthenticationModalComponent implements OnInit, OnDestroy {
               if (error === "Not Found") {
                 this.toastService.error("Không tìm thấy người dùng");
               } else {
-                this.toastService.error("Email đã được đăng ký");
+                this.toastService.error("Đăng nhập không thành công");
               }
             });
           })

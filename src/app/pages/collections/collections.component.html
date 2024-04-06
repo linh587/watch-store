@@ -6,8 +6,13 @@
           <div class="shop-box-area">
             <!-- PRODUCT CATEGORIES  -->
             <div class="sidebar-categories-box shop-sidebar mb-30">
-              <h4 class="title">Hãng sản phẩm</h4>
-              <div class="category-sub-menu">
+              <h4
+                class="title cursor-pointer d-flex align-items-center"
+                (click)="showCategory = !showCategory">
+                <span class="me-1">Hãng sản phẩm</span>
+                <span class="material-symbols-outlined"> expand_more </span>
+              </h4>
+              <div class="category-sub-menu" *ngIf="showCategory">
                 <ul>
                   <li
                     (click)="resetSearch()"

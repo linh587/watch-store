@@ -11,7 +11,7 @@ import { BehaviorSubject } from "rxjs";
 export class HomeComponent implements OnInit {
   public highPopularProduct: any[] = [];
   public PRODUCT_SORT = PRODUCT_SORT;
-  public productListSort$ = new BehaviorSubject<any>([]);
+  public productListSort: any[] = [];
   public activeKey: any;
 
   constructor(private productsService: ProductsService) {}
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   private getListProduct() {
     this.productsService.getProducts().subscribe((res: any) => {
-      this.productListSort$.next(res.data.slice(0, 10));
+      this.productListSort = res.data.slice(0, 10);
     });
   }
 
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
         sort: text || "highRating",
       })
       .subscribe((res) => {
-        this.productListSort$.next(res.data.slice(0, 10));
+        this.productListSort = res.data.slice(0, 10);
       });
   }
 }

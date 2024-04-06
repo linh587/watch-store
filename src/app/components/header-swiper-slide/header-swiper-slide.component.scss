@@ -42,3 +42,9 @@
     min-height: 300px;
   }
 }
+
+@media screen and (max-width: 576px) {
+  .header-image-wrapper {
+    min-height: 140px;
+  }
+}

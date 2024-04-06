@@ -40,3 +40,24 @@
     }
   }
 }
+
+@media screen and (max-width: 992px) {
+  .widget-footer {
+    margin-bottom: 24px !important;
+  }
+
+  .title-widget {
+    margin-bottom: 12px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .copy-left-text {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .copy-right-image {
+    text-align: center !important;
+  }
+}
