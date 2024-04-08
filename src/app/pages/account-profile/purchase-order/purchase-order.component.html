@@ -1,5 +1,36 @@
 <div class="purchase-order">
   <h3>Đơn đã mua</h3>
+  <div class="filter-search">
+    <div class="row" [formGroup]="searchForm">
+      <div class="col-xl-3 col-md-3 mb-4">
+        <label class="form-label">Trạng thái đơn hàng</label>
+        <select class="form-control fs-14" formControlName="status">
+          <option value="">Tất cả</option>
+          <option value="waitVerify">Chờ duyệt</option>
+          <option value="verified">Đã duyệt</option>
+          <option value="waitReceive">Chờ giao hàng</option>
+          <option value="received">Đã nhận</option>
+          <option value="cancelled">Đã huỷ</option>
+        </select>
+      </div>
+      <div class="col-xl-3 col-md-3 mb-4">
+        <label class="form-label">Lọc theo thời gian</label>
+        <select class="form-control fs-14" formControlName="sort">
+          <option value="">Tất cả</option>
+          <option value="oldest">Đơn hàng cũ nhất</option>
+          <option value="newest">Đơn hàng mới nhất</option>
+        </select>
+      </div>
+      <div class="col-xl-3 col-md-3 mb-4">
+        <label class="form-label">Từ ngày</label>
+        <input type="date" class="form-control" formControlName="createdFrom" />
+      </div>
+      <div class="col-xl-3 col-md-3 mb-4">
+        <label class="form-label">Đến ngày</label>
+        <input type="date" class="form-control" formControlName="createdTo" />
+      </div>
+    </div>
+  </div>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -7,30 +38,56 @@
           <th *ngFor="let header of PURCHASE_ORDER_HEADER">{{ header }}</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let order of orderList; let index = index">
-          <td>{{ index }}</td>
-          <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
-          <td>{{ order.status | orderStatus }}</td>
-          <td>{{ order.totalPrice | formatPrice }}đ</td>
-          <td>{{ order.paymentStatus | paymentStatus }}</td>
-          <td class="d-flex align-items-center">
-            <a
-              [ngbTooltip]="'Xem chi tiết'"
-              class="view cursor-pointer me-2 bg-primary-color"
-              (click)="directOrderDetail(order.id)"
-              ><i class="fa-regular fa-eye"></i
-            ></a>
-            <a
-              [ngbTooltip]="'Huỷ đơn'"
-              *ngIf="order.status === 'waitVerify'"
-              class="view cancel cursor-pointer bg-black"
-              (click)="onCancelOrder(order.id)">
-              <i class="fa-regular fa-circle-xmark"></i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
+      <ng-container *ngIf="orderList$ | async as orderList">
+        <tbody>
+          <tr
+            *ngFor="
+              let order of orderList
+                | paginate
+                  : {
+                      itemsPerPage: 16,
+                      currentPage: page,
+                      totalItems: orderList.length
+                    };
+              let index = index
+            ">
+            <td>{{ index }}</td>
+            <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
+
+            <td>{{ order.totalPrice | formatPrice }}đ</td>
+            <td>{{ order.paymentStatus | paymentStatus }}</td>
+            <td>
+              <div
+                class="badge text-size-small text-white p-2"
+                ngClass="bg-{{ order.status | orderStatusColor }}">
+                {{ order.status | orderStatus }}
+              </div>
+            </td>
+            <td class="d-flex align-items-center">
+              <a
+                [ngbTooltip]="'Xem chi tiết'"
+                class="view cursor-pointer me-2 bg-primary-color"
+                (click)="directOrderDetail(order.id)"
+                ><i class="fa-regular fa-eye"></i
+              ></a>
+              <a
+                [ngbTooltip]="'Huỷ đơn'"
+                *ngIf="order.status === 'waitVerify'"
+                class="view cancel cursor-pointer bg-black"
+                (click)="onCancelOrder(order.id)">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </ng-container>
     </table>
+
+    <pagination-controls
+      previousLabel="Trang trước"
+      nextLabel="Trang sau"
+      (pageChange)="page = $event"
+      class="float-right text-center">
+    </pagination-controls>
   </div>
 </div>

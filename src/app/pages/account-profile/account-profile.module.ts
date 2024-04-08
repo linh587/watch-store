@@ -9,6 +9,7 @@ import { PurchaseOrderComponent } from "./purchase-order/purchase-order.componen
 import { UserInfoComponent } from "./user-info/user-info.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { PipesModule } from "../../public/pipes/pipes.module";
+import { NgxPaginationModule } from "ngx-pagination";
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    NgxPaginationModule,
   ],
   declarations: [
     AccountProfileComponent,

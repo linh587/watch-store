@@ -13,6 +13,9 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  forkJoin,
+  map,
+  mergeMap,
   takeUntil,
   tap,
   throwError,
@@ -29,6 +32,7 @@ import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
 import { SocketService } from "../../services/socket/socket.service";
+import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-checkout",
@@ -64,7 +68,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private branchService: BranchService,
     private router: Router,
     private notificationService: NotificationService,
-    private socketService: SocketService
+    private socketService: SocketService,
+    private productService: ProductsService
   ) {}
 
   ngOnInit() {
@@ -78,7 +83,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.observeChangeDeliveryCharge();
     this.getAllBranchs();
     this.couponRelation();
-
     // this.socketService.listen("newNotification").subscribe((res) => {});
   }
 
@@ -96,7 +100,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         .couponRelation({
           order: this.orderGroup.getRawValue(),
         })
-        .subscribe((res) => {
+        .subscribe((res: any) => {
           this.coupons$.next(res);
         });
     }
@@ -131,6 +135,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         bankCode: ["NCB"],
         language: ["vn"],
         couponCode: [""],
+        note: [""],
       }),
       receivedAddressCoordinate: this.fb.group({
         latitude: [this.userInfo.latitude, Validators.required],

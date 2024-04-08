@@ -10,18 +10,18 @@ export class SocketService {
   public readonly string = "ws://localhost:8080";
 
   constructor() {
-    this.socket = io();
+    // this.socket = io();
   }
 
-  public listen(eventName: string) {
-    return new Observable((subscriber) => {
-      this.socket.on(eventName, (data: any) => {
-        subscriber.next(data);
-      });
-    });
-  }
+  // public listen(eventName: string) {
+  //   return new Observable((subscriber) => {
+  //     this.socket.on(eventName, (data: any) => {
+  //       subscriber.next(data);
+  //     });
+  //   });
+  // }
 
-  public emit(eventName: string, data: any) {
-    this.socket.emit(eventName, data);
-  }
+  // public emit(eventName: string, data: any) {
+  //   this.socket.emit(eventName, data);
+  // }
 }

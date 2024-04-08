@@ -35,8 +35,7 @@
                     <tr *ngFor="let product of detailProduct">
                       <td>
                         <div class="detail-product">
-                          <div
-                            class="flex-shrink-0 avatar-md bg-light rounded p-1">
+                          <div class="flex-shrink-0 avatar-md p-1">
                             <img
                               [src]="
                                 createCloudinaryImageLink(
@@ -153,6 +152,9 @@
               <li>
                 <i class="fa-solid fa-phone me-2"></i>
                 <span>{{ order?.phone }}</span>
+              </li>
+              <li>
+                <span>Ghi chú: {{ order?.note }}</span>
               </li>
             </ul>
           </div>

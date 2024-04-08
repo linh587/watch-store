@@ -51,9 +51,9 @@ export const ACCOUNT_TAB = [
 export const PURCHASE_ORDER_HEADER = [
   "STT",
   "Thời gian",
-  "Trạng thái",
   "Tổng tiền",
   "Thanh toán",
+  "Trạng thái",
   "Hành động",
 ];
 

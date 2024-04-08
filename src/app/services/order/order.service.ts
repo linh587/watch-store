@@ -13,8 +13,10 @@ export class OrderService extends BaseHttpRequest {
     );
   }
 
-  public getOrders() {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_ORDER_LIST}`);
+  public getOrders(params?: any) {
+    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_ORDER_LIST}`, {
+      params,
+    });
   }
 
   public cancelOrder(orderId: string, payload: any) {
