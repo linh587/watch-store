@@ -26,13 +26,14 @@ export class ProductDetailComponent implements OnInit {
   public id!: string;
   public productItem!: any;
   public active = 1;
-  public productItem$ = new BehaviorSubject<any[]>([]);
   public productPrices: any[] = [];
   public productPrices$ = new BehaviorSubject<any[]>([]);
   public productSizes$ = new BehaviorSubject<any[]>([]);
   public selectedPrice: any;
   public selectedSize!: string;
   public addToCartForm!: FormGroup;
+  public products: any[] = [];
+  public highPopularProduct: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +49,26 @@ export class ProductDetailComponent implements OnInit {
     this.getListProductPrice();
     this.getProductSizes();
     this.initForm();
+    this.getListProduct();
+    this.getHighPopularProduct();
+  }
+
+  public getHighPopularProduct() {
+    this.productsService
+      .getProducts({
+        sort: "highPopular",
+      })
+      .subscribe((res) => {
+        const newProduct = res.data.slice(0, 10);
+
+        this.highPopularProduct = newProduct;
+      });
+  }
+
+  public getListProduct() {
+    this.productsService.getProducts().subscribe((res) => {
+      this.products = res.data.slice(0, 10);
+    });
   }
 
   private initForm() {
@@ -63,9 +84,13 @@ export class ProductDetailComponent implements OnInit {
   }
 
   public getProductItem() {
-    this.productsService.getDetailProduct(this.id).subscribe((res: any) => {
-      this.productItem = res;
-    });
+    this.productsService
+      .getDetailProduct(this.id, {
+        includes: "priceAndSize,images",
+      })
+      .subscribe((res: any) => {
+        this.productItem = res;
+      });
   }
 
   public getProductSizes() {

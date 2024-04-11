@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ProductsService } from "../../services/products/products.service";
 import { PRODUCT_SORT } from "../../public/constants/common";
-import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -23,15 +22,20 @@ export class HomeComponent implements OnInit {
   }
 
   private getListProduct() {
-    this.productsService.getProducts().subscribe((res: any) => {
-      this.productListSort = res.data.slice(0, 10);
-    });
+    this.productsService
+      .getProducts({
+        includes: "images, priceAndSize",
+      })
+      .subscribe((res: any) => {
+        this.productListSort = res.data.slice(0, 10);
+      });
   }
 
   public getHighPopularProduct() {
     this.productsService
       .getProducts({
         sort: "highPopular",
+        includes: "images, priceAndSize",
       })
       .subscribe((res) => {
         const newProduct = res.data.slice(0, 10);

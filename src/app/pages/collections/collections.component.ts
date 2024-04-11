@@ -52,6 +52,7 @@ export class CollectionsComponent implements OnInit {
     this.searchForm.patchValue({
       page: "",
       status: "",
+      includes: "images, priceAndSize",
     });
   }
 

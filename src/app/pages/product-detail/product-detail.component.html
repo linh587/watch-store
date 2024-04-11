@@ -3,36 +3,35 @@
     <div class="row product-details-inner">
       <div class="col-lg-5 col-md-6">
         <div class="gallery">
-          <!-- <swiper
+          <swiper
             [spaceBetween]="10"
             [navigation]="false"
             [thumbs]="{ swiper: thumbsSwiper }"
-            class="mySwiper2 mb-3 w-100"> -->
-          <!-- <ng-template swiperSlide *ngFor="let image of productItem?.images"> -->
-          <img
-            [src]="createCloudinaryThumbLink(productItem?.coverImage)"
-            alt=""
-            class="w-100 border mb-3"
-            style="object-fit: scale-down" />
-          <!-- </ng-template> -->
-          <!-- </swiper> -->
-          <!-- <swiper
+            class="mySwiper2 mb-3 w-100">
+            <ng-template swiperSlide *ngFor="let image of productItem?.images">
+              <img
+                [src]="createCloudinaryImageLink(image)"
+                alt=""
+                class="w-100 border mb-3" />
+            </ng-template>
+          </swiper>
+          <swiper
             (swiper)="thumbsSwiper = $event"
             [loop]="false"
             [spaceBetween]="10"
             [slidesPerView]="slidesPerView"
             [freeMode]="true"
             [watchSlidesProgress]="true"
-            class="custome-swiper mb-2 w-100"> -->
-          <!-- <ng-template
+            class="custome-swiper mb-2 w-100">
+            <ng-template
               swiperSlide
-              *ngFor="let image of productItem?.images; let index = index"> -->
-          <img
-            class="image-thumbnail border p-2"
-            [src]="createCloudinaryImageLink(productItem?.coverImage, 100, 100)"
-            alt="" />
-          <!-- </ng-template>
-          </swiper> -->
+              *ngFor="let image of productItem?.images; let index = index">
+              <img
+                class="image-thumbnail border p-2"
+                [src]="createCloudinaryThumbLink(image)"
+                alt="" />
+            </ng-template>
+          </swiper>
         </div>
       </div>
 
@@ -231,7 +230,9 @@
           </div>
         </div>
         <div class="row product">
-          <!-- <app-swiper-product></app-swiper-product> -->
+          <app-swiper-product
+            [slidesPerViewBreakPoint]="5"
+            [products]="products"></app-swiper-product>
         </div>
       </div>
     </div>
@@ -245,7 +246,9 @@
         </div>
       </div>
       <div class="row product">
-        <!-- <app-swiper-product></app-swiper-product> -->
+        <app-swiper-product
+          [slidesPerViewBreakPoint]="5"
+          [products]="highPopularProduct"></app-swiper-product>
       </div>
     </div>
   </div>

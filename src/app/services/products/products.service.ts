@@ -28,8 +28,11 @@ export class ProductsService extends BaseHttpRequest {
       );
   }
 
-  public getDetailProduct(id: string) {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.DETAIL_PRODUCT}/${id}`);
+  public getDetailProduct(id: string, params?: any) {
+    return this.httpClient.get(
+      `${ENVIRONMENT}${API_URL.DETAIL_PRODUCT}/${id}`,
+      { params }
+    );
   }
 
   public getProductPrices() {

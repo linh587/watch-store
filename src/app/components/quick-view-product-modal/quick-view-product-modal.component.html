@@ -7,24 +7,23 @@
     </div>
     <div class="modal-inner-area">
       <div class="row gx-3 product-details-inner">
-        <div class="col-lg-5 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="gallery">
-            <!-- <swiper
+            <swiper
               [spaceBetween]="10"
               [navigation]="false"
               [thumbs]="{ swiper: thumbsSwiper }"
               class="mySwiper2 mb-3 w-100">
               <ng-template
                 swiperSlide
-                *ngFor="let image of productItem?.images"> -->
-            <img
-              [src]="createCloudinaryThumbLink(productItem.coverImage)"
-              alt=""
-              class="w-100"
-              style="object-fit: scale-down" />
-            <!-- </ng-template>
-            </swiper> -->
-            <!-- <swiper
+                *ngFor="let image of productItem?.images">
+                <img
+                  [src]="createCloudinaryImageLink(image)"
+                  alt=""
+                  class="w-100" />
+              </ng-template>
+            </swiper>
+            <swiper
               (swiper)="thumbsSwiper = $event"
               [loop]="false"
               [spaceBetween]="10"
@@ -34,16 +33,16 @@
               class="mySwiper mb-2 w-100">
               <ng-template
                 swiperSlide
-                *ngFor="let image of productItem?.images; let index = index"> -->
-            <img
-              class="image-thumbnail"
-              [src]="createCloudinaryImageLink(productItem.coverImage, 70, 70)"
-              alt="" />
-            <!-- </ng-template>
-            </swiper> -->
+                *ngFor="let image of productItem?.images; let index = index">
+                <img
+                  class="image-thumbnail"
+                  [src]="createCloudinaryThumbLink(image)"
+                  alt="" />
+              </ng-template>
+            </swiper>
           </div>
         </div>
-        <div class="col-lg-7 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="product-details-view-content">
             <div class="product-info">
               <h3 class="mb-2">{{ productItem?.name }}</h3>
@@ -69,9 +68,9 @@
               </div>
               <div
                 class="price-box primary-color fw-500 mb-3 mt-2 w-100 text-size-large">
-                <span class="new-price fw-500 primary-color">{{
-                  selectedPrice?.price | formatPrice
-                }}đ</span>
+                <span class="new-price fw-500 primary-color"
+                  >{{ selectedPrice?.price | formatPrice }}đ</span
+                >
               </div>
               <div class="select-size-box mb-3">
                 <h6 class="mb-2">Chọn size</h6>
