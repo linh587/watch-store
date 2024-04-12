@@ -10,6 +10,9 @@ import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CartService } from "../../services/cart/cart.service";
 import { ToastrService } from "ngx-toastr";
+import { Product, ProductSize } from "../../models/product.model";
+import { RatingService } from "../../services/rating/rating.service";
+import { Rating } from "../../models/rating.model";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs, Pagination]);
 
@@ -28,25 +31,27 @@ export class ProductDetailComponent implements OnInit {
   public active = 1;
   public productPrices: any[] = [];
   public productPrices$ = new BehaviorSubject<any[]>([]);
-  public productSizes$ = new BehaviorSubject<any[]>([]);
+  public productSizes$ = new BehaviorSubject<ProductSize[]>([]);
   public selectedPrice: any;
   public selectedSize!: string;
   public addToCartForm!: FormGroup;
-  public products: any[] = [];
-  public highPopularProduct: any[] = [];
+  public products: Product[] = [];
+  public highPopularProduct: Product[] = [];
   public ratingForm!: FormGroup;
+  public listRating: Rating[] = [];
+  public starOfProduct!: number;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
     private fb: FormBuilder,
     private cartService: CartService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private ratingService: RatingService
   ) {}
 
   ngOnInit() {
-    this.getProductId();
-    this.getProductItem();
+    this.subscribeParamChange();
     this.getListProductPrice();
     this.getProductSizes();
     this.initForm();
@@ -54,10 +59,11 @@ export class ProductDetailComponent implements OnInit {
     this.getHighPopularProduct();
   }
 
-  public getHighPopularProduct() {
+  private getHighPopularProduct() {
     this.productsService
       .getProducts({
         sort: "highPopular",
+        includes: "images",
       })
       .subscribe((res) => {
         const newProduct = res.data.slice(0, 10);
@@ -66,10 +72,14 @@ export class ProductDetailComponent implements OnInit {
       });
   }
 
-  public getListProduct() {
-    this.productsService.getProducts().subscribe((res) => {
-      this.products = res.data.slice(0, 10);
-    });
+  private getListProduct() {
+    this.productsService
+      .getProducts({
+        includes: "images",
+      })
+      .subscribe((res) => {
+        this.products = res.data.slice(0, 10);
+      });
   }
 
   private initForm() {
@@ -84,23 +94,44 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  private getProductId() {
-    this.route.params.subscribe((params) => {
-      this.id = params["id"];
+  private subscribeParamChange() {
+    this.id = this.getProductId();
+    this.getProductItem(this.id);
+    this.getStarOfProduct(this.id);
+    this.getRatingsOfProduct(this.id);
+
+    this.route.params.subscribe((param) => {
+      const { id } = param;
+      if (id && id !== this.id) {
+        this.getProductItem(id);
+        this.getStarOfProduct(id);
+        this.getRatingsOfProduct(id);
+      } else this.id = id;
     });
   }
 
-  public getProductItem() {
+  private getStarOfProduct(id: string) {
+    this.ratingService.getStarOfProduct(id).subscribe((res: any) => {
+      this.starOfProduct = res;
+    });
+  }
+
+  private getProductId() {
+    const { id } = this.route.snapshot.params;
+    return id || "";
+  }
+
+  private getProductItem(id: string) {
     this.productsService
-      .getDetailProduct(this.id, {
-        includes: "priceAndSize,images",
+      .getDetailProduct(id, {
+        includes: "images",
       })
       .subscribe((res: any) => {
         this.productItem = res;
       });
   }
 
-  public getProductSizes() {
+  private getProductSizes() {
     let productSizes: any = [];
     this.productPrices$.subscribe((prices) => {
       prices.forEach((price) => {
@@ -113,6 +144,13 @@ export class ProductDetailComponent implements OnInit {
               priceId: price.id,
             });
             this.productSizes$.next(productSizes);
+
+            this.selectedPrice = {
+              price: productSizes[0].price,
+              id: productSizes[0].priceId,
+            };
+
+            this.selectedSize = productSizes[0].name;
           });
       });
     });
@@ -138,10 +176,16 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  public getListProductPrice() {
+  private getListProductPrice() {
     this.productsService.getProductPrices().subscribe((res: any) => {
       this.productPrices = res.filter((p: any) => p?.productId === this.id);
       this.productPrices$.next(this.productPrices);
+    });
+  }
+
+  private getRatingsOfProduct(id: string) {
+    this.ratingService.getRatingsOfProduct(id).subscribe((res: any) => {
+      this.listRating = res.data;
     });
   }
 }

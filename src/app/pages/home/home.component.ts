@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ProductsService } from "../../services/products/products.service";
 import { PRODUCT_SORT } from "../../public/constants/common";
+import { Product } from "../../models/product.model";
+import { Response } from "../../models/common.model";
 
 @Component({
   selector: "app-home",
@@ -8,10 +10,10 @@ import { PRODUCT_SORT } from "../../public/constants/common";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  public highPopularProduct: any[] = [];
+  public highPopularProduct: Product[] = [];
   public PRODUCT_SORT = PRODUCT_SORT;
-  public productListSort: any[] = [];
-  public activeKey: any;
+  public productListSort: Product[] = [];
+  public activeKey: string | undefined;
 
   constructor(private productsService: ProductsService) {}
 
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit {
       .getProducts({
         includes: "images, priceAndSize",
       })
-      .subscribe((res: any) => {
+      .subscribe((res: Response) => {
         this.productListSort = res.data.slice(0, 10);
       });
   }

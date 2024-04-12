@@ -27,10 +27,13 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListProductPrice();
+
+    console.log(this.productItem)
   }
 
   public onOpenQuickViewProductModal(event: Event) {
     event.preventDefault();
+    event.stopPropagation();
     const modalRef = this.modalService.open(QuickViewProductModalComponent, {
       centered: true,
       size: "lg",

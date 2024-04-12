@@ -50,4 +50,9 @@ export const API_URL = {
   COUPON: "coupon",
   RELATION: "coupon/relation",
   DECREASE_MONEY: "coupon/decrease-money",
+
+  // RATING
+  USER_RATING: "user/rating",
+  RATING: "rating",
+  AVERAGE_STAR: "average-star",
 };

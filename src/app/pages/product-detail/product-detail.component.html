@@ -41,25 +41,16 @@
             <h3 class="mb-2">{{ productItem?.name }}</h3>
             <div class="product-rating d-flex align-items-center">
               <ul class="d-flex">
-                <li>
-                  <i class="fa-regular fa-star"></i>
-                </li>
-                <li>
-                  <i class="fa-regular fa-star"></i>
-                </li>
-                <li>
-                  <i class="fa-regular fa-star"></i>
-                </li>
-                <li>
-                  <i class="fa-regular fa-star"></i>
-                </li>
-                <li>
-                  <i class="fa-regular fa-star"></i>
-                </li>
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i
+                    class="fa-star"
+                    [class.fa-solid]="star <= starOfProduct"
+                    [class.fa-regular]="star > starOfProduct"></i>
+                </ng-container>
               </ul>
-              <a href="#reviews" class="ms-2"
-                >(<span class="count">1</span> đánh giá)</a
-              >
+              <div class="ms-2">
+                (<span class="count">{{ listRating.length }}</span> đánh giá)
+              </div>
             </div>
             <div class="price-box">
               <span class="new-price"
@@ -149,6 +140,38 @@
           <div class="product-details-tab">
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
               <li [ngbNavItem]="1">
+                <button ngbNavLink class="text-size-medium">Đánh giá</button>
+                <ng-template ngbNavContent>
+                  <ng-container *ngIf="listRating; else noRating">
+                    <ng-container *ngFor="let rating of listRating">
+                      <div class="rating-wrapper my-3 pb-3">
+                        <div class="d-flex align-items-center mb-1">
+                          <h6 class="customer-name">
+                            {{ rating.userName }}
+                          </h6>
+                          <div class="d-flex align-items-center ms-2">
+                            <i class="fa-solid fa-circle-check me-1"></i>
+                            <span> Đã mua hàng </span>
+                          </div>
+                        </div>
+                        <div class="mb-2">
+                          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                            <i
+                              class="fa-star"
+                              [class.fa-solid]="star <= rating.star"
+                              [class.fa-regular]="star > rating.star"></i>
+                          </ng-container>
+                        </div>
+                        <p>{{ rating.content }}</p>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #noRating>
+                    <h5>Sản phẩm này không có đánh giá nào</h5>
+                  </ng-template>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2">
                 <button ngbNavLink class="text-size-medium">Mô tả</button>
                 <ng-template ngbNavContent>
                   <div class="product_description_wrap mt-30">
@@ -158,96 +181,6 @@
                         [innerHTML]="productItem?.description"></p>
                     </div>
                   </div>
-                </ng-template>
-              </li>
-              <li [ngbNavItem]="2">
-                <button ngbNavLink class="text-size-medium">Đánh giá</button>
-                <ng-template ngbNavContent>
-                  <form [formGroup]="ratingForm">
-                    <div class="rating_wrap mt-30">
-                      <h5 class="rating-title-1 text-size-medium mb-2">
-                        Thêm đánh giá
-                      </h5>
-                      <p class="mb-3">
-                        Email của bạn sẽ không bị công khai. Những trường bắt
-                        buộc có *
-                      </p>
-                      <h6 class="rating-title-2 mb-2">Đánh giá của bạn</h6>
-                      <div class="row justify-content-center">
-                        <div class="rating-wrapper">
-                          <input
-                            type="radio"
-                            id="5-star-rating"
-                            name="star"
-                            value="5"
-                            formControlName="star" />
-                          <label for="5-star-rating" class="star-rating">
-                            <i class="fas fa-star d-inline-block"></i>
-                          </label>
-
-                          <input
-                            type="radio"
-                            id="4-star-rating"
-                            name="star"
-                            value="4"
-                            formControlName="star" />
-                          <label for="4-star-rating" class="star-rating star">
-                            <i class="fas fa-star d-inline-block"></i>
-                          </label>
-
-                          <input
-                            type="radio"
-                            id="3-star-rating"
-                            name="star"
-                            value="3"
-                            formControlName="star" />
-                          <label for="3-star-rating" class="star-rating star">
-                            <i class="fas fa-star d-inline-block"></i>
-                          </label>
-
-                          <input
-                            type="radio"
-                            id="2-star-rating"
-                            name="star"
-                            value="2"
-                            formControlName="star" />
-                          <label for="2-star-rating" class="star-rating star">
-                            <i class="fas fa-star d-inline-block"></i>
-                          </label>
-
-                          <input
-                            type="radio"
-                            id="1-star-rating"
-                            name="star"
-                            value="1"
-                            formControlName="star" />
-                          <label for="1-star-rating" class="star-rating star">
-                            <i class="fas fa-star d-inline-block"></i>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="comments-area comments-reply-area">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <form action="#" class="comment-form-area">
-                            <div class="mt-3 form-group col-md-12">
-                              <label class="form-label">Nhận xét</label>
-                              <textarea
-                                class="form-control"
-                                formControlName="content"></textarea>
-                            </div>
-                            <div class="comment-form-submit mt-3">
-                              <input
-                                type="submit"
-                                value="Gửi"
-                                class="comment-submit" />
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
                 </ng-template>
               </li>
             </ul>

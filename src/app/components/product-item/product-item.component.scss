@@ -65,7 +65,7 @@
   }
 
   .product-caption {
-    padding: 20px 0;
+    padding: 20px;
     border-top: 1px solid $gray-lighter;
 
     .product-name {
@@ -76,6 +76,10 @@
       color: $primary-color;
     }
   }
+}
+
+.fa-star {
+  color: #ffca08;
 }
 
 @media screen and (max-width: 499px) {

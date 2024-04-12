@@ -11,10 +11,13 @@ import {
 } from "rxjs";
 import { ProductsService } from "../../services/products/products.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { RatingModalComponent } from "../../components/rating-modal/rating-modal.component";
 
 @Component({
   selector: "app-order-history",
   templateUrl: "./order-history.component.html",
+  styleUrls: ["./order-history.component.scss"],
 })
 export class OrderHistoryComponent implements OnInit {
   public orderId!: string;
@@ -27,7 +30,8 @@ export class OrderHistoryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -55,6 +59,14 @@ export class OrderHistoryComponent implements OnInit {
       .subscribe((res: any) => {
         this.couponDetail = res;
       });
+  }
+
+  public onOpenRatingModal(productId: string) {
+    const modalRef = this.modalService.open(RatingModalComponent, {
+      centered: true,
+    });
+
+    modalRef.componentInstance.productId = productId;
   }
 
   private getProduct() {

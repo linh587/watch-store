@@ -165,7 +165,7 @@
   border: 1px solid #ddd;
   margin-top: 60px;
   border-radius: 3px;
-  padding: 0px 20px 20px 20px;
+  padding: 0px 20px;
 }
 
 .nav-link.active {
@@ -180,20 +180,12 @@
   font-size: 20px;
   font-weight: 500;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 
   &:hover {
     border: unset;
     color: $primary-color;
   }
-}
-
-.comment-form-submit input {
-  border: none;
-  padding: 10px 30px;
-  border-radius: 3px;
-  background: #c89979;
-  color: #fff;
 }
 
 .select-size-box {
@@ -224,41 +216,14 @@
   }
 }
 
-// rating
-.rating-wrapper {
-  align-self: center;
-  border-radius: 5rem;
-  direction: rtl !important;
-  display: flex;
-  justify-content: end;
+.fa-star {
+  color: #ffca08;
+}
 
-  label {
-    color: #e1e6f6;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    transition: color 0.5s;
-  }
+.fa-circle-check {
+  color: green;
+}
 
-  input {
-    height: 100%;
-    width: 100%;
-  }
-
-  input {
-    display: none;
-  }
-
-  label:hover,
-  label:hover ~ label,
-  input:checked ~ label {
-    color: #ffca08;
-  }
-
-  label:hover,
-  label:hover ~ label,
-  input:checked ~ label {
-    color: #ffca08;
-  }
+.rating-wrapper:not(:nth-last-child(1)) {
+  border-bottom: 1px solid $gray-lighter;
 }

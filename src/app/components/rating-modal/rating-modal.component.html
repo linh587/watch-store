@@ -1,0 +1,73 @@
+<form [formGroup]="ratingForm" (submit)="onPostRating($event)">
+  <div class="p-4">
+    <h5 class="text-size-medium mb-2">Viết đánh giá</h5>
+    <p class="mb-2">Đánh giá của bạn</p>
+    <div class="row justify-content-center">
+      <div class="rating-wrapper">
+        <input
+          type="radio"
+          id="5-star-rating"
+          name="star"
+          value="5"
+          formControlName="star" />
+        <label for="5-star-rating" class="star-rating">
+          <i class="fas fa-star d-inline-block"></i>
+        </label>
+
+        <input
+          type="radio"
+          id="4-star-rating"
+          name="star"
+          value="4"
+          formControlName="star" />
+        <label for="4-star-rating" class="star-rating star">
+          <i class="fas fa-star d-inline-block"></i>
+        </label>
+
+        <input
+          type="radio"
+          id="3-star-rating"
+          name="star"
+          value="3"
+          formControlName="star" />
+        <label for="3-star-rating" class="star-rating star">
+          <i class="fas fa-star d-inline-block"></i>
+        </label>
+
+        <input
+          type="radio"
+          id="2-star-rating"
+          name="star"
+          value="2"
+          formControlName="star" />
+        <label for="2-star-rating" class="star-rating star">
+          <i class="fas fa-star d-inline-block"></i>
+        </label>
+
+        <input
+          type="radio"
+          id="1-star-rating"
+          name="star"
+          value="1"
+          formControlName="star" />
+        <label for="1-star-rating" class="star-rating star">
+          <i class="fas fa-star d-inline-block"></i>
+        </label>
+      </div>
+
+      <div class="mt-3 form-group">
+        <textarea
+          class="form-control text-size-small"
+          formControlName="content"
+          rows="4"
+          placeholder="Nhập đánh giá về sản phẩm"></textarea>
+      </div>
+      <div class="mt-3 d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-light" (click)="cancelChange()">
+          Huỷ
+        </button>
+        <button type="submit" class="btn btn-primary">Gửi</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -8,7 +8,6 @@ import { PaymentService } from "../../services/payment/payment.service";
 })
 export class OrderReturnComponent implements OnInit {
   public params: any;
-  public orderReturn: any;
 
   constructor(
     private route: ActivatedRoute,

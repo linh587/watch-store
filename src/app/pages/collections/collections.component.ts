@@ -6,6 +6,9 @@ import { SyncUrlWithSearchRealEstateHelper } from "../../public/helpers/sync-url
 import { FormSearchHelper } from "../../public/helpers/form-search.helper";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { Product } from "../../models/product.model";
+import { Category } from "../../models/category.model";
+import { Response } from "../../models/common.model";
 
 @Component({
   selector: "app-collections",
@@ -19,9 +22,9 @@ export class CollectionsComponent implements OnInit {
   })
   public searchForm: FormGroup;
 
-  public productList$ = new BehaviorSubject<any>(null);
+  public productList$ = new BehaviorSubject<Product[]>([]);
   public page = 1;
-  public categories: any[] = [];
+  public categories: Category[] = [];
   public showCategory: boolean = true;
 
   constructor(
@@ -53,11 +56,12 @@ export class CollectionsComponent implements OnInit {
       page: "",
       status: "",
       includes: "images, priceAndSize",
+      sort: "newest",
     });
   }
 
   private getListProduct() {
-    this.productsService.getProducts().subscribe((res: any) => {
+    this.productsService.getProducts().subscribe((res: Response) => {
       this.productList$.next(res.data);
     });
   }

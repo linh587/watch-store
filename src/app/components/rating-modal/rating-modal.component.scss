@@ -1,0 +1,47 @@
+@import "color";
+@import "text-size";
+
+.rating-wrapper {
+  align-self: center;
+  border-radius: 5rem;
+  direction: rtl !important;
+  display: flex;
+  justify-content: end;
+
+  label {
+    color: #e1e6f6;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    transition: color 0.5s;
+  }
+
+  input {
+    height: 100%;
+    width: 100%;
+    display: none;
+  }
+
+  label:hover,
+  label:hover ~ label,
+  input:checked ~ label {
+    color: #ffca08;
+  }
+
+  label:hover,
+  label:hover ~ label,
+  input:checked ~ label {
+    color: #ffca08;
+  }
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border: 1px solid $primary-color;
+
+  &:active {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+}

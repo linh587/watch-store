@@ -72,6 +72,13 @@ export class QuickViewProductModalComponent implements OnInit {
             priceId: res.id,
           });
           this.productSizes$.next(productSizes);
+
+          this.selectedPrice = {
+            price: productSizes[0].price,
+            id: productSizes[0].priceId,
+          };
+
+          this.selectedSize = productSizes[0].name;
         });
     });
   }

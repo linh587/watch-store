@@ -28,6 +28,8 @@ import { BranchService } from "../../services/branch/branch.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
+import { UserAccount } from "../../models/user.model";
+import { Branch } from "../../models/branch.model";
 
 @Component({
   selector: "app-checkout",
@@ -37,7 +39,7 @@ import { NotificationService } from "../../services/notification/notification.se
 export class CheckoutComponent implements OnInit, OnDestroy {
   public productList$!: Observable<any[]>;
   public orderForm!: FormGroup;
-  public userInfo!: any;
+  public userInfo!: UserAccount;
   public searchSuggestion$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
@@ -47,7 +49,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public searchElementRef!: ElementRef;
   public total!: number;
   public deliveryCharge!: number;
-  public branchs$ = new BehaviorSubject<any>(null);
+  public branchs$ = new BehaviorSubject<Branch[]>([]);
   public createCloudinaryImageLink = createCloudinaryImageLink;
   public coupons$ = new BehaviorSubject<any>(null);
   public couponSuggestion: boolean = false;
@@ -143,7 +145,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         debounceTime(200),
         distinctUntilChanged()
       )
-      .subscribe((branch: any) => {
+      .subscribe((branch: string) => {
         this.branchService.getBranchDetail(branch).subscribe((res: any) => {
           this.calculateDeliveryCharge(res.latitude, res.longitude);
         });
@@ -171,7 +173,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     });
   }
 
-  private calculateDeliveryCharge(branchLat?: any, branchLng?: any) {
+  private calculateDeliveryCharge(branchLat?: string, branchLng?: string) {
     this.mapService
       .getLengthFromOriginToDestinationGoongIo(
         {

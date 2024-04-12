@@ -25,8 +25,10 @@
                     <th scope="col">Chi tiết sản phẩm</th>
                     <th scope="col">Giá</th>
                     <th scope="col">Số lượng</th>
-                    <th scope="col">Đánh giá</th>
-                    <th scope="col" class="text-end">Tổng tiền</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col" *ngIf="order.status === 'received'">
+                      Hành động
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -72,21 +74,20 @@
                         {{ product?.detail?.priceAtPurchase | formatPrice }}đ
                       </td>
                       <td>{{ product?.detail?.quality }}</td>
-                      <td>
-                        <div class="text-warning fs-15">
-                          <i class="ri-star-fill"></i
-                          ><i class="ri-star-fill"></i
-                          ><i class="ri-star-fill"></i
-                          ><i class="ri-star-fill"></i
-                          ><i class="ri-star-half-fill"></i>
-                        </div>
-                      </td>
-                      <td class="fw-medium text-end">
+                      <td class="fw-medium">
                         {{
                           product?.detail?.priceAtPurchase *
                             product?.detail?.quality | formatPrice
                         }}đ
                       </td>
+                      <ng-container *ngIf="order.status === 'received'">
+                        <td (click)="onOpenRatingModal(product.productInfo.id)">
+                          <input
+                            type="submit"
+                            value="Đánh giá"
+                            class="rating" />
+                        </td>
+                      </ng-container>
                     </tr>
                   </ng-container>
                   <tr class="border-top border-top-dashed">
