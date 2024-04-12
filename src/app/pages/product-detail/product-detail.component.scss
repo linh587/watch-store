@@ -223,3 +223,42 @@
     box-shadow: rgb(17, 17, 17) 0px 0px 0px 1px;
   }
 }
+
+// rating
+.rating-wrapper {
+  align-self: center;
+  border-radius: 5rem;
+  direction: rtl !important;
+  display: flex;
+  justify-content: end;
+
+  label {
+    color: #e1e6f6;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    transition: color 0.5s;
+  }
+
+  input {
+    height: 100%;
+    width: 100%;
+  }
+
+  input {
+    display: none;
+  }
+
+  label:hover,
+  label:hover ~ label,
+  input:checked ~ label {
+    color: #ffca08;
+  }
+
+  label:hover,
+  label:hover ~ label,
+  input:checked ~ label {
+    color: #ffca08;
+  }
+}

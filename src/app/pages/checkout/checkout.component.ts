@@ -13,9 +13,6 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
-  forkJoin,
-  map,
-  mergeMap,
   takeUntil,
   tap,
   throwError,
@@ -31,8 +28,6 @@ import { BranchService } from "../../services/branch/branch.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
-import { SocketService } from "../../services/socket/socket.service";
-import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-checkout",
@@ -67,9 +62,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private toastService: ToastrService,
     private branchService: BranchService,
     private router: Router,
-    private notificationService: NotificationService,
-    private socketService: SocketService,
-    private productService: ProductsService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -83,7 +76,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.observeChangeDeliveryCharge();
     this.getAllBranchs();
     this.couponRelation();
-    // this.socketService.listen("newNotification").subscribe((res) => {});
   }
 
   get orderGroup() {
@@ -119,9 +111,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private initForm() {
     this.orderForm = this.fb.group({
       order: this.fb.group({
-        customerName: [this.userInfo.name, Validators.required],
+        customerName: [this.userInfo?.name, Validators.required],
         phone: [
-          this.userInfo.phone,
+          this.userInfo?.phone,
           Validators.compose([
             Validators.required,
             Validators.pattern(PHONE_REGEX),
@@ -129,17 +121,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         ],
         branchId: ["00lu07vqv0a46crjdi6f", Validators.required],
         receivedType: ["delivery"],
-        receivedAddress: [this.userInfo.address, Validators.required],
+        receivedAddress: [this.userInfo?.address, Validators.required],
         details: [[]],
         paymentType: ["0", Validators.required],
         bankCode: ["NCB"],
         language: ["vn"],
-        couponCode: [""],
+        couponCode: [null],
         note: [""],
       }),
       receivedAddressCoordinate: this.fb.group({
-        latitude: [this.userInfo.latitude, Validators.required],
-        longitude: [this.userInfo.longitude, Validators.required],
+        latitude: [this.userInfo?.latitude, Validators.required],
+        longitude: [this.userInfo?.longitude, Validators.required],
       }),
     });
   }

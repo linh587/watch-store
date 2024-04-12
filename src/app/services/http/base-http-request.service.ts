@@ -10,6 +10,7 @@ import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Observable, of, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 import { StorageService } from "../storage/storage.service";
+import { Router } from "@angular/router";
 
 export interface OptionsRequest {
   headers?:
@@ -43,7 +44,8 @@ export class BaseHttpRequest {
 
   constructor(
     public httpClient: HttpClient,
-    public storageService: StorageService
+    public storageService: StorageService,
+    public router: Router
   ) {
     this.context = new HttpContext();
     this.context.set(IS_CALL_API, true);

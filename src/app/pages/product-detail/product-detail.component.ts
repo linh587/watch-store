@@ -34,6 +34,7 @@ export class ProductDetailComponent implements OnInit {
   public addToCartForm!: FormGroup;
   public products: any[] = [];
   public highPopularProduct: any[] = [];
+  public ratingForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,6 +75,12 @@ export class ProductDetailComponent implements OnInit {
   private initForm() {
     this.addToCartForm = this.fb.group({
       quantity: [1, Validators.required],
+    });
+
+    this.ratingForm = this.fb.group({
+      productId: [this.id, Validators.required],
+      star: ["", Validators.required],
+      content: [""],
     });
   }
 
