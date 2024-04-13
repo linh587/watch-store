@@ -42,8 +42,8 @@
     <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
       <i
         class="fa-star"
-        [class.fa-solid]="star <= productItem?.ratingStar"
-        [class.fa-regular]="star > productItem?.ratingStar"></i>
+        [class.fa-solid]="star <= productItem?.avgStar"
+        [class.fa-regular]="star > productItem?.avgStar"></i>
     </ng-container>
   </div>
 </div>

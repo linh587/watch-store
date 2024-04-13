@@ -154,6 +154,9 @@
                             <span> Đã mua hàng </span>
                           </div>
                         </div>
+                        <p class="mb-1">
+                          {{ rating.createdAt | date: 'dd-MM-YYYY' }}
+                        </p>
                         <div class="mb-2">
                           <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
                             <i

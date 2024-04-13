@@ -7,6 +7,7 @@ export interface Product {
   categoryId?: string;
   categoryName?: string;
   coverImage?: string;
+  avgStar?: number;
   images?: string[];
   priceSizeCombines?: PriceSizeCombine[];
 }
