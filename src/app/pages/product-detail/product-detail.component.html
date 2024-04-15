@@ -44,8 +44,8 @@
                 <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
                   <i
                     class="fa-star"
-                    [class.fa-solid]="star <= starOfProduct"
-                    [class.fa-regular]="star > starOfProduct"></i>
+                    [class.fa-solid]="star <= productItem?.avgStar"
+                    [class.fa-regular]="star > productItem?.avgStar"></i>
                 </ng-container>
               </ul>
               <div class="ms-2">
@@ -142,7 +142,7 @@
               <li [ngbNavItem]="1">
                 <button ngbNavLink class="text-size-medium">Đánh giá</button>
                 <ng-template ngbNavContent>
-                  <ng-container *ngIf="listRating; else noRating">
+                  <ng-container *ngIf="listRating.length; else noRating">
                     <ng-container *ngFor="let rating of listRating">
                       <div class="rating-wrapper my-3 pb-3">
                         <div class="d-flex align-items-center mb-1">
@@ -155,7 +155,7 @@
                           </div>
                         </div>
                         <p class="mb-1">
-                          {{ rating.createdAt | date: 'dd-MM-YYYY' }}
+                          {{ rating.createdAt | date : "dd-MM-YYYY, h:mm a" }}
                         </p>
                         <div class="mb-2">
                           <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
@@ -170,7 +170,7 @@
                     </ng-container>
                   </ng-container>
                   <ng-template #noRating>
-                    <h5>Sản phẩm này không có đánh giá nào</h5>
+                    <h6 class="py-3">Sản phẩm này không có đánh giá nào</h6>
                   </ng-template>
                 </ng-template>
               </li>

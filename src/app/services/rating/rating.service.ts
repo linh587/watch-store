@@ -19,10 +19,4 @@ export class RatingService extends BaseHttpRequest {
       params,
     });
   }
-
-  public getStarOfProduct(productId: string) {
-    return this.httpClient.get(
-      `${ENVIRONMENT}${API_URL.RATING}/${productId}/${API_URL.AVERAGE_STAR}`
-    );
-  }
 }

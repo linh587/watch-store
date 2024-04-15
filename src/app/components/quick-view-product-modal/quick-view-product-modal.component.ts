@@ -15,6 +15,8 @@ import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CartService } from "../../services/cart/cart.service";
 import { ToastrService } from "ngx-toastr";
+import { Rating } from "../../models/rating.model";
+import { RatingService } from "../../services/rating/rating.service";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -36,18 +38,21 @@ export class QuickViewProductModalComponent implements OnInit {
   public selectedPrice: any;
   public selectedSize!: string;
   public addToCartForm!: FormGroup;
+  public listRating: Rating[] = [];
 
   constructor(
     private modalService: NgbModal,
     private productsService: ProductsService,
     private fb: FormBuilder,
     private cartService: CartService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private ratingService: RatingService
   ) {}
 
   ngOnInit() {
     this.getProductSizes();
     this.initForm();
+    this.getRatingsOfProduct(this.productItem.id);
   }
 
   private initForm() {
@@ -101,5 +106,11 @@ export class QuickViewProductModalComponent implements OnInit {
     } else {
       this.toastService.info("Vui lòng chọn size sản phẩm");
     }
+  }
+
+  private getRatingsOfProduct(id: string) {
+    this.ratingService.getRatingsOfProduct(id).subscribe((res: any) => {
+      this.listRating = res.data;
+    });
   }
 }

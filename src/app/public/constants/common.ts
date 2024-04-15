@@ -33,6 +33,14 @@ export const OUR_PARTNERS = [
   "/assets/images/partners/OV.jpg",
 ];
 
+export const PARTNERS = [
+  "/assets/images/about/partner-5.jpg",
+  "/assets/images/about/partner-1.webp",
+  "/assets/images/about/partner-2.webp",
+  "/assets/images/about/partner-3.webp",
+  "/assets/images/about/partner-4.webp",
+];
+
 export const ACCOUNT_TAB = [
   {
     label: "Đơn mua",

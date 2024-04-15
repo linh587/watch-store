@@ -39,7 +39,6 @@ export class ProductDetailComponent implements OnInit {
   public highPopularProduct: Product[] = [];
   public ratingForm!: FormGroup;
   public listRating: Rating[] = [];
-  public starOfProduct!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -97,22 +96,14 @@ export class ProductDetailComponent implements OnInit {
   private subscribeParamChange() {
     this.id = this.getProductId();
     this.getProductItem(this.id);
-    this.getStarOfProduct(this.id);
     this.getRatingsOfProduct(this.id);
 
     this.route.params.subscribe((param) => {
       const { id } = param;
       if (id && id !== this.id) {
         this.getProductItem(id);
-        this.getStarOfProduct(id);
         this.getRatingsOfProduct(id);
       } else this.id = id;
-    });
-  }
-
-  private getStarOfProduct(id: string) {
-    this.ratingService.getStarOfProduct(id).subscribe((res: any) => {
-      this.starOfProduct = res;
     });
   }
 

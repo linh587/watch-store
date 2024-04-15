@@ -7,13 +7,9 @@
 }
 
 .heading {
-  color: #fd8517;
+  color: $primary-color;
   margin: 0 auto;
   text-align: center;
-}
-
-heading h2 {
-  font-weight: 800;
 }
 
 .heading-container {

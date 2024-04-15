@@ -1,5 +1,5 @@
 <div class="about-wrapper">
-  <img src="../../../assets/images/about/1.webp" alt="" class="w-100 h-100" />
+  <img src="/assets/images/about/1.webp" alt="" class="w-100 h-100" />
   <div class="container mt-5">
     <div class="mb-5">
       <div class="heading-container">
@@ -183,14 +183,12 @@
             [virtual]="true"
             [speed]="1200">
             <ng-container>
-              <ng-template
-                swiperSlide
-                *ngFor="let partners of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+              <ng-template swiperSlide *ngFor="let partner of PARTNERS">
                 <img
-                  src="/assets/images/about/partner-5.jpg"
+                  [src]="partner"
                   alt=""
                   height="200"
-                  class="object-fit-cover" />
+                  class="object-fit-cover w-100" />
               </ng-template>
             </ng-container>
           </swiper>

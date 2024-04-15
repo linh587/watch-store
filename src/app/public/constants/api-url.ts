@@ -54,5 +54,4 @@ export const API_URL = {
   // RATING
   USER_RATING: "user/rating",
   RATING: "rating",
-  AVERAGE_STAR: "average-star",
 };
