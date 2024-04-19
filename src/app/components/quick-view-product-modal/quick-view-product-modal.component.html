@@ -41,6 +41,7 @@
               </ng-template>
             </swiper>
           </div>
+          <div [innerHTML]="productItem?.description"></div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="product-details-view-content">
@@ -103,12 +104,25 @@
                         formControlName="quantity" />
                     </div>
                   </div>
-                  <button type="submit" class="add-to-cart">
+                  <button
+                    type="submit"
+                    class="add-to-cart bg-primary-color border-0 cursor-pointer color-white text-size-small fw-400 px-2 d-inline-block text-center w-100">
                     Thêm vào giỏ
                   </button>
                 </form>
               </div>
-              <div class="mb-3" [innerHTML]="productItem?.description"></div>
+              <div class="mb-3">
+                <h6 class="mb-2">Thông số {{ productItem?.name }}</h6>
+                <ul>
+                  <li>Thương hiệu: {{ productItem?.categoryName }}</li>
+                  <li>
+                    Chất liệu kính:
+                    {{ productItem?.glassSurfaceMaterial | glassSurface }}
+                  </li>
+                  <li>Kháng nước: {{ productItem?.waterResistance }}</li>
+                  <li>Hình dạng: {{ productItem?.faceShape | faceShape }}</li>
+                </ul>
+              </div>
               <ul class="single-add-actions">
                 <li class="add-to-wishlist">
                   <i class="fa-regular fa-heart"></i>

@@ -9,10 +9,17 @@
               <h5 class="card-title flex-grow-1 mb-0">
                 Chi tiết đơn hàng #{{ order?.id }}
               </h5>
-              <div
-                class="badge text-size-small text-white p-2"
-                ngClass="bg-{{ order?.status | orderStatusColor }}">
-                {{ order?.status | orderStatus }}
+              <div>
+                <div
+                  class="badge text-size-small text-white p-2"
+                  ngClass="bg-{{ order.paymentStatus | paymentStatusColor }}">
+                  {{ order?.paymentStatus | paymentStatus }}
+                </div>
+                <div
+                  class="badge text-size-small text-white ms-2 p-2"
+                  ngClass="bg-{{ order?.status | orderStatusColor }}">
+                  {{ order?.status | orderStatus }}
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +145,7 @@
         </div>
       </div>
       <div class="col-xl-3">
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-header">
             <div class="d-flex">
               <h5 class="card-title flex-grow-1 mb-0">Khách hàng</h5>

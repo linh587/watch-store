@@ -1,19 +1,18 @@
-<div class="header-image-wrapper position-relative overflow-visible">
-  <swiper
-    class="bg-swiper position-absolute top-0 start-0 end-0 bottom-0"
-    [autoplay]="{
-      delay: 2500
-    }"
-    [speed]="1200">
-    <ng-template
-      swiperSlide
-      *ngFor="let item of backgroundImage"
-      (click)="onSearch()">
-      <img
-        [src]="item"
-        loading="lazy"
-        alt="header-background-img"
-        class="w-100 h-100 object-fit-cover" />
-    </ng-template>
-  </swiper>
+<div class="header-image-wrapper">
+  <div class="bg-img-autoplay">
+    <swiper
+      [autoplay]="{
+        delay: 2500
+      }"
+      [speed]="1200"
+      class="bg-swiper">
+      <ng-template swiperSlide *ngFor="let item of backgroundImage">
+        <img
+          [src]="item"
+          loading="lazy"
+          alt="header-background-img"
+          class="w-100 h-100" />
+      </ng-template>
+    </swiper>
+  </div>
 </div>

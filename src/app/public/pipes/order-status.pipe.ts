@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { ORDER_STATUS } from "../constants/common";
 
 @Pipe({
   name: "orderStatus",
@@ -6,15 +7,15 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class OrderStatusPipe implements PipeTransform {
   transform(value: string, args?: any): string {
     switch (value) {
-      case "waitVerify":
+      case ORDER_STATUS.WAIT_VERIFY:
         return "Chờ duyệt";
-      case "verified":
+      case ORDER_STATUS.VERIFY:
         return "Đã duyệt";
-      case "waitReceive":
+      case ORDER_STATUS.WAIT_RECEIVE:
         return "Chờ giao hàng";
-      case "received":
+      case ORDER_STATUS.RECEIVED:
         return "Đã giao hàng";
-      case "cancelled":
+      case ORDER_STATUS.CANCELLED:
         return "Đã huỷ đơn hàng";
       default:
         return "--";

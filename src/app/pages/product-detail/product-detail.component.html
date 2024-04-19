@@ -12,7 +12,7 @@
               <img
                 [src]="createCloudinaryImageLink(image)"
                 alt=""
-                class="w-100 border mb-3" />
+                class="w-100 mb-3" />
             </ng-template>
           </swiper>
           <swiper
@@ -79,9 +79,9 @@
                 </ng-container>
               </div>
             </div>
-            <div class="single-add-to-cart">
+            <div class="single-add-to-cart mb-4">
               <form
-                class="cart-quantity d-flex mb-3"
+                class="cart-quantity d-flex"
                 [formGroup]="addToCartForm"
                 (submit)="onAddToCart()">
                 <div class="quantity">
@@ -95,10 +95,25 @@
                       max="50" />
                   </div>
                 </div>
-                <button class="add-to-cart" type="submit">Thêm vào giỏ</button>
+                <button
+                  class="add-to-cart bg-primary-color color-white px-2 border-0 fw-400 text-size-small d-inline-block cursor-pointer text-center w-100"
+                  type="submit">
+                  Thêm vào giỏ
+                </button>
               </form>
             </div>
-            <div class="mb-3" [innerHTML]="productItem?.description"></div>
+            <div class="mb-3">
+              <h6 class="mb-2">Thông số {{ productItem?.name }}</h6>
+              <ul>
+                <li>Thương hiệu: {{ productItem?.categoryName }}</li>
+                <li>
+                  Chất liệu kính:
+                  {{ productItem?.glassSurfaceMaterial | glassSurface }}
+                </li>
+                <li>Kháng nước: {{ productItem?.waterResistance }}</li>
+                <li>Hình dạng: {{ productItem?.faceShape | faceShape }}</li>
+              </ul>
+            </div>
 
             <ul class="single-add-actions">
               <li class="add-to-wishlist">
@@ -140,6 +155,18 @@
           <div class="product-details-tab">
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
               <li [ngbNavItem]="1">
+                <button ngbNavLink class="text-size-medium">Mô tả</button>
+                <ng-template ngbNavContent>
+                  <div class="product_description_wrap mt-30">
+                    <div class="product_desc mb-30">
+                      <p
+                        class="mb-3"
+                        [innerHTML]="productItem?.description"></p>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2">
                 <button ngbNavLink class="text-size-medium">Đánh giá</button>
                 <ng-template ngbNavContent>
                   <ng-container *ngIf="listRating.length; else noRating">
@@ -170,20 +197,8 @@
                     </ng-container>
                   </ng-container>
                   <ng-template #noRating>
-                    <h6 class="py-3">Sản phẩm này không có đánh giá nào</h6>
+                    <h6 class="py-3">Sản phẩm chưa có đánh giá nào!</h6>
                   </ng-template>
-                </ng-template>
-              </li>
-              <li [ngbNavItem]="2">
-                <button ngbNavLink class="text-size-medium">Mô tả</button>
-                <ng-template ngbNavContent>
-                  <div class="product_description_wrap mt-30">
-                    <div class="product_desc mb-30">
-                      <p
-                        class="mb-3"
-                        [innerHTML]="productItem?.description"></p>
-                    </div>
-                  </div>
                 </ng-template>
               </li>
             </ul>

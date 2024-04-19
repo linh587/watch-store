@@ -1,50 +1,17 @@
-@import "text-size";
-@import "color";
-
 .header-image-wrapper {
-  min-height: 500px;
-}
-
-.bg-swiper {
-  z-index: -1;
-}
-
-.mask {
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.header-content {
-  z-index: 3;
-  top: 50%;
-  color: $white;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-}
-
-.btn-bordered {
-  line-height: 24px;
-  padding: 10px 40px;
-  font-size: $text-small;
-  font-weight: 500;
-  text-transform: uppercase;
-  overflow: hidden;
   position: relative;
-  z-index: 1;
-  transition: all 0.3s ease 0s;
-  border-color: $white;
-  color: $white;
+  overflow: visible;
 }
 
-@media screen and (max-width: 992px) {
-  .header-image-wrapper {
-    min-height: 300px;
-  }
+::ng-deep .bg-swiper .swiper-wrapper .swiper-slide > img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 599px) {
   .header-image-wrapper {
-    min-height: 140px;
+    margin-top: 0;
   }
 }

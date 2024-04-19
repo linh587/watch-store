@@ -47,22 +47,12 @@
     max-width: 190px;
 
     .add-to-cart {
-      background: $primary-color;
-      border: none;
-      color: $white;
-      cursor: pointer;
-      display: inline-block;
-      font-size: 14px;
-      font-weight: 400;
       letter-spacing: -0.025em;
       height: 40px;
       line-height: 40px;
-      padding: 0 5px;
       text-shadow: none;
-      text-align: center;
       border-radius: 3px;
       transition: 0.3s ease;
-      width: 100%;
     }
   }
 
@@ -226,4 +216,10 @@
 
 .rating-wrapper:not(:nth-last-child(1)) {
   border-bottom: 1px solid $gray-lighter;
+}
+
+@media screen and (max-width: 992px) {
+  .product-description-area {
+    padding: 0 10px;
+  }
 }

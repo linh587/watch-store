@@ -2,17 +2,17 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { PAYMENT_STATUS } from "../constants/common";
 
 @Pipe({
-  name: "paymentStatus",
+  name: "paymentStatusColor",
 })
-export class PaymentStatusPipe implements PipeTransform {
+export class PaymentStatusColorPipe implements PipeTransform {
   transform(value: string, args?: any): string {
     switch (value) {
       case PAYMENT_STATUS.PAID:
-        return "Đã thanh toán";
+        return "dark";
       case PAYMENT_STATUS.NOT_PAID:
-        return "Chưa thanh toán";
+        return "danger";
       default:
-        return "Chưa thanh toán";
+        return "--";
     }
   }
 }

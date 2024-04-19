@@ -4,6 +4,7 @@ import { CollectionsComponent } from "./collections.component";
 import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "../../components/shared.module";
 import { NgxPaginationModule } from "ngx-pagination";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
   { path: "", component: CollectionsComponent, pathMatch: "full" },
@@ -15,6 +16,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     NgxPaginationModule,
+    ReactiveFormsModule
   ],
   declarations: [CollectionsComponent],
 })

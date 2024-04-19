@@ -55,7 +55,13 @@
             <td>{{ order.createdAt | date : "dd-MM-YYYY" }}</td>
 
             <td>{{ order.totalPrice | formatPrice }}đ</td>
-            <td>{{ order.paymentStatus | paymentStatus }}</td>
+            <td>
+              <span
+                class="badge text-size-small text-white p-2"
+                ngClass="bg-{{ order.paymentStatus | paymentStatusColor }}"
+                >{{ order.paymentStatus | paymentStatus }}</span
+              >
+            </td>
             <td>
               <div
                 class="badge text-size-small text-white p-2"

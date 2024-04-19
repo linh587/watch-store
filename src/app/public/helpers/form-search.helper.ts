@@ -23,6 +23,11 @@ export class FormSearchHelper {
       categoryId: new FormControl(data?.categoryId || ""),
       sort: new FormControl(data?.sort || ""),
       s: new FormControl(data?.s || ""),
+      fromPrice: new FormControl(data?.fromPrice || ""),
+      toPrice: new FormControl(data?.toPrice || ""),
+      faceShape: new FormControl(data?.faceShape || ""),
+      glassSurface: new FormControl(data?.glassSurface || ""),
+      waterResistance: new FormControl(data?.waterResistance || ""),
     });
   }
 }
