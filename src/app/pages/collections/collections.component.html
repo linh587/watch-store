@@ -5,133 +5,134 @@
         <div class="shop-product-wrapper">
           <div
             class="filter-container d-flex align-items-center mb-3 gap-2 flex-wrap position-relative">
-            <form>
-              <div
-                (click)="onToggleGeneralFilter($event)"
-                class="filter-btn d-flex align-items-center justify-content-between gap-1 cursor-pointer">
-                <span class="material-symbols-outlined"> tune </span>
-                <span>Bộ lọc</span>
+            <div
+              (click)="toggleFilter($event, 'general')"
+              class="filter-btn customize-scrollbar d-flex align-items-center justify-content-between gap-1 cursor-pointer">
+              <span class="material-symbols-outlined"> tune </span>
+              <span>Bộ lọc</span>
 
-                <div
-                  class="position-absolute filter-dropdown p-3"
-                  (click)="$event.stopPropagation()"
-                  *ngIf="showGeneralFilter">
-                  <h6 class="border-bottom text-size-small mb-3 pb-2">
-                    Filter đã chọn
-                  </h6>
-                  <div class="general-filter-container">
-                    <div class="mb-3">
-                      <h6 class="mb-2 text-size-small">Thương hiệu</h6>
-                      <div class="filter-brand-check d-flex flex-wrap">
-                        <div
-                          class="filter-item mb-2"
-                          *ngFor="let category of categories"
-                          [class.filter-active]="category.id === activeCategory"
-                          (click)="filterByCategory($event, category.id)">
-                          <input type="checkbox" />
-                          <span>{{ category.name }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <h6 class="mb-2 text-size-small">Lọc theo giá</h6>
-                      <div class="filter-brand-check d-flex flex-wrap">
-                        <div
-                          class="filter-item mb-2"
-                          *ngFor="let price of PRICE_FILTER"
-                          [class.filter-active]="price.id === activePrice"
-                          (click)="filterByPrice($event, price)">
-                          <input type="checkbox" />
-                          <span>{{ price.label }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <h6 class="mb-2 text-size-small">Hình dạng</h6>
-                      <div class="filter-brand-check d-flex flex-wrap">
-                        <div
-                          class="filter-item mb-2"
-                          *ngFor="let faceShape of FILTER_FACE_SHAPE"
-                          [class.filter-active]="
-                            faceShape.key === activeFaceShape
-                          "
-                          (click)="filterByFaceShape($event, faceShape.key)">
-                          <input type="checkbox" />
-                          <span>{{ faceShape.label }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <h6 class="mb-2 text-size-small">Chất liệu kính</h6>
-                      <div class="filter-brand-check d-flex flex-wrap">
-                        <div
-                          class="filter-item mb-2"
-                          *ngFor="
-                            let glassSurface of FILTER_GLASS_SURFACE_MATERIAL
-                          "
-                          [class.filter-active]="
-                            glassSurface.key === activeGlassSurface
-                          "
-                          (click)="
-                            filterByGlassSurface($event, glassSurface.key)
-                          ">
-                          <input type="checkbox" />
-                          <span>{{ glassSurface.label }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <h6 class="mb-2 text-size-small">Kháng nước</h6>
-                      <div class="filter-brand-check d-flex flex-wrap">
-                        <div
-                          class="filter-item mb-2"
-                          *ngFor="
-                            let waterResistance of FILTER_WATER_RESISTANCE
-                          "
-                          [class.filter-active]="
-                            waterResistance.key === activeWaterResistance
-                          "
-                          (click)="
-                            filterByWaterResistance($event, waterResistance.key)
-                          ">
-                          <input type="checkbox" />
-                          <span>{{ waterResistance.label }}</span>
-                        </div>
+              <div
+                class="position-absolute filter-dropdown p-3"
+                *ngIf="showFilter['general']">
+                <h6 class="border-bottom text-size-small mb-3 pb-2">
+                  Filter đã chọn
+                </h6>
+                <div class="general-filter-container">
+                  <div class="mb-3">
+                    <h6 class="mb-2 text-size-small">Thương hiệu</h6>
+                    <div class="filter-brand-check d-flex flex-wrap">
+                      <div
+                        class="filter-item mb-2"
+                        *ngFor="let category of categories"
+                        [class.filter-active]="
+                          category.id === activeFilters['categoryId']
+                        "
+                        (click)="filterBy($event, 'categoryId', category.id)">
+                        <input type="checkbox" />
+                        <span>{{ category.name }}</span>
                       </div>
                     </div>
                   </div>
-                  <div class="filter-footer">
-                    <a class="cursor-pointer" (click)="resetSearch()"
-                      >Bỏ chọn</a
-                    >
-                    <a class="apply-filter" (click)="applyFilter()"
-                      >Xem kết quả</a
-                    >
+                  <div class="mb-3">
+                    <h6 class="mb-2 text-size-small">Lọc theo giá</h6>
+                    <div class="filter-brand-check d-flex flex-wrap">
+                      <div
+                        class="filter-item mb-2"
+                        *ngFor="let price of PRICE_FILTER"
+                        [class.filter-active]="price.id === activePrice"
+                        (click)="filterByPrice($event, price)">
+                        <input type="checkbox" />
+                        <span>{{ price.label }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <h6 class="mb-2 text-size-small">Hình dạng</h6>
+                    <div class="filter-brand-check d-flex flex-wrap">
+                      <div
+                        class="filter-item mb-2"
+                        *ngFor="let faceShape of FILTER_FACE_SHAPE"
+                        [class.filter-active]="
+                          faceShape.key === activeFilters['faceShape']
+                        "
+                        (click)="filterBy($event, 'faceShape', faceShape.key)">
+                        <input type="checkbox" />
+                        <span>{{ faceShape.label }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <h6 class="mb-2 text-size-small">Chất liệu kính</h6>
+                    <div class="filter-brand-check d-flex flex-wrap">
+                      <div
+                        class="filter-item mb-2"
+                        *ngFor="
+                          let glassSurface of FILTER_GLASS_SURFACE_MATERIAL
+                        "
+                        [class.filter-active]="
+                          glassSurface.key === activeFilters['glassSurface']
+                        "
+                        (click)="
+                          filterBy($event, 'glassSurface', glassSurface.key)
+                        ">
+                        <input type="checkbox" />
+                        <span>{{ glassSurface.label }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h6 class="mb-2 text-size-small">Kháng nước</h6>
+                    <div class="filter-brand-check d-flex flex-wrap">
+                      <div
+                        class="filter-item mb-2"
+                        *ngFor="let waterResistance of FILTER_WATER_RESISTANCE"
+                        [class.filter-active]="
+                          waterResistance.key ===
+                          activeFilters['waterResistance']
+                        "
+                        (click)="
+                          filterBy(
+                            $event,
+                            'waterResistance',
+                            waterResistance.key
+                          )
+                        ">
+                        <input type="checkbox" />
+                        <span>{{ waterResistance.label }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div class="filter-footer">
+                  <a class="cursor-pointer" (click)="resetSearch()">Bỏ chọn</a>
+                  <a class="apply-filter" (click)="applyFilter()"
+                    >Xem kết quả</a
+                  >
+                </div>
               </div>
-            </form>
+            </div>
             <div
-              (click)="onToggleCategoryFilter($event)"
+              (click)="toggleFilter($event, 'category')"
               class="filter-btn hide-filter d-flex align-items-center justify-content-between gap-1 cursor-pointer">
               <span>Thương hiệu</span>
 
               <div
                 class="position-absolute filter-dropdown p-3"
-                (click)="$event.stopPropagation()"
-                *ngIf="showCategoryFilter">
+                *ngIf="showFilter['category']">
                 <div class="filter-brand-check d-flex flex-wrap">
                   <div
                     class="filter-item mb-2"
                     *ngFor="let category of categories"
-                    [class.filter-active]="category.id === activeCategory"
-                    (click)="filterByCategory($event, category.id)">
+                    [class.filter-active]="
+                      category.id === activeFilters['categoryId']
+                    "
+                    (click)="filterBy($event, 'categoryId', category.id)">
                     <input type="checkbox" />
                     <span>{{ category.name }}</span>
                   </div>
                 </div>
                 <div class="filter-footer">
-                  <a class="cursor-pointer" (click)="resetCategory()"
+                  <a class="cursor-pointer" (click)="resetFilter('categoryId')"
                     >Bỏ chọn</a
                   >
                   <a class="apply-filter" (click)="applyFilter()"
@@ -141,14 +142,13 @@
               </div>
             </div>
             <div
-              (click)="onTogglePriceFilter($event)"
+              (click)="toggleFilter($event, 'price')"
               class="filter-btn hide-filter d-flex align-items-center justify-content-between gap-1 cursor-pointer">
               <span>Lọc theo giá</span>
 
               <div
                 class="position-absolute filter-dropdown p-3"
-                (click)="$event.stopPropagation()"
-                *ngIf="showPriceFitler">
+                *ngIf="showFilter['price']">
                 <div class="filter-brand-check d-flex flex-wrap">
                   <div
                     class="filter-item mb-2"
@@ -168,22 +168,23 @@
               </div>
             </div>
             <div
-              (click)="onToggleFaceProductFilter($event)"
+              (click)="toggleFilter($event, 'faceProduct')"
               class="filter-btn hide-filter d-flex align-items-center justify-content-between gap-1 cursor-pointer">
               <span>Mặt đồng hồ</span>
 
               <div
                 class="position-absolute filter-dropdown p-3"
-                (click)="$event.stopPropagation()"
-                *ngIf="showFaceProductFilter">
+                *ngIf="showFilter['faceProduct']">
                 <div class="mb-3">
                   <h6 class="mb-2 text-size-small">Hình dạng</h6>
                   <div class="filter-brand-check d-flex flex-wrap">
                     <div
                       class="filter-item mb-2"
                       *ngFor="let faceShape of FILTER_FACE_SHAPE"
-                      [class.filter-active]="faceShape.key === activeFaceShape"
-                      (click)="filterByFaceShape($event, faceShape.key)">
+                      [class.filter-active]="
+                        faceShape.key === activeFilters['faceShape']
+                      "
+                      (click)="filterBy($event, 'faceShape', faceShape.key)">
                       <input type="checkbox" />
                       <span>{{ faceShape.label }}</span>
                     </div>
@@ -196,9 +197,11 @@
                       class="filter-item mb-2"
                       *ngFor="let glassSurface of FILTER_GLASS_SURFACE_MATERIAL"
                       [class.filter-active]="
-                        glassSurface.key === activeGlassSurface
+                        glassSurface.key === activeFilters['glassSurface']
                       "
-                      (click)="filterByGlassSurface($event, glassSurface.key)">
+                      (click)="
+                        filterBy($event, 'glassSurface', glassSurface.key)
+                      ">
                       <input type="checkbox" />
                       <span>{{ glassSurface.label }}</span>
                     </div>
@@ -215,30 +218,31 @@
               </div>
             </div>
             <div
-              (click)="onToggleWaterResistanceFilter($event)"
+              (click)="toggleFilter($event, 'waterResistance')"
               class="filter-btn hide-filter d-flex align-items-center justify-content-between gap-1 cursor-pointer">
               <span>Kháng nước</span>
 
               <div
                 class="position-absolute filter-dropdown p-3"
-                (click)="$event.stopPropagation()"
-                *ngIf="showWaterResistanceFilter">
+                *ngIf="showFilter['waterResistance']">
                 <div class="filter-brand-check d-flex flex-wrap">
                   <div
                     class="filter-item mb-2"
                     *ngFor="let waterResistance of FILTER_WATER_RESISTANCE"
                     [class.filter-active]="
-                      waterResistance.key === activeWaterResistance
+                      waterResistance.key === activeFilters['waterResistance']
                     "
                     (click)="
-                      filterByWaterResistance($event, waterResistance.key)
+                      filterBy($event, 'waterResistance', waterResistance.key)
                     ">
                     <input type="checkbox" />
                     <span>{{ waterResistance.label }}</span>
                   </div>
                 </div>
                 <div class="filter-footer">
-                  <a class="cursor-pointer" (click)="resetWaterResistance()"
+                  <a
+                    class="cursor-pointer"
+                    (click)="resetFilter('waterResistance')"
                     >Bỏ chọn</a
                   >
                   <a class="apply-filter" (click)="applyFilter()"

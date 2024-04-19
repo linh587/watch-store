@@ -35,17 +35,23 @@ export class CollectionsComponent implements OnInit {
   public productList$ = new BehaviorSubject<Product[]>([]);
   public page = 1;
   public categories: Category[] = [];
-  public showCategoryFilter: boolean = false;
-  public showPriceFitler: boolean = false;
-  public showGeneralFilter: boolean = false;
-  public showFaceProductFilter: boolean = false;
-  public showWaterResistanceFilter: boolean = false;
+  public showFilter: { [key: string]: boolean } = {
+    general: false,
+    category: false,
+    price: false,
+    faceProduct: false,
+    waterResistance: false,
+  };
 
-  public activeCategory!: string;
+  public activeFilters: { [key: string]: string } = {
+    categoryId: "",
+    price: "",
+    faceShape: "",
+    glassSurface: "",
+    waterResistance: "",
+  };
+
   public activePrice!: string;
-  public activeFaceShape!: string;
-  public activeGlassSurface!: string;
-  public activeWaterResistance!: string;
 
   constructor(
     public injector: Injector,
@@ -66,7 +72,7 @@ export class CollectionsComponent implements OnInit {
 
   private getParamsOnInit() {
     this.route.queryParams.pipe(take(1)).subscribe((params: any) => {
-      this.activeCategory = params?.categoryId;
+      this.activeFilters["categoryId"] = params?.categoryId;
     });
   }
 
@@ -99,12 +105,62 @@ export class CollectionsComponent implements OnInit {
     });
   }
 
-  public filterByCategory(event: Event, id: string) {
-    this.activeCategory = id;
+  public toggleFilter(event: Event, filterType: string) {
+    event.stopPropagation();
+    Object.keys(this.showFilter).forEach((key) => {
+      this.showFilter[key] = key === filterType ? !this.showFilter[key] : false;
+    });
+  }
+
+  public sortByCondition(event: any) {
+    this.searchForm.patchValue({
+      sort: event.target.value,
+    });
+  }
+
+  public resetGlassProduct() {
+    this.searchForm.patchValue({
+      faceShape: "",
+      glassSurface: "",
+    });
+
+    this.activeFilters["faceShape"] = "";
+    this.activeFilters["glassSurface"] = "";
+  }
+
+  public resetPrice() {
+    this.searchForm.patchValue({
+      fromPrice: "",
+      toPrice: "",
+    });
+
+    this.activePrice = "";
+  }
+
+  public applyFilter() {
+    this.searchForm.patchValue({});
+  }
+
+  public resetSearch() {
+    this.searchForm.reset();
+    Object.keys(this.activeFilters).forEach((key) => {
+      this.activeFilters[key] = "";
+    });
+  }
+
+  public resetFilter(filterType: string) {
+    this.searchForm.patchValue({
+      [filterType]: "",
+    });
+    this.activeFilters[filterType] = "";
+  }
+
+  public filterBy(event: Event, filterType: string, key: string) {
+    this.activeFilters[filterType] = key;
     event.stopPropagation();
     this.searchForm.patchValue(
       {
-        categoryId: id,
+        [filterType]: key,
       },
       { emitEvent: false }
     );
@@ -124,144 +180,9 @@ export class CollectionsComponent implements OnInit {
     );
   }
 
-  public filterByFaceShape(event: Event, key: string) {
-    this.activeFaceShape = key;
-    event.stopPropagation();
-    this.searchForm.patchValue(
-      {
-        faceShape: key,
-      },
-      {
-        emitEvent: false,
-      }
-    );
-  }
-
-  public filterByGlassSurface(event: Event, key: string) {
-    this.activeGlassSurface = key;
-    event.stopPropagation();
-    this.searchForm.patchValue(
-      {
-        glassSurface: key,
-      },
-      {
-        emitEvent: false,
-      }
-    );
-  }
-
-  public filterByWaterResistance(event: Event, key: string) {
-    this.activeWaterResistance = key;
-    event.stopPropagation();
-    this.searchForm.patchValue(
-      {
-        waterResistance: key,
-      },
-      {
-        emitEvent: false,
-      }
-    );
-  }
-
-  public resetGlassProduct() {
-    this.searchForm.patchValue({
-      faceShape: "",
-      glassSurface: "",
-    });
-
-    this.activeFaceShape = "";
-    this.activeGlassSurface = "";
-  }
-
-  public resetPrice() {
-    this.searchForm.patchValue({
-      fromPrice: "",
-      toPrice: "",
-    });
-
-    this.activePrice = "";
-  }
-
-  public resetCategory() {
-    this.searchForm.patchValue({
-      categoryId: "",
-    });
-    this.activeCategory = "";
-  }
-
-  public resetWaterResistance() {
-    this.searchForm.patchValue({
-      waterResistance: "",
-    });
-    this.activeWaterResistance = "";
-  }
-
-  public applyFilter() {
-    this.searchForm.patchValue({});
-  }
-
-  public resetSearch() {
-    this.searchForm.reset();
-    this.activePrice = "";
-    this.activeCategory = "";
-  }
-
-  public sortByCondition(event: any) {
-    this.searchForm.patchValue({
-      sort: event.target.value,
-    });
-  }
-
-  public onToggleCategoryFilter(event: Event) {
-    event.stopPropagation();
-    this.showCategoryFilter = !this.showCategoryFilter;
-    this.showPriceFitler = false;
-    this.showGeneralFilter = false;
-    this.showFaceProductFilter = false;
-    this.showWaterResistanceFilter = false;
-  }
-
-  public onTogglePriceFilter(event: Event) {
-    event.stopPropagation();
-    this.showPriceFitler = !this.showPriceFitler;
-    this.showCategoryFilter = false;
-    this.showGeneralFilter = false;
-    this.showFaceProductFilter = false;
-    this.showWaterResistanceFilter = false;
-  }
-
-  public onToggleGeneralFilter(event: Event) {
-    event.stopPropagation();
-    this.showGeneralFilter = !this.showGeneralFilter;
-    this.showCategoryFilter = false;
-    this.showPriceFitler = false;
-    this.showFaceProductFilter = false;
-    this.showWaterResistanceFilter = false;
-  }
-
-  public onToggleFaceProductFilter(event: Event) {
-    event.stopPropagation();
-    this.showFaceProductFilter = !this.showFaceProductFilter;
-    this.showCategoryFilter = false;
-    this.showPriceFitler = false;
-    this.showGeneralFilter = false;
-    this.showWaterResistanceFilter = false;
-  }
-
-  public onToggleWaterResistanceFilter(event: Event) {
-    event.stopPropagation();
-    this.showWaterResistanceFilter = !this.showWaterResistanceFilter;
-    this.showCategoryFilter = false;
-    this.showPriceFitler = false;
-    this.showGeneralFilter = false;
-    this.showFaceProductFilter = false;
-  }
-
   @HostListener("document:click", ["$event"]) onDocumentClick() {
-    this.showCategoryFilter = false;
-    this.showPriceFitler = false;
-    this.showGeneralFilter = false;
-    this.showFaceProductFilter = false;
-    this.showWaterResistanceFilter = false;
+    Object.keys(this.showFilter).forEach((key) => {
+      this.showFilter[key] = false;
+    });
   }
 }

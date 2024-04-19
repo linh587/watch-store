@@ -1,0 +1,41 @@
+<div class="w-100">
+  <div class="container-content relative">
+    <div class="gallery">
+      <swiper
+        #swiper
+        class="swiper-navigation"
+        [spaceBetween]="10"
+        [navigation]="true"
+        [initialSlide]="currentSlide"
+        (slideChange)="onSlideChange($event)"
+        [navigation]="false"
+        [thumbs]="{
+          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null
+        }"
+        class="mySwiper2">
+        <ng-template swiperSlide *ngFor="let image of images">
+          <img [src]="createCloudinaryImageLink(image)" class="w-100" />
+        </ng-template>
+      </swiper>
+    </div>
+
+    <div
+      class="top-bar d-flex align-items-center justify-content-between color-white position-fixed">
+      <div class="count-slider">{{ countSlider }} / {{ images.length }}</div>
+      <span
+        class="material-symbols-outlined cursor-pointer text-size-3xl"
+        (click)="onCloseModal()">
+        close
+      </span>
+    </div>
+
+    <div class="navigation">
+      <div class="button-next cursor-pointer" (click)="slideNext()">
+        <span class="material-symbols-outlined text-size-3xl"> east </span>
+      </div>
+      <div class="button-prev cursor-pointer" (click)="slidePrev()">
+        <span class="material-symbols-outlined text-size-3xl"> west </span>
+      </div>
+    </div>
+  </div>
+</div>

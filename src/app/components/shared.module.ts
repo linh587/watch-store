@@ -19,6 +19,7 @@ import { DirectivesModule } from "../public/directives/directives.module";
 import { PipesModule } from "../public/pipes/pipes.module";
 import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
 import { RatingModalComponent } from "./rating-modal/rating-modal.component";
+import { ModalImageSliderComponent } from "./modal-image-slider/modal-image-slider.component";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -36,6 +37,7 @@ const COMPONENTS = [
   QuickViewProductModalComponent,
   ConfirmModalComponent,
   RatingModalComponent,
+  ModalImageSliderComponent,
 ];
 
 @NgModule({

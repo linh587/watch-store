@@ -80,7 +80,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   private onHandleError401(request: HttpRequest<any>, next: HttpHandler) {
     const refreshToken = this.storageService.get("JWT_REFRESH_TOKEN");
     if (!refreshToken) {
-      debugger;
       this.eventBus.emit({ name: "logout", value: null });
       // @ts-ignore
       return;

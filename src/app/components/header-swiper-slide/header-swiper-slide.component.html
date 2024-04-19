@@ -1,11 +1,12 @@
 <div class="header-image-wrapper">
   <div class="bg-img-autoplay">
     <swiper
+      (click)="onClickDetail($event)"
       [autoplay]="{
         delay: 2500
       }"
       [speed]="1200"
-      class="bg-swiper">
+      class="bg-swiper cursor-pointer">
       <ng-template swiperSlide *ngFor="let item of backgroundImage">
         <img
           [src]="item"

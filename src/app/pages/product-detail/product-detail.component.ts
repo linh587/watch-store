@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import SwiperCore, { FreeMode, Navigation, Pagination, Thumbs } from "swiper";
 import { ProductsService } from "../../services/products/products.service";
@@ -13,6 +13,9 @@ import { ToastrService } from "ngx-toastr";
 import { Product, ProductSize } from "../../models/product.model";
 import { RatingService } from "../../services/rating/rating.service";
 import { Rating } from "../../models/rating.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalImageSliderComponent } from "../../components/modal-image-slider/modal-image-slider.component";
+import { isPlatformBrowser } from "@angular/common";
 
 SwiperCore.use([FreeMode, Navigation, Thumbs, Pagination]);
 
@@ -46,7 +49,9 @@ export class ProductDetailComponent implements OnInit {
     private fb: FormBuilder,
     private cartService: CartService,
     private toastService: ToastrService,
-    private ratingService: RatingService
+    private ratingService: RatingService,
+    private modalService: NgbModal,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
@@ -56,6 +61,11 @@ export class ProductDetailComponent implements OnInit {
     this.initForm();
     this.getListProduct();
     this.getHighPopularProduct();
+    this.scrollToTop();
+  }
+
+  private scrollToTop() {
+    if (isPlatformBrowser(this.platformId)) window.scrollTo(0, 0);
   }
 
   private getHighPopularProduct() {
@@ -164,6 +174,21 @@ export class ProductDetailComponent implements OnInit {
       this.cartService.addToCart(payload);
     } else {
       this.toastService.info("Vui lòng chọn size sản phẩm");
+    }
+  }
+
+  public openSliderImage(event: any, images: any[]) {
+    const swiper = event[0];
+
+    if (swiper) {
+      const modalRef = this.modalService.open(ModalImageSliderComponent, {
+        size: "lg",
+        centered: true,
+        windowClass: "customize-slider-image",
+      });
+
+      modalRef.componentInstance.images = images;
+      modalRef.componentInstance.currentSlide = Number(swiper?.activeIndex);
     }
   }
 

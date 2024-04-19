@@ -7,12 +7,13 @@
             [spaceBetween]="10"
             [navigation]="false"
             [thumbs]="{ swiper: thumbsSwiper }"
-            class="mySwiper2 mb-3 w-100">
+            (click)="openSliderImage($event, productItem.images)"
+            class="mySwiper2 mb-3 w-100 cursor-pointer">
             <ng-template swiperSlide *ngFor="let image of productItem?.images">
               <img
                 [src]="createCloudinaryImageLink(image)"
                 alt=""
-                class="w-100 mb-3" />
+                class="w-100" />
             </ng-template>
           </swiper>
           <swiper
@@ -27,7 +28,7 @@
               swiperSlide
               *ngFor="let image of productItem?.images; let index = index">
               <img
-                class="image-thumbnail border p-2"
+                class="image-thumbnail"
                 [src]="createCloudinaryThumbLink(image)"
                 alt="" />
             </ng-template>

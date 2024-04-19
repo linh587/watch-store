@@ -1,0 +1,25 @@
+@import "color";
+@import "text-size";
+
+::ng-deep .customize-slider-image {
+  .button-next,
+  .button-prev {
+    position: fixed;
+    top: 50%;
+    color: $white;
+  }
+
+  .button-next {
+    right: 15px;
+  }
+
+  .button-prev {
+    left: 15px;
+  }
+
+  .top-bar {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+  }
+}

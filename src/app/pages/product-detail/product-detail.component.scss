@@ -18,7 +18,6 @@
     width: inherit;
     object-fit: cover;
     height: inherit;
-    padding-right: 2px;
   }
 }
 
@@ -216,6 +215,10 @@
 
 .rating-wrapper:not(:nth-last-child(1)) {
   border-bottom: 1px solid $gray-lighter;
+}
+
+.customize-slider-image {
+  position: relative;
 }
 
 @media screen and (max-width: 992px) {
