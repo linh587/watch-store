@@ -143,6 +143,7 @@ export class CollectionsComponent implements OnInit {
 
   public resetSearch() {
     this.searchForm.reset();
+    this.activePrice = "";
     Object.keys(this.activeFilters).forEach((key) => {
       this.activeFilters[key] = "";
     });

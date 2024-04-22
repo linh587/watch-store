@@ -12,7 +12,6 @@ import { Observable, Subject, switchMap, tap, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { StorageService } from "../../services/storage/storage.service";
 import { AuthService } from "../../services/auth/auth.service";
-import { EventBusService } from "../../services/common/event-bus.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -21,8 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private storageService: StorageService,
-    private authService: AuthService,
-    private eventBus: EventBusService
+    private authService: AuthService
   ) {}
 
   intercept(
@@ -80,8 +78,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   private onHandleError401(request: HttpRequest<any>, next: HttpHandler) {
     const refreshToken = this.storageService.get("JWT_REFRESH_TOKEN");
     if (!refreshToken) {
-      this.eventBus.emit({ name: "logout", value: null });
-      // @ts-ignore
+      window.location.reload();
+      this.storageService.deleteAll();
       return;
     }
 
@@ -117,13 +115,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     token: string
   ): HttpRequest<any> {
+    /* for Spring Boot back-end */
     return request.clone({
       headers: request.headers.set("Authorization", token),
     });
   }
 
   private static isRequestRefresh(url: string) {
-    if (url.includes("refresh/user")) {
+    if (url.includes("refresh")) {
       return "JWT_REFRESH_TOKEN";
     }
     return null;

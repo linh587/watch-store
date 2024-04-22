@@ -40,9 +40,6 @@ export const API_URL = {
   // CATEGORY
   GET_LIST_CATEGORY: "category",
 
-  // BRANCH
-  BRANCH: "branch",
-
   // PAYMENT STATUS
   PAYMENT: "order/querydr",
 

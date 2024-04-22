@@ -96,6 +96,13 @@ const routes: Routes = [
             (m) => m.OrderHistoryModule
           ),
       },
+      {
+        path: "return-policy",
+        loadChildren: () =>
+          import("./pages/return-policy/return-policy.module").then(
+            (m) => m.ReturnPolicyModule
+          ),
+      },
     ],
   },
   {

@@ -24,12 +24,10 @@ import { OrderService } from "../../services/order/order.service";
 import { ToastrService } from "ngx-toastr";
 import { PHONE_REGEX } from "../../public/constants/regex";
 import { calculateDeliveryCharge } from "../../public/helpers/utils";
-import { BranchService } from "../../services/branch/branch.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
 import { UserAccount } from "../../models/user.model";
-import { Branch } from "../../models/branch.model";
 
 @Component({
   selector: "app-checkout",
@@ -49,7 +47,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public searchElementRef!: ElementRef;
   public total!: number;
   public deliveryCharge!: number;
-  public branchs$ = new BehaviorSubject<Branch[]>([]);
   public createCloudinaryImageLink = createCloudinaryImageLink;
   public coupons$ = new BehaviorSubject<any>(null);
   public couponSuggestion: boolean = false;
@@ -62,7 +59,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private mapService: MapService,
     private orderService: OrderService,
     private toastService: ToastrService,
-    private branchService: BranchService,
     private router: Router,
     private notificationService: NotificationService
   ) {}
@@ -76,7 +72,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.calculateTotal();
     this.calculateDeliveryCharge();
     this.observeChangeDeliveryCharge();
-    this.getAllBranchs();
     this.couponRelation();
   }
 
@@ -100,12 +95,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getAllBranchs() {
-    this.branchService.getAllBranch().subscribe((res: any) => {
-      this.branchs$.next(res);
-    });
-  }
-
   private getProductList() {
     this.productList$ = this.cartService.getProductList$();
   }
@@ -121,7 +110,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             Validators.pattern(PHONE_REGEX),
           ]),
         ],
-        branchId: ["00lu07vqv0a46crjdi6f", Validators.required],
         receivedType: ["delivery"],
         receivedAddress: [this.userInfo?.address, Validators.required],
         details: [[]],
@@ -130,6 +118,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         language: ["vn"],
         couponCode: [null],
         note: [""],
+        paymentStatus: ["not-paid"],
       }),
       receivedAddressCoordinate: this.fb.group({
         latitude: [this.userInfo?.latitude, Validators.required],
@@ -139,18 +128,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private observeChangeDeliveryCharge() {
-    this.orderGroup.controls["branchId"].valueChanges
-      .pipe(
-        takeUntil(this.subscriptions$),
-        debounceTime(200),
-        distinctUntilChanged()
-      )
-      .subscribe((branch: string) => {
-        this.branchService.getBranchDetail(branch).subscribe((res: any) => {
-          this.calculateDeliveryCharge(res.latitude, res.longitude);
-        });
-      });
-
     this.orderForm.controls["receivedAddressCoordinate"].valueChanges
       .pipe(
         takeUntil(this.subscriptions$),
@@ -173,12 +150,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     });
   }
 
-  private calculateDeliveryCharge(branchLat?: string, branchLng?: string) {
+  private calculateDeliveryCharge() {
     this.mapService
       .getLengthFromOriginToDestinationGoongIo(
         {
-          latitude: branchLat || "21.00418966600006",
-          longitude: branchLng || "105.84547508400004",
+          latitude: "21.0049552335956",
+          longitude: "105.8455270153421",
         },
         {
           latitude: this.latlngGroup.controls["latitude"].value,

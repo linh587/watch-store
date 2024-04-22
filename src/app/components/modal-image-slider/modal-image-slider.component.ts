@@ -19,7 +19,7 @@ export class ModalImageSliderComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.countSlider = this.currentSlide + 1;
+    this.countSlider = Number(this.currentSlide + 1);
   }
 
   public slideNext() {
@@ -34,6 +34,6 @@ export class ModalImageSliderComponent implements OnInit {
   }
 
   public onSlideChange(event: any) {
-    this.countSlider = event[0].activeIndex + 1;
+    this.countSlider = Number(event[0].activeIndex + 1);
   }
 }

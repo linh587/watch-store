@@ -29,41 +29,32 @@
               <li><a>Chính sách bảo hành</a></li>
               <li><a>Chính sách bảo mật</a></li>
               <li><a>Chính sách vận chuyển</a></li>
-              <li><a>Chính sách đổi trả</a></li>
+              <li
+                class="cursor-pointer"
+                (click)="router.navigate(['/return-policy'])">
+                <a>Chính sách đổi trả</a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="widget-footer mb-4">
-            <h6 class="title-widget mb-4 text-uppercase">Cửa hàng Hà Nội</h6>
+            <h6 class="title-widget mb-4 text-uppercase">Địa chỉ cửa hàng</h6>
             <ul class="footer-list">
-              <li *ngFor="let branch of BRANCH_HA_NOI">
+              <li>
                 <div class="mb-1">
                   <i class="fa-solid fa-location-dot color-blue me-1"></i>
-                  <span class="fw-500">{{ branch.address }}</span>
+                  <span class="fw-500"
+                    >97 Trần Đại Nghĩa, P. Bách Khoa, HBT, Hà Nội</span
+                  >
                 </div>
                 <p class="d-flex align-items-center">
-                  <span>Mở cửa: {{ branch.time }}</span>
+                  <span>Mở cửa: 8h30 - 22h45</span>
                   <span class="mx-1">|</span>
-                  <a [href]="branch.map">Chỉ đường</a>
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div class="widget-footer">
-            <h6 class="title-widget mb-4 text-uppercase">
-              Cửa hàng Hồ Chí Minh
-            </h6>
-            <ul class="footer-list">
-              <li *ngFor="let branch of BRANCH_HO_CHI_MINH">
-                <div class="mb-1">
-                  <i class="fa-solid fa-location-dot color-blue me-1"></i>
-                  <span class="fw-500">{{ branch.address }}</span>
-                </div>
-                <p class="d-flex align-items-center">
-                  <span>Mở cửa: {{ branch.time }}</span>
-                  <span class="mx-1">|</span>
-                  <a [href]="branch.map">Chỉ đường</a>
+                  <a
+                    href="https://www.google.com/maps/place/WatchStore/@21.0040587,105.8406132,17z/data=!3m1!4b1!4m6!3m5!1s0x3135ad3069755481:0x3a32977628b17570!8m2!3d21.0040538!4d105.8454841!16s%2Fg%2F11k4xt3kvc?hl=vi-VN&entry=ttu"
+                    >Chỉ đường</a
+                  >
                 </p>
               </li>
             </ul>

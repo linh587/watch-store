@@ -4,7 +4,6 @@ export interface Order {
   phone: string;
   email?: string;
   userAccountId?: string;
-  branchId: string;
   couponCode?: string;
   receivedType: string;
   receivedAddress: string;
