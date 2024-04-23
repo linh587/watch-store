@@ -92,67 +92,19 @@
           sang trọng, tạo nên tiện nghi cho khách hàng lựa chọn và mua sắm.
         </p>
       </div>
-      <div class="container">
-        <div class="dsch_list ent-flex">
-          <div class="item_dsch_list">
-            <h4>WatchStore Trần Đại Nghĩa</h4>
-            <div class="ct_cd">
-              <p>97 Trần Đại Nghĩa, HBT, Hà Nội</p>
-              <a
-                target="_blank"
-                class="color-blue"
-                href="https://goo.gl/maps/bCrqSUZgrUVfNWDN7"
-                ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
-              >
-            </div>
-          </div>
-          <div class="item_dsch_list">
-            <h4>WatchStore Trần Đăng Ninh</h4>
-            <div class="ct_cd">
-              <p>58 Trần Đăng Ninh, Cầu Giấy, Hà Nội</p>
-              <a
-                target="_blank"
-                class="color-blue"
-                href="https://goo.gl/maps/c7QvgddZgdtJ9fKW9"
-                ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
-              >
-            </div>
-          </div>
-          <div class="item_dsch_list">
-            <h4>WatchStore Lê Văn Sỹ</h4>
-            <div class="ct_cd">
-              <p>90 Lê Văn Sỹ, P11, Phú Nhuận, HCM</p>
-              <a
-                target="_blank"
-                class="color-blue"
-                href="https://goo.gl/maps/Hsi8dhnpfwGgC4s36"
-                ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
-              >
-            </div>
-          </div>
-          <div class="item_dsch_list">
-            <h4>WatchStore Quang Trung</h4>
-            <div class="ct_cd">
-              <p>61 Quang Trung, P10, Gò Vấp, HCM</p>
-              <a
-                target="_blank"
-                class="color-blue"
-                href="https://goo.gl/maps/J88jtv1u9NfZGFAh6"
-                ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
-              >
-            </div>
-          </div>
-          <div class="item_dsch_list">
-            <h4>WatchStore Lê Quang Định</h4>
-            <div class="ct_cd">
-              <p>193 Lê Quang Định, Bình Thạnh, HCM</p>
-              <a
-                target="_blank"
-                class="color-blue"
-                href="https://goo.gl/maps/Wdneitu3kAcVpP3MA"
-                ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
-              >
-            </div>
+      <div class="d-flex justify-content-center m-auto store-list-container">
+        <div class="store-item overflow-hidden m-2 w-100">
+          <h4 class="m-0 fw-500 text-size-medium py-3">
+            WatchStore Trần Đại Nghĩa
+          </h4>
+          <div class="ct_cd py-3 text-size-small m-0">
+            <p class="mb-3 fw-400">97 Trần Đại Nghĩa, HBT, Hà Nội</p>
+            <a
+              target="_blank"
+              class="color-blue"
+              href="https://goo.gl/maps/bCrqSUZgrUVfNWDN7"
+              ><i class="fa-solid fa-map-pin me-1"></i> Xem chỉ đường</a
+            >
           </div>
         </div>
       </div>
@@ -163,7 +115,7 @@
         <h2 class="heading">Các sự kiện cùng đối tác lớn</h2>
       </div>
       <div class="ext-gt">
-        <p>
+        <p class="mb-3">
           Ban Lãnh Đạo WatchStore.vn luôn không ngừng nâng cao kinh nghiệm và
           kiến thức chuyên môn để đào tạo nhân viên và mở rộng mối quan hệ cùng
           đối tác. Dưới đây là hình ảnh Ban Lãnh Đạo WatchStore tham dự các hội
@@ -171,28 +123,22 @@
         </p>
       </div>
       <div class="swiper-partners pb-60">
-        <div class="container">
-          <swiper
-            [slidesPerView]="5"
-            [centeredSlides]="false"
-            [spaceBetween]="20"
-            slideActiveClass="swiper-active"
-            [navigation]="false"
-            [pagination]="false"
-            [autoplay]="{ delay: 500, disableOnInteraction: false }"
-            [virtual]="true"
-            [speed]="1200">
-            <ng-container>
-              <ng-template swiperSlide *ngFor="let partner of PARTNERS">
-                <img
-                  [src]="partner"
-                  alt=""
-                  height="200"
-                  class="object-fit-cover w-100" />
-              </ng-template>
-            </ng-container>
-          </swiper>
-        </div>
+        <swiper
+          [slidesPerView]="5"
+          [centeredSlides]="false"
+          [spaceBetween]="16"
+          slideActiveClass="swiper-active"
+          [navigation]="false"
+          [pagination]="false"
+          [autoplay]="{ delay: 500, disableOnInteraction: false }"
+          [virtual]="true"
+          [speed]="1200">
+          <ng-container>
+            <ng-template swiperSlide *ngFor="let partner of PARTNERS">
+              <img [src]="partner" alt="" class="object-fit-cover w-100" />
+            </ng-template>
+          </ng-container>
+        </swiper>
       </div>
     </div>
   </div>
