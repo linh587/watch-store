@@ -13,6 +13,7 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  forkJoin,
   takeUntil,
   tap,
   throwError,
@@ -28,6 +29,7 @@ import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
 import { UserAccount } from "../../models/user.model";
+import { ProductsService } from "../../services/products/products.service";
 
 @Component({
   selector: "app-checkout",
@@ -51,6 +53,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public coupons$ = new BehaviorSubject<any>(null);
   public couponSuggestion: boolean = false;
   public decreaseMoney: any;
+  public productDetails: any = [];
 
   constructor(
     private cartService: CartService,
@@ -60,7 +63,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private toastService: ToastrService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private productService: ProductsService
   ) {}
 
   ngOnInit() {
@@ -90,9 +94,33 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           order: this.orderGroup.getRawValue(),
         })
         .subscribe((res: any) => {
+          this.getProductDetail(res);
           this.coupons$.next(res);
         });
     }
+  }
+
+  private getProductDetail(coupons: any[]) {
+    const observables: any[] = [];
+
+    coupons.forEach((coupon) => {
+      if (!coupon.productPriceIds?.length) return;
+
+      const detailObservables = coupon.productPriceIds.map(
+        (productPriceId: any) => {
+          return this.productService.getDetailProductPrice(productPriceId);
+        }
+      );
+
+      const combinedObservable = forkJoin(detailObservables);
+      observables.push(combinedObservable);
+    });
+
+    forkJoin(observables).subscribe((details: any[]) => {
+      details.forEach((couponDetails, index) => {
+        coupons[index].productPriceDetails = couponDetails;
+      });
+    });
   }
 
   private getProductList() {

@@ -10,7 +10,6 @@ import {
   createCloudinaryImageLink,
   createCloudinaryThumbLink,
 } from "../../public/helpers/images.helper";
-import { ProductsService } from "../../services/products/products.service";
 import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CartService } from "../../services/cart/cart.service";
@@ -42,7 +41,6 @@ export class QuickViewProductModalComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private productsService: ProductsService,
     private fb: FormBuilder,
     private cartService: CartService,
     private toastService: ToastrService,
@@ -67,24 +65,21 @@ export class QuickViewProductModalComponent implements OnInit {
 
   public getProductSizes() {
     let productSizes: any = [];
-    this.productPrices.forEach((res) => {
-      this.productsService
-        .getDetailProductSize(res.productSizeId)
-        .subscribe((data) => {
-          productSizes.push({
-            ...data,
-            price: res.price,
-            priceId: res.id,
-          });
-          this.productSizes$.next(productSizes);
+    this.productPrices.forEach((price) => {
+      productSizes.push({
+        id: price.productSizeId,
+        name: price.productSizeName,
+        price: price.price,
+        priceId: price.id,
+      });
 
-          this.selectedPrice = {
-            price: productSizes[0].price,
-            id: productSizes[0].priceId,
-          };
+      this.productSizes$.next(productSizes);
+      this.selectedPrice = {
+        price: productSizes[0].price,
+        id: productSizes[0].priceId,
+      };
 
-          this.selectedSize = productSizes[0].name;
-        });
+      this.selectedSize = productSizes[0].name;
     });
   }
 

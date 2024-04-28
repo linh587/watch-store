@@ -54,7 +54,10 @@ export class HeaderComponent implements OnInit {
     this.getCart();
     this.calculateTotal();
     this.getAllCategory();
+    this.changeStatusNotification();
+  }
 
+  private changeStatusNotification() {
     this.notifications$.subscribe((n) => {
       const unseenIds = n
         .filter((res: any) => res.seen === 0)

@@ -45,16 +45,6 @@ export class ProductsService extends BaseHttpRequest {
     );
   }
 
-  public getProductSizes() {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.GET_PRODUCT_SIZES}`);
-  }
-
-  public getDetailProductSize(id: string) {
-    return this.httpClient.get(
-      `${ENVIRONMENT}${API_URL.GET_DETAIL_PRODUCT_SIZE}/${id}`
-    );
-  }
-
   public addToCart(payload: InformationToCreateCartDetail) {
     return this.httpClient.post(
       `${ENVIRONMENT}${API_URL.ADD_TO_CART}`,

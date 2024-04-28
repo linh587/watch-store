@@ -14,9 +14,8 @@
         </select>
       </div>
       <div class="col-xl-3 col-md-3 mb-4">
-        <label class="form-label">Lọc theo thời gian</label>
+        <label class="form-label">Sắp xếp theo thời gian</label>
         <select class="form-control fs-14" formControlName="sort">
-          <option value="">Tất cả</option>
           <option value="oldest">Đơn hàng cũ nhất</option>
           <option value="newest">Đơn hàng mới nhất</option>
         </select>
@@ -78,9 +77,7 @@
               ></a>
               <a
                 [ngbTooltip]="'Huỷ đơn'"
-                *ngIf="
-                  order.status === 'waitVerify' || order.status === 'verified'
-                "
+                *ngIf="order.status === 'waitVerify'"
                 class="view cancel cursor-pointer bg-black"
                 (click)="onCancelOrder(order.id)">
                 <i class="fa-regular fa-circle-xmark"></i>

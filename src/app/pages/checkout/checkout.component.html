@@ -93,14 +93,30 @@
                               Giảm {{ coupon.decrease | formatPrice }}
                               {{ coupon.unit | getTypePriceCoupon }}
                             </p>
-                            <p>
+                            <p
+                              *ngIf="
+                                coupon.totalPriceFrom && coupon.totalPriceTo
+                              ">
                               Áp dụng cho đơn hàng có giá từ
                               {{ coupon.totalPriceFrom | formatPrice }}đ đến
                               {{ coupon.totalPriceTo | formatPrice }}đ
                             </p>
+                            <ng-container
+                              *ngIf="coupon.productPriceIds?.length">
+                              <p>Áp dụng cho các sản phẩm</p>
+                              <span
+                                *ngFor="
+                                  let productPrice of coupon?.productPriceDetails;
+                                  let last = last
+                                ">
+                                {{ productPrice.productName }} ({{
+                                  productPrice.productSizeName
+                                }}){{ !last ? ", " : "" }}
+                              </span>
+                            </ng-container>
                             <p>
                               Hạn sử dụng:
-                              {{ coupon.beginAt | date : "dd-MM-YYYY" }} -
+                              {{ coupon.beginAt | date : "dd-MM-YYYY" }} đến
                               {{ coupon.finishAt | date : "dd-MM-YYYY" }}
                             </p>
                           </div>

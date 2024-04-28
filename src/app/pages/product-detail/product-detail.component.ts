@@ -32,7 +32,6 @@ export class ProductDetailComponent implements OnInit {
   public id!: string;
   public productItem!: any;
   public active = 1;
-  public productPrices: any[] = [];
   public productPrices$ = new BehaviorSubject<any[]>([]);
   public productSizes$ = new BehaviorSubject<ProductSize[]>([]);
   public selectedPrice: any;
@@ -136,23 +135,20 @@ export class ProductDetailComponent implements OnInit {
     let productSizes: any = [];
     this.productPrices$.subscribe((prices) => {
       prices.forEach((price) => {
-        this.productsService
-          .getDetailProductSize(price.productSizeId)
-          .subscribe((data) => {
-            productSizes.push({
-              ...data,
-              price: price.price,
-              priceId: price.id,
-            });
-            this.productSizes$.next(productSizes);
+        productSizes.push({
+          id: price.productSizeId,
+          name: price.productSizeName,
+          price: price.price,
+          priceId: price.id,
+        });
 
-            this.selectedPrice = {
-              price: productSizes[0].price,
-              id: productSizes[0].priceId,
-            };
+        this.productSizes$.next(productSizes);
+        this.selectedPrice = {
+          price: productSizes[0].price,
+          id: productSizes[0].priceId,
+        };
 
-            this.selectedSize = productSizes[0].name;
-          });
+        this.selectedSize = productSizes[0].name;
       });
     });
   }
@@ -194,8 +190,8 @@ export class ProductDetailComponent implements OnInit {
 
   private getListProductPrice() {
     this.productsService.getProductPrices().subscribe((res: any) => {
-      this.productPrices = res.filter((p: any) => p?.productId === this.id);
-      this.productPrices$.next(this.productPrices);
+      let productPrices = res.filter((p: any) => p?.productId === this.id);
+      this.productPrices$.next(productPrices);
     });
   }
 

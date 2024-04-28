@@ -83,16 +83,13 @@ export class OrderHistoryComponent implements OnInit {
                     productInfo: this.productService.getDetailProduct(
                       productPrice?.productId
                     ),
-                    productSize: this.productService.getDetailProductSize(
-                      productPrice?.productSizeId
-                    ),
                   }).pipe(
                     map((data: any) => {
                       return {
                         detail: detail,
                         productPrice: productPrice,
                         productInfo: data.productInfo,
-                        productSize: data.productSize,
+                        productSizeName: productPrice.productSizeName,
                       };
                     })
                   )

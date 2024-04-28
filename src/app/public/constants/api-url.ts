@@ -23,10 +23,6 @@ export const API_URL = {
   GET_PRODUCT_PRICES: "product-price",
   GET_DETAIL_PRODUCT_PRICE: "product-price",
 
-  // PRODUCT SIZE
-  GET_PRODUCT_SIZES: "product-size",
-  GET_DETAIL_PRODUCT_SIZE: "product-size",
-
   //CART
   ADD_TO_CART: "user/cart",
   CART: "user/cart",
