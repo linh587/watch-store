@@ -86,7 +86,7 @@
                           *ngIf="couponSuggestion">
                           <div
                             (mousedown)="onClickItem(coupon.couponCode)"
-                            class="coupon-item"
+                            class="coupon-item cursor-pointer"
                             *ngFor="let coupon of coupons">
                             <p>{{ coupon.couponCode }}</p>
                             <p>

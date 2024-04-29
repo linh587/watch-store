@@ -14,6 +14,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   forkJoin,
+  take,
   takeUntil,
   tap,
   throwError,
@@ -76,7 +77,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.calculateTotal();
     this.calculateDeliveryCharge();
     this.observeChangeDeliveryCharge();
-    this.couponRelation();
   }
 
   get orderGroup() {
@@ -85,19 +85,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   get latlngGroup() {
     return this.orderForm.get("receivedAddressCoordinate") as FormGroup;
-  }
-
-  private couponRelation() {
-    if (this.orderGroup.controls["details"].value.length) {
-      this.orderService
-        .couponRelation({
-          order: this.orderGroup.getRawValue(),
-        })
-        .subscribe((res: any) => {
-          this.getProductDetail(res);
-          this.coupons$.next(res);
-        });
-    }
   }
 
   private getProductDetail(coupons: any[]) {
@@ -124,7 +111,33 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private getProductList() {
-    this.productList$ = this.cartService.getProductList$();
+    this.productList$ = this.cartService.getProductList$().pipe(
+      tap((res) => {
+        const details = res.map((d: any) => ({
+          productPriceId: d.productPriceId,
+          quality: d.quality,
+        }));
+        if (details?.length) {
+          this.orderGroup.controls["details"].setValue(details);
+          this.orderService
+            .couponRelation({
+              order: {
+                ...this.orderGroup.getRawValue(),
+                details: details,
+              },
+            })
+            .pipe(take(1))
+            .subscribe((coupons: any) => {
+              this.getProductDetail(coupons);
+              this.coupons$.next(coupons);
+            });
+        } else {
+          this.orderGroup.controls["details"].setValue([]);
+          this.coupons$.next([]);
+        }
+      }),
+      takeUntil(this.subscriptions$)
+    );
   }
 
   private initForm() {
@@ -225,6 +238,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             this.router.navigate(["/"]).then();
           }
         });
+    } else {
+      this.toastService.info("Bạn không có sản phẩm nào trong giỏ hàng");
     }
   }
 
