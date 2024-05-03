@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "orderStatusColor",
 })
 export class OrderStatusColorPipe implements PipeTransform {
-  transform(value: string, args?: any): string {
+  transform(value: string): string {
     switch (value) {
       case "waitVerify":
         return "warning";
@@ -14,6 +14,8 @@ export class OrderStatusColorPipe implements PipeTransform {
         return "info";
       case "received":
         return "success";
+      case "completed":
+        return "info";
       case "cancelled":
         return "danger";
       default:

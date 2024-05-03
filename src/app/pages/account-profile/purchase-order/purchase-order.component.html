@@ -55,15 +55,13 @@
 
             <td>{{ order.totalPrice | formatPrice }}đ</td>
             <td>
-              <span
-                class="badge text-size-small text-white p-2"
-                ngClass="bg-{{ order.paymentStatus | paymentStatusColor }}"
-                >{{ order.paymentStatus | paymentStatus }}</span
-              >
+              <span class="text-size-small p-2">{{
+                order.paymentStatus | paymentStatus
+              }}</span>
             </td>
             <td>
               <div
-                class="badge text-size-small text-white p-2"
+                class="badge text-size-x-small text-white p-2"
                 ngClass="bg-{{ order.status | orderStatusColor }}">
                 {{ order.status | orderStatus }}
               </div>

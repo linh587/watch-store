@@ -5,7 +5,7 @@ import { FACE_SHAPE } from "../constants/common";
   name: "faceShape",
 })
 export class FaceShapePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  transform(value: any): any {
     switch (value) {
       case FACE_SHAPE.ROUND:
         return "Hình tròn";

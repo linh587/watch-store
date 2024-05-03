@@ -6,7 +6,6 @@ import { PaymentStatusPipe } from "./payment-status.pipe";
 import { TimeAgoPipe } from "./time-ago.pipe";
 import { OrderStatusColorPipe } from "./order-status-color.pipe";
 import { GetTypePriceCouponPipe } from "./get-type-price-coupon.pipe";
-import { PaymentStatusColorPipe } from "./payment-status-color.pipe";
 import { FaceShapePipe } from "./face-shape.pipe";
 import { GlassSurfacePipe } from "./glass-surface.pipe";
 
@@ -17,7 +16,6 @@ const PIPES = [
   TimeAgoPipe,
   OrderStatusColorPipe,
   GetTypePriceCouponPipe,
-  PaymentStatusColorPipe,
   TimeAgoPipe,
   FaceShapePipe,
   GlassSurfacePipe,

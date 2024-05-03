@@ -5,7 +5,7 @@ import { ORDER_STATUS } from "../constants/common";
   name: "orderStatus",
 })
 export class OrderStatusPipe implements PipeTransform {
-  transform(value: string, args?: any): string {
+  transform(value: string): string {
     switch (value) {
       case ORDER_STATUS.WAIT_VERIFY:
         return "Chờ duyệt";

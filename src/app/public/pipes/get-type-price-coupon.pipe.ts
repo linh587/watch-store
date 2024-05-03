@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "getTypePriceCoupon",
 })
 export class GetTypePriceCouponPipe implements PipeTransform {
-  transform(value: string, args?: any): string {
+  transform(value: string): string {
     switch (value) {
       case "money":
         return "đ";

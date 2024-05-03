@@ -5,7 +5,7 @@ import { PAYMENT_STATUS } from "../constants/common";
   name: "paymentStatus",
 })
 export class PaymentStatusPipe implements PipeTransform {
-  transform(value: string, args?: any): string {
+  transform(value: string): string {
     switch (value) {
       case PAYMENT_STATUS.PAID:
         return "Đã thanh toán";

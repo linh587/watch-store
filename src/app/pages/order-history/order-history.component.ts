@@ -13,6 +13,7 @@ import { ProductsService } from "../../services/products/products.service";
 import { createCloudinaryImageLink } from "../../public/helpers/images.helper";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RatingModalComponent } from "../../components/rating-modal/rating-modal.component";
+import { ORDER_STATUS } from "../../public/constants/common";
 
 @Component({
   selector: "app-order-history",
@@ -26,6 +27,7 @@ export class OrderHistoryComponent implements OnInit {
   public detailProducts$ = new BehaviorSubject<any>(null);
   public createCloudinaryImageLink = createCloudinaryImageLink;
   public couponDetail: any;
+  public ORDER_STATUS = ORDER_STATUS
 
   constructor(
     private route: ActivatedRoute,

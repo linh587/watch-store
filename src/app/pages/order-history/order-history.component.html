@@ -6,17 +6,15 @@
         <div class="card">
           <div class="card-header">
             <div class="d-flex align-items-center">
-              <h5 class="card-title flex-grow-1 mb-0">
+              <h5 class="card-title flex-grow-1 mb-0 text-size-large">
                 Chi tiết đơn hàng #{{ order?.id }}
               </h5>
-              <div>
-                <div
-                  class="badge text-size-small text-white p-2"
-                  ngClass="bg-{{ order.paymentStatus | paymentStatusColor }}">
+              <div class="d-flex align-items-center">
+                <div class="text-size-small p-2">
                   {{ order?.paymentStatus | paymentStatus }}
                 </div>
                 <div
-                  class="badge text-size-small text-white ms-2 p-2"
+                  class="badge text-size-x-small text-white ms-2 p-2"
                   ngClass="bg-{{ order?.status | orderStatusColor }}">
                   {{ order?.status | orderStatus }}
                 </div>
@@ -33,7 +31,12 @@
                     <th scope="col">Giá</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Tổng tiền</th>
-                    <th scope="col" *ngIf="order.status === 'received'">
+                    <th
+                      scope="col"
+                      *ngIf="
+                        order.status === ORDER_STATUS.RECEIVED ||
+                        order.status === ORDER_STATUS.COMPLETED
+                      ">
                       Hành động
                     </th>
                   </tr>
@@ -148,7 +151,9 @@
         <div class="card mb-3">
           <div class="card-header">
             <div class="d-flex">
-              <h5 class="card-title flex-grow-1 mb-0">Khách hàng</h5>
+              <h5 class="card-title flex-grow-1 mb-0 text-size-large">
+                Khách hàng
+              </h5>
             </div>
           </div>
           <div class="card-body">
@@ -169,7 +174,7 @@
         </div>
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title mb-0">
+            <h5 class="card-title mb-0 text-size-large">
               <i class="ri-map-pin-line align-middle me-1 text-muted"></i> Địa
               chỉ giao hàng
             </h5>

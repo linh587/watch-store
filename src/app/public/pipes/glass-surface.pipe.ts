@@ -5,7 +5,7 @@ import { GLASS_SURFACE_MATERIAL } from "../constants/common";
   name: "glassSurface",
 })
 export class GlassSurfacePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  transform(value: any): any {
     switch (value) {
       case GLASS_SURFACE_MATERIAL.SAPPHIRE:
         return "Kính Sapphire";
