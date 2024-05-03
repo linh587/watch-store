@@ -85,6 +85,7 @@ export enum ORDER_STATUS {
   VERIFY = "verified",
   WAIT_RECEIVE = "waitReceive",
   RECEIVED = "received",
+  COMPLETED = "completed",
   CANCELLED = "cancelled",
 }
 

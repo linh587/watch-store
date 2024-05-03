@@ -6,9 +6,16 @@ import { API_URL, ENVIRONMENT } from "../../public/constants/api-url";
   providedIn: "root",
 })
 export class OrderService extends BaseHttpRequest {
-  public createOrder(payload: any) {
+  public createOrderByUser(payload: any) {
     return this.httpClient.post(
-      `${ENVIRONMENT}${API_URL.CREATE_ORDER}`,
+      `${ENVIRONMENT}${API_URL.USER_CREATE_ORDER}`,
+      payload
+    );
+  }
+
+  public createOrderByGuest(payload: any) {
+    return this.httpClient.post(
+      `${ENVIRONMENT}${API_URL.GUEST_CREATE_ORDER}`,
       payload
     );
   }

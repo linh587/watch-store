@@ -31,7 +31,8 @@ export const API_URL = {
   GET_ORDER_LIST: "user/order",
   ORDER: "order",
   CANCEL: "cancel",
-  CREATE_ORDER: "user/order",
+  USER_CREATE_ORDER: "user/order",
+  GUEST_CREATE_ORDER: "order",
 
   // CATEGORY
   GET_LIST_CATEGORY: "category",

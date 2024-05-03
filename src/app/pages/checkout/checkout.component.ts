@@ -54,7 +54,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public coupons$ = new BehaviorSubject<any>(null);
   public couponSuggestion: boolean = false;
   public decreaseMoney: any;
-  public productDetails: any = [];
 
   constructor(
     private cartService: CartService,
@@ -192,21 +191,25 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private calculateDeliveryCharge() {
-    this.mapService
-      .getLengthFromOriginToDestinationGoongIo(
-        {
-          latitude: "21.0049552335956",
-          longitude: "105.8455270153421",
-        },
-        {
-          latitude: this.latlngGroup.controls["latitude"].value,
-          longitude: this.latlngGroup.controls["longitude"].value,
-        }
-      )
-      .subscribe((res) => {
-        const deliveryCharge = calculateDeliveryCharge(res);
-        this.deliveryCharge = deliveryCharge;
-      });
+    const destination = this.latlngGroup.controls;
+
+    if (destination["latitude"].value && destination["longitude"].value) {
+      this.mapService
+        .getLengthFromOriginToDestinationGoongIo(
+          {
+            latitude: "21.0049552335956",
+            longitude: "105.8455270153421",
+          },
+          {
+            latitude: destination["latitude"].value,
+            longitude: destination["longitude"].value,
+          }
+        )
+        .subscribe((res) => {
+          const deliveryCharge = calculateDeliveryCharge(res);
+          this.deliveryCharge = deliveryCharge;
+        });
+    }
   }
 
   private getUserInfo() {
@@ -218,29 +221,58 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.orderForm.valid &&
       this.orderGroup.controls["details"].value.length
     ) {
-      this.orderService
-        .createOrder(this.orderForm.value)
-        .pipe(
-          tap(() => {
-            this.toastService.success("Đặt đơn hàng thành công");
-            this.cartService.getCartProducts();
-            this.notificationService.getListNotification();
-          }),
-          catchError((error) => {
-            this.toastService.error("Đặt đơn hàng thất bại");
-            return throwError(() => error);
-          })
-        )
-        .subscribe((res: any) => {
-          if (res.vpnUrl) {
-            window.location.href = res.vpnUrl;
-          } else {
-            this.router.navigate(["/"]).then();
-          }
-        });
+      this.userInfo
+        ? this.handleUserPlaceOrder()
+        : this.handleGuestPlaceOrder();
     } else {
       this.toastService.info("Bạn không có sản phẩm nào trong giỏ hàng");
     }
+  }
+
+  private handleUserPlaceOrder() {
+    this.orderService
+      .createOrderByUser(this.orderForm.value)
+      .pipe(
+        tap(() => {
+          this.toastService.success("Đặt đơn hàng thành công");
+          this.cartService.getCartProducts();
+          this.notificationService.getListNotification();
+        }),
+        catchError((error) => {
+          this.toastService.error("Đặt đơn hàng thất bại");
+          return throwError(() => error);
+        })
+      )
+      .subscribe((res: any) => {
+        if (res.vpnUrl) {
+          window.location.href = res.vpnUrl;
+        } else {
+          this.router.navigate(["/"]).then();
+        }
+      });
+  }
+
+  private handleGuestPlaceOrder() {
+    this.orderService
+      .createOrderByGuest(this.orderForm.value)
+      .pipe(
+        tap(() => {
+          this.toastService.success("Đặt đơn hàng thành công");
+          this.storageService.delete("CART_DETAIL");
+          this.cartService.getCartStorage();
+        }),
+        catchError((error) => {
+          this.toastService.error("Đặt đơn hàng thất bại");
+          return throwError(() => error);
+        })
+      )
+      .subscribe((res: any) => {
+        if (res.vpnUrl) {
+          window.location.href = res.vpnUrl;
+        } else {
+          this.router.navigate(["/"]).then();
+        }
+      });
   }
 
   public patchProductCartToForm() {

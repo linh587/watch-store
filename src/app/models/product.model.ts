@@ -24,6 +24,10 @@ export interface ProductPrice {
   productId?: string;
   productSizeId?: string;
   price?: number;
+  quantity: number;
+  productSizeName: string;
+  productCoverImage: string;
+  productName: string;
 }
 
 export interface ProductSize {

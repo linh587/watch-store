@@ -15,6 +15,8 @@ export class OrderStatusPipe implements PipeTransform {
         return "Chờ giao hàng";
       case ORDER_STATUS.RECEIVED:
         return "Đã giao hàng";
+      case ORDER_STATUS.COMPLETED:
+        return "Đã giao hàng";
       case ORDER_STATUS.CANCELLED:
         return "Đã huỷ đơn hàng";
       default:
