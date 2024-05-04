@@ -287,6 +287,11 @@
               <li>
                 <a (click)="router.navigate(['about']).then()">Giới thiệu</a>
               </li>
+              <li>
+                <a (click)="router.navigate(['promotions']).then()"
+                  >Khuyến mãi</a
+                >
+              </li>
             </ul>
           </nav>
         </div>
@@ -416,6 +421,11 @@
         data-bs-dismiss="offcanvas"
         (click)="router.navigate(['/about']).then()">
         Giới thiệu
+      </li>
+      <li
+        data-bs-dismiss="offcanvas"
+        (click)="router.navigate(['/promotions']).then()">
+        Khuyến mãi
       </li>
     </ul>
 

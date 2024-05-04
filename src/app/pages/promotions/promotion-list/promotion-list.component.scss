@@ -1,0 +1,52 @@
+@import "color";
+@import "text-size";
+
+.date {
+  font-size: 13px;
+  line-height: 21px;
+  color: #888888;
+  margin-bottom: 10px;
+
+  i {
+    color: #b22830;
+  }
+}
+
+.promotion-item {
+  overflow: hidden;
+
+  img {
+    border-radius: 4px;
+    transition: 0.4s;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+}
+
+h5 {
+  transition: 0.3s;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  h5 {
+    font-size: $text-medium;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .promotion-item-container {
+    flex-direction: column;
+    border: 1px solid $gray-lighter;
+    padding-bottom: 10px;
+  }
+
+  .promotion-content {
+    padding: 0 16px;
+  }
+}

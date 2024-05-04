@@ -1,0 +1,31 @@
+<div class="mb-60">
+  <ng-container *ngIf="promotions$ | async as promotions">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4" *ngFor="let promotion of promotions">
+          <div class="single-latest-blog">
+            <div class="articles-content pt-3">
+              <div class="author-name fw-500 d-flex text-size-x-small">
+                Ngày đăng:
+                {{ promotion.createdAt | date : "EEEE, dd-MM-YYYY, hh:mm a" }}
+              </div>
+              <h4
+                class="text-size-medium cursor-pointer"
+                (click)="onRedirectDetail(promotion.id)">
+                {{ promotion.title }}
+              </h4>
+            </div>
+            <div
+              class="articles-image overflow-hidden position-relative cursor-pointer"
+              (click)="onRedirectDetail(promotion.id)">
+              <img
+                [src]="createLinkImage(promotion.coverImage)"
+                alt=""
+                class="w-100 h-100 object-fit-fill" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

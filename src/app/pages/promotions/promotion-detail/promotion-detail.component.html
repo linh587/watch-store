@@ -1,0 +1,18 @@
+<ng-container *ngIf="promotion$ | async as promotion">
+  <div class="container pt-60 pb-60">
+    <h4 class="mb-3">
+      {{ promotion.title }}
+    </h4>
+
+    <div class="date">
+      <i class="fa-regular fa-calendar me-1"></i>
+      {{ promotion.createdAt | date : "EEEE, dd-MM-YYYY, h:mm a" }}
+    </div>
+
+    <div class="text-center mb-5">
+      <img [src]="createCloudaryLink(promotion.coverImage)" alt="" />
+    </div>
+
+    <div [innerHTML]="promotion.content" class="content"></div>
+  </div>
+</ng-container>

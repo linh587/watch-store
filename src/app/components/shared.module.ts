@@ -9,7 +9,6 @@ import { QuickViewProductModalComponent } from "./quick-view-product-modal/quick
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HeaderSwiperSlideComponent } from "./header-swiper-slide/header-swiper-slide.component";
 import { ProductItemComponent } from "./product-item/product-item.component";
-import { BlogComponent } from "./blog/blog.component";
 import { OurPartnersComponent } from "./our-partners/our-partners.component";
 import { AuthenticationModalComponent } from "./authentication-modal/authentication-modal.component";
 import { CategoryBannerComponent } from "./category-banner/category-banner.component";
@@ -20,6 +19,7 @@ import { PipesModule } from "../public/pipes/pipes.module";
 import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
 import { RatingModalComponent } from "./rating-modal/rating-modal.component";
 import { ModalImageSliderComponent } from "./modal-image-slider/modal-image-slider.component";
+import { PromotionAreaComponent } from "./promotion-area/promotion-area.component";
 
 SwiperCore.use([Pagination, Navigation, Virtual, Autoplay]);
 
@@ -31,13 +31,13 @@ const COMPONENTS = [
   SwiperProductComponent,
   SeasonCollectionBannerComponent,
   CategoryBannerComponent,
-  BlogComponent,
   OurPartnersComponent,
   AuthenticationModalComponent,
   QuickViewProductModalComponent,
   ConfirmModalComponent,
   RatingModalComponent,
   ModalImageSliderComponent,
+  PromotionAreaComponent,
 ];
 
 @NgModule({

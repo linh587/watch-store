@@ -36,19 +36,4 @@ export class OrderService extends BaseHttpRequest {
   public getOrderDetail(id: string) {
     return this.httpClient.get(`${ENVIRONMENT}${API_URL.ORDER}/${id}`);
   }
-
-  public couponRelation(payload: any) {
-    return this.httpClient.post(`${ENVIRONMENT}${API_URL.RELATION}`, payload);
-  }
-
-  public decreaseMoney(payload: any) {
-    return this.httpClient.post(
-      `${ENVIRONMENT}${API_URL.DECREASE_MONEY}`,
-      payload
-    );
-  }
-
-  public couponDetail(couponCode: string) {
-    return this.httpClient.get(`${ENVIRONMENT}${API_URL.COUPON}/${couponCode}`);
-  }
 }

@@ -103,6 +103,13 @@ const routes: Routes = [
             (m) => m.ReturnPolicyModule
           ),
       },
+      {
+        path: "promotions",
+        loadChildren: () =>
+          import("./pages/promotions/promotions.module").then(
+            (m) => m.PromotionsModule
+          ),
+      },
     ],
   },
   {

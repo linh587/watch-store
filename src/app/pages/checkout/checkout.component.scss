@@ -1,11 +1,12 @@
 @import "color";
+@import "text-size";
 
 .coupon-accordion {
   h3 {
     background: #f6f6f6;
     border-top: 3px solid $primary-color;
     color: #515151;
-    font-size: 14px;
+    font-size: $text-small;
     font-weight: 400;
     margin: 0 0 30px;
     padding: 1em 2em 1em 3.5em;
@@ -21,7 +22,7 @@
 }
 
 .coupon-content {
-  border: 1px solid #dddddd;
+  border: 1px solid $gray-lighter;
   margin-bottom: 30px;
   padding: 20px;
   display: none;
@@ -35,7 +36,7 @@
 .coupon-input {
   label {
     display: block;
-    font-size: 14px;
+    font-size: $text-small;
   }
 
   span.required {
@@ -47,7 +48,7 @@
     color: $black;
     padding: 5px 10px;
     width: 100%;
-    font-size: 14px;
+    font-size: $text-small;
   }
 }
 
@@ -69,7 +70,7 @@
 }
 
 .shoping-checkboxt-title {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid $gray-lighter;
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 30px;
@@ -77,7 +78,7 @@
 }
 
 .shoping-checkboxt-title {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid $gray-lighter;
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 30px;
@@ -95,7 +96,7 @@
   table th {
     border-bottom: 1px solid #d8d8d8;
     border-right: medium none;
-    font-size: 14px;
+    font-size: $text-small;
     padding: 15px 0;
     text-align: center;
   }
@@ -116,13 +117,13 @@
 }
 
 h5 {
-  font-size: 16px;
+  font-size: $text-medium;
   line-height: 20px;
   margin-bottom: 8px;
 }
 
 .payment-accordion p {
-  font-size: 14px;
+  font-size: $text-small;
   padding-left: 16px;
 }
 
@@ -137,12 +138,11 @@ h5 {
     background: $primary-color;
     border: medium none;
     color: $white;
-    font-size: 14px;
+    font-size: $text-small;
     font-weight: 600;
     padding: 12px;
     text-transform: uppercase;
     width: 100%;
-    -webkit-transition: 0.4s;
     transition: 0.4s;
   }
 }

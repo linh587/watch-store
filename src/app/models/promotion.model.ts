@@ -1,3 +1,13 @@
+export interface Promotion {
+  id: string;
+  title: string;
+  content: string;
+  coverImage: string;
+  couponCode: string;
+  createdAt: Date | string;
+  updatedAt?: Date | string;
+}
+
 export interface Coupon {
   couponCode: string;
   type: CouponType;

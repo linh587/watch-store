@@ -31,6 +31,7 @@ import { Router } from "@angular/router";
 import { NotificationService } from "../../services/notification/notification.service";
 import { UserAccount } from "../../models/user.model";
 import { ProductsService } from "../../services/products/products.service";
+import { PromotionService } from "../../services/promotion/promotion.service";
 
 @Component({
   selector: "app-checkout",
@@ -64,7 +65,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private toastService: ToastrService,
     private router: Router,
     private notificationService: NotificationService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private promotionService: PromotionService
   ) {}
 
   ngOnInit() {
@@ -118,7 +120,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         }));
         if (details?.length) {
           this.orderGroup.controls["details"].setValue(details);
-          this.orderService
+          this.promotionService
             .couponRelation({
               order: {
                 ...this.orderGroup.getRawValue(),
@@ -179,7 +181,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       });
 
     this.orderGroup.controls["couponCode"].valueChanges.subscribe(() => {
-      this.orderService
+      this.promotionService
         .decreaseMoney({
           couponCode: this.orderGroup.get("couponCode")?.value,
           order: this.orderGroup.getRawValue(),
