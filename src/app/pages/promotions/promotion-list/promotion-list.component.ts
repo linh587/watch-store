@@ -13,6 +13,7 @@ import { PromotionService } from "../../../services/promotion/promotion.service"
 export class PromotionListComponent implements OnInit {
   public promotions$!: Observable<Promotion[]>;
   public createCloudinaryLink = createCloudinaryImageLink;
+  public page = 1;
 
   constructor(
     private promotionService: PromotionService,

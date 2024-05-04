@@ -2,7 +2,16 @@
   <h5 class="mb-4">Chương trình khuyến mãi</h5>
 
   <ng-container *ngIf="promotions$ | async as promotions">
-    <ng-container *ngFor="let promotion of promotions">
+    <ng-container
+      *ngFor="
+        let promotion of promotions
+          | paginate
+            : {
+                itemsPerPage: 16,
+                currentPage: page,
+                totalItems: promotions.length
+              }
+      ">
       <div class="d-flex gap-4 mb-4 promotion-item-container">
         <div
           class="col-lg-4 col-sm-6 col-12 overflow-hidden promotion-item cursor-pointer"
@@ -26,4 +35,13 @@
       </div>
     </ng-container>
   </ng-container>
+
+  <div class="mt-5">
+    <pagination-controls
+      previousLabel="Trang trước"
+      nextLabel="Trang sau"
+      (pageChange)="page = $event"
+      class="float-right text-center">
+    </pagination-controls>
+  </div>
 </div>
