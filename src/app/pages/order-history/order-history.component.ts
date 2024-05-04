@@ -40,17 +40,33 @@ export class OrderHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.getOrderId();
-    this.getOrderDetail();
+    // this.getOrderDetail();
+    this.subscribeParamChange();
   }
 
   private getOrderId() {
-    this.route.params.subscribe((params) => {
-      this.orderId = params["orderId"];
+    // this.route.params.subscribe((params) => {
+    //   this.orderId = params["orderId"];
+    // });
+
+    const { orderId } = this.route.snapshot.params;
+    return orderId || "";
+  }
+
+  private subscribeParamChange() {
+    this.orderId = this.getOrderId();
+    this.getOrderDetail(this.orderId);
+
+    this.route.params.subscribe((param) => {
+      const { orderId } = param;
+      if (orderId && orderId !== this.orderId) {
+        this.getOrderDetail(orderId);
+      } else this.orderId = orderId;
     });
   }
 
-  public getOrderDetail() {
-    this.orderService.getOrderDetail(this.orderId).subscribe((res: any) => {
+  public getOrderDetail(id: string) {
+    this.orderService.getOrderDetail(id).subscribe((res: any) => {
       this.orderDetail$.next(res);
       this.getCouponDetail(res);
       this.getProduct();
