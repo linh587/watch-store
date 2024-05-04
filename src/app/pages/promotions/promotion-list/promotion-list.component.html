@@ -1,3 +1,29 @@
-<p>
-  promotion-list works!
-</p>
+<div class="container pt-60 pb-60">
+  <h5 class="mb-4">Chương trình khuyến mãi</h5>
+
+  <ng-container *ngIf="promotions$ | async as promotions">
+    <ng-container *ngFor="let promotion of promotions">
+      <div class="d-flex gap-4 mb-4 promotion-item-container">
+        <div
+          class="col-lg-4 col-sm-6 col-12 overflow-hidden promotion-item cursor-pointer"
+          (click)="redirectPromotionDetail(promotion.id)">
+          <img
+            [src]="createCloudinaryLink(promotion.coverImage)"
+            alt=""
+            class="w-100 object-fit-fill" />
+        </div>
+        <div class="promotion-content">
+          <h5
+            class="mb-2 cursor-pointer"
+            (click)="redirectPromotionDetail(promotion.id)">
+            {{ promotion.title }}
+          </h5>
+          <div class="date">
+            <i class="fa-regular fa-calendar me-1"></i>
+            {{ promotion.createdAt | date : "EEEE, dd-MM-YYYY, h:mm a" }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
