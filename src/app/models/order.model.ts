@@ -19,10 +19,15 @@ export interface Order {
 }
 
 export interface OrderDetail {
+  priceAtPurchase: any;
   orderId: string;
   productPriceId: string;
   quality: number;
-  priceAtPurchase: number;
+  price: number;
+  productName: string;
+  productSizeName: string;
+  categoryName: string;
+  productCoverImage: string;
 }
 
 export interface TemporaryOrderDetail {

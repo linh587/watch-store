@@ -161,6 +161,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         couponCode: [null],
         note: [""],
         paymentStatus: ["not-paid"],
+        email: [
+          this.storageService.get("USER_LOGIN").email,
+          Validators.compose([Validators.required, Validators.email]),
+        ],
       }),
       receivedAddressCoordinate: this.fb.group({
         latitude: [this.userInfo?.latitude, Validators.required],
