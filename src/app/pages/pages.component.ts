@@ -14,6 +14,7 @@ import { isPlatformBrowser } from "@angular/common";
 })
 export class PagesComponent implements OnInit {
   public showBackToTop: boolean = false;
+  public showMessageBlock: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 

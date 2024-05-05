@@ -16,6 +16,8 @@ import { UserAccount } from "../../models/user.model";
 import { ProductsService } from "../../services/products/products.service";
 import { DatePipe } from "@angular/common";
 import { NotificationService } from "../../services/notification/notification.service";
+import { Notification } from "../../models/notification.model";
+import { Category } from "../../models/category.model";
 
 @Component({
   selector: "app-header",
@@ -24,14 +26,14 @@ import { NotificationService } from "../../services/notification/notification.se
   providers: [DatePipe],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild("inputSearch") inputSearch!: ElementRef;
   public userInfo$!: Observable<UserAccount>;
   public productList$!: Observable<any>;
   public menuFixed: boolean = false;
   public createCloudinaryThumbLink = createCloudinaryImageLink;
   public total!: number;
-  public categories: any[] = [];
-  @ViewChild("inputSearch") inputSearch!: ElementRef;
-  public notifications$!: Observable<any>;
+  public categories: Category[] = [];
+  public notifications$!: Observable<Notification[]>;
   public unseenIds: string[] = [];
   public showNotification: boolean = false;
   public hpCollapsed: boolean = false;
@@ -133,6 +135,16 @@ export class HeaderComponent implements OnInit {
         relativeTo: this.route,
         queryParamsHandling: "merge",
         queryParams: { categoryId: id },
+      })
+      .then();
+  }
+
+  public onSearchNewest() {
+    this.router
+      .navigate(["/collections"], {
+        relativeTo: this.route,
+        queryParamsHandling: "merge",
+        queryParams: { sort: "newest" },
       })
       .then();
   }

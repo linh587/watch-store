@@ -11,8 +11,11 @@
                 class="cursor-pointer">
                 <a>Về Chúng Tôi</a>
               </li>
-              <li><a>Kiến thức về đồng hồ</a></li>
-              <li><a>Tin tức</a></li>
+              <li
+                (click)="router.navigate(['/promotions']).then()"
+                class="cursor-pointer">
+                <a>Tin tức</a>
+              </li>
             </ul>
             <ul class="social-icons">
               <li *ngFor="let social of SOCIAL_ICONS">
@@ -29,10 +32,7 @@
           <div class="widget-footer">
             <h6 class="title-widget mb-4 text-uppercase">Chính sách chung</h6>
             <ul class="footer-list">
-              <li><a>Điều khoản thanh toán</a></li>
-              <li><a>Chính sách bảo hành</a></li>
               <li><a>Chính sách bảo mật</a></li>
-              <li><a>Chính sách vận chuyển</a></li>
               <li class="cursor-pointer">
                 <a href="/return-policy">Chính sách đổi trả</a>
               </li>

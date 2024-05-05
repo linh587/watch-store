@@ -9,8 +9,49 @@
 
   <div
     *ngIf="showBackToTop"
-    class="back-to-top d-flex align-items-center justify-content-center position-fixed color-white bg-primary-color"
+    class="back-to-top d-flex align-items-center cursor-pointer justify-content-center position-fixed color-white bg-primary-color"
     (click)="scrollToTop()">
     <span class="material-symbols-outlined"> arrow_upward </span>
+  </div>
+
+  <div
+    (click)="showMessageBlock = !showMessageBlock"
+    class="chat-box color-white bg-primary-color position-fixed cursor-pointer">
+    <div
+      class="w-100 h-100 d-flex align-items-center justify-content-center chat position-relative">
+      <span class="material-symbols-outlined text-size-xl" *ngIf="!showMessageBlock">
+        chat
+      </span>
+      <i class="fa-solid fa-xmark text-size-large" *ngIf="showMessageBlock"></i>
+    </div>
+
+    <div
+      class="messenger-block d-flex flex-column align-items-start position-absolute"
+      *ngIf="showMessageBlock"
+      (click)="$event.stopPropagation()">
+      <div class="title text-size-medium">
+        Chat với WatchStore để có giá tốt nhất trong hôm nay
+      </div>
+      <a
+        href="https://m.me/watchstore.kenhbanle"
+        target="_blank"
+        rel="nofollow"
+        class="messenger-item">
+        <span>
+          <i class="fa-brands fa-facebook-messenger text-size-large"></i>
+        </span>
+        <p>Chat Messenger</p>
+      </a>
+      <a
+        href="https://zalo.me/4455668531311407892"
+        target="_blank"
+        rel="nofollow"
+        class="messenger-item">
+        <span>
+          <img src="/assets/images/icons/zalo.png" alt="" width="20" />
+        </span>
+        <p>Chat trên zalo</p>
+      </a>
+    </div>
   </div>
 </div>
