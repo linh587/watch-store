@@ -162,7 +162,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         note: [""],
         paymentStatus: ["not-paid"],
         email: [
-          this.storageService.get("USER_LOGIN").email,
+          this.storageService.get("USER_LOGIN")?.email || "",
           Validators.compose([Validators.required, Validators.email]),
         ],
       }),
@@ -231,7 +231,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         ? this.handleUserPlaceOrder()
         : this.handleGuestPlaceOrder();
     } else {
-      this.toastService.info("Bạn không có sản phẩm nào trong giỏ hàng");
+      this.toastService.info(
+        "Bạn không có sản phẩm nào trong giỏ hàng hoặc bạn chưa điền đầy đủ thông tin"
+      );
     }
   }
 
