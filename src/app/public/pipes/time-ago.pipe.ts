@@ -55,7 +55,7 @@ export class TimeAgoPipe implements PipeTransform, OnDestroy {
     } else if (days === 7) {
       return "1 tuần trước";
     } else {
-      return this.datePipe.transform(value, "d MMMM, y");
+      return this.datePipe.transform(value, "dd-MM-YYYY");
     }
   }
   ngOnDestroy(): void {
